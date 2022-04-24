@@ -31,6 +31,9 @@ class Demande
     #[ORM\Column(type: 'string', length: 255)]
     private $ville;
 
+    #[ORM\Column(type: 'date')]
+    private $date;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +107,18 @@ class Demande
     public function setVille(string $ville): self
     {
         $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

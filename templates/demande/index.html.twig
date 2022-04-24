@@ -1,0 +1,110 @@
+{% extends 'base.admin.html.twig' %}
+
+
+{% block page_title %} Demande d'adhésion {% endblock page_title %}
+
+{% block content %}
+<div class="page-content">
+    <section class="section">
+        <div class="row" id="basic-table">
+            
+            <div class="col-12 {% if selected is defined %}col-md-8{% endif %}">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Liste des demandes</h4>
+                    </div>
+                    <div class="card-content">
+
+                        <!-- Table with no outer spacing -->
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0 table-lg">
+                                <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        {% if selected is not defined %}
+                                        <th>Mail</th>
+                                        {% endif %}
+                                        <th>Date</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+
+                                    {% for demande in demandes %}
+                                    <tr>
+                                        <td class="text-bold-500">{{demande.nom}}  {{demande.prenom}}</td>
+                                        {% if selected is not defined %}
+                                        <td>{{demande.mail}}</td>
+                                        {% endif %}
+                                        <td>{{demande.date|date('d-m-Y')}}</td>
+                                        <td class="text-bold-500"><a href="{{path('details_demande', {'id' : demande.id })}}" class="btn btn-outline-primary">Details</a></td>
+
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if selected is defined %}
+
+
+            <div class="col-12 col-md-4 ">
+                <div class="card ">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                <strong> Detail de la demande </strong> 
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                                Date de la demande :  <strong>{{selected.date|date('d-m-Y')}}</strong> 
+                                        <br>
+                                        <br>
+                                        <strong>Nom : </strong> {{selected.nom}}  <br>  <strong>Prenom : </strong> {{selected.prenom}}
+                                        <br>
+                                        <strong>Promotion : </strong> {{selected.promotion}}
+                                        <br>
+                                        <br>
+                                        <strong>Résidence </strong> <br>
+                                        <strong>Pays : </strong> {{selected.pays}}  <br>    <strong>Ville : </strong> {{selected.ville}}
+        
+                            </div>
+                          </div>
+                        </div>
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                Valider / Rejeter
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                            <div class="accordion-body">
+                                <div class="row justify-content-center custom-line">
+                                    <div class="col-4">
+                                        <a href="#" class="btn btn-outline-primary mr-2">Valider</a>
+                                    </div>
+                                    <div class="col-4">
+                                        <a href="#" class="btn btn-outline-danger">Rejeter </a>
+                                    </div>
+                                </div>
+                                                   
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+            {% endif %}
+
+            
+
+
+        </div>
+    </section>
+</div>
+{% endblock content %}
