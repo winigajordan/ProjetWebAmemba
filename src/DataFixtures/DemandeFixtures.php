@@ -24,6 +24,7 @@ class DemandeFixtures extends AppFixtures
         $demande -> setPromotion("2019");
         $demande -> setVille("Dakar");
         $demande -> setDate(new DateTime());
+        $demande -> setEtat('EN COURS');
         $manager-> persist($demande);
 
 
@@ -35,6 +36,7 @@ class DemandeFixtures extends AppFixtures
         $demande1 -> setPromotion("2019");
         $demande1 -> setVille("Dakar");
         $demande1 -> setDate(new DateTime());
+        $demande1 -> setEtat('EN COURS');
         $manager-> persist($demande1);
 
         $manager->flush();
