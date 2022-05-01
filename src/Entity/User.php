@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\InheritanceType('JOINED')]
 #[ORM\DiscriminatorMap(['membre' => 'Membre', 'client' => 'Client', 'admin' => 'Admin', 'super_admin' => 'SuperAdmin'])]
 
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]

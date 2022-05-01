@@ -12,9 +12,16 @@ use Mail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class DemandeController extends AbstractController
 {
+    private UserPasswordHasherInterface $hasher;
+    public function __construct(UserPasswordHasherInterface $hasher)
+    {
+        $this->hasher = $hasher;
+    }
+
     #[Route('/admin/demande', name: 'demande')]
     public function index(DemandeRepository $dmd): Response
     {
@@ -61,8 +68,12 @@ class DemandeController extends AbstractController
         $membre -> setTelephone('');
         $membre -> setStatut(false);
         $membre -> setEmail($selected -> getMail());
-        $membre -> setPassword(date_format(new DateTime(),'Y/m/d-H:i:s'));
-        $membre -> setRoles(["MEMBRE"]);
+        //$password = date_format(new DateTime(),'Y/m/d-H:i:s');
+        $password = "1234";
+        $membre -> setRoles(["ROLE_MEMBRE"]);
+
+        $pwd = $this->hasher->hashPassword($membre, $password);
+        $membre -> setPassword($pwd);
        
         $selected -> setEtat('VALIDE');
         $manager -> persist($membre);
