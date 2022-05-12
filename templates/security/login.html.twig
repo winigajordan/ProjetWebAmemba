@@ -1,42 +1,49 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.pages.html.twig' %}
+{% block page %}{% endblock page %}
+{% block content %}
 
-{% block title %}Log in!{% endblock %}
+<!-- LOGIN SECTION START -->
+    <section class="login-register">
+        <div class="container d-flex">
+            <div class="login-left login-card d-flex justify-content-center align-items-center">
+                <div>
+                    {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
 
-{% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    {% if app.user %}
+                        <div class="mb-3">
+                            You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                        </div>
+                    {% endif %}
+                    <img src="assets/images/login_vector.svg" alt="">
+                    <h2 class="mt-5 mb-3">Bon retour parmi nous 😊</h2>
+                    <p>Entrez vos identifiants pour acceder a votre compte, si vous avec quelconque probleme n'hesitez pas a nous <a href="">contacter</a>  !</p>
+                </div>
+            </div>
+            <div class="login-right login-card">
+                <div class="container">
+                    <form method="post">
+                        <h2>Entrez votre email et votre mot de passe</h2>
+                        <div class="mt-4">
+                             <label class="form-label">Email</label>
+                             <input class="form-control" placeholder="Adresse email." type="email" required value="{{ last_username }}" name="email" autocomplete="email">
+                        </div> 
+                        <div class="my-4">
+                            <label class="form-label">Mot de passe</label>
+                            <input name="password" autocomplete="current-password" class="form-control" placeholder="Au moins 6 caractères." type="password" required>
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" >
+                        </div>    
+                        <div class="d-flex justify-content-between w-100">
+                          <button type="submit" class="btn btn-primary">Connexion</button>
+                          <a href="#">Mot de passe oublie ?</a>
+                        </div> 
+                        
+                    </form>
+                </div>
+            </div>
         </div>
-    {% endif %}
+    </section>
+    <!-- LOGIN SECTION END -->
+{% endblock content %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-    #}
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
-{% endblock %}

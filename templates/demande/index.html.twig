@@ -1,9 +1,67 @@
 {% extends 'base.admin.html.twig' %}
 
-
 {% block page_title %} Demande d'adhésion {% endblock page_title %}
 
 {% block content %}
+<section class="row">
+    <div class="col-12 ">
+        <div class="row">
+            <div class="col-6 col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-body px-3 py-4-5">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="stats-icon green">
+                                    <i class="iconly-boldAdd-User"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <h6 class="text-muted font-semibold">Demandes d'adhésion</h6>
+                                <h6 class="font-extrabold mb-0">{{nombreDemandes}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-body px-3 py-4-5">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="stats-icon purple">
+                                    <i class="iconly-boldShow"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <h6 class="text-muted font-semibold">Demandes de partenariat</h6>
+                                <h6 class="font-extrabold mb-0">XXX</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-body py-4 px-5">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar avatar-xl">
+                                <img src="{{asset('admin/assets/images/faces/1.jpg')}}" alt="Face 1">
+                            </div>
+                            <div class="ms-3 name">
+                                <h5 class="font-bold">{{app.user.nom}}  {{app.user.prenom}}</h5>
+                                <h6 class="text-muted mb-0">{{app.user.email}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        
+    </div>
+    
+</section>
 <div class="page-content">
     <section class="section">
         <div class="row" id="basic-table">
@@ -90,7 +148,7 @@
                                         <a href="{{path('valider_demande', {'id' : selected.id })}}" class="btn btn-outline-primary mr-2">Valider</a>
                                     </div>
                                     <div class="col-4">
-                                        <a href="#" class="btn btn-outline-danger">Rejeter </a>
+                                        <a href="{{path('annuler_demande', {'id' : selected.id })}}" class="btn btn-outline-warning mr-2">Annuler</a>
                                     </div>
                                 </div>
                                                    

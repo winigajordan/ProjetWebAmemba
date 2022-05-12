@@ -1,0 +1,318 @@
+{% extends 'base.front.html.twig' %}
+
+{% block title %}Hello AccueilController!{% endblock %}
+
+{% block content %}
+
+
+<!-- MISSION SECTION START -->
+<section class="mission-section d-flex container">
+    <div class="mission-left d-flex align-items-center justify-content-center w-50 h-100">
+        <div class="blue-bg d-flex align-items-center">
+            <img src="{{asset('front/images/goal.png')}}">
+        </div>
+    </div>
+    <div class="mission-right w-50 h-100 d-flex align-items-center">
+        <div class="">
+            <h3>Mission de <br> l'Amicale de MEMBA</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec volutpat elit. Mauris sollicitudin, est ac tristique euismod, velit turpis vehicula dui, at fringilla dui orci non nibh. Quisque congue tellus lacus, et tristique leo tristique sit amet. Mauris tincidunt faucibus mi eu tempus. Sed congue risus sed fermentum dapibus. In feugiat egestas bibendum. Aenean vitae risus id ante ornare vehicula a sed sem. Sed nibh mauris, fermentum et dignissim a, tempus ut urna.
+            </p>
+            <a href="#" class="btn btn-lg btn-primary">Lire plus <i class="fa-solid fa-angle-right"></i></a>
+        </div>
+    </div>
+</section>
+<!-- MISSION SECTION END -->
+
+<!-- STATS SECTION START -->
+<section class="stats container d-flex flex-column justify-content-between mt-5">
+    <h2 class="text-center my-5">L'Amicale en chiffres</h2>
+    <div class="stats-cards w-100 h-50 d-flex justify-content-around mb-5">
+        <div class="stats-card">
+            <div class="stats-ico d-flex justify-content-center align-items-center grad">
+                <i class="fa-solid fa-graduation-cap fa-2x"></i>
+            </div>
+            <h4 class="text-center">50k Alumnis</h4>
+            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. </p>
+        </div>
+        <div class="stats-card">
+            <div class="stats-ico d-flex justify-content-center align-items-center chart">
+                <i class="fa-solid fa-chart-line fa-2x"></i>
+            </div>
+            <h4 class="text-center">50k Projets</h4>
+            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. </p>
+        </div>
+        <div class="stats-card">
+            <div class="stats-ico d-flex justify-content-center align-items-center money">
+                <i class="fa-solid fa-money-bill fa-2x"></i>
+            </div>
+            <h4 class="text-center">50k Fonds Immobilises</h4>
+            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. </p>
+        </div>
+    </div>
+</section>
+<!-- STATS SECTION END -->
+
+<!-- CTA SECTION START -->
+<section class="cta">
+    <div class="container d-flex flex-column justify-content-around h-100 py-5">
+        <h2 class="text-center">Vous êtes une entreprise ?</h2>
+        <p class="text-center">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. Enim vel sed posuere ut massa ut. Non sit imperdiet enim at diam orci augue sit ultrices. Rhoncus et ipsum, quis egestas scelerisque viverra id sit. 
+            Ullamcorper enim ultrices suspendisse odio. 
+        </p>
+        <div class="w-100 d-flex justify-content-center">
+            <a href="" class="btn btn-primary btn-lg">Collaborer <i class="fa-solid fa-angle-right"></i></a>
+        </div>
+    </div>
+</section>
+<!-- CTA SECTION END -->
+
+<!-- WEN SECTION START -->
+<section class="wen container">
+    <h2 class="text-center py-5">La parole à nos entrepreneuses</h2>
+    <div class="wen-cards container">
+        <div class="card1 wen-card position-relative">
+            <p>
+                “ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.“         
+            </p>
+            <h5 class="position-absolute">Nom et prenom</h5>
+        </div>
+        <div class="card2 wen-card p-5 d-flex align-items-end">
+            <div class="wen-card-video">
+                <h5>Nom et prenom</h5>
+                <h3>A.S nous raconte son parcours de jeune femme entrepreneur</h3>
+                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+            </div>
+        </div>
+        <div class="card3 wen-card p-5 h-100 d-flex align-items-end">
+            <div class="wen-card-video position-relative">
+                <h5>Nom et prenom</h5>
+                <h3>A.S nous raconte son parcours de jeune femme entrepreneur</h3>
+                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+            </div>
+        </div>
+        <div class="card4 wen-card position-relative">
+            <p>
+                “ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.“         
+            </p>
+            <h5 class="position-absolute">Nom et prenom</h5>
+        </div>
+    </div>
+    <div class="w-100 d-flex justify-content-center py-5">
+        <a href="#" class="btn btn-primary btn-lg">PROGRAMME WEN</a>
+    </div>
+    
+</section>
+<!-- WEN SECTION END -->
+
+<!-- BLOG SECTION START -->
+<section class="blog container position-relative">
+    <h2 class="text-center pt-5">Derniers articles du blog</h2>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. 
+        Enim vel sed posuere ut massa ut.
+    </p>
+    <div class="blog-carousel-container pb-5">
+        <div class="blog-card">
+            <div class="blog-card-top">
+                <img src="{{asset('front/images/blog/blog1.png')}}" alt="">
+            </div>
+            <div class="blog-card-bottom">
+                <h4>Titre de l’article</h4>
+                <p>
+                    Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod.Lorem ipsum dolor sit amet, consec tetur adipiscing elit, 
+                    sed do eiusmod.
+                </p>
+                <a href="" class="btn btn-outline-primary">Lire plus</a>
+            </div>
+        </div>
+        <div class="blog-card">
+            <div class="blog-card-top">
+                <img src="{{asset('front/images/blog/blog2.png')}}" alt="">
+            </div>
+            <div class="blog-card-bottom">
+                <h4>Titre de l’article</h4>
+                <p>
+                    Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod.Lorem ipsum dolor sit amet, consec tetur adipiscing elit, 
+                    sed do eiusmod.
+                </p>
+                <a href="" class="btn btn-outline-primary">Lire plus</a>
+            </div>
+        </div>
+        <div class="blog-card">
+            <div class="blog-card-top">
+                <img src="{{asset('front/images/blog/blog3.png')}}" alt="">
+            </div>
+            <div class="blog-card-bottom">
+                <h4>Titre de l’article</h4>
+                <p>
+                    Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod.Lorem ipsum dolor sit amet, consec tetur adipiscing elit, 
+                    sed do eiusmod.
+                </p>
+                <a href="" class="btn btn-outline-primary">Lire plus</a>
+            </div>
+        </div>
+        <div class="blog-card">
+            <div class="blog-card-top">
+                <img src="{{asset('front/images/blog/blog2.png')}}" alt="">
+            </div>
+            <div class="blog-card-bottom">
+                <h4>Titre de l’article</h4>
+                <p>
+                    Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod.Lorem ipsum dolor sit amet, consec tetur adipiscing elit, 
+                    sed do eiusmod.
+                </p>
+                <a href="" class="btn btn-outline-primary">Lire plus</a>
+            </div>
+        </div>
+        <div class="blog-card">
+            <div class="blog-card-top">
+                <img src="{{asset('front/images/blog/blog1.png')}}" alt="">
+            </div>
+            <div class="blog-card-bottom">
+                <h4>Titre de l’article</h4>
+                <p>
+                    Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod.Lorem ipsum dolor sit amet, consec tetur adipiscing elit, 
+                    sed do eiusmod.
+                </p>
+                <a href="" class="btn btn-outline-primary">Lire plus</a>
+            </div>
+        </div>
+        <div class="blog-card">
+            <div class="blog-card-top">
+                <img src="{{asset('front/images/blog/blog2.png')}}" alt="">
+            </div>
+            <div class="blog-card-bottom">
+                <h4>Titre de l’article</h4>
+                <p>
+                    Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod.Lorem ipsum dolor sit amet, consec tetur adipiscing elit, 
+                    sed do eiusmod.
+                </p>
+                <a href="" class="btn btn-outline-primary">Lire plus</a>
+            </div>
+        </div>
+    </div>
+    <div class="blog-btn position-absolute">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" id="blog-arrow-left" class="btn btn-secondary"><i class="fa-solid fa-angle-left"></i></button>
+            <button type="button" id="blog-arrow-right" class="btn btn-secondary"><i class="fa-solid fa-angle-right"></i></button>
+        </div>
+        <a class="btn btn-primary" href="#">Voir tout <i class="fa-solid fa-angle-right"></i></a>
+    </div>
+</section>
+<!-- BLOG SECTION END -->
+
+<!-- EVENTS SECTION START -->
+<section class="events container position-relative">
+    <h2 class="text-center pt-5">Evènements à venir</h2>
+    <div class="events-carousel-container my-5 position-relative">
+        <div class="event-card event-card1 position-relative">
+            <div class="event-card-badge position-absolute">
+                <span class="text-center">6<br>Mai</span>
+            </div>
+            <div class="event-card-content">
+                <h3>Rencontres Nouvelles Sortantes</h3>
+                <h5>09:00 AM - 02:00 PM</h5>
+            </div>
+        </div>
+        <div class="event-card event-card2 position-relative">
+            <div class="event-card-badge position-absolute">
+                <span class="text-center">6<br>Mai</span>
+            </div>
+            <div class="event-card-content">
+                <h3>Rencontres Nouvelles Sortantes</h3>
+                <h5>09:00 AM - 02:00 PM</h5>
+            </div>
+        </div>
+        <div class="event-card event-card3 position-relative">
+            <div class="event-card-badge position-absolute">
+                <span class="text-center">6<br>Mai</span>
+            </div>
+            <div class="event-card-content">
+                <h3>Rencontres Nouvelles Sortantes</h3>
+                <h5>09:00 AM - 02:00 PM</h5>
+            </div>
+        </div>
+        <div class="event-card event-card4 position-relative">
+            <div class="event-card-badge position-absolute">
+                <span class="text-center">6<br>Mai</span>
+            </div>
+            <div class="event-card-content">
+                <h3>Rencontres Nouvelles Sortantes</h3>
+                <h5>09:00 AM - 02:00 PM</h5>
+            </div>
+        </div>
+        <div class="event-card event-card5 position-relative">
+            <div class="event-card-badge position-absolute">
+                <span class="text-center">6<br>Mai</span>
+            </div>
+            <div class="event-card-content">
+                <h3>Rencontres Nouvelles Sortantes</h3>
+                <h5>09:00 AM - 02:00 PM</h5>
+            </div>
+        </div>
+    </div>
+    <div class="events-btn position-absolute">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" id="events-arrow-left" class="btn btn-secondary"><i class="fa-solid fa-angle-left"></i></button>
+            <button type="button" id="events-arrow-right" class="btn btn-secondary"><i class="fa-solid fa-angle-right"></i></button>
+        </div>
+        <a class="btn btn-primary" href="#">Voir tout <i class="fa-solid fa-angle-right"></i></a>
+    </div>
+</section>
+<!-- EVENTS SECTION END -->
+
+<!-- OLD SECTION START -->
+<section class="old">
+    <div class="container d-flex flex-column justify-content-around h-100 py-5">
+        <h2 class="text-center">Vous être une ancienne ?</h2>
+        <p class="text-center">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. Enim vel sed posuere ut massa ut. Non sit imperdiet enim at diam orci augue
+        </p>
+        <div class="w-100 d-flex justify-content-center">
+            <a href="" class="btn btn-primary btn-lg">Adhérer</a>
+        </div>
+    </div>
+</section>
+<!-- OLD SECTION END -->
+
+<!-- PARTNERS SECTION START -->
+<section class="partners container">
+    <h2 class="text-center py-5">Nos partenaires</h2>
+    <div class="partners-carousel-container">
+        <div class="d-flex justify-content-center align-items center">
+            <img src="{{asset('front/images/partners/free.png')}}" alt="">    
+        </div>
+        <div class="d-flex justify-content-center align-items center">
+            <img src="{{asset('front/images/partners/sonatel.png')}}" alt="">    
+        </div>
+        <div class="d-flex justify-content-center align-items center">
+            <img src="{{asset('front/images/partners/ism.png')}}" alt="">    
+        </div>
+        <div class="d-flex justify-content-center align-items center">
+            <img src="{{asset('front/images/partners/iam.png')}}" alt="">    
+        </div>
+        <div class="d-flex justify-content-center align-items center">
+            <img src="{{asset('front/images/partners/zadada.png')}}" alt="">    
+        </div>
+        <div class="d-flex justify-content-center align-items center">
+            <img src="{{asset('front/images/partners/free.png')}}" alt="">    
+        </div>
+        <div class="d-flex justify-content-center align-items center">
+            <img src="{{asset('front/images/partners/sonatel.png')}}" alt="">    
+        </div>
+        <div class="d-flex justify-content-center align-items center">
+            <img src="{{asset('front/images/partners/ism.png')}}" alt="">    
+        </div>
+        <div class="d-flex justify-content-center align-items center">
+            <img src="{{asset('front/images/partners/iam.png')}}" alt="">    
+        </div>
+        <div class="d-flex justify-content-center align-items center">
+            <img src="{{asset('front/images/partners/zadada.png')}}" alt="">    
+        </div>
+    </div>
+</section>
+<!-- PARTNERS SECTION END -->
+
+{% endblock %}

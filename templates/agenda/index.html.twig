@@ -1,0 +1,239 @@
+{% extends 'base.pages.html.twig' %}
+
+
+{% block content %}
+
+<!-- EVENTS SECTION START -->
+<section class="events container position-relative">
+    <h2 class="text-center pt-5">Evènements à venir</h2>
+    <div class="events-carousel-container my-5 position-relative">
+        <div class="event-card event-card1 position-relative">
+            <div class="event-card-badge position-absolute">
+                <span class="text-center">6<br>Mai</span>
+            </div>
+            <div class="event-card-content">
+                <h3>Rencontres Nouvelles Sortantes</h3>
+                <h5>09:00 AM - 02:00 PM</h5>
+            </div>
+        </div>
+        <div class="event-card event-card2 position-relative">
+            <div class="event-card-badge position-absolute">
+                <span class="text-center">6<br>Mai</span>
+            </div>
+            <div class="event-card-content">
+                <h3>Rencontres Nouvelles Sortantes</h3>
+                <h5>09:00 AM - 02:00 PM</h5>
+            </div>
+        </div>
+        <div class="event-card event-card3 position-relative">
+            <div class="event-card-badge position-absolute">
+                <span class="text-center">6<br>Mai</span>
+            </div>
+            <div class="event-card-content">
+                <h3>Rencontres Nouvelles Sortantes</h3>
+                <h5>09:00 AM - 02:00 PM</h5>
+            </div>
+        </div>
+        <div class="event-card event-card4 position-relative">
+            <div class="event-card-badge position-absolute">
+                <span class="text-center">6<br>Mai</span>
+            </div>
+            <div class="event-card-content">
+                <h3>Rencontres Nouvelles Sortantes</h3>
+                <h5>09:00 AM - 02:00 PM</h5>
+            </div>
+        </div>
+        <div class="event-card event-card5 position-relative">
+            <div class="event-card-badge position-absolute">
+                <span class="text-center">6<br>Mai</span>
+            </div>
+            <div class="event-card-content">
+                <h3>Rencontres Nouvelles Sortantes</h3>
+                <h5>09:00 AM - 02:00 PM</h5>
+            </div>
+        </div>
+    </div>
+    <div class="events-btn position-absolute">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" id="events-arrow-left" class="btn btn-secondary"><i class="fa-solid fa-angle-left"></i></button>
+            <button type="button" id="events-arrow-right" class="btn btn-secondary"><i class="fa-solid fa-angle-right"></i></button>
+        </div>
+        <a class="btn btn-primary" href="#">Voir tout <i class="fa-solid fa-angle-right"></i></a>
+    </div>
+</section>
+<!-- EVENTS SECTION END -->
+
+<!-- SECOND SECTION START -->
+<section class="second">
+    <div class="container">
+        <main class="col-lg-12">
+            <h2 class="text-center second-title pt-5">Activités passées</h2>
+            <header class="d-sm-flex align-items-center border-bottom mb-4 pb-3">
+                <strong class="d-block py-2">32 articles trouvés </strong>
+                <div class="ms-auto">
+                  <select class="form-select d-inline-block w-auto">
+                      <option value="0">Best match</option>
+                      <option value="1">Recommended</option>
+                      <option value="2">High rated</option>
+                      <option value="3">Randomly</option>
+                  </select>
+                  <div class="btn-group">
+                    <a href="#" class="btn btn-light" data-bs-toggle="tooltip" title="List view"> 
+                      <i class="fa fa-bars"></i>
+                    </a>
+                    <a href="#" class="btn btn-light active" data-bs-toggle="tooltip" title="Grid view"> 
+                      <i class="fa fa-th"></i>
+                    </a>
+                  </div>
+                </div>
+            </header>
+        
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <figure class="card card-product-grid">
+                    <div class="img-wrap" style="background-image: url({{asset('front/images/interview/interview_1.png')}});"></div>
+                    <figcaption class="info-wrap border-top">
+                      <h3>Titre de l'aticle</h3>
+                      <p class="title mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra sollicitudin leo, eleifend tempus enim...</p>
+                      <div class="article-infos">
+                        <div class="article-date"><i class="fa-solid fa-calendar-days pb-2 pb-2"></i> 01/01/2022</div>
+                        <div class="article-auteur"><i class="fa-solid fa-user"></i> Auteur</div>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <figure class="card card-product-grid">
+                    <div class="img-wrap" style="background-image: url({{asset('front/images/blog/blog1.png')}});"> </div>
+                    <figcaption class="info-wrap border-top">
+                      <h3>Titre de l'aticle</h3>  
+                      <p class="title mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra sollicitudin leo, eleifend tempus enim...</p>
+                      <div class="article-infos">
+                        <div class="article-date"><i class="fa-solid fa-calendar-days pb-2"></i> 01/01/2022</div>
+                        <div class="article-auteur"><i class="fa-solid fa-user"></i> Auteur</div>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <figure class="card card-product-grid">
+                    <div class="img-wrap" style="background-image: url({{asset('front/images/blog/blog2.png')}});"> </div>
+                    <figcaption class="info-wrap border-top">
+                      <h3>Titre de l'aticle</h3>
+                      <p class="title mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra sollicitudin leo, eleifend tempus enim...</p>
+                      <div class="article-infos">
+                        <div class="article-date"><i class="fa-solid fa-calendar-days pb-2"></i> 01/01/2022</div>
+                        <div class="article-auteur"><i class="fa-solid fa-user"></i> Auteur</div>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <figure class="card card-product-grid">
+                    <div class="img-wrap" style="background-image: url({{asset('front/images/interview/interview_1.png')}});"> </div>
+                    <figcaption class="info-wrap border-top">
+                      <h3>Titre de l'aticle</h3>
+                      <p class="title mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra sollicitudin leo, eleifend tempus enim...</p>
+                      <div class="article-infos">
+                        <div class="article-date"><i class="fa-solid fa-calendar-days pb-2"></i> 01/01/2022</div>
+                        <div class="article-auteur"><i class="fa-solid fa-user"></i> Auteur</div>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <figure class="card card-product-grid">
+                    <div class="img-wrap" style="background-image: url({{asset('front/images/blog/blog1.png')}});"> </div>
+                    <figcaption class="info-wrap border-top">
+                      <h3>Titre de l'aticle</h3>
+                      <p class="title mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra sollicitudin leo, eleifend tempus enim...</p>
+                      
+                      <div class="article-infos">
+                        <div class="article-date"><i class="fa-solid fa-calendar-days pb-2"></i> 01/01/2022</div>
+                        <div class="article-auteur"><i class="fa-solid fa-user"></i> Auteur</div>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <figure class="card card-product-grid">
+                    <div class="img-wrap" style="background-image: url({{asset('front/images/blog/blog2.png')}});"> </div>
+                    <figcaption class="info-wrap border-top">
+                      <h3>Titre de l'aticle</h3>
+                      <p class="title mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra sollicitudin leo, eleifend tempus enim...</p>
+                      <div class="article-infos">
+                        <div class="article-date"><i class="fa-solid fa-calendar-days pb-2"></i> 01/01/2022</div>
+                        <div class="article-auteur"><i class="fa-solid fa-user"></i> Auteur</div>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <figure class="card card-product-grid">
+                    <div class="img-wrap" style="background-image: url({{asset('front/images/interview/interview_1.png')}});"> </div>
+                    <figcaption class="info-wrap border-top">
+                      <h3>Titre de l'aticle</h3>
+                      <p class="title mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra sollicitudin leo, eleifend tempus enim...</p>
+                      <div class="article-infos">
+                        <div class="article-date"><i class="fa-solid fa-calendar-days pb-2"></i> 01/01/2022</div>
+                        <div class="article-auteur"><i class="fa-solid fa-user"></i> Auteur</div>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <figure class="card card-product-grid">
+                    <div class="img-wrap" style="background-image: url({{asset('front/images/interview/interview_1.png')}});"> </div>
+                    <figcaption class="info-wrap border-top">
+                      <h3>Titre de l'aticle</h3>
+                      <p class="title mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra sollicitudin leo, eleifend tempus enim...</p>
+                      <div class="article-infos">
+                        <div class="article-date"><i class="fa-solid fa-calendar-days pb-2"></i> 01/01/2022</div>
+                        <div class="article-auteur"><i class="fa-solid fa-user"></i> Auteur</div>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+        
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <figure class="card card-product-grid">
+                    <div class="img-wrap" style="background-image: url({{asset('front/images/blog/blog2.png')}});"> </div>
+                    <figcaption class="info-wrap border-top">
+                      <h3>Titre de l'aticle</h3>
+                      <p class="title mb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam pharetra sollicitudin leo, eleifend tempus enim... </p>
+                      <div class="article-infos">
+                        <div class="article-date"><i class="fa-solid fa-calendar-days pb-2"></i> 01/01/2022</div>
+                        <div class="article-auteur"><i class="fa-solid fa-user"></i> Auteur</div>
+                      </div>
+                    </figcaption>
+                  </figure>
+                </div>
+            </div>
+            <hr>
+            <div class="d-flex mt-4 d-flex justify-content-end">
+                <div aria-label="Page navigation nav-pagination" class="p-2">
+                  <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Précédent</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#">5</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Suivant</a></li>
+                  </ul>
+                </div>
+            </div>
+        </main> 
+    </div>
+</section>
+<!-- SECOND SECTION END -->
+
+
+{% endblock %}
