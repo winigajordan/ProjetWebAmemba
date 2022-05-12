@@ -26,22 +26,24 @@ class DemandeController extends AbstractController
     public function index(DemandeRepository $dmd): Response
     {
 
-        $demandes = $dmd -> findAll();
+        $demandes = $dmd -> findBy(["etat"=>"EN COURS"]);
         return $this->render('./demande/index.html.twig', [
             'controller_name' => 'DemandeController',
-            'demandes' => $demandes
+            'demandes' => $demandes,
+            'nombreDemandes'=>count($demandes)
         ]);
     }
 
     #[Route('/admin/demande/details/{id}', name: 'details_demande')]
     public function details($id, DemandeRepository $dmd) : Response
     {
-        $demandes = $dmd -> findAll();
+        $demandes = $dmd -> findBy(["etat"=>"EN COURS"]);
         $selected = $dmd -> find($id);
         return $this->render('./demande/index.html.twig',[
             'controller_name' => 'DemandeController',
             'demandes' => $demandes,
-            'selected' => $selected
+            'selected' => $selected,
+            'nombreDemandes'=>count($demandes)
         ]);
     }
 
@@ -52,13 +54,11 @@ class DemandeController extends AbstractController
         $selected = $dmd -> find($id);
         //dd($selected);
         
-        /* 
+        
         $nom = "JOJO";
         $content = "Votre login est xxxx et votre mot de passe est 1234";
         $mail = new Mail();
         $mail -> send($selected-> getMail(), $nom, "Creation de compte", $content);
-        */
-
         $membre = new Membre();
         $membre -> setNom($selected -> getNom());
         $membre -> setPrenom($selected -> getPrenom());
@@ -71,22 +71,24 @@ class DemandeController extends AbstractController
         //$password = date_format(new DateTime(),'Y/m/d-H:i:s');
         $password = "1234";
         $membre -> setRoles(["ROLE_MEMBRE"]);
-
         $pwd = $this->hasher->hashPassword($membre, $password);
         $membre -> setPassword($pwd);
-       
         $selected -> setEtat('VALIDE');
         $manager -> persist($membre);
         $manager -> persist($selected);
         $manager -> flush();
-
         return $this->redirectToRoute('demande');
-
-        
-
-
     }
 
-    
+
+    #[Route('/admin/demande/annuler/{id}', name: 'annuler_demande')]
+    public function annulationDemande($id,  DemandeRepository $dmd, EntityManagerInterface $manager) : Response
+    {
+        $selected = $dmd -> find($id);
+        $selected -> setEtat('REFUSE');
+        $manager -> persist($selected);
+        $manager -> flush();
+        return $this->redirectToRoute('demande');
+    }
 
 }

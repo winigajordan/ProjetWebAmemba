@@ -1,0 +1,47 @@
+{% extends 'base.pages.html.twig' %}
+
+{% block content %}
+<!-- MISSION SECTION START -->
+<section class="mission-section d-flex align-items-center container">
+    <div class="mission-left d-flex align-items-center justify-content-center w-50 h-50 img-wrap" style="background-image: url({{asset('front/images/blog/blog2.png')}});"></div>
+    <div class="mission-right w-50 h-50">
+        <h3>Mission de <br> l'Amicale de MEMBA</h3>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec volutpat elit. Mauris sollicitudin, est ac tristique euismod, velit turpis vehicula dui, at fringilla dui orci non nibh. Quisque congue tellus lacus, et tristique leo tristique sit amet. Mauris tincidunt faucibus mi eu tempus. Sed congue risus sed fermentum dapibus. In feugiat egestas bibendum. Aenean vitae risus id ante ornare vehicula a sed sem. Sed nibh mauris, fermentum et dignissim a, tempus ut urna.
+        </p>
+    </div>
+</section>
+<!-- MISSION SECTION END -->
+
+<!-- STATS SECTION START -->
+<section class="container-fluid stats-about">
+    <div class="stats container d-flex flex-column justify-content-between">
+        <h2 class="text-center my-5">L'Amicale en chiffres</h2>
+        <div class="stats-cards w-100 h-50 d-flex justify-content-around mb-5">
+            <div class="stats-card">
+                <div class="stats-ico d-flex justify-content-center align-items-center grad">
+                    <i class="fa-solid fa-graduation-cap fa-2x"></i>
+                </div>
+                <h4 class="text-center">50k Alumnis</h4>
+                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. </p>
+            </div>
+            <div class="stats-card">
+                <div class="stats-ico d-flex justify-content-center align-items-center chart">
+                    <i class="fa-solid fa-chart-line fa-2x"></i>
+                </div>
+                <h4 class="text-center">50k Projets</h4>
+                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. </p>
+            </div>
+            <div class="stats-card">
+                <div class="stats-ico d-flex justify-content-center align-items-center money">
+                    <i class="fa-solid fa-money-bill fa-2x"></i>
+                </div>
+                <h4 class="text-center">50k Fonds Immobilises</h4>
+                <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- STATS SECTION END -->
+<div class="vh-100"></div>
+{% endblock content %}
