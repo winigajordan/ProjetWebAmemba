@@ -8,7 +8,7 @@
             <div class="login-left login-card d-flex justify-content-center align-items-center">
                 <div>
                     {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    <div class="alert alert-primary text-dark">Erreur de connexion </div>
                     {% endif %}
 
                     {% if app.user %}

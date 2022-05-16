@@ -52,13 +52,14 @@ class DemandeController extends AbstractController
     public function validationDemande($id,  DemandeRepository $dmd, MembreRepository $membreRipo, EntityManagerInterface $manager): Response
     {
         $selected = $dmd -> find($id);
+        $userMail = $selected -> getMail();
         //dd($selected);
         
+        $userPassword = date_format(new DateTime(),'Y/m/d-H:i:s');
         
-        $nom = "JOJO";
-        $content = "Votre login est xxxx et votre mot de passe est 1234";
+        $content = "Votre login est $userMail et votre mot de passe est $userPassword";
         $mail = new Mail();
-        $mail -> send($selected-> getMail(), $nom, "Creation de compte", $content);
+        $mail -> send($selected-> getMail(), "", "Demande accepté", $content);
         $membre = new Membre();
         $membre -> setNom($selected -> getNom());
         $membre -> setPrenom($selected -> getPrenom());
@@ -68,7 +69,7 @@ class DemandeController extends AbstractController
         $membre -> setTelephone('');
         $membre -> setStatut(false);
         $membre -> setEmail($selected -> getMail());
-        //$password = date_format(new DateTime(),'Y/m/d-H:i:s');
+        
         $password = "1234";
         $membre -> setRoles(["ROLE_MEMBRE"]);
         $pwd = $this->hasher->hashPassword($membre, $password);
@@ -86,6 +87,9 @@ class DemandeController extends AbstractController
     {
         $selected = $dmd -> find($id);
         $selected -> setEtat('REFUSE');
+        $content = "Suite à des vérifications, nous ne sommes pas en mesure de valider la création de votre compte";
+        $mail = new Mail();
+        $mail -> send($selected-> getMail(), "", "Demande refusé", $content);
         $manager -> persist($selected);
         $manager -> flush();
         return $this->redirectToRoute('demande');

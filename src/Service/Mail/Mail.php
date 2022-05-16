@@ -27,12 +27,11 @@ class Mail {
                             'Name' => $name
                         ]
                     ],
-                    'TemplateID' => 3887294,
+                    'TemplateID' => 3936720 ,
                     'TemplateLanguage' => true,
-                    'Subject' => $subject,
                     'Variables' => [
                         'content' => $content,
-                        'sujet' => $subject
+                        'objet' => $subject
                     ]
                 ]
             ]

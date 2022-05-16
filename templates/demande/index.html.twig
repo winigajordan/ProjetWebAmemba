@@ -48,8 +48,8 @@
                                 <img src="{{asset('admin/assets/images/faces/1.jpg')}}" alt="Face 1">
                             </div>
                             <div class="ms-3 name">
-                                <h5 class="font-bold">{{app.user.nom}}  {{app.user.prenom}}</h5>
-                                <h6 class="text-muted mb-0">{{app.user.email}}</h6>
+                                <h5 class="font-bold">Nom </h5>
+                                <h6 class="text-muted mb-0">mail </h6>
                             </div>
                         </div>
                     </div>
@@ -95,7 +95,8 @@
                                         <td>{{demande.mail}}</td>
                                         {% endif %}
                                         <td>{{demande.date|date('d-m-Y')}}</td>
-                                        <td class="text-bold-500"><a href="{{path('details_demande', {'id' : demande.id })}}" class="btn btn-outline-primary">Details</a></td>
+                                        <td class="text-bold-500">
+                                            <a href="{{path('details_demande', {'id' : demande.id })}}" class="btn btn-outline-primary">Details</a></td>
 
                                     </tr>
                                     {% endfor %}
