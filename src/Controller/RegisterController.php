@@ -4,15 +4,22 @@ namespace App\Controller;
 
 use Mail;
 use DateTime;
+use App\Entity\Client;
 use App\Entity\Demande;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegisterController extends AbstractController
 {
+    private $encoder;
+    public function __construct(UserPasswordHasherInterface $encoder){
+        $this->encoder=$encoder;
+    }
 
     #[Route('/register', name: 'app_register')]
     public function index(): Response
@@ -42,5 +49,27 @@ class RegisterController extends AbstractController
        $mail = new Mail();
        $mail -> send("winiga-jordane.rema@ism.edu.sn", "", "Demande d'adhésion", $content);
        return $this->redirectToRoute("app_register");
+    }
+
+
+    #[Route('/register/client', name: 'add_client')]
+    public function addClient(Request $request, EntityManagerInterface $em,
+    SessionInterface $session): Response {
+        if (!empty($_POST)){
+            $client=new Client();
+            $client->setNom($request -> request -> get('nom'))
+                ->setPrenom($request -> request -> get('prenom'))
+                ->setEmail($request -> request -> get('email'));
+            $plainPassword=$request -> request -> get('password');
+            $passwordEncode= $this->encoder->hashPassword($client,$plainPassword);
+            $client->setPassword($passwordEncode);
+            $em -> persist($client);
+            $em -> flush();
+            $_SESSION["Redirect"]="Panier";
+            return $this->redirectToRoute("app_login");
+        }
+        return $this->render('register/client.register.html.twig', [
+            'controller_name' => 'RegisterController',
+        ]);
     }
 }

@@ -1,0 +1,91 @@
+{% extends 'base.pages.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+{% block page %}{% endblock page %}
+
+{% block content %}
+    <!-- SECOND SECTION START -->
+    <section class="second py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="card">
+                        <div class="content-body">
+                            <h4 class="card-title mb-4">Votre panier</h4>
+                            <form method="POST" action="{{path('app_panier_update')}}">
+                            {% for i in items %}
+                            <article class="row gy-3 mb-4">
+                                <div class="col-lg-5">
+                                    <figure class="itemside me-lg-5">
+                                        <div class="aside"><img src="produits/{{i['produit'].images[0].path}}" class="img-sm img-thumbnail"></div>
+                                        <figcaption class="info">
+                                            <p class="text-muted">{{i['produit'].libelle}}</p>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                                <div class="col-auto">
+                                    <div class="form-group">
+                                      <label for=""></label>
+                                      <input type="Number"
+                                        class="form-control" name="{{i['produit'].id}}" value="{{i['quantite']}}" id="" aria-describedby="helpId" placeholder="">
+                                      <small id="helpId" class="form-text text-muted">Quantite</small>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-sm-4 col-6">
+                                    <div class="price-wrap lh-sm">
+                                        <var class="price h6">Total: {{i['produit'].prix*i['quantite']}}</var> <br>
+                                        <small class="text-muted">PU: {{i['produit'].prix}} </small>
+                                    </div>
+                                </div>
+                                <div class="col-lg col-sm-4">
+                                    <div class="float-lg-end">
+                                        <a href="{{path('app_panier_remove',{id:i['produit'].id})}}" class="btn btn-light text-danger"> Supprimer</a>
+                                    </div>
+                                </div>
+                            </article>
+                            {% endfor %}
+                            {% if total>0 %}
+                            <div class="cart-buttons">
+							    <input  type="submit" class="btn btn-primary" value="Actualiser le panier" class="boxed-btn">
+						    </div>
+                            {% else%}
+                            <p>Votre panier est vide !!! </p>
+                            {% endif %}
+                            </form>
+                        </div>
+
+                        <!-- <div class="content-body border-top">
+                            <p><i class="me-2 text-muted fa-lg fa fa-truck"></i> Free Delivery within 1-2 weeks</p>
+                            <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip</p>
+                        </div> -->
+
+                    </div>
+
+                </div>
+                <aside class="col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <dl class="dlist-align">
+                                <dt>Total:</dt>
+                                <dd class="text-end text-dark h5">{{total}}</dd>
+                            </dl>
+                            <div class="d-grid gap-2 my-3">
+                                {% if total>0 %}
+                                    <a href="{{path('app_commande_add')}}" class="btn btn-success w-100"> Poursuivre l'achat </a>
+                                {% endif %}
+                                <a href="{{path('app_shop')}}" class="btn btn-light w-100"> Retour a la boutique </a>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                </aside>
+
+            </div>
+        </div>
+    </section>
+    <!-- SECOND SECTION END -->
+
+
+    
+{% endblock %}

@@ -1,5 +1,5 @@
 {% extends 'base.pages.html.twig' %}
-
+{% block page %}{% endblock page %}
 {% block content %}
 <!-- SECOND SECTION START -->
 <section class="second p-3">
@@ -11,19 +11,15 @@
                 <article class="filter-group">
                     <header class="card-header">
                     <a href="#" class="title" data-bs-toggle="collapse" data-bs-target="#collapse_aside1">
-                        <i class="icon-control fa fa-chevron-down"></i>   Articles connexes 
+                        <i class="icon-control fa fa-chevron-down"></i>   Categories 
                     </a>
                     </header>
                     <div class="collapse show" id="collapse_aside1">
                         <div class="card-body">
                             <ul class="list-menu">
-                                <li><a href="#">Electronique </a></li>
-                                <li><a href="#">Accessories  </a></li>
-                                <li><a href="#">Articles de maison </a></li>
-                                <li><a href="#">Vêtements pour hommes </a></li>
-                                <li><a href="#">Articles d'intérieur </a></li>
-                                <li><a href="#">Magazines </a></li>
-                                <li><a href="#">Catégorie </a></li>
+                                {% for cat in categories %}
+                                <li><a href="{{path('app_produit_by_category',{id:cat.id})}}">{{cat.libelle}}</a></li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -36,48 +32,19 @@
                     </header>
                     <div class="collapse show" id="collapse_aside2">
                         <div class="card-body">
-                            <input type="range" class="form-range" min="0" max="100">
                             <div class="row mb-3">
+                            <form method="POST" >
                                 <div class="col-6">
                                     <label for="min" class="form-label">Min</label>
-                                    <input class="form-control" id="min" placeholder="0 F CFA" type="number">
+                                    <input name="min" class="form-control" id="min" placeholder="0 F CFA" type="number">
                                 </div>
                                 <div class="col-6">
                                     <label for="max" class="form-label">Max</label>
-                                    <input class="form-control" id="max" placeholder="999999 F CFA" type="number">
+                                    <input name="max" class="form-control" id="max" placeholder="999999 F CFA" type="number">
                                 </div>
                             </div>
-                            <button class="btn btn-primary w-100" type="button">Filtrer</button>
-                        </div>
-                    </div>
-                </article>
-                <article class="filter-group">
-                    <header class="card-header">
-                    <a href="#" class="title" data-bs-toggle="collapse" data-bs-target="#collapse_aside3">
-                        <i class="icon-control fa fa-chevron-down"></i>  Taille 
-                    </a>
-                    </header>
-                    <div class="collapse show" id="collapse_aside3">
-                        <div class="card-body">
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light"> XS </span>
-                            </label>
-                    
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light"> SM </span>
-                            </label>
-                    
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light"> LG </span>
-                            </label>
-                    
-                            <label class="checkbox-btn">
-                                <input type="checkbox">
-                                <span class="btn btn-light"> XXL </span>
-                            </label>
+                            <button class="btn btn-primary w-100" type="submit">Filtrer</button>
+                            </form>
                         </div>
                     </div>
                 </article>
@@ -86,7 +53,7 @@
             <main class="col-lg-9">
                 
             <header class="d-sm-flex align-items-center border-bottom mb-4 pb-3">
-                <strong class="d-block py-2">32 produits trouvés </strong>
+                <strong class="d-block py-2">{{count}} produits trouvés </strong>
                 <div class="ms-auto">
                   <select class="form-select d-inline-block w-auto">
                       <option value="0">Correspondance</option>
@@ -97,148 +64,23 @@
                 </div>
             </header>
             <div class="row">
+            {% for i in produits %}
                 <div class="col-lg-4 col-md-6 col-sm-6">
                   <figure class="card card-product-grid">
                     <div class="img-wrap text-center"> 
-                      <img src="{{asset('front/images/products/10.jpg')}}"> 
+                      <img src="/produits/{{i.images[0].path}}"> 
                     </div>
                     <figcaption class="info-wrap border-top">
                       <div class="price-wrap">
-                        <strong class="price">5.000 F CFA</strong>
-                        <del class="price-old">10.000 F CFA</del>
+                        <strong class="price">{{i.prix}} F CFA</strong>
                       </div>
-                      <p class="title mb-2">T-shirts with multiple colors, for men and lady</p>
-                      <a href="#" class="btn btn-primary">Mettre au panier</a>
-                      <a href="#" class="btn btn-light btn-icon"> <i class="fa fa-heart"></i> </a>
+                      <p class="title mb-2">{{i.libelle}}</p>
+                      <a href="{{path('app_produit_detail',{slug:i.slug})}}" class="btn btn-primary">Details</a>
+                      <a href="{{path('app_panier_add',{id:i.id})}}" class="btn btn-light btn-icon"> <i class="fa fa-heart"></i> </a>
                     </figcaption>
                   </figure>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                  <figure class="card card-product-grid">
-                    <div class="img-wrap text-center"> 
-                      <img src="{{asset('front/images/products/11.jpg')}}"> 
-                    </div>
-                    <figcaption class="info-wrap border-top">
-                      <div class="price-wrap">
-                        <strong class="price">5.000 F CFA</strong>
-                      </div>
-                      <p class="title mb-2">Winter Jacket for Men and Women, All sizes</p>
-                      
-                      <a href="#" class="btn btn-primary">Mettre au panier</a>
-                      <a href="#" class="btn btn-light btn-icon"> <i class="fa fa-heart"></i> </a>
-                    </figcaption>
-                  </figure>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                  <figure class="card card-product-grid">
-                    <div class="img-wrap text-center"> 
-                      <img src="{{asset('front/images/products/12.jpg')}}"> 
-                    </div>
-                    <figcaption class="info-wrap border-top">
-                      <div class="price-wrap">
-                        <strong class="price">5.000 F CFA</strong>
-                      </div>
-                      <p class="title mb-2">T-shirts with multiple colors, for men and lady</p>
-                      
-                      <a href="#" class="btn btn-primary">Mettre au panier</a>
-                      <a href="#" class="btn btn-light btn-icon"> <i class="fa fa-heart"></i> </a>
-                    </figcaption>
-                  </figure>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                  <figure class="card card-product-grid">
-                    <div class="img-wrap text-center"> 
-                      <img src="{{asset('front/images/products/13.jpg')}}"> 
-                    </div>
-                    <figcaption class="info-wrap border-top">
-                      <div class="price-wrap">
-                        <strong class="price">5.000 F CFA</strong>
-                      </div>
-                      <p class="title mb-2">T-shirts with multiple colors, for men and lady</p>
-                      
-                      <a href="#" class="btn btn-primary">Mettre au panier</a>
-                      <a href="#" class="btn btn-light btn-icon"> <i class="fa fa-heart"></i> </a>
-                    </figcaption>
-                  </figure>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                  <figure class="card card-product-grid">
-                    <div class="img-wrap text-center"> 
-                      <img src="{{asset('front/images/products/14.jpg')}}"> 
-                    </div>
-                    <figcaption class="info-wrap border-top">
-                      <div class="price-wrap">
-                        <strong class="price">6.000 F CFA</strong>
-                      </div>
-                      <p class="title mb-2">Blazer Suit Dress Jacket for Men, Blue color</p>
-                      
-                      <a href="#" class="btn btn-primary">Mettre au panier</a>
-                      <a href="#" class="btn btn-light btn-icon"> <i class="fa fa-heart"></i> </a>
-                    </figcaption>
-                  </figure>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                  <figure class="card card-product-grid">
-                    <div class="img-wrap text-center"> 
-                      <img src="{{asset('front/images/products/10.jpg')}}"> 
-                    </div>
-                    <figcaption class="info-wrap border-top">
-                      <div class="price-wrap">
-                        <strong class="price">2.500 F CFA</strong>
-                      </div>
-                      <p class="title mb-2">Rucksack Backpack The Bridge Large Line Mounts</p>
-                      
-                      <a href="#" class="btn btn-primary">Mettre au panier</a>
-                      <a href="#" class="btn btn-light btn-icon"> <i class="fa fa-heart"></i> </a>
-                    </figcaption>
-                  </figure>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                  <figure class="card card-product-grid">
-                    <div class="img-wrap text-center"> 
-                      <img src="{{asset('front/images/products/11.jpg')}}"> 
-                    </div>
-                    <figcaption class="info-wrap border-top">
-                      <div class="price-wrap">
-                        <strong class="price">5.000 F CFA</strong>
-                      </div>
-                      <p class="title mb-2">T-shirts with multiple colors, for men and lady</p>
-                      
-                      <a href="#" class="btn btn-primary">Mettre au panier</a>
-                      <a href="#" class="btn btn-light btn-icon"> <i class="fa fa-heart"></i> </a>
-                    </figcaption>
-                  </figure>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                  <figure class="card card-product-grid">
-                    <div class="img-wrap text-center"> 
-                      <img src="{{asset('front/images/products/12.jpg')}}"> 
-                    </div>
-                    <figcaption class="info-wrap border-top">
-                      <div class="price-wrap">
-                        <strong class="price">5.000 F CFA</strong>
-                      </div>
-                      <p class="title mb-2">T-shirts with multiple colors, for men and lady</p>
-                      <a href="#" class="btn btn-primary">Mettre au panier</a>
-                      <a href="#" class="btn btn-light btn-icon"> <i class="fa fa-heart"></i> </a>
-                    </figcaption>
-                  </figure>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-6">
-                  <figure class="card card-product-grid">
-                    <div class="img-wrap text-center"> 
-                      <img src="{{asset('front/images/products/9.jpg')}}"> 
-                    </div>
-                    <figcaption class="info-wrap border-top">
-                      <div class="price-wrap">
-                        <strong class="price">1.500 F CFA</strong>
-                      </div>
-                      <p class="title mb-2">Summer New Men's Denim Jeans Shorts </p>
-                      <a href="#" class="btn btn-primary">Mettre au panier</a>
-                      <a href="#" class="btn btn-light btn-icon"> <i class="fa fa-heart"></i> </a>
-                    </figcaption>
-                  </figure>
-                </div>
+              {% endfor %}
             </div>
             <hr>
             <div class="d-flex justify-content-end mt-4">

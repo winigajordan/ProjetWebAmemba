@@ -1,0 +1,106 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block content %}
+        <!-- SECOND SECTION START -->
+    <section class="content-main container">
+
+        <h2 class="content-title my-2">Commandes</h2>
+
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card mb-4">
+                    <header class="card-header">
+                        <div class="row gx-3">
+                            <div class="col-lg-2 col-md-3 col-6 me-auto">
+                                <select class="form-select">
+                                    <option>EN COURS</option>
+                                    <option>EXPEDIE</option>
+                                    <option>VALIDE</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-2 col-md-3 col-6">
+                                <select class="form-select">
+                                    <option>20</option>
+                                    <option>30</option>
+                                    <option>40</option>
+                                </select>
+                            </div>
+                        </div>
+                    </header>
+                    <!-- card-header end// -->
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Client</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th class="text-end"> Action </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for com in commandes %}
+                                    <tr>
+                                        <td>{{com.id}}</td>
+                                        <td>{{com.client.email}}</td>
+                                        <td>{{com.getPrixTotal()}}</td>
+                                        <td><span class="badge rounded-pill alert-success">{{com.etat}}</span></td>
+                                        <td>{{com.date|date}}</td>
+                                        <td class="text-end d-flex">
+                                            <a href="{{path('app_commande_details',{id:com.id})}}" class="btn btn-light">Detail</a>
+                                            {# <div class="dropdown">
+                                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light"> Actions </a>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item" href="#">Voir detail</a>
+                                                    <a class="dropdown-item" href="#">Voir info</a>
+                                                    <a class="dropdown-item text-danger" href="#">Supprimer</a>
+                                                </div>
+                                            </div> #}
+                                            <!-- dropdown //end -->
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- table-responsive //end -->
+                    </div>
+                    <!-- card-body end// -->
+                </div>
+                <!-- card end// -->
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="mb-3">Filtre par</h5>
+                        <form>
+                            <div class="mb-4">
+                                <label class="form-label">Statut de la commande</label>
+                                <select class="form-select">
+                                    <option>EN COURS</option>
+                                    <option>EXPEDIE</option>
+                                    <option>VALIDE</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="order_created_date" class="form-label">Date commande</label>
+                                <input type="date" placeholder="Type here" class="form-control" id="order_created_date">
+                            </div>
+                            <div class="mb-4">
+                                <a href="#" type="submit" class="btn btn-primary"> Filtre</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- card end// -->
+            </div>
+        </div>
+        <!-- .row end// -->
+
+
+    </section>
+    <!-- SECOND SECTION END -->
+{% endblock content %}

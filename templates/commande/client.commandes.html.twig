@@ -1,0 +1,77 @@
+{% extends 'base.pages.html.twig' %}
+{% block page %}{% endblock page %}
+{% block content %}
+        <!-- SECOND SECTION START -->
+    <section class="content-main container">
+
+        <h2 class="content-title my-2">Mes commandes</h2>
+
+        <div class="row">
+            <div class="col-md-9">
+                <div class="card mb-4">
+                    <!-- card-header end// -->
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Prix</th>
+                                        <th>Statut</th>
+                                        <th>Date</th>
+                                        <th> Action </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for com in commandes %}
+                                    <tr>
+                                        <td>{{com.getPrixTotal()}}</td>
+                                        <td><span class="badge rounded-pill alert-success">{{com.etat}}</span></td>
+                                        <td>{{com.date|date}}</td>
+                                        <td class="text-end d-flex">
+                                            <a href="{{path('app_client_commande_details',{id:com.id})}}" class="btn btn-light">Detail</a>
+                                            
+                                            <!-- dropdown //end -->
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- table-responsive //end -->
+                    </div>
+                    <!-- card-body end// -->
+                </div>
+                <!-- card end// -->
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="mb-3">Filtre par</h5>
+                        <form method="POST" action="{{path('app_commandes_client')}}">
+                            <div class="mb-4">
+                                <label class="form-label">Statut de la commande</label>
+                                <select class="form-select" name="etat">
+                                    <option value="EN COURS">EN COURS</option>
+                                    <option value="EN COURS DE LIVRAISON">EN COURS DE LIVRAISON</option>
+                                    <option value="LIVRE">LIVRE</option>
+                                </select>
+                            </div>
+                            {# <div class="mb-4">
+                                <label for="order_created_date" class="form-label">Date commande</label>
+                                <input type="date" placeholder="Type here" class="form-control" id="order_created_date"name="date" >
+                            </div> #}
+                            <div class="mb-4">
+                                <button type="submit" class="btn btn-primary"> Filtre </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- card end// -->
+            </div>
+        </div>
+        <!-- .row end// -->
+
+
+    </section>
+    <!-- SECOND SECTION END -->
+{% endblock content %}

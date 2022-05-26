@@ -69,10 +69,8 @@ class DemandeController extends AbstractController
         $membre -> setTelephone('');
         $membre -> setStatut(false);
         $membre -> setEmail($selected -> getMail());
-        
-        $password = "1234";
         $membre -> setRoles(["ROLE_MEMBRE"]);
-        $pwd = $this->hasher->hashPassword($membre, $password);
+        $pwd = $this->hasher->hashPassword($membre, $userPassword);
         $membre -> setPassword($pwd);
         $selected -> setEtat('VALIDE');
         $manager -> persist($membre);
