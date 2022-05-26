@@ -1,0 +1,80 @@
+{% extends 'base.pages.html.twig' %}
+{% block page %}{% endblock page %}
+{% block content %}
+<!-- SECOND SECTION START -->
+    <section class="second py-5 bg-gray">
+        <div class="container">
+            <div class="card">
+                <header class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-md-6">
+                            <span>
+                        <i class="material-icons md-calendar_today"></i> <b>{{commande.date|date}}</b>  
+                      </span> <br>
+                            <small class="text-muted">Reference: {{commande.reference}}</small>
+                        </div>
+                    </div>
+                </header>
+                <!-- card-header end// -->
+                <div class="card-body">
+                    
+                    <div class="row">
+                        
+                            <div class="table-responsive">
+                                <table class="table border table-hover table-lg">
+                                    <thead>
+                                        <tr>
+                                            <th width="40%">Produit</th>
+                                            <th width="20%">Prix unitaire</th>
+                                            <th width="20%">Quantite</th>
+                                            <th width="20%" class="text-end">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in commande.getDetailCommandes() %}
+                                        <tr>
+                                            <td>
+                                                <a class="itemside" href="#">
+                                                    <div class="left">
+                                                        <img src="produits/{{i.produit.images[0].path}}" width="40" height="40" class="img-xs" alt="Item">
+                                                    </div>
+                                                    <div class="info"> {{i.produit.libelle}} </div>
+                                                </a>
+                                            </td>
+                                            <td> {{i.produit.getPrix()}} </td>
+                                            <td> {{i.quantite}} </td>
+                                            <td class="text-end">{{i.prix}} FCFA</td>
+                                        </tr>
+                                        {% endfor %}
+                                        <tr>
+                                            <td colspan="4">
+                                                <article class="float-end">
+                                                    <dl class="dlist">
+                                                        <dt>Grand total:</dt>
+                                                        <dd> <b class="h5">{{commande.getPrixTotal()}} FCFA</b> </dd>
+                                                    </dl>
+                                                    <dl class="dlist">
+                                                        <dt class="text-muted">Statut:</dt>
+                                                        <dd>
+                                                            <span class="badge rounded-pill alert-success text-success">{{commande.etat}}</span>
+                                                        </dd>
+                                                    </dl>
+                                                </article>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- table-responsive// -->
+                       
+                        <!-- col// -->
+                        <!-- col// -->
+
+                    </div>
+                </div>
+                <!-- card-body end// -->
+            </div>
+        </div>
+    </section>
+    <!-- SECOND SECTION END -->
+{% endblock content %}

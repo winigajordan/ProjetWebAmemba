@@ -1,0 +1,36 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block page_title %}Produit Admin{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <a href="{{path('app_produit_add')}}"><button type="button" class="btn btn-primary">Nouveau Produit</button></a>
+</div>
+<br>
+<div class="container">
+    <h2>Liste des produits</h2>
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">Libelle</th>
+            <th scope="col">Prix</th>
+            <th scope="col">Qte Stock</th>
+            <th scope="col">Etat</th>
+            <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in produits %}
+            <tr>
+            <th>{{i.libelle}}</th>
+            <td>{{i.prix}}</td>
+            <td>{{i.getQteStock()}}</td>
+            <td>{% if i.etat %}Disponible{% else %}Archivé{% endif %}</td>
+            <td><a href="{{path('app_produit_edit',{slug:i.slug})}}"><i class="bi bi-pencil-square"></i></a><a href="{{path('app_produit_archive',{slug:i.slug})}}"><i class="bi bi-trash"></i></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

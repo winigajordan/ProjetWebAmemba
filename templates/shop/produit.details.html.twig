@@ -1,0 +1,60 @@
+{% extends 'base.pages.html.twig' %}
+{% block page %}{% endblock page %}
+{% block content %}
+<!-- SECOND SECTION START -->
+    <section class="second ">
+        <div class="container pt-5 ">
+            <div class="row ">
+                <aside class="col-lg-6 ">
+                    <article class="gallery-wrap ">
+                        <div class="img-big-wrap img-thumbnail ">
+                            <a data-fslightbox="mygalley " data-type="image " href="/produits/{{produit.images[0].getPath()}}">
+                                <img height="560 " src="/produits/{{produit.images[0].path}}">
+                            </a>
+                        </div>
+                    </article>
+                </aside>
+                <main class="col-lg-6 ">
+                    <article class="ps-lg-3 ">
+                        <h4 class="title text-dark ">{{produit.libelle}}</h4>
+                        <div class="mb-3 ">
+                            <span class="price h5 ">{{produit.prix}} F CFA</span>
+                        </div>
+                        <p>{{produit.description}}</p>
+                        <hr>
+                        <a href="{{path('app_panier_add',{id:produit.id})}}" class="btn btn-primary "> <i class="me-1 fa fa-shopping-basket "></i> Mettre au panier </a>
+                    </article>
+                </main>
+            </div>
+        </div>
+    </section>
+    <!-- SECOND SECTION END -->
+
+    <section class="padding-y border-top">
+        <div class="container">
+            <header class="section-heading">
+                <h4 class="section-title">Produits similaires</h4>
+            </header>
+
+            <div class="row">
+            {% for pro in similaires %}
+                <div class="col-lg-3 col-sm-6 col-12">
+                    <figure class="card card-product-grid">
+                        <div class="img-wrap">
+                            <img src="/produits/{{pro.images[0].path}}">
+                        </div>
+                        <figcaption class="info-wrap border-top">
+                            <a href="#" class="title">{{pro.libelle}}</a>
+                            <div class="price-wrap mb-3">
+                                <strong class="price">{{pro.prix}} F CFA</strong>
+                            </div>
+                            <a href="{{path('app_panier_add',{id:pro.id})}}" class="btn btn-outline-primary w-100">Ajouter au panier</a>
+                        </figcaption>
+                    </figure>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        <!-- container .//  -->
+    </section>
+{% endblock content %}

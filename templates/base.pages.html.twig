@@ -21,13 +21,13 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{('front/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('front/css/style.css')}}">
 </head>
 <body>
     <!-- NAVBAR START -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container h-100">
-            <a href="#"><img src="{{asset('front/images/identity/logo_txt/logo_text.png')}}" alt=""></a>
+            <a href="#"><img src="{{asset('front/images/identity/logo_draw.png')}}" alt=""></a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent"">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-2">
@@ -41,11 +41,26 @@
                             <li><a href="#" class="dropdown-item nav-link">Partenariat</a></li>
                         </ul>
                     </li>
+
+                    
+
+
                     <li class="nav-item mx-2">
                         <a href="#" class="nav-link">Blog</a>
                     </li>
                     <li class="nav-item mx-2">
                         <a href="{{path('app_about')}}" class="nav-link">A propos</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Shop</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{path('app_agenda')}}" class="dropdown-item nav-link">Boutique</a></li>
+                             <li><a href="#" class="dropdown-item nav-link">Panier</a></li>
+                            {% if app.user %}
+                            <li><a href="#" class="dropdown-item nav-link">Commandes</a></li>
+                            {% endif %}
+                           
+                        </ul>
                     </li>
                     <li class="nav-item mx-2">
                         <a href="{{path('app_shop')}}" class="nav-link">Boutique</a>

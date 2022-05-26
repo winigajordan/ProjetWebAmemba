@@ -1,0 +1,213 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block page_title %} Planification d'évènement {% endblock page_title %}
+
+{% block content %}
+<section class="row">
+    <div class="col-12 ">
+        <div class="row">
+            <div class="col-6 col-lg-6 col-md-6">
+                <div class="card">
+                    <div class="card-body px-3 py-4-5">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="stats-icon green">
+                                    <i class="iconly-boldCalendar"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <h6 class="text-muted font-semibold">Nombre d'évènements</h6>
+                                <h6 class="font-extrabold mb-0">hihi 123</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-6 col-lg-6 col-md-6">
+                <div class="card">
+                    <div class="card-body py-4 px-5">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar avatar-xl">
+                                <img src="{{asset('admin/assets/images/faces/1.jpg')}}" alt="Face 1">
+                            </div>
+                            <div class="ms-3 name">
+                                <h5 class="font-bold">Nom </h5>
+                                <h6 class="text-muted mb-0">mail </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        
+    </div>
+    
+</section>
+
+<div class="page-content">
+    <section class="section">
+        <div class="row" id="basic-table">
+            <div class="col-12 ">
+                <div class="card ">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                <strong> Ajouter un evenement </strong> 
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                                <div class="card-body">
+                                    <form class="form form-horizontal" method='POST' action="{% if selected is defined %} {{path('admin_evenement_update')}}{% else %} {{path('admin_evenement_add')}} {% endif %}">
+                                        <div class="form-body">
+
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>Titre</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input type="text" id="first-name" class="form-control" name="title" {% if selected is defined %} value="{{selected.title}}" {% endif %} required>
+                                                </div>
+                                            </div>
+
+                                            {% if selected is defined %}
+                                                <div class="col-12 mb-2">
+                                                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                                                        <div class="accordion-item">
+                                                        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
+                                                                <strong> Description </strong> 
+                                                            </button>
+                                                        </h2>
+                                                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+                                                            <div class="accordion-body">
+                                                                <div class="card-body">
+                                                                    {{selected.content}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                            
+
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="desc">{% if selected is defined %} Nouvelle description {% else %} Description {% endif %}</label>
+                                                    <textarea class="form-control" id="desc" rows="2" name="description" {% if selected is defined %} value="lol" {% endif %} required></textarea>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label>{% if selected is defined %} Nouvelle catégorie {% else %} Categorie {% endif %}</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <select class="form-control" name="categorie">
+                                                        {% for cat in categories %}
+                                                            <option value = "{{cat.id}}">{{cat.name}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                            </div>
+
+                                            <div class="dropdown-divider"></div>
+
+                                            <div class="col-12 mt-2">
+                                                <div class="form-group">
+                                                    <label for="email-id-vertical">Date</label>
+                                                    <input type="date" id="email-id-vertical" class="form-control" name="date" {% if selected is defined %} value="{{selected.date |date('Y-m-d')}}" {% endif %} required>
+                                                </div>
+                                            </div>
+
+                                            
+                                                <div class = "col-6">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label for="email-id-vertical">Debut</label>
+                                                            <input type="time" id="email-id-vertical" class="form-control" name="startAt" {% if selected is defined %} value="{{selected.startAt |date('H:i')}}" {% endif %} required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class = "col-6">
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                            <label for="email-id-vertical">Fin</label>
+                                                            <input type="time" id="email-id-vertical" class="form-control" name="endAt" {% if selected is defined %} value="{{selected.endAt |date('H:i')}}" {% endif %} required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="dropdown-divider"></div>
+
+                                                <input class="form-control" type="text" id="formFileMultiple" {% if selected is defined %} value="{{selected.id}}" {% endif %}  name="id" hidden>
+                                               
+                                                
+                                                <div class="mb-3">
+                                                    <label for="formFileMultiple" class="form-label">Importer l'image</label>
+                                                    <input class="form-control" type="file" id="formFileMultiple" name="cover">
+                                                </div>
+                                            
+                                                <div class="col-sm-12 d-flex justify-content-end">
+                                                    {% if selected is defined %} 
+                                                    <button type="submit" class="btn btn-warning me-1 mb-1">Modifier</button>
+                                                    {% else %}
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Ajouter</button>
+                                                    {% endif %}
+                                                </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Liste des catégories</h4>
+                </div>
+                <div class="card-content">
+                    <!-- Table with no outer spacing -->
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0 table-lg">
+                            <thead>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Catégorie</th>
+                                    <th>Date</th>
+                                    <th>Heure</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                             {% for ev in evenements %}
+                                <tr>
+                                    <td>{{ev.title}} </td>
+                                    <td class="text-bold-500">{{ev.categorie.name}}</td>
+                                    <td>{{ev.date |date("d/m/Y")}}</td>
+                                    <td> {{ev.startAt |date("H:i")}} -- {{ev.endAt |date("H:i")}}</td>
+                                    <td>
+                                        <a href="{{path('admin_evenement_details', {'id' : ev.id })}}" class="btn btn-outline-primary">Details</a></td>    
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+{% endblock content %}

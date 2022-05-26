@@ -1,0 +1,130 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block page_title %} Catégorie d'évènement {% endblock page_title %}
+{% block content %}
+<section class="row">
+    <div class="col-12 ">
+        <div class="row">
+            <div class="col-6 col-lg-6 col-md-6">
+                <div class="card">
+                    <div class="card-body px-3 py-4-5">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="stats-icon green">
+                                    <i class="iconly-boldCalendar"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <h6 class="text-muted font-semibold">Nombre de catégorie</h6>
+                                <h6 class="font-extrabold mb-0">{{nombreCategorie}}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-6 col-lg-6 col-md-6">
+                <div class="card">
+                    <div class="card-body py-4 px-5">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar avatar-xl">
+                                <img src="{{asset('admin/assets/images/faces/1.jpg')}}" alt="Face 1">
+                            </div>
+                            <div class="ms-3 name">
+                                <h5 class="font-bold">Nom </h5>
+                                <h6 class="text-muted mb-0">mail </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        
+    </div>
+    
+</section>
+
+<div class="page-content">
+    <section class="section">
+        <div class="row" id="basic-table">
+            
+            <div class="col-12 col-md-7">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Liste des catégories</h4>
+                    </div>
+                    <div class="card-content">
+                        <!-- Table with no outer spacing -->
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0 table-lg">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>Nom</th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    {% for cat in categories %}
+                                    <tr>
+                                        <td>{{cat.id}} </td>
+                                        <td class="text-bold-500">
+                                            {{cat.name}}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+
+
+            <div class="col-12 col-md-5">
+                <div class="card ">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                <strong> Ajouter une catégorie</strong> 
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                                <div class="card-body">
+                                    <form class="form form-horizontal" method="POST" action="{{path('add_categorie_evenement')}}">
+                                        <div class="form-body">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="first-name-vertical">Nom de la catégorie</label>
+                                                        <input type="text" id="first-name-vertical" class="form-control my-3" name="name">
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-sm-12 d-flex justify-content-end">
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Ajouter</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+           
+
+            
+
+
+        </div>
+    </section>
+</div>
+{% endblock content %}

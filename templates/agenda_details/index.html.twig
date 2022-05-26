@@ -1,0 +1,85 @@
+{% extends 'base.pages.html.twig' %}
+
+{% block content %}
+<!-- SECOND SECTION START -->
+    <section class="second py-5">
+        <div class="container single-event d-flex justify-content-between w-100">
+            <div class="single-event-left single-event-side">
+                <img src="{{asset('front/images/products/2.jpg')}}" alt="event">
+            </div>
+            <div class="single-event-right single-event-side px-3">
+                <h3>{{evenement.title}}</h3>
+                <p class="my-4">
+                    {{evenement.content}}
+                </p>
+                
+                <div class="d-flex">
+                    <div class="hour mr-4">
+                        <i class="fa-solid fa-clock"></i>
+                        <span> {{evenement.startAt |date("H:i")}} - {{evenement.endAt |date("H:i")}} </span>
+                    </div>
+                    <div class="day">
+                        <i class="fa-solid fa-calendar"></i>
+                        <span> {{evenement.date |format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none') }} </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container ">
+            <h4>Commentaires</h4>
+
+            <div class="row ">
+                <div class="col-12 ">
+                    <div class="container p-0">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-12 col-lg-10 col-xl-8 w-100">
+                                {% for com in commentaires %}
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-start align-items-center">
+                                            <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="60" height="60" />
+                                            <div>
+                                                <h6 class="fw-bold text-primary mb-1">{{com.user.nom}} {{com.user.prenom}}</h6>
+                                                <p class="text-muted small mb-0">
+                                                    {{com.date |format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none') }} 
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <p class="mt-3 mb-4 pb-2">
+                                            {{com.content}}
+                                        </p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                
+                                
+                                <Form method="POST" action="{{path('app_agenda_commentaire')}}"> 
+                                    <div class="card">
+                                        <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+                                            <h6>Votre commentaire</h6>
+                                            <div class="d-flex flex-start w-100">
+                                                <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="40" height="40" />
+                                                <div class="form-outline w-100">
+                                                    <textarea class="form-control" id="textAreaExample" rows="4" style="background: #fff;" name="content"></textarea>
+                                                    <input type="number" name="id" value="{{evenement.id}}" hidden>
+                                                </div>
+                                            </div>
+                                            <div class="float-end mt-2 pt-1">
+                                                
+                                                <button type="submit" class="btn btn-outline-primary btn-sm"> Commenter </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+        </div>
+    </section>
+    <!-- SECOND SECTION END -->
+
+{% endblock content %}
