@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\MembreRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MembreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: MembreRepository::class)]
 class Membre extends User
@@ -30,6 +31,15 @@ class Membre extends User
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $cv;
+
+    #[ORM\OneToOne(mappedBy: 'membre', targetEntity: Wallet::class, cascade: ['persist', 'remove'])]
+    private $wallet;
+
+    public function __construct()
+    {
+        $this->setRoles(['ROLE_MEMBRE']);
+        $this->commandes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,6 +114,28 @@ class Membre extends User
     public function setCv(?string $cv): self
     {
         $this->cv = $cv;
+
+        return $this;
+    }
+
+    public function getWallet(): ?Wallet
+    {
+        return $this->wallet;
+    }
+
+    public function setWallet(?Wallet $wallet): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($wallet === null && $this->wallet !== null) {
+            $this->wallet->setMembre(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($wallet !== null && $wallet->getMembre() !== $this) {
+            $wallet->setMembre($this);
+        }
+
+        $this->wallet = $wallet;
 
         return $this;
     }

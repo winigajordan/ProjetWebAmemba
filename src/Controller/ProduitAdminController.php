@@ -39,12 +39,16 @@ class ProduitAdminController extends AbstractController
             $produit->setDescription($request->request->get("description"));
             $produit->setPrix($request->request->get("prix"));
             $produit->setQteStock($request->request->get("qte_stock"));
+
             $image=new Image(); 
+            //dd($request);
             $img=$request->files->get("image"); 
             $imageName=uniqid().'.'.$img->guessExtension(); 
             $img->move($this->getParameter("images_directory"),$imageName);          
             $image->setPath($imageName);
             $produit->addImage($image);
+
+
             $categorie=$catRepo->find($request->request->get("categorie"));
             $produit->setCategorie($categorie);
             $slugger = new AsciiSlugger();

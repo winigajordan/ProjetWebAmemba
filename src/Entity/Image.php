@@ -19,6 +19,9 @@ class Image
     #[ORM\ManyToOne(targetEntity: Produit::class, inversedBy: 'images')]
     private $produit;
 
+    #[ORM\ManyToOne(targetEntity: Evenement::class, inversedBy: 'images')]
+    private $evenement;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +47,18 @@ class Image
     public function setProduit(?Produit $produit): self
     {
         $this->produit = $produit;
+
+        return $this;
+    }
+
+    public function getEvenement(): ?Evenement
+    {
+        return $this->evenement;
+    }
+
+    public function setEvenement(?Evenement $evenement): self
+    {
+        $this->evenement = $evenement;
 
         return $this;
     }

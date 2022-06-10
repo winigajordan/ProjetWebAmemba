@@ -51,26 +51,55 @@
                     <li class="nav-item mx-2">
                         <a href="{{path('app_about')}}" class="nav-link">A propos</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Shop</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{path('app_agenda')}}" class="dropdown-item nav-link">Boutique</a></li>
-                             <li><a href="#" class="dropdown-item nav-link">Panier</a></li>
-                            {% if app.user %}
-                            <li><a href="#" class="dropdown-item nav-link">Commandes</a></li>
-                            {% endif %}
-                           
-                        </ul>
-                    </li>
+                    {% if app.user %}
+                        {% if "ROLE_MEMBRE" not in app.user.roles %}
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Shop</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{path('app_shop')}}" class="dropdown-item nav-link">Boutique</a></li>
+                                <li><a href="{{path('app_panier')}}" class="dropdown-item nav-link">Panier</a></li>
+                                {% if app.user %}
+                                <li><a href="{{path('app_commandes_client')}}" class="dropdown-item nav-link">Commandes</a></li>
+                                {% endif %}
+                            
+                            </ul>
+                        </li>
+                        {% else %}
+                        <li class="nav-item mx-2">
+                            <a href="{{path('app_shop')}}" class="nav-link">Boutique</a>
+                        </li>
+                        {% endif %}
+                    {% else %} 
                     <li class="nav-item mx-2">
                         <a href="{{path('app_shop')}}" class="nav-link">Boutique</a>
                     </li>
+                    {% endif %}
+                    
+                   
                 </ul>
             </div>
-            <div class="navbar-buttons">
-                <a href="{{path('app_register')}}" class="btn btn-outline-primary mx-2">Adhésion</a>
-                <a href="{{path('app_login')}}" class="btn btn-primary">Connexion <i class="fa-solid fa-angle-right"></i></a>
+            {% if not app.user %}
+            
+                <div class="navbar-buttons">
+                    <a href="{{path('app_register')}}" class="btn btn-outline-primary mx-2">Adhésion</a>
+                    <a href="{{path('app_login')}}" class="btn btn-primary">Connexion <i class="fa-solid fa-angle-right"></i></a>
+                </div>
+            {% else %}
+            {% if "ROLE_MEMBRE" in app.user.roles %}
+            <div class="membre">
+                <a href="#">
+                    <img src="{{asset('front/images/avatars/exemple.jpg')}}" alt="avatar" id="show">
+                </a>
             </div>
+            {% endif %}
+            {% endif %}
+            
+
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
+            </button>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
             </button>
@@ -79,6 +108,80 @@
     <!-- NAVBAR END -->
     <div class="top" id="top"></div>
     <div id="scroll-to-top"><a href="#top"><i class="fa-2x fa-solid fa-angle-up"></i></a></div>
+    {% if app.user %}
+    {% if "ROLE_MEMBRE" in app.user.roles %}
+    <!-- MENU MEMBER START -->
+    <div class="menu-membre pt-3">
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <a href="#" class="btn">
+                    <i class="fa-solid fa-user"></i> Compte
+                </a>
+
+            </li>
+
+            <li class="list-group-item">
+                <a href="{{path('app_panier')}}" class="btn">
+                    <i class="fa-solid fa-cart-shopping"></i> Panier
+                </a>
+            </li class="list-group-item">
+
+            <li class="list-group-item">
+                <a href="{{path('app_commandes_client')}}" class="btn">
+                    <i class="fa-solid fa-cart-shopping"></i> Commandes
+                </a>
+            </li class="list-group-item">
+
+            <li class="list-group-item">
+                <a href="#" class="btn">
+                    <i class="fa-solid fa-bell"></i> Notifications
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="{{path('app_wallet')}}" class="btn">
+                    <i class="fa-solid fa-money-bill"></i> Portefeuille
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="#" class="btn">
+                    <i class="fa-solid fa-book"></i> Annuaire
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="#" class="btn">
+                    <i class="fa-solid fa-w"></i> Programme WEN
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="#" class="btn">
+                    <i class="fa-solid fa-briefcase"></i> Offres d'emplois
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="#" class="btn">
+                    <i class="fa-solid fa-comments"></i> Forum
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="#" class="btn">
+                    <i class="fa-solid fa-pen"></i> Ecrire un article
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="#" class="btn">
+                    <i class="fa-solid fa-money-bill"></i> Cotisations
+                </a>
+            </li>
+            <li class="list-group-item text-center">
+                <a href="" class="btn btn-primary btn-sm mt-3">Activer mode recherche d'emploi</a>
+            </li>
+
+        </ul>
+    </div>
+    <!-- MENU MEMBER END -->
+    {% endif %}
+    {% endif %}
+    
 
     {% block page %}
      <!-- FIRST SECTION START -->

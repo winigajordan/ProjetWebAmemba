@@ -2,7 +2,7 @@
 /*
 This call sends a message based on a template.
 */
-require 'vendor/autoload.php';
+namespace App\Service\Mail;
 
 use Mailjet\Client;
 use \Mailjet\Resources;

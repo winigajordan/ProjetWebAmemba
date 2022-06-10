@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\ProduitRepository;
+use phpDocumentor\Reflection\PseudoTypes\True_;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +14,7 @@ class PanierController extends AbstractController
 {
     #[Route('/panier', name: 'app_panier')]
     public function index(SessionInterface $session,ProduitRepository $repoP): Response
-    {
+    {   
         $panier=$session->get("panier",[]);
         $panierWithData=[];
         $total=0;
@@ -25,10 +26,27 @@ class PanierController extends AbstractController
             $totalI=$repoP->find($id)->getPrix()*$quantite;
             $total+=$totalI;
         }
+
+        $visible = 0;
+        $isMembre = 0;
+        $solde = 0;
+        if($this->getUser()){
+            if(in_array('ROLE_MEMBRE', $this->getUser()->getRoles())){
+                $solde = $this->getUser()->getWallet()->getSolde();
+                $isMembre = 1;
+                if(intval($solde)>$total){
+                    $visible = 1;
+                }
+            }
+        }
+
         return $this->render('panier/panier.html.twig', [
             'controller_name' => 'PanierController',
             'items' => $panierWithData,
-            'total' => $total
+            'total' => $total,
+            'membre' => $isMembre,
+            'solde' => $solde,
+            'visible' => $visible
         ]);
     }
 
