@@ -2,16 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\Membre;
-use App\Repository\DemandeRepository;
-use App\Repository\MembreRepository;
 use DateTime;
+use App\Entity\Membre;
+use App\Entity\Wallet;
+use App\Service\Mail\Mail;
 use Doctrine\ORM\EntityManager;
+use App\Repository\MembreRepository;
+use App\Repository\DemandeRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
-use Mail;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class DemandeController extends AbstractController
@@ -53,13 +55,9 @@ class DemandeController extends AbstractController
     {
         $selected = $dmd -> find($id);
         $userMail = $selected -> getMail();
-        //dd($selected);
         
-        $userPassword = date_format(new DateTime(),'Y/m/d-H:i:s');
-        
-        $content = "Votre login est $userMail et votre mot de passe est $userPassword";
-        $mail = new Mail();
-        $mail -> send($selected-> getMail(), "", "Demande accepté", $content);
+
+        //creation du memebre
         $membre = new Membre();
         $membre -> setNom($selected -> getNom());
         $membre -> setPrenom($selected -> getPrenom());
@@ -70,11 +68,24 @@ class DemandeController extends AbstractController
         $membre -> setStatut(false);
         $membre -> setEmail($selected -> getMail());
         $membre -> setRoles(["ROLE_MEMBRE"]);
+        $userPassword = date_format(new DateTime(),'Y/m/d-H:i:s');
         $pwd = $this->hasher->hashPassword($membre, $userPassword);
         $membre -> setPassword($pwd);
         $selected -> setEtat('VALIDE');
         $manager -> persist($membre);
         $manager -> persist($selected);
+        
+        //creation de wallet
+        $wallet = new Wallet();
+        $wallet -> setSolde(0);
+        $wallet -> setMembre($membre);
+        $manager -> persist($wallet);
+
+        //envoie de mail
+        $content = "Votre login est $userMail et votre mot de passe est $userPassword";
+        $mail = new Mail();
+        $mail -> send($selected-> getMail(), "", "Demande accepté", $content);
+
         $manager -> flush();
         return $this->redirectToRoute('demande');
     }

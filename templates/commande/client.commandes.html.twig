@@ -26,7 +26,7 @@
                                     <tr>
                                         <td>{{com.getPrixTotal()}}</td>
                                         <td><span class="badge rounded-pill alert-success">{{com.etat}}</span></td>
-                                        <td>{{com.date|date}}</td>
+                                        <td>{{com.date |format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none') }} </td>
                                         <td class="text-end d-flex">
                                             <a href="{{path('app_client_commande_details',{id:com.id})}}" class="btn btn-light">Detail</a>
                                             

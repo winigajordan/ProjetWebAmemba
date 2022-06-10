@@ -30,8 +30,6 @@ class Evenement
     #[ORM\Column(type: 'text')]
     private $content;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $cover;
 
     #[ORM\ManyToOne(targetEntity: CategorieEvenement::class, inversedBy: 'evenements')]
     private $categorie;
@@ -39,9 +37,13 @@ class Evenement
     #[ORM\OneToMany(mappedBy: 'evenement', targetEntity: Commentaire::class)]
     private $commentaires;
 
+    #[ORM\OneToMany(mappedBy: 'evenement', targetEntity: Image::class)]
+    private $images;
+
     public function __construct()
     {
         $this->commentaires = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -109,17 +111,7 @@ class Evenement
         return $this;
     }
 
-    public function getCover(): ?string
-    {
-        return $this->cover;
-    }
-
-    public function setCover(string $cover): self
-    {
-        $this->cover = $cover;
-
-        return $this;
-    }
+    
 
     public function getCategorie(): ?CategorieEvenement
     {
@@ -157,6 +149,36 @@ class Evenement
             // set the owning side to null (unless already changed)
             if ($commentaire->getEvenement() === $this) {
                 $commentaire->setEvenement(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setEvenement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getEvenement() === $this) {
+                $image->setEvenement(null);
             }
         }
 

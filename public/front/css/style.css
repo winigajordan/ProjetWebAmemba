@@ -82,6 +82,28 @@ nav img {
     width: 50px;
 }
 
+nav .membre img {
+    border-radius: 50%;
+}
+
+.menu-membre {
+    width: 300px;
+    background-color: #fff;
+    display: none;
+    position: absolute;
+    right: 0;
+    z-index: 5;
+}
+
+.menu-membre ul li a {
+    font-weight: 500;
+}
+
+.menu-membre ul li i {
+    color: var(--main-blue);
+    margin: 0 15px;
+}
+
 
 /* SECTION HEADER STYLING END */
 
@@ -1294,3 +1316,27 @@ dl[class=row] dt {
 
 
 /* SECTION SHOP STYLING END */
+
+
+/* SECTION WALLET STYLING START */
+
+.icon-recharge {
+    width: 50px;
+    height: 50px;
+    background-color: var(--main-blue);
+    color: var(--secondary-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.sidebar-membre {
+    margin: 20px;
+    width: 20%;
+    background-color: #f6f6f6;
+}
+
+
+/* SECTION WALLET STYLING END */

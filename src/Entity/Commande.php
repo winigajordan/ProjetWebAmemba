@@ -33,7 +33,7 @@ class Commande
     #[ORM\Column(type: 'string', length: 255)]
     private $adresse;
 
-    #[ORM\ManyToOne(targetEntity: Client::class, inversedBy: 'commandes')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'commandes')]
     #[ORM\JoinColumn(nullable: false)]
     private $client;
 
@@ -142,7 +142,7 @@ class Commande
         return $this->client;
     }
 
-    public function setClient(?Client $client): self
+    public function setClient(?User $client): self
     {
         $this->client = $client;
 

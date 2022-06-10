@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Entity\Image;
 use App\Entity\Evenement;
-use App\Repository\CategorieEvenementRepository;
 use App\Repository\EvenementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\CategorieEvenementRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\RedirectController;
 
@@ -38,7 +39,13 @@ class AdminEvenementController extends AbstractController
         $ev -> setContent($data->get('description'));
         $ev -> setStartAt(new DateTime($data->get('startAt')));
         $ev -> setEndAt(new DateTime($data->get('endAt')));
-        $ev -> setCover($data->get('cover'));
+        $image=new Image(); 
+        $img=$request->files->get("image"); 
+        $imageName=uniqid().'.'.$img->guessExtension(); 
+        $img->move($this->getParameter("evenement_directory"),$imageName);          
+        $image->setPath($imageName);
+        $ev->addImage($image);
+        $em -> persist($image);
         $em -> persist($ev);
         $em -> flush();
         return $this->redirectToRoute('app_admin_evenement');
@@ -67,7 +74,19 @@ class AdminEvenementController extends AbstractController
         $ev -> setContent($data->get('description'));
         $ev -> setStartAt(new DateTime($data->get('startAt')));
         $ev -> setEndAt(new DateTime($data->get('endAt')));
-        $ev -> setCover($data->get('cover'));
+        if($request->files->get("image")){
+            $image=new Image(); 
+            $img=$request->files->get("image"); 
+            $imageName=uniqid().'.'.$img->guessExtension(); 
+            $img->move($this->getParameter("evenement_directory"),$imageName);          
+            $image->setPath($imageName);
+            unlink($this->getParameter("evenement_directory")."/".$ev->getImages()[0]->getPath());
+            $em->remove($ev->getImages()[0]);
+            $ev->removeImage($ev->getImages()[0]);
+            $ev->addImage($image);
+            $em->persist($image);
+        }
+        
         $em -> persist($ev);
         $em -> flush();
         return $this->redirectToRoute('app_admin_evenement');

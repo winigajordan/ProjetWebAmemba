@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Achat;
 use DateTime;
 use App\Entity\User;
 use App\Entity\Client;
@@ -9,6 +10,8 @@ use App\Entity\Commande;
 use App\Entity\DetailCommande;
 use App\Repository\ProduitRepository;
 use App\Repository\CommandeRepository;
+use App\Repository\MembreRepository;
+use App\Repository\WalletRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,7 +76,7 @@ class CommandeController extends AbstractController
             }
             else{
                 $idRef = strval($lastCommande[0]->getId()+1);
-                $commande->setReference("REF00"+$idRef);
+                $commande->setReference("REF00".$idRef);
             }
             $commande->setAdresse("Medina");
             $em->persist($commande);
@@ -83,6 +86,71 @@ class CommandeController extends AbstractController
         }
         return $this->redirectToRoute('add_client');
     }
+
+    #[Route('/commande/add/wallet', name: 'app_commande_add_with_wallet')]
+    public function addCommandeWithWallet(SessionInterface $session, 
+    EntityManagerInterface $em,
+    ProduitRepository $prodRepo, 
+    CommandeRepository $commRepo,
+    MembreRepository $membreRepository,
+    WalletRepository $walletRepository){
+        if($this->getUser()){
+            $commande=new Commande();
+            $commande->setPrixTotal(0);
+            $panier=$session->get("panier",[]);
+            foreach($panier as $id=>$quantite){
+                $detailCommande = new DetailCommande();
+                $produit = $prodRepo->find($id);
+                if($produit->getQteStock()-$quantite<0){
+                    $produit->setQteStock(0);
+                }else{
+                    $produit->setQteStock($produit->getQteStock()-$quantite);
+                }
+                $em->persist($produit);
+                $detailCommande->setProduit($produit);
+                $detailCommande->setPrix($produit->getPrix()*$quantite);
+                $detailCommande->setQuantite($quantite);
+                $commande->addDetailCommande($detailCommande);
+                $em->persist($detailCommande);
+                $commande->setPrixTotal($commande->getPrixTotal()+$detailCommande->getPrix());
+            }
+            $commande->setEtat("EN COURS");
+            $commande->setClient($this->getUser());
+            $commande->setDate(new DateTime());
+            $lastCommande = $commRepo->findBy([],['id'=>'DESC'],1);
+            if(count($lastCommande)==0){
+                $commande->setReference("REF001");
+            }
+            else{
+                $idRef = strval($lastCommande[0]->getId()+1);
+                $commande->setReference("REF00".$idRef);
+            }
+            $commande->setAdresse("Medina");
+            $em->persist($commande);
+            
+            
+            $wallet = $this->getUser()->getWallet();
+            $newSolde = intval($wallet -> getSolde())-intval($commande->getPrixTotal());
+            $wallet->setSolde($newSolde);
+            $em-> persist($wallet);
+
+            $achat = new Achat();
+            $achat -> setDate(new DateTime());
+            $achat -> setMontant(floatval($commande->getPrixTotal()));
+            $achat -> setType('Achat');
+            $achat -> setWallet($wallet);
+            $achat -> setCommande($commande);
+            $em -> persist($achat);
+            
+
+            $em->flush();
+            $session->set("panier",[]);
+            return $this->redirectToRoute('app_commandes_client');   
+        }
+        return $this->redirectToRoute('add_client');
+    }
+
+
 
     #[Route('/client/commandes', name: 'app_commandes_client')]
     public function clientCommandes(SessionInterface $session,CommandeRepository $comRepo,

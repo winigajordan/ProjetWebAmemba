@@ -62,7 +62,7 @@
                           <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                             <div class="accordion-body">
                                 <div class="card-body">
-                                    <form class="form form-horizontal" method='POST' action="{% if selected is defined %} {{path('admin_evenement_update')}}{% else %} {{path('admin_evenement_add')}} {% endif %}">
+                                    <form class="form form-horizontal" enctype="multipart/form-data" method='POST' action="{% if selected is defined %} {{path('admin_evenement_update')}}{% else %} {{path('admin_evenement_add')}} {% endif %}">
                                         <div class="form-body">
 
                                             <div class="row">
@@ -149,7 +149,7 @@
                                                 
                                                 <div class="mb-3">
                                                     <label for="formFileMultiple" class="form-label">Importer l'image</label>
-                                                    <input class="form-control" type="file" id="formFileMultiple" name="cover">
+                                                    <input name="image" class="form-control" id="formFileLg" type="file">
                                                 </div>
                                             
                                                 <div class="col-sm-12 d-flex justify-content-end">
