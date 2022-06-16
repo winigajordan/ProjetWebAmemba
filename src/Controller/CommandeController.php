@@ -12,6 +12,8 @@ use App\Repository\ProduitRepository;
 use App\Repository\CommandeRepository;
 use App\Repository\MembreRepository;
 use App\Repository\WalletRepository;
+use App\Service\PayTech\Payement;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,7 +47,7 @@ class CommandeController extends AbstractController
     #[Route('/commande/add', name: 'app_commande_add')]
     public function addCommande(SessionInterface $session,
     EntityManagerInterface $em,ProduitRepository $prodRepo,
-    CommandeRepository $commRepo): Response
+    CommandeRepository $commRepo, Payement $payement): Response
     {
         if($this->getUser()){
             $commande=new Commande();
@@ -67,7 +69,7 @@ class CommandeController extends AbstractController
                 $em->persist($detailCommande);
                 $commande->setPrixTotal($commande->getPrixTotal()+$detailCommande->getPrix());
             }
-            $commande->setEtat("EN COURS");
+            $commande->setEtat("EN ATTENTE DE PAYEMENT");
             $commande->setClient($this->getUser());
             $commande->setDate(new DateTime());
             $lastCommande = $commRepo->findBy([],['id'=>'DESC'],1);
@@ -80,9 +82,11 @@ class CommandeController extends AbstractController
             }
             $commande->setAdresse("Medina");
             $em->persist($commande);
+            $url =  $payement -> payAction($commande);
+            
             $em->flush();
             $session->set("panier",[]);
-            return $this->redirectToRoute('app_commandes_client');   
+            return $this->redirect($url);   
         }
         return $this->redirectToRoute('add_client');
     }
@@ -205,4 +209,16 @@ class CommandeController extends AbstractController
             'commande' => $commande
         ]);
     }
+
+    #[Route('/commande/success/{ref}', name: 'app_client_commande_success')]
+    public function commandeValide($ref, CommandeRepository $cmdRipo, EntityManagerInterface $em): Response
+    {    
+        $commande = $cmdRipo->findOneBy(["reference"=>$ref]);
+        //dd($commande);
+        $commande -> setEtat('EN COURS');
+        
+        return $this->render('commande/success.commande.html.twig', [
+        ]);
+    }
+
 }

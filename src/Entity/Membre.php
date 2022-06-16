@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\MembreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -35,10 +36,14 @@ class Membre extends User
     #[ORM\OneToOne(mappedBy: 'membre', targetEntity: Wallet::class, cascade: ['persist', 'remove'])]
     private $wallet;
 
+    #[ORM\OneToMany(mappedBy: 'proprietaire', targetEntity: Entreprise::class)]
+    private $entreprises;
+
     public function __construct()
     {
         $this->setRoles(['ROLE_MEMBRE']);
         $this->commandes = new ArrayCollection();
+        $this->entreprises = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -136,6 +141,36 @@ class Membre extends User
         }
 
         $this->wallet = $wallet;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Entreprise>
+     */
+    public function getEntreprises(): Collection
+    {
+        return $this->entreprises;
+    }
+
+    public function addEntreprise(Entreprise $entreprise): self
+    {
+        if (!$this->entreprises->contains($entreprise)) {
+            $this->entreprises[] = $entreprise;
+            $entreprise->setProprietaire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEntreprise(Entreprise $entreprise): self
+    {
+        if ($this->entreprises->removeElement($entreprise)) {
+            // set the owning side to null (unless already changed)
+            if ($entreprise->getProprietaire() === $this) {
+                $entreprise->setProprietaire(null);
+            }
+        }
 
         return $this;
     }

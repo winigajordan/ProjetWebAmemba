@@ -52,8 +52,6 @@ class RegisterController extends AbstractController
        return $this->redirectToRoute("app_register");
     }
 
-    
-
     #[Route('/register/client', name: 'add_client')]
     public function addClient(Request $request, EntityManagerInterface $em,
     SessionInterface $session): Response {

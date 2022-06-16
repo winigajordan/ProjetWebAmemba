@@ -34,7 +34,7 @@ class Produit
     #[ORM\JoinColumn(nullable: false)]
     private $categorie;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'text')]
     private $description;
 
     #[ORM\Column(type: 'string', length: 255)]
