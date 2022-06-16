@@ -6,6 +6,7 @@ use Mail;
 use DateTime;
 use App\Entity\Client;
 use App\Entity\Demande;
+use App\Service\Mail\ApiMailJet;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,11 +47,10 @@ class RegisterController extends AbstractController
        $nom = $demande -> getNom()." ".$demande -> getPrenom();
        $date = date_format($demande -> getDate(),'Y/m/d-H:i:s');
        $content = "Une demande d'adhésion vien d'être effectué par $nom \n Date et heure : $date \n Veuillez vous connecter pour traiter la demande";
-       $mail = new Mail();
+       $mail = new ApiMailJet();
        $mail -> send("winiga-jordane.rema@ism.edu.sn", "", "Demande d'adhésion", $content);
        return $this->redirectToRoute("app_register");
     }
-
 
     #[Route('/register/client', name: 'add_client')]
     public function addClient(Request $request, EntityManagerInterface $em,

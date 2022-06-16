@@ -5,11 +5,10 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Membre;
 use App\Entity\Wallet;
-use App\Service\Mail\Mail;
-use Doctrine\ORM\EntityManager;
 use App\Repository\MembreRepository;
 use App\Repository\DemandeRepository;
 
+use App\Service\Mail\ApiMailJet;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -83,7 +82,7 @@ class DemandeController extends AbstractController
 
         //envoie de mail
         $content = "Votre login est $userMail et votre mot de passe est $userPassword";
-        $mail = new Mail();
+        $mail = new ApiMailJet();
         $mail -> send($selected-> getMail(), "", "Demande accepté", $content);
 
         $manager -> flush();
@@ -97,7 +96,7 @@ class DemandeController extends AbstractController
         $selected = $dmd -> find($id);
         $selected -> setEtat('REFUSE');
         $content = "Suite à des vérifications, nous ne sommes pas en mesure de valider la création de votre compte";
-        $mail = new Mail();
+        $mail = new ApiMailJet();
         $mail -> send($selected-> getMail(), "", "Demande refusé", $content);
         $manager -> persist($selected);
         $manager -> flush();

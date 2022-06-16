@@ -63,6 +63,7 @@
                   </select>
                 </div>
             </header>
+            {% if produits|length > 0 %}
             <div class="row">
             {% for i in produits %}
                 <div class="col-lg-4 col-md-6 col-sm-6">
@@ -82,6 +83,7 @@
                 </div>
               {% endfor %}
             </div>
+            
             <hr>
             <div class="d-flex justify-content-end mt-4">
                 <nav aria-label="Page navigation example">
@@ -94,6 +96,7 @@
                     </ul>
                   </nav>
             </div>
+            {% endif %}
             </main>
         </div>
         

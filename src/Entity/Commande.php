@@ -137,7 +137,7 @@ class Commande
         return $this;
     }
 
-    public function getClient(): ?Client
+    public function getClient(): ?User
     {
         return $this->client;
     }
