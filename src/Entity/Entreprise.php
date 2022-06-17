@@ -37,6 +37,9 @@ class Entreprise
     #[ORM\Column(type: 'string', length: 255)]
     private $slug;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $etat;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -145,6 +148,18 @@ class Entreprise
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getEtat(): ?string
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(string $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }

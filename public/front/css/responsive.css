@@ -1,38 +1,129 @@
-/* RESPONSIVE START */
-
-@media (max-width:320px) {
-    /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
-}
-
-@media (max-width:480px) {
-    /* smartphones, Android phones, landscape iPhone */
-}
-
-@media (max-width:600px) {
-    /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
-    .login-register .container {
-        flex-direction: column;
+    /* RESPONSIVE START */
+    
+    @media (max-width:1281px) {
+        /* hi-res laptops and desktops */
     }
-    .login-register .container .login-card {
-        width: 90%;
+    
+    @media (max-width: 1025px) {
+        /* big landscape tablets, laptops, and desktops */
+        footer .container {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: 2fr;
+        }
     }
-}
-
-@media (max-width:801px) {
-    /* tablet, landscape iPad, lo-res laptops ands desktops */
-}
-
-@media (max-width:1025px) {
-    /* big landscape tablets, laptops, and desktops */
-    footer .container {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: 2fr;
+    
+    @media (max-width:980px) {
+        .slider-section .slider .sl-content .sl-content-content h2 {
+            font-size: 35px;
+        }
+        .slider-section .arrow {
+            visibility: hidden;
+        }
+        .slider-section .slider {
+            padding: 0 20px;
+        }
+        .slider-section .slider .sl-content .sl-content-content p {
+            font-size: 20px;
+            line-height: 35px;
+        }
     }
-}
-
-@media (max-width:1281px) {
-    /* hi-res laptops and desktops */
-}
-
-
-/* RESPONSIVE END */
+    
+    @media (max-width:801px) {
+        /* tablet, landscape iPad, lo-res laptops ands desktops */
+    }
+    
+    @media (max-width:600px) {
+        /* portrait tablets, portrait iPad, e-readers (Nook/Kindle), landscape 800x480 phones (Android) */
+        .login-register .container {
+            flex-direction: column;
+        }
+        .login-register .container .login-card {
+            width: 90%;
+        }
+        .mission-section .mission-left .blue-bg {
+            height: 380px;
+        }
+        .mission-section .mission-right h3 {
+            line-height: 40px;
+            margin-bottom: 20px;
+        }
+        .mission-section .mission-right p {
+            font-size: 16px;
+        }
+        .mission-section .mission-right {
+            text-align: center;
+        }
+        .stats .stats-cards {
+            flex-direction: column;
+        }
+        .stats .stats-cards .stats-card {
+            margin-bottom: 60px;
+        }
+        .cta .container {
+            padding: 0 50px;
+        }
+        .cta h2 {
+            font-size: 30px;
+        }
+        .cta p {
+            font-size: 18px;
+        }
+        .events .events-carousel-container .event-card {
+            height: 470px;
+        }
+        .old .container {
+            padding: 0 50px;
+        }
+        .partners .d-flex img {
+            max-width: 200px;
+        }
+        .wen-cards-duo {
+            flex-direction: column;
+        }
+    }
+    
+    @media (max-width:500px) {
+        /* smartphones, Android phones, landscape iPhone */
+        .slider-section .slider .sl-content .sl-content-content h2,
+        .wen h2,
+        .stats h2,
+        .cta h2,
+        .blog h2,
+        .events h2,
+        .old h2,
+        .partners h2,
+        .first h2 {
+            font-size: 22px;
+        }
+        .slider-section .slider .sl-content .sl-content-content p,
+        .first .container p {
+            font-size: 15px;
+            line-height: 25px;
+            margin: 30px 0;
+        }
+        .cta p,
+        .blog p {
+            font-size: 16px;
+        }
+        .wen .wen-cards .wen-card {
+            padding: 20px;
+        }
+        .wen .wen-cards .wen-card p {
+            font-size: 24px;
+            line-height: 36px;
+        }
+        .blog p {
+            padding: 0;
+        }
+        .old .container {
+            padding: 0 30px;
+        }
+        .partners .d-flex img {
+            max-width: 100px;
+        }
+    }
+    
+    @media (max-width:320px) {
+        /* smartphones, portrait iPhone, portrait 480x320 phones (Android) */
+    }
+    /* RESPONSIVE END */

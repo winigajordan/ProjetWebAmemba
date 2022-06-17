@@ -106,9 +106,13 @@
         </div>
     </nav>
     <!-- NAVBAR END -->
+
+
     <div class="top" id="top"></div>
     <div id="scroll-to-top"><a href="#top"><i class="fa-2x fa-solid fa-angle-up"></i></a></div>
-    {% if app.user %}
+
+
+    {% if app.user is not null %}
     {% if "ROLE_MEMBRE" in app.user.roles %}
     <!-- MENU MEMBER START -->
     <div class="menu-membre pt-3">

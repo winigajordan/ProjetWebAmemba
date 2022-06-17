@@ -1,0 +1,132 @@
+{% extends 'base.admin.html.twig' %}
+
+
+{% block page_title %} Gestion des offres d'emplois {% endblock page_title %}
+
+{% block content %}
+<div class="page-content">
+    <section class="section">
+        
+        
+        <div class="row" id="basic-table">
+            <div class="col-12 ">
+                <div class="card mb-5">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                <strong>  {% if selected is defined %} Modification d'une offre d'emplois {% else %} Ajouter une offre d'emplois {% endif %}  </strong> 
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                                <div class="card-body">
+                                    
+                                    <form method="POST" {% if selected is defined %} action="{{path('app_admin_emplois_update')}}" {% else %} action="{{path('app_admin_emplois_add')}}"  {% endif %}>
+                                        <div class="row mb-3">
+                                            <div class="col-4">
+                                                <label for="Titre" class="form-label">Titre</label>
+                                                <input type="number" name = "id"  {% if selected is defined %} value="{{selected.id}}" {% endif %}  hidden>
+                                                <input type="text" id="Titre" class="form-control" name="titre" {% if selected is defined %} value="  {{selected.titre}} " {% endif %} required>
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="Domaine" class="form-label">Domaine</label>
+                                                <input type="text" id="Domaine" class="form-control"  name="domaine" {% if selected is defined %} value="  {{selected.domaine}} " {% endif %} required>
+                                            </div>
+                                            
+                                            <div class="col-4">
+                                                <label for="Date" class="form-label">Date de fin {% if selected is defined %} : <strong> {{selected.endAt |format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none') }} </strong>{% endif %} </label>
+                                                <input type="date" id="Date" class="form-control"  aria-label="Last name" min="{{today}}" name="date" {% if selected is defined %}  value="{{selected.endAt|date("Y-m-d")}}" {% endif %} required >
+                                            </div>
+                                        </div>
+                                        {% if selected is defined %}
+                                        {% if selected.membre is not null %}
+                                        <div class="row mb-3">
+                                            <div class="col-3">
+                                                <label for="Titre" class="form-label"> <strong> Publié par : </strong></label>
+                                            </div>
+                                            <div class="">
+                                                <input type="text" id="Date" class="form-control"  aria-label="Last name" value="{{selected.membre.prenom}} {{selected.membre.nom}}" disabled>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% endif %}
+                                        <div class="mb-3">
+                                            <label for="Description" class="form-label">Description</label>
+                                            <textarea class="form-control" id="Description" rows="4" name="description" required> {% if selected is defined %} {{selected.description}} {% endif %} </textarea>
+                                        </div>
+                                       
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <select class="form-select form-select" aria-label=".form-select-sm example" name="etat">
+                                                       
+                                                        <option value="VALIDE">VALIDE</option>
+                                                        <option value="ARCHIVE">ARCHIVE</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-6">
+                                                    <button type="submit" class="btn btn-primary">Publier l'offre</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                    </form>
+
+
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Liste des offres d'emplois</h4>
+                </div>
+                <div class="card-content">
+                    <!-- Table with no outer spacing -->
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0 table-lg">
+                            <thead>
+                                <tr>
+                                    <th>Titre</th>
+                                    <th>Domaine</th>
+                                    <th>Publication</th>
+                                    <th>Expiration</th>
+                                    <th>Etat</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                
+                            {% for emp in emplois %}
+                                <tr>
+                                    <td> {{emp.titre}}</td>
+                                    <td class="text-bold-500">{{emp.domaine}}</td>
+                                    <td>{{emp.createAt |format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none') }} </td>
+                                    <td>{{emp.endAt |format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none') }}</td>
+                                    <td>
+                                        <span class="badge rounded-pill alert-success">{{emp.etat}}</span>
+                                    </td>
+                                    <td>
+                                        <a href="{{path('admin_emplois_details', {'slug' : emp.slug })}}" class="btn btn-outline-primary">Details</a></td>    
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+{% endblock content %}

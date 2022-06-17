@@ -1,0 +1,106 @@
+{% extends 'base.admin.html.twig' %}
+{% block page_title %} Contenue de la page d'accueil {% endblock page_title %}
+
+{% block content %}
+<div class="page-content">
+    <section class="section">
+        <div class="row" id="basic-table">
+            <div class="col-12 ">
+                <div class="card">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                <strong> Section 1 : Carousel </strong> 
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                                <div class="card-body">
+                                    <form class="form form-horizontal" enctype="multipart/form-data" method='POST' action="">
+                                        <div class="form-body">
+
+                                            <div class="row justify-content-between">
+                                                <div class="col-4">
+                                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                                        <figure class="card card-product-grid">
+                                                          <div class="img-wrap text-center"> 
+                                                            <img src="{{asset('front/images/blog/blog1.png')}}" style="width:300px"> 
+                                                          </div>
+                                                          <figcaption class="info-wrap border-top">
+                                                            
+                                                            <p class="title mb-2"></p>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                                        <figure class="card card-product-grid">
+                                                          <div class="img-wrap text-center" > 
+                                                            <img src="{{asset('front/images/blog/blog1.png')}}" style="width:300px"> 
+                                                          </div>
+                                                          <figcaption class="info-wrap border-top">
+                                                            
+                                                            <p class="title mb-2"></p>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                                        <figure class="card card-product-grid">
+                                                          <div class="img-wrap text-center"> 
+                                                            <img src="{{asset('front/images/blog/blog1.png')}}" style="width:300px"> 
+                                                          </div>
+                                                          <figcaption class="info-wrap border-top">
+                                                            
+                                                            <p class="title mb-2"></p>
+                                                            </figcaption>
+                                                        </figure>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-4">
+                                                   <div class="form-group">
+                                                        <label for="">Titre</label>
+                                                        <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                                        <label for="" class="mt-2">Text de couverture de l'image</label>
+                                                        <textarea class="form-control" name="" id="" rows="3"></textarea>
+                                                   </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                         <label for="">Titre</label>
+                                                         <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                                         <label for="" class="mt-2">Text de couverture de l'image</label>
+                                                         <textarea class="form-control" name="" id="" rows="3"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="">Titre</label>
+                                                        <input type="text" name="" id="" class="form-control" placeholder="" aria-describedby="helpId">
+                                                        <label for="" class="mt-2">Text de couverture de l'image</label>
+                                                        <textarea class="form-control" name="" id="" rows="3"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </section>
+</div>
+{% endblock %}
