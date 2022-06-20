@@ -1,0 +1,98 @@
+{% extends 'base.admin.html.twig' %}
+{% block page_title %} Gestion des demandes de partenariat {% endblock page_title %}
+
+{% block content %}
+
+<div class="page-content">
+    <section class="section">
+        {% if selected is defined %}
+        <div class="row" id="basic-table">
+            <div class="col-12 ">
+                <div class="mb-5">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                <strong> Detail de la demande de partenariat </strong> 
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                                <div class="card-body">
+                                    <div class="card">
+                                        <div class="card-header">
+                                        <h5 class="card-title mb-5"> {{selected.entreprise}} <span class="badge rounded-pill {% if selected.etat=="DEMANDE" %} alert-warning {% endif %} {% if selected.etat=="VALIDE" %} alert-primary {% endif %} {% if selected.etat=="REFUSE" %} alert-danger {% endif %} ">{{selected.etat}}</span></h5> 
+                                        
+                                        Représentante : <strong>{{selected.prenom}} {{selected.nom}}<br>
+                                        </div>
+                                        <div class="card-body">
+                                          <p class="">
+                                           {{selected.requete}}
+                                          </p>
+                                          <p class="card-text mt-3"> Adresse e-mail : {{selected.mail}}</p>
+                                            <form method="post" action={{path('admin_demande_partenariat_traitement')}}>
+                                                <div class="form-group mb-3">
+                                                  <label for="reponse">Reponse</label>
+                                                  <textarea class="form-control" name="reponse" id="reponse" rows="3"> {% if selected.reponse is not null %}{{selected.reponse}}{% endif %} </textarea>
+                                                  <input type="text" name="id" value="{{selected.id}}" hidden>
+                                                </div>
+                                                <div class="form-check form-switch mb-3">
+                                                    <input class="form-check-input" name="valide" type="checkbox" id="flexSwitchCheckChecked" checked>
+                                                    <label class="form-check-label" for="flexSwitchCheckChecked"> Accepter la demande de partenariat </label>
+                                                </div>
+                                                
+                                                <button type="submit" class="btn btn-primary" {% if selected.etat != "DEMANDE" %} disabled {% endif %}>Traiter la demande</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Liste des entreprises</h4>
+                </div>
+                <div class="card-content">
+                    <!-- Table with no outer spacing -->
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0 table-lg">
+                            <thead>
+                                <tr>
+                                    <th>Demandé par</th>
+                                    <th>Mail de contact</th>
+                                    <th>Entreprise</th>
+                                    <th>Etat</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                {% for part in partenariats %}
+                                    <tr>
+                                        <td class="text-bold-500">{{part.prenom}} {{part.nom}}</td>
+                                        <td> {{part.mail}}</td>
+                                        <td>{{part.entreprise}}</td>
+                                        <td>
+                                            <span class="badge rounded-pill {% if part.etat=="DEMANDE" %} alert-warning {% endif %} {% if part.etat=="VALIDE" %} alert-primary {% endif %} {% if part.etat=="REFUSE" %} alert-danger {% endif %}">{{part.etat}}</span>
+                                        </td>
+                                        <td>
+                                            <a href="{{path('admin_demande_partenariat_details',{id:part.id})}}" class="btn btn-outline-primary">Details</a></td>    
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+{% endblock %}

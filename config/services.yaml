@@ -6,7 +6,9 @@
 parameters:
     images_directory: '%kernel.project_dir%/public/produits'
     evenement_directory : '%kernel.project_dir%/public/evenements'
-
+    pages_directory : '%kernel.project_dir%/public/pages'
+    entreprises_directory : '%kernel.project_dir%/public/entreprises'
+    
 services:
     # default configuration for services in *this* file
     _defaults:

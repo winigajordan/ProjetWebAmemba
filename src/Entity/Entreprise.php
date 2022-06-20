@@ -31,18 +31,19 @@ class Entreprise
     #[ORM\JoinColumn(nullable: false)]
     private $proprietaire;
 
-    #[ORM\OneToMany(mappedBy: 'entreprise', targetEntity: Image::class)]
-    private $images;
-
     #[ORM\Column(type: 'string', length: 255)]
     private $slug;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $etat;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $logo;
+
+
     public function __construct()
     {
-        $this->images = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -110,36 +111,8 @@ class Entreprise
         return $this;
     }
 
-    /**
-     * @return Collection<int, Image>
-     */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    public function addImage(Image $image): self
-    {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
-            $image->setEntreprise($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(Image $image): self
-    {
-        if ($this->images->removeElement($image)) {
-            // set the owning side to null (unless already changed)
-            if ($image->getEntreprise() === $this) {
-                $image->setEntreprise(null);
-            }
-        }
-
-        return $this;
-    }
-
+    
+    
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -163,4 +136,18 @@ class Entreprise
 
         return $this;
     }
+
+    public function getLogo(): ?string
+    {
+        return $this->logo;
+    }
+
+    public function setLogo(?string $logo): self
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+   
 }

@@ -55,7 +55,7 @@ class MembreEmploisController extends AbstractController
         $offre ->setMembre($this->membreRipo->find($this->getUser()->getId()));
         $this->em->persist($offre);
         $this->em->flush();
-        return $this->redirectToRoute('app_admin_emplois');
+        return $this->redirectToRoute('app_membre_emplois');
     }
 
     public function slg($slug){
@@ -64,11 +64,15 @@ class MembreEmploisController extends AbstractController
 
     #[Route('/membre/emplois/details/{slug}', name: 'membre_emplois_details')]
     public function details($slug, Request $request){
+        $selected = $this->offreRipo->findOneBy(['membre'=>$this->membreRipo->find($this->getUser()->getId()), 'slug'=>$slug]);
+        if ($selected == null) {
+            return $this->redirectToRoute('app_membre_emplois');
+        }
         return $this->render('membre_emplois/index.html.twig', [
             'controller_name' => 'MembreEmploisController',
             'today'=> date_format(new DateTime(),'Y-m-d'),
             'emplois'=>$this->offreRipo->findBy(['membre'=>$this->membreRipo->find($this->getUser()->getId())]),
-            'selected'=>$this->offreRipo->findOneBy(['membre'=>$this->membreRipo->find($this->getUser()->getId()), 'slug'=>$slug]),
+            'selected'=>$selected,
         ]);
     }
 
@@ -88,7 +92,7 @@ class MembreEmploisController extends AbstractController
         }
         $this->em->persist($offre);
         $this->em->flush();
-        return $this->redirectToRoute('app_admin_emplois');
+        return $this->redirectToRoute('app_membre_emplois');
     }
     
 }

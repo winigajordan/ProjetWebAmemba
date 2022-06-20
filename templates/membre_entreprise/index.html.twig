@@ -1,0 +1,83 @@
+{% extends 'base.pages.html.twig' %}
+{% block title %}Mon entreprise{% endblock %}
+{% block page %}{% endblock page %}
+
+{% block content %}
+<!-- REGISTER SECTION START -->
+<section class="login-register">
+    <div class="container d-flex">
+        <div class="login-left login-card d-flex justify-content-center align-items-center">
+            <div>
+                <img src="{{asset('front/images/business_woman.svg')}}" alt="business woman">
+                
+            </div>
+        </div>
+        <div class="login-right login-card">
+            <div class="container">
+                <form method="POST" action = " {% if entreprise is defined %} {{path('app_membre_entreprise_update')}} {% else %} {{path('app_membre_entreprise_add')}} {% endif %} " enctype="multipart/form-data">
+                    <h2> {% if entreprise is defined %}  Modifier votre entreprise {% else %} Inscrire votre entrepise {% endif %} </h2>
+                    <div class="mb-3">
+                        <label class="form-label">Nom</label>
+                        <input type="text" class="form-control" name="id" value="{% if entreprise is defined %}{{entreprise.id}}{% endif %}" hidden>
+                        <input class="form-control" name="nom" placeholder="Nom de l'entreprise" type="text" required {% if entreprise is defined %}value="{{entreprise.nom}}"{% endif %}>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Domaine d'activite</label>
+                        <input class="form-control" name="domaine" placeholder="Domaine" type="text" required {% if entreprise is defined %}value="{{entreprise.domaine}}"{% endif %}>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" name="description" placeholder="Description de votre entreprise" rows="3" required>{% if entreprise is defined %}{{entreprise.description}}{% endif %}</textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Adresse</label>
+                        <input class="form-control" name="adresse" placeholder="Ou se situe votre entreprise?" type="text" required {% if entreprise is defined %}value="{{entreprise.adresses}}"{% endif %}>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Logo de l'entreprise (facultatif)</label>
+                        <input class="form-control logo-enterprise" name="logo" type="file" accept="image/png, image/gif, image/jpeg">
+                    </div>
+
+                    {% if entreprise is defined %}
+                    <div class="mb-4">
+                        <label class="form-label">Etat : <strong>{{entreprise.etat}}</strong> </label>
+                        <select class="form-select" aria-label="Default select example" name="etat">
+                            {% if entreprise.etat == "VALIDE" %}
+                                <option value="VALIDE" selected >Valider</option>
+                                <option value="ARCHIVE">Archiver</option>
+                            {% else %}
+                            {% if entreprise.etat == "ARCHIVE"%}
+                                <option value="ARCHIVE">Archiver</option>
+                                <option value="DEMANDE" selected>Demande de publication</option>
+                            {% endif %}
+                            {% endif %}
+                        </select>
+                    </div> 
+                    {% endif %}
+                    
+
+                    <div class="mb-4">
+                        {% if entreprise is defined %}
+                        <button type="submit" class="btn btn-warning w-100">Modifier mon entrepise</button>
+                        {% else %}
+                        <button type="submit" class="btn btn-primary w-100">Inscrire mon entrepise</button>
+                        {% endif %}
+                        
+                    </div>
+
+                   
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- REGISTER SECTION END -->
+
+
+
+
+
+
+{% endblock %}
+

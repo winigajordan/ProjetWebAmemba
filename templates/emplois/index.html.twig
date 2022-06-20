@@ -10,12 +10,12 @@
         <div class="container py-4">
 
             
-           {% if emplois|length > 0 %}
+           
             <form class="d-flex mb-3" action="{{path('app_emplois_search')}}" method="POST">
-                <input type="text" class="form-control" id="search" aria-describedby="search" placeholder="Rechercher des mots clés..." name="key">
+                <input type="text" class="form-control" id="search" aria-describedby="search" placeholder="Rechercher des mots clés..." name="key" {% if key is defined %}value="{{key}}"{% endif %}>
                 <button type="submit" class="btn btn-primary d-flex mx-3"> Rechercher </button>
             </form>
-        {% endif %}
+            
             <h6 class="mb-4">{{emplois|length}} emplois</h6>
             {% for emp in emplois %}
             <div class="forum-post mb-4">

@@ -21,7 +21,6 @@
                           <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                             <div class="accordion-body">
                                 <div class="card-body">
-                                    
                                     <div class="card">
                                         <div class="card-header">
                                         <h5 class="card-title mb-5">{{selected_startup.nom}} <span class="badge rounded-pill {% if selected_startup.etat == "VALIDE" %}alert-success{% else %}alert-warning{% endif %} ">{{selected_startup.etat}}</span></h5> 
@@ -38,11 +37,8 @@
                                           {% else %}
                                           <a href="{{path('admin_entreprise_update', {'slug':selected_startup.slug, 'etat':'VALIDE' })}}" class="btn btn-primary">Valider</a>
                                           {% endif %}
-                                          
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
                           </div>
@@ -79,7 +75,7 @@
                                     <td class="text-bold-500">{{en.domaine}}</td>
                                     <td>{{en.proprietaire.prenom}} {{en.proprietaire.nom}}</td>
                                     <td>
-                                        <span class="badge rounded-pill {% if en.etat == "VALIDE" %}alert-success{% else %}alert-warning{% endif %} ">{{en.etat}}</span>
+                                        <span class="badge rounded-pill {% if en.etat == "VALIDE" %} alert-success {% elseif en.etat == "DEMANDE"  %} alert-primary {% else %} alert-warning{% endif %} ">{{en.etat}}</span>
                                     </td>
                                     <td>
                                         <a href="{{path('admin_entreprise_details', {'slug' : en.slug })}}" class="btn btn-outline-primary">Details</a></td>    

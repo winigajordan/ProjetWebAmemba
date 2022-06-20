@@ -32,10 +32,14 @@ class AdminEntrepriseController extends AbstractController
     #[Route('/admin/entreprise/details/{slug}', name: 'admin_entreprise_details')]
     public function details($slug)
     {
+        $selected = $this->entRipo->findOneBy(['slug'=>$slug]);
+        if ($selected == null) {
+            return $this->redirectToRoute('app_admin_entreprise');
+        }
         return $this->render('admin/admin_entreprise/index.html.twig', [
             'controller_name' => 'AdminEntrepriseController',
             'entreprises' => $this->entRipo->findAll(),
-            'selected_startup' => $this->entRipo->findOneBy(['slug'=>$slug])
+            'selected_startup' => $selected
         ]);
     }
 
