@@ -1,0 +1,57 @@
+{% extends 'base.pages.html.twig' %}
+
+{% block title %}Offres d'emplois{% endblock %}
+{% block page %}{% endblock page %}
+
+
+{% block content %}
+    <!-- SECOND SECTION START -->
+    <section class="second">
+        <div class="container py-4">
+
+            
+           
+            <form class="d-flex mb-3" action="{{path('app_emplois_search')}}" method="POST">
+                <input type="text" class="form-control" id="search" aria-describedby="search" placeholder="Rechercher des mots clés..." name="key" {% if key is defined %}value="{{key}}"{% endif %}>
+                <button type="submit" class="btn btn-primary d-flex mx-3"> Rechercher </button>
+            </form>
+            
+            <h6 class="mb-4">{{emplois|length}} emplois</h6>
+            {% for emp in emplois %}
+            <div class="forum-post mb-4">
+                <a href="{{path('app_emplois_details', {'slug' : emp.slug })}}">
+                    <hr>
+                    <h3>{{emp.titre}}</h3>
+                    
+                </a>
+                <div class="forums-post-infos d-flex justify-content-between">
+                    <span class="badge text-bg-secondary">{{emp.domaine}}</span>
+                    <div class="right">Par
+                        <span class="name">{% if emp.membre is null %} Amemba {% else %} {{emp.membre.prenom}} {{emp.membre.nom}} {% endif %}</span>, Expire le : 
+                        <span class="name">{{emp.endAt |format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none') }} </span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+            {% if emplois|length > 0 %}
+            <!-- Pagination -->
+            <div class="d-flex mt-4 d-flex justify-content-end">
+                <div aria-label="Page navigation nav-pagination" class="p-2">
+                    <ul class="pagination">
+                        <li class="page-item"><a class="page-link" href="#">Précédent</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Suivant</a></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- pagination end -->
+            {% endif %}
+        </div>
+    </section>
+    <!-- SECOND SECTION END -->
+{% endblock %}

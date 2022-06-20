@@ -22,9 +22,6 @@ class Image
     #[ORM\ManyToOne(targetEntity: Evenement::class, inversedBy: 'images')]
     private $evenement;
 
-    #[ORM\ManyToOne(targetEntity: Entreprise::class, inversedBy: 'images')]
-    private $entreprise;
-
     public function getId(): ?int
     {
         return $this->id;
@@ -66,15 +63,4 @@ class Image
         return $this;
     }
 
-    public function getEntreprise(): ?Entreprise
-    {
-        return $this->entreprise;
-    }
-
-    public function setEntreprise(?Entreprise $entreprise): self
-    {
-        $this->entreprise = $entreprise;
-
-        return $this;
-    }
 }

@@ -7,7 +7,7 @@
         <h2 class="content-title my-2">Commandes</h2>
 
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-md-12">
                 <div class="card mb-4">
                     <header class="card-header">
                         <div class="row gx-3">
@@ -51,14 +51,7 @@
                                         <td>{{com.date|date}}</td>
                                         <td class="text-end d-flex">
                                             <a href="{{path('app_commande_details',{id:com.id})}}" class="btn btn-light">Detail</a>
-                                            {# <div class="dropdown">
-                                                <a href="#" data-bs-toggle="dropdown" class="btn btn-light"> Actions </a>
-                                                <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="#">Voir detail</a>
-                                                    <a class="dropdown-item" href="#">Voir info</a>
-                                                    <a class="dropdown-item text-danger" href="#">Supprimer</a>
-                                                </div>
-                                            </div> #}
+                                            
                                             <!-- dropdown //end -->
                                         </td>
                                     </tr>
@@ -72,6 +65,7 @@
                 </div>
                 <!-- card end// -->
             </div>
+            {#
             <div class="col-md-3">
                 <div class="card mb-4">
                     <div class="card-body">
@@ -95,8 +89,11 @@
                         </form>
                     </div>
                 </div>
+                
+             
                 <!-- card end// -->
             </div>
+            #}
         </div>
         <!-- .row end// -->
 

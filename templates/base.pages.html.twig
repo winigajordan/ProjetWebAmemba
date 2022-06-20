@@ -51,7 +51,7 @@
                     <li class="nav-item mx-2">
                         <a href="{{path('app_about')}}" class="nav-link">A propos</a>
                     </li>
-                    {% if app.user %}
+                    {% if app.user is not null %}
                         {% if "ROLE_MEMBRE" not in app.user.roles %}
                         <li class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Shop</a>
@@ -106,19 +106,35 @@
         </div>
     </nav>
     <!-- NAVBAR END -->
+
+
     <div class="top" id="top"></div>
     <div id="scroll-to-top"><a href="#top"><i class="fa-2x fa-solid fa-angle-up"></i></a></div>
-    {% if app.user %}
+
+
+    {% if app.user is not null %}
     {% if "ROLE_MEMBRE" in app.user.roles %}
     <!-- MENU MEMBER START -->
     <div class="menu-membre pt-3">
         <ul class="list-group list-group-flush">
+
+            {% if not app.user.statut %}
+            <li class="list-group-item text-center">
+                <a href="{{path('app_looking_for_job_activate')}}" class="btn btn-primary btn-sm ">Activer mode recherche d'emploi </a>
+            </li>
+            {% else %}
+            <li class="list-group-item text-center">
+                <a href="{{path('app_looking_for_job_disable')}}" class="btn btn-warning btn-sm ">Desactiver mode recherche d'emploi</a>
+            </li>
+            {% endif %}
+            
+
             <li class="list-group-item">
                 <a href="#" class="btn">
                     <i class="fa-solid fa-user"></i> Compte
                 </a>
-
             </li>
+
 
             <li class="list-group-item">
                 <a href="{{path('app_panier')}}" class="btn">
@@ -132,11 +148,7 @@
                 </a>
             </li class="list-group-item">
 
-            <li class="list-group-item">
-                <a href="#" class="btn">
-                    <i class="fa-solid fa-bell"></i> Notifications
-                </a>
-            </li>
+            
             <li class="list-group-item">
                 <a href="{{path('app_wallet')}}" class="btn">
                     <i class="fa-solid fa-money-bill"></i> Portefeuille
@@ -171,9 +183,6 @@
                 <a href="#" class="btn">
                     <i class="fa-solid fa-money-bill"></i> Cotisations
                 </a>
-            </li>
-            <li class="list-group-item text-center">
-                <a href="" class="btn btn-primary btn-sm mt-3">Activer mode recherche d'emploi</a>
             </li>
 
         </ul>

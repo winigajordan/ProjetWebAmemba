@@ -1,0 +1,94 @@
+{% extends 'base.admin.html.twig' %}
+
+
+{% block page_title %} Gestion des entreprises {% endblock page_title %}
+
+{% block content %}
+<div class="page-content">
+    <section class="section">
+        
+        {% if selected_startup is defined %}
+        <div class="row" id="basic-table">
+            <div class="col-12 ">
+                <div class="mb-5">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                <strong> Detail d'une entreprise </strong> 
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                                <div class="card-body">
+                                    <div class="card">
+                                        <div class="card-header">
+                                        <h5 class="card-title mb-5">{{selected_startup.nom}} <span class="badge rounded-pill {% if selected_startup.etat == "VALIDE" %}alert-success{% else %}alert-warning{% endif %} ">{{selected_startup.etat}}</span></h5> 
+                                        Domaine : <strong>{{selected_startup.domaine}}</strong> <br>
+                                        Représentante : <strong>{{selected_startup.proprietaire.prenom}}  {{selected_startup.proprietaire.nom }} <br>
+                                        </div>
+                                        <div class="card-body">
+                                          <p class="">
+                                            {{selected_startup.description}}
+                                          </p>
+                                          <p class="card-text"> Adresse : {{selected_startup.adresses}}</p>
+                                          {% if selected_startup.etat == "VALIDE" %}
+                                          <a href="{{path('admin_entreprise_update', {'slug':selected_startup.slug, 'etat':'ARCHIVE' })}}" class="btn btn-warning">Archiver</a>
+                                          {% else %}
+                                          <a href="{{path('admin_entreprise_update', {'slug':selected_startup.slug, 'etat':'VALIDE' })}}" class="btn btn-primary">Valider</a>
+                                          {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Liste des entreprises</h4>
+                </div>
+                <div class="card-content">
+                    <!-- Table with no outer spacing -->
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0 table-lg">
+                            <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Domaine</th>
+                                    <th>Proprietaire</th>
+                                    <th>Etat</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody >
+                                
+                            {% for en in entreprises %}
+                                <tr>
+                                    <td> {{en.nom}}</td>
+                                    <td class="text-bold-500">{{en.domaine}}</td>
+                                    <td>{{en.proprietaire.prenom}} {{en.proprietaire.nom}}</td>
+                                    <td>
+                                        <span class="badge rounded-pill {% if en.etat == "VALIDE" %} alert-success {% elseif en.etat == "DEMANDE"  %} alert-primary {% else %} alert-warning{% endif %} ">{{en.etat}}</span>
+                                    </td>
+                                    <td>
+                                        <a href="{{path('admin_entreprise_details', {'slug' : en.slug })}}" class="btn btn-outline-primary">Details</a></td>    
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</div>
+{% endblock content %}

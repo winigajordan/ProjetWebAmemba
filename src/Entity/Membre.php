@@ -39,11 +39,15 @@ class Membre extends User
     #[ORM\OneToMany(mappedBy: 'proprietaire', targetEntity: Entreprise::class)]
     private $entreprises;
 
+    #[ORM\OneToMany(mappedBy: 'membre', targetEntity: OffreEmplois::class)]
+    private $offreEmplois;
+
     public function __construct()
     {
         $this->setRoles(['ROLE_MEMBRE']);
         $this->commandes = new ArrayCollection();
         $this->entreprises = new ArrayCollection();
+        $this->offreEmplois = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -169,6 +173,36 @@ class Membre extends User
             // set the owning side to null (unless already changed)
             if ($entreprise->getProprietaire() === $this) {
                 $entreprise->setProprietaire(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OffreEmplois>
+     */
+    public function getOffreEmplois(): Collection
+    {
+        return $this->offreEmplois;
+    }
+
+    public function addOffreEmploi(OffreEmplois $offreEmploi): self
+    {
+        if (!$this->offreEmplois->contains($offreEmploi)) {
+            $this->offreEmplois[] = $offreEmploi;
+            $offreEmploi->setMembre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffreEmploi(OffreEmplois $offreEmploi): self
+    {
+        if ($this->offreEmplois->removeElement($offreEmploi)) {
+            // set the owning side to null (unless already changed)
+            if ($offreEmploi->getMembre() === $this) {
+                $offreEmploi->setMembre(null);
             }
         }
 

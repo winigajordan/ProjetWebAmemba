@@ -1,0 +1,349 @@
+{% extends 'base.admin.html.twig' %}
+{% block page_title %} Contenue de la page d'accueil {% endblock page_title %}
+
+{% block content %}
+<div class="page-content">
+    <section class="section">
+        <div class="row" id="basic-table">
+            <div class="col-12 ">
+
+                <div class="card">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                <strong> Section 1 : Carousel </strong> 
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                                <div class="card-body">
+                                    <form class="form form-horizontal" enctype="multipart/form-data" method='POST' action="{{path('page_accueil_section1')}}">
+                                        <div class="form-body">
+                                            <div class="row justify-content-between">
+                                                <div class="col-4">
+                                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                                        <figure class="card card-product-grid" >
+                                                          <div class="img-wrap text-center" style="margin-bottom: 0px;"> 
+                                                            <img src="/pages/{{page.carouselImage1}}" style="width:300px"> 
+                                                          </div>
+                                                          <figcaption class="info-wrap border-top" style="margin-bottom: -30px;">
+                                                            <p class="title mb-2"></p>
+                                                            <div class="form-group">
+                                                              <input type="file" class="form-control-file" name="img1" id="" placeholder="" aria-describedby="fileHelpId" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
+                                                              <small id="fileHelpId" class="form-text text-muted">Modifier l'image</small>
+                                                            </div>
+                                                        </figcaption>
+                                                        </figure>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                                        <figure class="card card-product-grid" >
+                                                          <div class="img-wrap text-center" style="margin-bottom: 0px;"> 
+                                                            <img src="/pages/{{page.carouselImage2}}" style="width:300px"> 
+                                                          </div>
+                                                          <figcaption class="info-wrap border-top" style="margin-bottom: -30px;">
+                                                            <p class="title mb-2"></p>
+                                                            <div class="form-group">
+                                                              <input type="file" class="form-control-file" name="img2" id="" placeholder="" aria-describedby="fileHelpId" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
+                                                              <small id="fileHelpId" class="form-text text-muted">Modifier l'image</small>
+                                                            </div>
+                                                        </figcaption>
+                                                        </figure>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                                        <figure class="card card-product-grid" >
+                                                          <div class="img-wrap text-center" style="margin-bottom: 0px;"> 
+                                                            <img src="/pages/{{page.carouselImage3}}" style="width:300px"> 
+                                                          </div>
+                                                          <figcaption class="info-wrap border-top" style="margin-bottom: -30px;">
+                                                            <p class="title mb-2"></p>
+                                                            <div class="form-group">
+                                                              <input type="file" class="form-control-file" name="img3" id="" placeholder="" aria-describedby="fileHelpId" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
+                                                              <small id="fileHelpId" class="form-text text-muted">Modifier l'image</small>
+                                                            </div>
+                                                        </figcaption>
+                                                        </figure>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row">
+                                                <div class="col-4">
+                                                   <div class="form-group">
+                                                        <label for="">Titre</label>
+                                                        <input type="text" name="titre1" id="" class="form-control" placeholder="" aria-describedby="helpId" value="{{page.carouselTitre1}}">
+                                                        <label for="" class="mt-2">Text de couverture de l'image</label>
+                                                        <textarea class="form-control" name="text1" id="" rows="3"> {{page.carouselText1}} </textarea>
+                                                   </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                         <label for="">Titre</label>
+                                                         <input type="text" name="titre2" id="" class="form-control" placeholder="" aria-describedby="helpId" value="{{page.carouselTitre2}}">
+                                                         <label for="" class="mt-2">Text de couverture de l'image</label>
+                                                         <textarea class="form-control" name="text2" id="" rows="3"> {{page.carouselText2}}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="">Titre</label>
+                                                        <input type="text" name="titre3" id="" class="form-control" placeholder="" aria-describedby="helpId" value="{{page.carouselTitre3}}">
+                                                        <label for="" class="mt-2">Text de couverture de l'image</label>
+                                                        <textarea class="form-control" name="text3" id="" rows="3">{{page.carouselText2}}</textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary mt-2">Modifier</button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                                <strong> Section 2 : Mission de l'amicale </strong> 
+                              </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                                <div class="accordion-body">
+                                    <form class="form form-horizontal" method="POST" action="{{path('page_accueil_section2')}}">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="missionTitre">Titre</label>
+                                                    <input type="text" class="form-control" name="missionTitre" id="missionTitre" aria-describedby="helpId" placeholder="" value="{{page.missionTitre}}">                                               
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="missionText">Texte</label>
+                                          <textarea class="form-control" name="missionText" id="missionText" rows="4">{{page.missionText}}</textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Modifier la section</button>      
+                                    </form>
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                            <strong> Section 3 : Chiffres </strong>
+                          </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                          <div class="accordion-body">
+                             <form method="POST" action="{{path('page_accueil_section3')}}">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                        <label for="chiffreTitre1">Nombre Alumni</label>
+                                        <input type="text"
+                                            class="form-control" name="chiffreAlumni" id="chiffreTitre1" aria-describedby="helpId" placeholder="" value="{{page.chiffreAlumni}}">
+                                        
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="chiffreTexte1">Texte nombre alumni</label>
+                                            <textarea class="form-control" name="chiffreAlumniText" id="chiffreTexte1" rows="3">{{page.chiffreAlumniText}}</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                        <label for="chiffreTitre2">Nombre de projets</label>
+                                        <input type="text"
+                                            class="form-control" name="chiffreProjet" id="chiffreTitre2" aria-describedby="helpId" placeholder="" value="{{page.chiffreProjet}}">
+                                        
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="chiffreTexte1">Texte nombre de projets</label>
+                                            <textarea class="form-control" name="chiffreProjetText" id="chiffreTexte2" rows="3"> {{page.chiffreProjetText}} </textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                        <label for="chiffreTitre1">Fonds immobilisés</label>
+                                        <input type="text"
+                                            class="form-control" name="chiffreFonds" id="chiffreTitre3" aria-describedby="helpId" placeholder="" value="{{page.chiffreFonds}}">
+                                        
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="chiffreTexte1">Texte de fonds immobilisés</label>
+                                            <textarea class="form-control" name="chiffreFondsText" id="chiffreTexte3" rows="3">{{page.chiffreProjettext}}</textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Modifier la section</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+                                <strong> Section 4 : Entreprise </strong> 
+                              </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+                                <div class="accordion-body">
+                                    <form class="form form-horizontal" method="POST" action="{{path('page_accueil_section4')}}">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="entrepriseTitre">Titre</label>
+                                                    <input type="text" class="form-control" name="entrepriseTitre" id="entrepriseTitre" aria-describedby="helpId" placeholder="" value="{{page.entrepriseTitre}}">                                               
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="entrepriseTexte">Texte</label>
+                                          <textarea class="form-control" name="entrepriseTexte" id="entrepriseTexte" rows="4">{{page.entrepriseTexte}}</textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Modifier la section</button>      
+                                    </form>
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingFive">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false" aria-controls="panelsStayOpen-collapseFive">
+                                <strong> Section 5 : Témoignages </strong> 
+                              </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFive">
+                                <div class="accordion-body">
+                                    <form class="form form-horizontal" method="POST" action="{{path('page_accueil_section5')}}">
+                                        
+                                        <div class="row">
+                                            <p class="mb-2"><strong> Temoignages avec titre </strong>  </p>
+                                        </div>
+
+
+                                        <div class="row mb-3">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                  <label for="temoignageAuteur1">Auteur</label>
+                                                  <input type="text" class="form-control" name="temoignageAuteur1" id="temoignageAuteur1" aria-describedby="helpId" value="{{page.temoignageAuteur1}}">
+                                                  <label for="temoignageTitre1">Titre</label>
+                                                  <input type="text" class="form-control" name="temoignageTitre1" id="temoignageTitre1" aria-describedby="helpId"value="{{page.temoignageTitre1}}">
+                                                  <label for="temoignageText1">Temoignage</label>
+                                                  <textarea class="form-control" name="temoignageText1" id="temoignageText1" rows="3">{{page.temoignageText1}}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                  <label for="temoignageAuteur2">Auteur</label>
+                                                  <input type="text" class="form-control" name="temoignageAuteur2" id="temoignageAuteur2" aria-describedby="helpId" placeholder="" value="{{page.temoignageAuteur2}}">
+                                                  <label for="temoignageTitre2">Titre</label>
+                                                  <input type="text" class="form-control" name="temoignageTitre2" id="temoignageTitre2" aria-describedby="helpId" placeholder="" value="{{page.temoignageTitre2}}">
+                                                  <label for="temoignageText2">Temoignage</label>
+                                                  <textarea class="form-control" name="temoignageText2" id="temoignageText2" rows="3">{{page.temoignageText2}}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr class="my-5">
+
+                                        <div class="row">
+                                            <p class="mb-2"><strong> Temoignages sans titre </strong>  </p>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                  <label for="temoignageAuteur3">Auteur</label>
+                                                  <input type="text" class="form-control" name="temoignageAuteur3" id="temoignageAuteur3" aria-describedby="helpId" placeholder="" value="{{page.temoignageAuteur3}}">
+                                                  <label for="temoignageText3">Temoignage</label>
+                                                  <textarea class="form-control" name="temoignageText3" id="temoignageText3" rows="3">{{page.temoignageText3}}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                  <label for="temoignageAuteur4">Auteur</label>
+                                                  <input type="text" class="form-control" name="temoignageAuteur4" id="temoignageAuteur4" aria-describedby="helpId" placeholder="" value="{{page.temoignageAuteur4}}">
+                                                  <label for="temoignageText4">Temoignage</label>
+                                                  <textarea class="form-control" name="temoignageText4" id="temoignageText4" rows="3">{{page.temoignageText4}}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-primary">Modifier la section</button>      
+                                    </form>
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="panelsStayOpen-headingSix">
+                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false" aria-controls="panelsStayOpen-collapseSix">
+                                <strong> Section 6 : Encienne </strong> 
+                              </button>
+                            </h2>
+                            <div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingSix">
+                                <div class="accordion-body">
+                                    <form class="form form-horizontal" method="POST" action="{{path('page_accueil_section6')}}">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="membreTitre">Titre</label>
+                                                    <input type="text" class="form-control" name="membreTitre" id="membreTitre" aria-describedby="helpId" placeholder="" value="{{page.membreTitre}}">                                               
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <label for="membreText">Texte</label>
+                                          <textarea class="form-control" name="membreText" id="membreText" rows="4">{{page.membreText}}</textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Modifier la section</button>      
+                                    </form>
+                                </div>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+                
+
+
+                
+            </div>
+        </div>
+
+        
+    </section>
+
+
+    
+</div>
+{% endblock %}
+
+
+

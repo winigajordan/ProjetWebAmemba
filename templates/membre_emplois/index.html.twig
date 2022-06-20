@@ -1,0 +1,116 @@
+{% extends 'base.pages.html.twig' %}
+
+{% block title %}Offres d'emplois{% endblock %}
+{% block page %}{% endblock page %}
+
+{% block content %}
+<!-- SECOND SECTION START -->
+    <section class="second">
+        <div class="container py-5">
+            <form method="POST" enctype="multipart/form-data" {% if selected is defined %}action="{{path('membre_emplois_update')}}"{% else %}action="{{path('membre_emplois_add')}}"{% endif %} >
+                <div class="form-top d-flex">
+                    <div class=" w-100">
+                        <div class="card" style="background-color: #F2F7FF;">
+                            <div class =" mx-3 my-3">
+                                <h2 class="mb-5"> {% if selected is defined %}Modifier une offre d'emplois{% else %}Ajouter une offre d'emplois{% endif %}  </h2>
+                                <div class="row">
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="title">Titre de l'offre</label>
+                                        <input type="number" name = "id"  {% if selected is defined %} value="{{selected.id}}" {% endif %}  hidden>
+                                        <input type="text" class="form-control mb-3" name="titre" {% if selected is defined %} value="{{selected.titre}}" {% endif %}>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                     <div class="form-group form-row">
+                                        <label for="title">Domaine <span class="require">*</span></label>
+                                        <input type="text" class="form-control mb-3" name="domaine" {% if selected is defined %} value="{{selected.domaine}}" {% endif %}>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="mb-3">
+                                        <label for="exampleFormControlFile1">Date d'expiration de l'offre</label>
+                                        <input class="form-control mb-4" type="date" id="formFileImage" min="{{today}}" {% if selected is defined %}  value="{{selected.endAt|date("Y-m-d")}}" {% endif %} >
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group my-3">
+                                <label for="article">Description de l'offre d'emploi</label>
+                                <textarea rows="4" minlength="20" class="form-control" name="description"> {% if selected is defined %} {{selected.description}} {% endif %}  </textarea>
+                            </div>
+
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" name="archive">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">Archiver l'offre d'emplois</label>
+                            </div>
+                            
+                            <div class="form-group mt-2">
+                                {% if selected is defined %} 
+                                <button type="submit" class="btn btn-warning"> Modifier l'offre </button>
+                                {% else %}
+                                <button type="submit" class="btn btn-primary"> Publier l'offre </button>
+                                {% endif %}
+                                
+                                   
+                                
+                            </div>
+                            </div>
+                            
+                        </div>
+                        
+                       
+                        
+                    </div>
+                </div>
+                
+            </form>
+
+            <div class="col-12 mt-5">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Liste de mes emplois</h4>
+                    </div>
+                    <div class="card-content">
+                        <!-- Table with no outer spacing -->
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0 table-lg">
+                                <thead>
+                                    <tr>
+                                        <th>Titre</th>
+                                        <th>Domaine</th>
+                                        <th>Publication</th>
+                                        <th>Expiration</th>
+                                        <th>Etat</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody >
+                                    
+                                {% for emp in emplois %}
+                                    <tr>
+                                        <td> {{emp.titre}}</td>
+                                        <td class="text-bold-500">{{emp.domaine}}</td>
+                                        <td>{{emp.createAt |format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none') }} </td>
+                                        <td>{{emp.endAt |format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none') }}</td>
+                                        <td>
+                                            <span class="badge rounded-pill alert-success">{{emp.etat}}</span>
+                                        </td>
+                                        <td>
+                                            <a href="{{path('membre_emplois_details', {'slug' : emp.slug })}}" class="btn btn-outline-primary">Details</a></td>    
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </section>
+    <!-- SECOND SECTION END -->
+{% endblock %}

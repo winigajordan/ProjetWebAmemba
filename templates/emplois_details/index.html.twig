@@ -1,0 +1,29 @@
+{% extends 'base.pages.html.twig' %}
+
+{% block title %}Offres d'emplois{% endblock %}
+{% block page %}{% endblock page %}
+
+
+{% block content %}
+ <!-- SECOND SECTION START -->
+ <section class="second">
+    <div class="container py-4">
+        
+        <div class="forum-post mb-4">
+            <hr>
+            <h3>{{emplois.titre}}</h3>
+            <p>
+                {{emplois.description}}
+            </p>
+            <div class="forums-post-infos d-flex justify-content-between">
+                <span class="badge text-bg-secondary">{{emplois.domaine}}</span>
+                <div class="right">Par
+                    <span class="name">{% if emplois.membre is null %} Amemba {% else %} {{emplois.membre.prenom}} {{emplois.membre.nom}} {% endif %}</span>, Expire le
+                    <span class="name">{{emplois.endAt |format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none') }} </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- SECOND SECTION END -->
+{% endblock %}
