@@ -71,16 +71,16 @@ class PageAccueil
     private $entrepriseTexte;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $temoignageAuteur1;
+    private $temoignageAuteur1; // titre
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $temoignageAuteur2;
+    private $temoignageAuteur2; //titre 
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $temoignageAuteur3;
+    private $temoignageAuteur3; //non titre
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $temoignageAuteur4;
+    private $temoignageAuteur4; //non titre
 
     #[ORM\Column(type: 'text')]
     private $temoignageTitre1;

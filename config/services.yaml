@@ -8,7 +8,9 @@ parameters:
     evenement_directory : '%kernel.project_dir%/public/evenements'
     pages_directory : '%kernel.project_dir%/public/pages'
     entreprises_directory : '%kernel.project_dir%/public/entreprises'
-    
+    cv_directory : '%kernel.project_dir%/public/cv'
+    pp_directory : '%kernel.project_dir%/public/pp
+    '
 services:
     # default configuration for services in *this* file
     _defaults:

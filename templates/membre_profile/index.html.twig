@@ -1,0 +1,191 @@
+{% extends 'base.pages.html.twig' %}
+{% block title %}Mon profile{% endblock %}
+{% block page %}{% endblock page %}
+
+{% block content %}
+<!-- SECOND SECTION START -->
+    <section class="second ">
+        <div class="container py-5">
+            <form class="row" enctype="multipart/form-data"  method="POST"  action="{{path('app_membre_profile_edit')}}">
+                <div class="profile-left col-4 d-flex flex-column align-items-center">
+                    {% if membre.profile %} 
+                        <img class="mt-5" src="/pp/{{membre.profile}}" alt="avatar user" class="mx-auto">
+                    {% else %}
+                        <img class="mt-5" src="{{asset('front/images/avatars/exemple.jpg')}}" alt="avatar user" class="mx-auto">
+                    {% endif %}
+                    <span class="mt-5">Changer l'avatar</span>
+                    <input type="file" class="mb-5 form-control" accept="image/png, image/gif, image/jpeg" name="image">
+                </div>
+                <div class="profile-right col">
+                    {% for message in app.flashes('danger') %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>{{message}}</strong> 
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <strong>{{message}}</strong> 
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                    <div class="row gx-2">
+                        <div class="col-6 mb-3">
+                            <label class="form-label" for="role">Rôle dans l'amicale</label>
+                            <input type="text" class="form-control" id="role" name="role" required value="{{membre.roleAmicale}}">
+                        </div>
+                    </div>
+
+                    <div class="row gx-2 mb-3">
+                          <label for="bio">Bio</label>
+                          <textarea class="form-control" name="bio" id="bio" rows="3">{{membre.bio}}</textarea>
+                        
+                    </div>
+
+                    <div class="row gx-2">
+                        <div class="col-6 mb-3">
+                            <label class="form-label" for="prenom">Prenom</label>
+                            <input type="text" class="form-control" id="prenom" name="prenom" required value="{{membre.prenom}}">
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label class="form-label" for="nom">Nom</label>
+                            <input type="text" id="nom" class="form-control" name="nom" required value="{{membre.nom}}">
+                        </div>
+                    </div>
+
+                    <div class="row gx-2">
+                        <div class="col-6 mb-3">
+                            <label class="form-label" for="promotion">Promotion</label>
+                            <input type="number" id="promotion" class="form-control" name="promotion" required value="{{membre.promotion}}">
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label class="form-label" for="bac">Série de BAC </label>
+                            <input type="text" class="form-control" id="bac" name="bac" required value="{{membre.bac}}">
+                        </div>
+                    </div>
+
+                    <div class="row gx-2">
+                        <div class="col-6 mb-3">
+                            <label class="form-label" for="univ">Université</label>
+                            <input type="text" id="univ" class="form-control" name="univ" value="{{membre.univ}}">
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label class="form-label" for="diplome">Dernier diplôme obtenue </label>
+                            <input type="text" class="form-control" id="diplome" name="diplome" required value="{{membre.diplome}}">
+                        </div>
+                    </div>
+
+                    <div class="row gx-2">
+                        <div class="mb-3">
+                            <label class="form-label" for="experience">Dernière expérience professionnelle</label>
+                            <input type="text" id="experience" class="form-control" name="experience" value="{{membre.experience}}">
+                        </div>
+                    </div>
+
+                    <div class="row gx-2">
+                        <div class="col-4 mb-3">
+                            <label class="form-label" for="profession">Profession </label>
+                            <input type="text" class="form-control" id="profession" name="profession" required value="{{membre.profession}}">
+                        </div>
+                        <div class="col-4 mb-3">
+                            <label class="form-label" for="entreprise">Entreprise </label>
+                            <input type="text" class="form-control" id="entreprise" name="entreprise" value="{{membre.entreprise}}">
+                        </div>
+                        <div class="col-4 mb-3">
+                            <label class="form-label" for="secteur">Secteur d'activité </label>
+                            <input type="text" class="form-control" id="secteur" name="secteur" value="{{membre.secteur}}">
+                        </div>
+                    </div>
+
+                    <div class="row gx-2">
+                        <div class="col-6 mb-3">
+                            <label class="form-label" for="pays">Pays de résidence</label>
+                            <input type="text" class="form-control" id="pays" name="pays" required value="{{membre.pays}}">
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label class="form-label" for="ville">Ville de résidence</label>
+                            <input type="text" id="nom" class="form-control" name="ville" required value="{{membre.ville}}">
+                        </div>
+                    </div>
+
+                    <div class="row gx-2">
+                        <div class="col-6 mb-3">
+                            <label class="form-label" for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required value="{{membre.email}}">
+                        </div>
+                        <div class="col-6 mb-3">
+                                <label class="form-label col-12" for="phone">Téléphone</label>
+                                <input class="form-control" id='phone' type="tel" value="{{membre.telephone}}" required>
+                        </div>
+                    </div>
+
+                    <div class="row gx-2">
+                        <div class="mb-3">
+                            <label class="form-label" for="link">Lien vers votre profil Linkedin</label>
+                            <input type="url" class="form-control" id="link" name="link" value="{{membre.link}}">
+                        </div>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label class="form-label" for="pwd1">Nouveau mot de passe (laisser vide si vous ne souhaitez pas le changer)</label>
+                        <input class="form-control" id="pwd1" name="pwd1" placeholder="Au moins 6 caractères." type="password" >
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="pwd2">Répéter le mot de passe</label>
+                        <input class="form-control" id="pwd2" name="pwd2"  placeholder="" type="password" >
+                    </div>
+
+                   
+
+                    {% if membre.statut %}
+                     <div class="mb-3">
+                        <label class="form-label" for="cv">Uploader votre cv (uniquement sous format pdf)</label>
+                       <input type="file" class="mb-5 form-control"  accept=".pdf" id="cv" name="cv">
+                    </div>    
+                    {% endif %}
+                    <div class="mb-4">
+                        <p>
+                            *mettre à jour le profil avant de mofifier les informations de votre entreprise
+                        </p>
+                        <a class="btn btn-primary mb-3" href="{{path('app_membre_entreprise')}}" >Mettre à jour les information de mon entreprise</a>
+                        <button type="submit" class="btn btn-primary w-100"> Enregistrer les modifications  </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- SECOND SECTION END -->
+{% endblock %}
+
+
+{% block js %}
+<!-- IntelTel Input -->
+<script type="text/javascript" src="{{asset('front/js/intlTelInput.js')}}"></script>
+<script>
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+        // allowDropdown: false,
+        // autoHideDialCode: false,
+        // autoPlaceholder: "off",
+        // dropdownContainer: document.body,
+        // excludeCountries: ["us"],
+        // formatOnDisplay: false,
+        // geoIpLookup: function(callback) {
+        //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+        //     var countryCode = (resp && resp.country) ? resp.country : "";
+        //     callback(countryCode);
+        //   });
+        // },
+        hiddenInput: "full_number",
+        // initialCountry: "auto",
+        // localizedCountries: { 'de': 'Deutschland' },
+        // nationalMode: false,
+        // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        placeholderNumberType: "MOBILE",
+        preferredCountries: ['sn'],
+        separateDialCode: true,
+        utilsScript: "{{asset('front/js/utils.js')}}",
+    });
+</script>
+{% endblock js %}

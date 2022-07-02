@@ -7,62 +7,66 @@
 {% block content %}
 
 <!-- HERO SECTION START -->
-    <section class="slider-section">
-        <i class="fas fa-angle-left fa-3x arrow arrow-left" id="arrow-left"></i>
-        <div class="sliders-container">
-            <div class="slider sl-1">
-                <div class="sl-content">
-                    <div class="sl-content-content">
-                        <h2>LE RESEAU ALUMNI FAIT LE LIEN</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec volutpat elit. Mauris sollicitudin, est ac tristique euismod, velit turpis vehicula dui, at fringilla dui orci non nibh. Quisque congue tellus lacus, et tristique leo tristique sit amet. Mauris tincidunt faucibus mi eu tempus. Sed congue risus sed fermentum dapibus. In feugiat egestas bibendum. Aenean vitae risus id ante ornare vehicula a sed sem. Sed nibh mauris, fermentum et dignissim a, tempus ut urna.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="slider sl-2">
-                <div class="sl-content">
-                    <div class="sl-content-content">
-                        <h2>LE RESEAU ALUMNI FAIT LE LIEN</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec volutpat elit. Mauris sollicitudin, est ac tristique euismod, velit turpis vehicula dui, at fringilla dui orci non nibh. Quisque congue tellus lacus, et tristique leo tristique sit amet. Mauris tincidunt faucibus mi eu tempus. Sed congue risus sed fermentum dapibus. In feugiat egestas bibendum. Aenean vitae risus id ante ornare vehicula a sed sem. Sed nibh mauris, fermentum et dignissim a, tempus ut urna.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="slider sl-3">
-                <div class="sl-content">
-                    <div class="sl-content-content">
-                        <h2>LE RESEAU ALUMNI FAIT LE LIEN</h2>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec volutpat elit. Mauris sollicitudin, est ac tristique euismod, velit turpis vehicula dui, at fringilla dui orci non nibh. Quisque congue tellus lacus, et tristique leo tristique sit amet. Mauris tincidunt faucibus mi eu tempus. Sed congue risus sed fermentum dapibus. In feugiat egestas bibendum. Aenean vitae risus id ante ornare vehicula a sed sem. Sed nibh mauris, fermentum et dignissim a, tempus ut urna.
-                        </p>
-                    </div>
+<section class="slider-section">
+    <i class="fas fa-angle-left fa-3x arrow arrow-left" id="arrow-left"></i>
+    <div class="sliders-container">
+        <div class="slider sl-1">
+            <div class="sl-content">
+                <div class="sl-content-content">
+                    <h2>{{page.carouselTitre1}}</h2>
+                    <p>
+                        {{page.carouselText1}}
+                    </p>
                 </div>
             </div>
         </div>
-        <i class="fas fa-angle-right fa-3x arrow arrow-right" id="arrow-right"></i>
-    </section>
-    <!-- HERO SECTION END -->
+        <div class="slider sl-2">
+            <div class="sl-content">
+                <div class="sl-content-content">
+                    <h2>{{page.carouselTitre2}}</h2>
+                    <p>
+                        {{page.carouselText2}}
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="slider sl-3">
+            <div class="sl-content">
+                <div class="sl-content-content">
+                    <h2>{{page.carouselTitre3}}</h2>
+                    <p>
+                        {{page.carouselText3}}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <i class="fas fa-angle-right fa-3x arrow arrow-right" id="arrow-right"></i>
+</section>
+<!-- HERO SECTION END -->
+
+
+
 
 <!-- MISSION SECTION START -->
-<section class="mission-section d-flex container">
-    <div class="mission-left d-flex align-items-center justify-content-center w-50 h-100">
+<section class="mission-section row row-cols-1 row-cols-md-2 container my-5 mx-auto">
+    <div class="mission-left col">
         <div class="blue-bg d-flex align-items-center">
             <img src="{{asset('front/images/goal.png')}}">
         </div>
     </div>
-    <div class="mission-right w-50 h-100 d-flex align-items-center">
+    <div class="mission-right col">
         <div class="">
-            <h3>Mission de <br> l'Amicale de MEMBA</h3>
+            <h3>{{page.missionTitre}}</h3>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec volutpat elit. Mauris sollicitudin, est ac tristique euismod, velit turpis vehicula dui, at fringilla dui orci non nibh. Quisque congue tellus lacus, et tristique leo tristique sit amet. Mauris tincidunt faucibus mi eu tempus. Sed congue risus sed fermentum dapibus. In feugiat egestas bibendum. Aenean vitae risus id ante ornare vehicula a sed sem. Sed nibh mauris, fermentum et dignissim a, tempus ut urna.
+                {{page.missionText}}
             </p>
-            <a href="#" class="btn btn-lg btn-primary">Lire plus <i class="fa-solid fa-angle-right"></i></a>
+            <a href="#" class="btn btn-primary">Lire plus <i class="fa-solid fa-angle-right"></i></a>
         </div>
     </div>
 </section>
 <!-- MISSION SECTION END -->
+
 
 <!-- STATS SECTION START -->
 <section class="stats container d-flex flex-column justify-content-between mt-5">
@@ -73,76 +77,80 @@
                 <i class="fa-solid fa-graduation-cap fa-2x"></i>
             </div>
             <h4 class="text-center">
-                <span class="count"> 50000 </span> Alumnis
+                <span class="count"> {{page.chiffreAlumni}} </span> Alumnis
             </h4>
-            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. </p>
+            <p class="text-center"> {{page.chiffreAlumniText}}</p>
         </div>
         <div class="stats-card">
             <div class="stats-ico d-flex justify-content-center align-items-center chart">
                 <i class="fa-solid fa-chart-line fa-2x"></i>
             </div>
             <h4 class="text-center">
-                <span class="count"> 50000 </span> Projets
+                <span class="count"> {{page.chiffreProjet}} </span> Projets
             </h4>
-            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. </p>
-        </div>
+            <p class="text-center"> {{page.chiffreProjetText}}</p>
+         </div>
         <div class="stats-card">
             <div class="stats-ico d-flex justify-content-center align-items-center money">
                 <i class="fa-solid fa-money-bill fa-2x"></i>
             </div>
             <h4 class="text-center">
-                <span class="count"> 50000 </span> Fonds Immobilises
+                <span class="count"> {{page.chiffreFonds}} </span> Fonds Immobilises
             </h4>
-            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. </p>
+            <p class="text-center"> {{page.chiffreFondsText}}</p>
         </div>
     </div>
 </section>
 <!-- STATS SECTION END -->
 
-<!-- CTA SECTION START -->
-<section class="cta">
+ <!-- CTA SECTION START -->
+ <section class="cta">
     <div class="container d-flex flex-column justify-content-around h-100 py-5">
-        <h2 class="text-center">Vous êtes une entreprise ?</h2>
+        <h2 class="text-center">{{page.entrepriseTitre}}</h2>
         <p class="text-center">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. Enim vel sed posuere ut massa ut. Non sit imperdiet enim at diam orci augue sit ultrices. Rhoncus et ipsum, quis egestas scelerisque viverra id sit. 
-            Ullamcorper enim ultrices suspendisse odio. 
+            {{page.entrepriseTexte}}
         </p>
         <div class="w-100 d-flex justify-content-center">
-            <a href="" class="btn btn-primary btn-lg">Collaborer <i class="fa-solid fa-angle-right"></i></a>
+            <a href="{{path('app_demande_partenariat')}}" class="btn btn-primary">Demander un partenariat <i class="fa-solid fa-angle-right"></i></a>
         </div>
     </div>
 </section>
 <!-- CTA SECTION END -->
 
+
+
 <!-- WEN SECTION START -->
+<!--
+    
+
 <section class="wen container">
     <h2 class="text-center py-5">La parole à nos entrepreneuses</h2>
     <div class="wen-cards container">
         <div class="card1 wen-card position-relative">
             <p>
-                “ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.“         
+                “{{page.temoignageText3}}“         
             </p>
-            <h5 class="position-absolute">Nom et prenom</h5>
+            <h5 class="position-absolute">{{page.temoignageAuteur3}}</h5>
         </div>
         <div class="card2 wen-card p-5 d-flex align-items-end">
             <div class="wen-card-video">
-                <h5>Nom et prenom</h5>
-                <h3>A.S nous raconte son parcours de jeune femme entrepreneur</h3>
-                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+                <h5>{{page.temoignageAuteur1}}</h5>
+                <h3>{{page.temoignageTitre1}}</h3>
+                <p>“{{page.temoignageText1}}“ </p>
             </div>
         </div>
         <div class="card3 wen-card p-5 h-100 d-flex align-items-end">
             <div class="wen-card-video position-relative">
-                <h5>Nom et prenom</h5>
-                <h3>A.S nous raconte son parcours de jeune femme entrepreneur</h3>
-                <p>Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.</p>
+                <h5>{{page.temoignageAuteur2}}</h5>
+                <h3>{{page.temoignageTitre2}}</h3>
+                <p>“{{page.temoignageText2}}“ </p>    
             </div>
         </div>
         <div class="card4 wen-card position-relative">
             <p>
-                “ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut.“         
+                “{{page.temoignageText4}}“         
             </p>
-            <h5 class="position-absolute">Nom et prenom</h5>
+            <h5 class="position-absolute">{{page.temoignageAuteur4}}</h5>
         </div>
     </div>
     <div class="w-100 d-flex justify-content-center py-5">
@@ -150,7 +158,50 @@
     </div>
     
 </section>
+ WEN SECTION END 
+-->
+
+<!-- WEN SECTION START -->
+<section class="wen container">
+    <h2 class="text-center py-5">La parole à nos entrepreneuses</h2>
+    <div class="wen-cards container mx-auto">
+        <div class="wen-cards-duo">
+            <div class="card1 wen-card col position-relative">
+                <p>
+                    “{{page.temoignageText3}}“  
+                </p>
+                <h5 class="position-absolute">{{page.temoignageAuteur3}}</h5>
+            </div>
+            <div class="card2 wen-card col d-flex align-items-end">
+                <div class="wen-card-video">
+                    <h5>{{page.temoignageAuteur1}}</h5>
+                    <h3>{{page.temoignageTitre1}}</h3>
+                    <p>“{{page.temoignageText1}}“ </p>
+                </div>
+            </div>
+        </div>
+        <div class="wen-cards-duo ">
+            <div class="card3 wen-card col d-flex align-items-end">
+                <div class="wen-card-video position-relative">
+                    <h5>{{page.temoignageAuteur2}}</h5>
+                    <h3>{{page.temoignageTitre2}}</h3>
+                    <p>“{{page.temoignageText2}}“ </p>  
+            </div>
+            </div>
+            <div class="card4 wen-card col position-relative">
+                <p>
+                    “{{page.temoignageText4}}“
+                </p>
+                <h5 class="position-absolute">{{page.temoignageAuteur4}}</h5>
+            </div>
+        </div>
+    </div>
+    <div class="w-100 d-flex justify-content-center py-5">
+        <a href="#" class="btn btn-primary">PROGRAMME WEN</a>
+    </div>
+</section>
 <!-- WEN SECTION END -->
+
 
 <!-- BLOG SECTION START -->
 <section class="blog container position-relative">
@@ -286,12 +337,12 @@
 <!-- OLD SECTION START -->
 <section class="old">
     <div class="container d-flex flex-column justify-content-around h-100 py-5">
-        <h2 class="text-center">Vous être une ancienne ?</h2>
+        <h2 class="text-center">{{page.membreTitre}}</h2>
         <p class="text-center">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. Enim vel sed posuere ut massa ut. Non sit imperdiet enim at diam orci augue
+            {{page.membreText}}
         </p>
         <div class="w-100 d-flex justify-content-center">
-            <a href="" class="btn btn-primary btn-lg">Adhérer</a>
+            <a href="{{path('app_register')}}" class="btn btn-primary btn-lg">Adhérer</a>
         </div>
     </div>
 </section>

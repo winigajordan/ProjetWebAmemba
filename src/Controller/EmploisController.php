@@ -7,6 +7,7 @@ use App\Repository\OffreEmploisRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class EmploisController extends AbstractController
@@ -18,7 +19,7 @@ class EmploisController extends AbstractController
         $this->offreRipo = $offreRipo;
     }
 
-    #[Route('/emplois', name: 'app_emplois')]
+    #[Route('/emplois', name: 'app_emplois'), IsGranted("ROLE_MEMBRE")]
     public function index(): Response
     {
         return $this->render('emplois/index.html.twig', [
@@ -40,7 +41,7 @@ class EmploisController extends AbstractController
     }
 
 
-    #[Route('/emplois/recherche', name: 'app_emplois_search')]
+    #[Route('/emplois/recherche', name: 'app_emplois_search'), IsGranted("ROLE_MEMBRE")]
     public function recherche(Request $request){
         
         $key = $request->request->get('key');

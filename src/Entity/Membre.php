@@ -42,6 +42,39 @@ class Membre extends User
     #[ORM\OneToMany(mappedBy: 'membre', targetEntity: OffreEmplois::class)]
     private $offreEmplois;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $profile;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $profession;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $secteur;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $entreprise;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $roleAmicale;
+
+    #[ORM\Column(type: 'string', length: 25, nullable: true)]
+    private $bac;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $univ;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $diplome;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $experience;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $link;
+
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $bio;
+
     public function __construct()
     {
         $this->setRoles(['ROLE_MEMBRE']);
@@ -205,6 +238,138 @@ class Membre extends User
                 $offreEmploi->setMembre(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProfile(): ?string
+    {
+        return $this->profile;
+    }
+
+    public function setProfile(?string $profile): self
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    public function getProfession(): ?string
+    {
+        return $this->profession;
+    }
+
+    public function setProfession(?string $profession): self
+    {
+        $this->profession = $profession;
+
+        return $this;
+    }
+
+    public function getSecteur(): ?string
+    {
+        return $this->secteur;
+    }
+
+    public function setSecteur(?string $secteur): self
+    {
+        $this->secteur = $secteur;
+
+        return $this;
+    }
+
+    public function getEntreprise(): ?string
+    {
+        return $this->entreprise;
+    }
+
+    public function setEntreprise(?string $entreprise): self
+    {
+        $this->entreprise = $entreprise;
+
+        return $this;
+    }
+
+    public function getRoleAmicale(): ?string
+    {
+        return $this->roleAmicale;
+    }
+
+    public function setRoleAmicale(?string $roleAmicale): self
+    {
+        $this->roleAmicale = $roleAmicale;
+
+        return $this;
+    }
+
+    public function getBac(): ?string
+    {
+        return $this->bac;
+    }
+
+    public function setBac(?string $bac): self
+    {
+        $this->bac = $bac;
+
+        return $this;
+    }
+
+    public function getUniv(): ?string
+    {
+        return $this->univ;
+    }
+
+    public function setUniv(?string $univ): self
+    {
+        $this->univ = $univ;
+
+        return $this;
+    }
+
+    public function getDiplome(): ?string
+    {
+        return $this->diplome;
+    }
+
+    public function setDiplome(?string $diplome): self
+    {
+        $this->diplome = $diplome;
+
+        return $this;
+    }
+
+    public function getExperience(): ?string
+    {
+        return $this->experience;
+    }
+
+    public function setExperience(?string $experience): self
+    {
+        $this->experience = $experience;
+
+        return $this;
+    }
+
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(?string $link): self
+    {
+        $this->link = $link;
+
+        return $this;
+    }
+
+    public function getBio(): ?string
+    {
+        return $this->bio;
+    }
+
+    public function setBio(?string $bio): self
+    {
+        $this->bio = $bio;
 
         return $this;
     }

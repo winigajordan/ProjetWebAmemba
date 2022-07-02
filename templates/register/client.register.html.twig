@@ -1,35 +1,35 @@
 {% extends 'base.pages.html.twig' %}
-
+{% block page %}{% endblock page %}
 {% block content %}
 <section class="login-register">
     <div class="container d-flex">
         <div class="login-left login-card d-flex justify-content-center align-items-center">
             <div>
                 <img src="{{asset('front/images/join_vector.svg')}}" alt="">
-                <p>Entrez vos donnees pour creer votre compte, si vous avec quelconque probleme n'hesitez pas a nous <a href="">contacter</a>  !</p>
+                <h2>{{txtRegister}}</h2>
             </div>
         </div>
         <div class="login-right login-card">
             <div class="container">
                 <form method = "post" action= "{{path('add_client')}}">
-                    <h2>Entrez vos donnees pour vous inscrire</h2>	
+                    <h2>Création de compte client</h2>	
                     <div class="row gx-2">
                         <div class="col-6 mb-3">
                             <label class="form-label">Prenom</label>
-                            <input type="text" class="form-control" name="prenom" required="" placeholder="Astou">
+                            <input type="text" class="form-control" name="prenom" required="" placeholder="Prenom">
                         </div>
                         <div class="col-6 mb-3">
                             <label class="form-label">Nom</label>
-                            <input type="text" class="form-control" name="nom" required="" placeholder="Ndiaye">
+                            <input type="text" class="form-control" name="nom" required="" placeholder="Nom">
                         </div> 
                     </div>
                     <div class="mb-3">
                          <label class="form-label">Email</label>
-                         <input class="form-control" name="email" placeholder="Adresse email" type="text" required="">
+                         <input class="form-control" name="email" placeholder="Adresse email" type="email" required>
                     </div> 
                     <div class="mb-3">
                          <label class="form-label">Password</label>
-                         <input class="form-control" name="password" placeholder="Mot de passe" type="password" required="">
+                         <input class="form-control" name="password" placeholder="Mot de passe" type="password" required>
                     </div> 
                     <div class="my-4">
                       <button type="submit" class="btn btn-primary w-100">Creer un compte</button>

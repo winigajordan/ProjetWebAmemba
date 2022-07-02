@@ -10,6 +10,7 @@ use App\Repository\DemandeRepository;
 
 use App\Service\Mail\ApiMailJet;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,7 +24,10 @@ class DemandeController extends AbstractController
         $this->hasher = $hasher;
     }
 
-    #[Route('/admin/demande', name: 'demande')]
+    #[
+        Route('/admin/demande', name: 'demande'),
+        IsGranted("ROLE_ADMIN")
+    ]
     public function index(DemandeRepository $dmd): Response
     {
 
@@ -35,11 +39,17 @@ class DemandeController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/demande/details/{id}', name: 'details_demande')]
+    #[
+        Route('/admin/demande/details/{id}', name: 'details_demande'),
+        IsGranted("ROLE_ADMIN")
+    ]
     public function details($id, DemandeRepository $dmd) : Response
     {
         $demandes = $dmd -> findBy(["etat"=>"EN COURS"]);
         $selected = $dmd -> find($id);
+        if ($selected == null or $selected->getEtat()!="EN COURS") {
+            return $this->redirectToRoute('demande');
+        }
         return $this->render('./demande/index.html.twig',[
             'controller_name' => 'DemandeController',
             'demandes' => $demandes,
@@ -49,7 +59,7 @@ class DemandeController extends AbstractController
     }
 
 
-    #[Route('/admin/demande/valider/{id}', name: 'valider_demande')]
+    #[Route('/admin/demande/valider/{id}', name: 'valider_demande'), IsGranted("ROLE_ADMIN")]
     public function validationDemande($id,  DemandeRepository $dmd, MembreRepository $membreRipo, EntityManagerInterface $manager): Response
     {
         $selected = $dmd -> find($id);
@@ -63,11 +73,11 @@ class DemandeController extends AbstractController
         $membre -> setPromotion($selected -> getPromotion());
         $membre -> setPays($selected -> getPays());
         $membre-> setVille($selected -> getVille());
-        $membre -> setTelephone('');
+        $membre -> setTelephone($selected->getTelephone());
         $membre -> setStatut(false);
         $membre -> setEmail($selected -> getMail());
         $membre -> setRoles(["ROLE_MEMBRE"]);
-        $userPassword = date_format(new DateTime(),'Y/m/d-H:i:s');
+        $userPassword = date_format(new DateTime(),'Y-m-d-H-i-s');
         $pwd = $this->hasher->hashPassword($membre, $userPassword);
         $membre -> setPassword($pwd);
         $selected -> setEtat('VALIDE');
@@ -90,7 +100,7 @@ class DemandeController extends AbstractController
     }
 
 
-    #[Route('/admin/demande/annuler/{id}', name: 'annuler_demande')]
+    #[Route('/admin/demande/annuler/{id}', name: 'annuler_demande'), IsGranted("ROLE_ADMIN")]
     public function annulationDemande($id,  DemandeRepository $dmd, EntityManagerInterface $manager) : Response
     {
         $selected = $dmd -> find($id);

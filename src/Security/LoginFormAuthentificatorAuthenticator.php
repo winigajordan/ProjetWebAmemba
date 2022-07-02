@@ -53,7 +53,7 @@ class LoginFormAuthentificatorAuthenticator extends AbstractLoginFormAuthenticat
         $user = $token->getUser();
 
         if (in_array('ROLE_MEMBRE', $user->getRoles())) {
-            return new RedirectResponse($this->urlGenerator->generate('demande'));
+            return new RedirectResponse($this->urlGenerator->generate('app_accueil'));
         }
 
         
@@ -66,8 +66,8 @@ class LoginFormAuthentificatorAuthenticator extends AbstractLoginFormAuthenticat
             }  
         }
  
-        if (in_array('ROLE_GESTIONNAIRE', $user->getRoles())) {
-            return new RedirectResponse($this->urlGenerator->generate('app_accueil'));
+        if (in_array('ROLE_ADMIN', $user->getRoles())) {
+            return new RedirectResponse($this->urlGenerator->generate('demande'));
         }
 
         // For example:

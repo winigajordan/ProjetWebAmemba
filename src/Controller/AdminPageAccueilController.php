@@ -5,14 +5,16 @@ namespace App\Controller;
 use App\Entity\PageAccueil;
 use App\Repository\PageAccueilRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class AdminPageAccueilController extends AbstractController
 {
-
+   
     public function __construct(
         PageAccueilRepository $accueilRipo,
         EntityManagerInterface $em,
@@ -22,7 +24,7 @@ class AdminPageAccueilController extends AbstractController
         $this->page =  $this->accueilRipo->find(1);
     }
 
-    #[Route('/admin/page/accueil', name: 'app_admin_page_accueil')]
+    #[Route('/admin/page/accueil', name: 'app_admin_page_accueil'), IsGranted("ROLE_ADMIN")]
     public function index(): Response
     {
         return $this->render('admin/admin_page_accueil/index.html.twig', [
@@ -31,7 +33,7 @@ class AdminPageAccueilController extends AbstractController
     }
 
 
-    #[Route('/admin/page/accueil/section1/update', name: 'page_accueil_section1')]
+    #[Route('/admin/page/accueil/section1/update', name: 'page_accueil_section1', methods:('POST')), IsGranted("ROLE_ADMIN")]
     public function section1(Request $request): Response
     {
         $files = $request->files;
@@ -71,7 +73,7 @@ class AdminPageAccueilController extends AbstractController
     }
 
     
-    #[Route('/admin/page/accueil/section2/update', name: 'page_accueil_section2')]
+    #[Route('/admin/page/accueil/section2/update', name: 'page_accueil_section2',  methods:('POST')), IsGranted("ROLE_ADMIN")]
     public function section2(Request $request): Response
     {
         $data = $request->request;
@@ -83,7 +85,7 @@ class AdminPageAccueilController extends AbstractController
         return $this->redirectToRoute('app_admin_page_accueil');
     }
 
-    #[Route('/admin/page/accueil/section3/update', name: 'page_accueil_section3')]
+    #[Route('/admin/page/accueil/section3/update', name: 'page_accueil_section3',  methods:('POST')), IsGranted("ROLE_ADMIN")]
     public function section3(Request $request): Response
     {
         $data = $request->request;
@@ -98,7 +100,7 @@ class AdminPageAccueilController extends AbstractController
         return $this->redirectToRoute('app_admin_page_accueil');
     }
 
-    #[Route('/admin/page/accueil/section4/update', name: 'page_accueil_section4')]
+    #[Route('/admin/page/accueil/section4/update', name: 'page_accueil_section4',  methods:('POST')), IsGranted("ROLE_ADMIN")]
     public function section4(Request $request): Response
     {
         $data = $request->request;
@@ -110,14 +112,14 @@ class AdminPageAccueilController extends AbstractController
         return $this->redirectToRoute('app_admin_page_accueil');
     }
 
-    #[Route('/admin/page/accueil/section5/update', name: 'page_accueil_section5')]
+    #[Route('/admin/page/accueil/section5/update', name: 'page_accueil_section5',  methods:('POST')), IsGranted("ROLE_ADMIN")]
     public function section5(Request $request): Response
     {
         
         $data = $request->request;
        //dd($data);
         $page= $this->page;
-        $page->setTemoignageAuteur1($request->request->get('temoignageAuteur1'));
+        $page->setTemoignageAuteur1($request->request->get('temoignageAuteur1')); 
         $page->setTemoignageAuteur2($request->request->get('temoignageAuteur2'));
         $page->setTemoignageAuteur3($request->request->get('temoignageAuteur3'));
         $page->setTemoignageAuteur4($request->request->get('temoignageAuteur4'));
@@ -132,7 +134,7 @@ class AdminPageAccueilController extends AbstractController
         return $this->redirectToRoute('app_admin_page_accueil');
     }
     
-    #[Route('/admin/page/accueil/section6/update', name: 'page_accueil_section6')]
+    #[Route('/admin/page/accueil/section6/update', name: 'page_accueil_section6',  methods:('POST')), IsGranted("ROLE_ADMIN")]
     public function section6(Request $request): Response
     {
         $data = $request->request;

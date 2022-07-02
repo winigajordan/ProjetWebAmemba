@@ -2,15 +2,16 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Depot;
 use App\Repository\MembreRepository;
-use App\Repository\TransactionRepository;
 use App\Repository\WalletRepository;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\TransactionRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
@@ -38,7 +39,7 @@ class WalletController extends AbstractController
 
 
 
-    #[Route('/wallet', name: 'app_wallet')]
+    #[Route('/wallet', name: 'app_wallet'), IsGranted("ROLE_MEMBRE")]
     public function index(): Response
     {
         $id = $this->getUser()->getId();
@@ -52,7 +53,7 @@ class WalletController extends AbstractController
         ]);
     }
 
-    #[Route('/wallet/recharge', name: 'app_wallet_recharge')]
+    #[Route('/wallet/recharge', name: 'app_wallet_recharge'), IsGranted("ROLE_MEMBRE")]
     public function recharge(Request $request){
         $solde = $request -> request -> get('montant');
         $membre = $this->membreRepository->find($this->getUser()->getId());

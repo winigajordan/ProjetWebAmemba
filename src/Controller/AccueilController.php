@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use DateTime;
 use App\Repository\EvenementRepository;
+use App\Repository\PageAccueilRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,10 +13,12 @@ class AccueilController extends AbstractController
 {
 
     public function __construct(
-        EvenementRepository $eventRipo
+        EvenementRepository $eventRipo,
+        PageAccueilRepository $accueilRepository
         )
     {
         $this-> eventRipo = $eventRipo;
+        $this-> accueilRepository = $accueilRepository;
     }
 
     #[Route('/', name: 'app_accueil')]
@@ -23,8 +26,8 @@ class AccueilController extends AbstractController
     {
 
         return $this->render('accueil/index.html.twig', [
-            'controller_name' => 'AccueilController',
             'events' => $this->events(),
+            'page' =>  $this-> accueilRepository->find(1)
         ]);
     }
 

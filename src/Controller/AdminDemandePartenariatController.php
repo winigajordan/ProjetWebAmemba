@@ -42,17 +42,18 @@ class AdminDemandePartenariatController extends AbstractController
 
     #[Route('/admin/demande/partenariat/traitement', name: 'admin_demande_partenariat_traitement', methods:['POST'])]
     public function traitement(Request $request): Response{
-        $data = $request->request->all();
-        $partenariat = $this->partenariatRepository->find($data['id']);
-        if($data['valide']){
+        $data = $request->request;
+        $partenariat = $this->partenariatRepository->find($data->get('id'));
+        if($data->get('valide')){
             $partenariat->setEtat("VALIDE");
         } else {
             $partenariat->setEtat("REFUSE");
         }
-        $partenariat->setReponse($data['reponse']);
+        $partenariat->setReponse($data->get('reponse'));
         $partenariat->setDateReponse(new \DateTime());
         $mail = new ApiMailJet();
-        $mail->send($partenariat->getMail(), $partenariat->getPrenom()." " .$partenariat->getNom(), "Demande de partenariat" ,$data['reponse']);
+        $mail->send($partenariat->getMail(), $partenariat->getPrenom()." " .$partenariat->getNom(), "Demande de partenariat" ,$data->get('reponse'));
+        //dd($partenariat);
         $this->em->persist($partenariat);
         $this->em->flush();
 

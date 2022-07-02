@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\CategorieProduit;
 use App\Repository\CategorieProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CategorieProduitController extends AbstractController
 {
-    #[Route('/admin/produit/categorie', name: 'app_categorie_produit')]
+    #[Route('/admin/produit/categorie', name: 'app_categorie_produit'), IsGranted("ROLE_ADMIN")]
     public function index(CategorieProduitRepository $catRepo): Response
     {
         $categories=$catRepo->findAll();
@@ -22,7 +23,7 @@ class CategorieProduitController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/produit/categorie/add', name: 'app_produit_categorie_add')]
+    #[Route('/admin/produit/categorie/add', name: 'app_produit_categorie_add'), IsGranted("ROLE_ADMIN")]
     public function addCategorie(Request $request,EntityManagerInterface $em): Response
     {
         if(!empty($_POST)){

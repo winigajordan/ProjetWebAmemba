@@ -1,5 +1,5 @@
 {% extends 'base.pages.html.twig' %}
-
+{% block page %}{% endblock page %}
 {% block content %}
 <!-- MISSION SECTION START -->
 <section class="mission-section d-flex align-items-center container">
@@ -160,64 +160,6 @@
 <!-- BUREAU SECTION END -->
 
 
-<!-- HISTORIQUE SECTION START -->
-<section class="historique">
-    <h2 class="text-center my-5">Historique du bureau</h2>
-    <div class="container">
-        <div class="historiques-caroussel-container">
-            <div class="historique-card">
-                <div class="image" style="background-image: url({{asset('front/images/interview/interview_1.png')}});"></div>
-                <h5>Fonction</h5>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu pur
-                </p>
-                <h6>Nom prénom</h6>
-            </div>
-            <div class="historique-card">
-                <div class="image" style="background-image: url({{asset('front/images/interview/interview_1.png')}});"></div>
-                <h5>Fonction</h5>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu pur
-                </p>
-                <h6>Nom prénom</h6>
-            </div>
-            <div class="historique-card">
-                <div class="image" style="background-image: url({{asset('front/images/interview/interview_1.png')}});"></div>
-                <h5>Fonction</h5>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu pur
-                </p>
-                <h6>Nom prénom</h6>
-            </div>
-            <div class="historique-card">
-                <div class="image" style="background-image: url({{asset('front/images/interview/interview_1.png')}});"></div>
-                <h5>Fonction</h5>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu pur
-                </p>
-                <h6>Nom prénom</h6>
-            </div>
-            <div class="historique-card">
-                <div class="image" style="background-image: url({{asset('front/images/interview/interview_1.png')}});"></div>
-                <h5>Fonction</h5>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu pur
-                </p>
-                <h6>Nom prénom</h6>
-            </div>
-            <div class="historique-card">
-                <div class="image" style="background-image: url({{asset('front/images/interview/interview_1.png')}});"></div>
-                <h5>Fonction</h5>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu pur
-                </p>
-                <h6>Nom prénom</h6>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- HISTORIQUE SECTION END -->
-
 <!-- TESTIMONY SECTION START  -->
 <section class="testimony-section container-fluid">
     <h2 class="text-center mb-5 pt-5">Quelques mots de la présidente</h2>
@@ -227,8 +169,7 @@
             <p>
                 ''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. Enim vel sed posuere ut massa ut. Non sit imperdiet enim at diam orci augue sit ultrices. Rhoncus et ipsum, quis egestas''
             </p>
-            <h5 class="my-3">Présidente</h5>
-            <h6>Profession</h6>
+            <h6 class="my-3">La présidente</h6>
         </div>
     </div>
 </section>

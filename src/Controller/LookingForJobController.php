@@ -4,9 +4,10 @@ namespace App\Controller;
 
 use App\Repository\MembreRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class LookingForJobController extends AbstractController
 {
@@ -29,7 +30,7 @@ class LookingForJobController extends AbstractController
         ]);
     }
 
-    #[Route('/looking/for/job/activate', name: 'app_looking_for_job_activate')]
+    #[Route('/looking/for/job/activate', name: 'app_looking_for_job_activate'), IsGranted("ROLE_MEMBRE")]
     public function acive(): Response
     {
         $userConnected = $this->membreRipo->find($this->getUser()->getId());
@@ -40,7 +41,7 @@ class LookingForJobController extends AbstractController
         return $this->redirectToRoute('app_accueil');
     }
 
-    #[Route('/looking/for/job/disable', name: 'app_looking_for_job_disable')]
+    #[Route('/looking/for/job/disable', name: 'app_looking_for_job_disable'), IsGranted("ROLE_MEMBRE")]
     public function desactive(): Response
     {
         $userConnected = $this->membreRipo->find($this->getUser()->getId());
