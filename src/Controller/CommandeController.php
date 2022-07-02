@@ -15,6 +15,7 @@ use App\Repository\WalletRepository;
 use App\Service\PayTech\Payement;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -91,7 +92,7 @@ class CommandeController extends AbstractController
         return $this->redirectToRoute('add_client');
     }
 
-    #[Route('/commande/add/wallet', name: 'app_commande_add_with_wallet')]
+    #[Route('/commande/add/wallet', name: 'app_commande_add_with_wallet'), IsGranted("ROLE_MEMBRE")]
     public function addCommandeWithWallet(SessionInterface $session, 
     EntityManagerInterface $em,
     ProduitRepository $prodRepo, 
@@ -173,7 +174,7 @@ class CommandeController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/commande', name: 'app_commandes')]
+    #[Route('/admin/commandes', name: 'app_commandes'), IsGranted("ROLE_ADMIN")]
     public function allCommandes(SessionInterface $session,CommandeRepository $comRepo): Response
     {
         $commandes= $comRepo->findAll();
@@ -183,7 +184,7 @@ class CommandeController extends AbstractController
         ]);
     }
 
-    #[Route('/commandes/details/admin/{id}', name: 'app_commande_details')]
+    #[Route('/admin/commandes/details/{id}', name: 'app_commande_details'), IsGranted("ROLE_ADMIN")]
     public function commandeDetails($id,CommandeRepository $comRepo,EntityManagerInterface $em,
     Request $request): Response
     {
@@ -200,7 +201,7 @@ class CommandeController extends AbstractController
         ]);
     }
 
-    #[Route('/commandes/client/details/{id}', name: 'app_client_commande_details')]
+    #[Route('/client/commandes/details/{id}', name: 'app_client_commande_details')]
     public function commandeClientDetails($id,CommandeRepository $comRepo): Response
     {
         $commande= $comRepo->find($id);        

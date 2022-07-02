@@ -7,6 +7,7 @@ use App\Repository\EvenementRepository;
 use App\Repository\UserRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,15 +18,20 @@ class AgendaDetailsController extends AbstractController
     #[Route('/agenda/details/{id}', name: 'app_agenda_details')]
     public function index($id, EvenementRepository $evRipo): Response
     {
-        return $this->render('agenda_details/index.html.twig', [
-            'controller_name' => 'AgendaDetailsController',
-            'evenement' => $evRipo-> find(intval($id)),
-            'commentaires' => $evRipo -> find(intval($id)) ->getCommentaires(),
+        $selected = $evRipo-> find(intval($id));
+        if($selected == null){
+            return $this->redirectToRoute('app_agenda');
+        } else {
+            return $this->render('agenda_details/index.html.twig', [
+                'controller_name' => 'AgendaDetailsController',
+                'evenement' => $selected,
+                'commentaires' => $evRipo -> find(intval($id)) ->getCommentaires(),
 
-        ]);
+            ]);
+        }
     }
 
-    #[Route('/agenda/details/commentaire/add', name: 'app_agenda_commentaire')]
+    #[Route('/agenda/details/commentaire/add', name: 'app_agenda_commentaire'), IsGranted("ROLE_MEMBRE")]
     public function commenter(Request $request, UserRepository $userRipo, EvenementRepository $evRipo, EntityManagerInterface $em){
         $data = $request->request;
         $cmt = new Commentaire();

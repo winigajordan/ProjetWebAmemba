@@ -1,0 +1,65 @@
+{% extends 'base.pages.html.twig' %}
+
+{% block title %}Annuaire{% endblock %}
+{% block page %}{% endblock page %}
+
+{% block content %}
+
+<!-- SECOND SECTION START -->
+<section class="container py-5">
+    <div class=" row">
+        <div class="col-4">
+            <img src="{% if membre.profile %} /pp/{{membre.profile}} {% else %}{{asset('front/images/avatars/exemple.jpg')}} {% endif %}" alt="avatar" width="300" height="500">
+
+        </div>
+        <div class="col-8">
+            <div class="card">
+                
+                <div class="card-header">
+                    <strong> <h3>{{membre.prenom}} {{membre.nom}}</h3> </strong>
+                </div>
+                {% if membre.statut %}
+                            <button class="btn btn-primary mt-1 mx-1">Recherche d'emplois</button>
+                {% endif %}
+
+                <div class="card-body">
+                  <p class="card-text mb-3">  <strong>  Bio : </strong> {{membre.bio}}  </p>
+                  <p class="card-text mb-3">  <strong>  Promotion : </strong> {{membre.promotion}}</p>
+                  <p class="card-text mb-3">  <strong>  Pays : </strong> {{membre.pays}}</p>
+                  <p class="card-text mb-3">  <strong>  Ville : </strong> {{membre.ville}}</p>
+                  <p class="card-text mb-3">  <strong>  Email : </strong> <a class="card-text" href="mailto:{{membre.email}}">{{membre.email}}</a></p>
+                  <p class="card-text mb-3">  <strong>  Téléphone : </strong> {{membre.telephone}}</p>
+                  {% if membre.statut %}
+                    <a href="/cv/{{membre.cv}}" target="_blank" class="btn btn-primary">Affichier le CV</a>
+                {% endif %}
+                </div>
+                
+                <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                         Afficher plus d'informations
+                        </button>
+                      </h2>
+                      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <p class="card-text mb-3">  <strong>  Baccalauréat obtenue : </strong> {{membre.bac}}</p>
+                            <p class="card-text mb-3">  <strong>  Université : </strong> {{membre.univ}}</p>
+                            <p class="card-text mb-3">  <strong>  Dernier diplôme obtenue : </strong> {{membre.diplome}}</p>
+                            <p class="card-text mb-3">  <strong>  Dernière expérience professionnelle : </strong> {{membre.experience}}</p>
+                            <p class="card-text mb-3">  <strong>  Profession : </strong> {{membre.profession}}</p>
+                            <p class="card-text mb-3">  <strong>  Entreprise : </strong> {{membre.entreprise}}</p>
+                            <p class="card-text mb-3">  <strong>  Secteur : </strong> {{membre.secteur}}</p>
+                            <p class="card-text mb-3">  <strong>  Profil LinkedIn : </strong> <a class="" href="{{membre.link}}">{{membre.link}}</a></p>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+  
+ </section>
+<!-- SECOND SECTION END -->
+{% endblock %}

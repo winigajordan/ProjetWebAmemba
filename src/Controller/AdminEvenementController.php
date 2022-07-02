@@ -11,12 +11,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\CategorieEvenementRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\RedirectController;
 
 class AdminEvenementController extends AbstractController
 {
-    #[Route('/admin/evenement', name: 'app_admin_evenement')]
+    #[Route('/admin/evenement', name: 'app_admin_evenement'), IsGranted("ROLE_ADMIN")]
     public function index(CategorieEvenementRepository $cateRipo, EvenementRepository $evRipo): Response
     {
 
@@ -27,7 +28,7 @@ class AdminEvenementController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/evenement/add', name: 'admin_evenement_add')]
+    #[Route('/admin/evenement/add', name: 'admin_evenement_add'), IsGranted("ROLE_ADMIN")]
     public function add(Request $request, EntityManagerInterface $em, CategorieEvenementRepository $cateRipo)
     {
         $data = $request -> request;
@@ -51,7 +52,7 @@ class AdminEvenementController extends AbstractController
         return $this->redirectToRoute('app_admin_evenement');
     }
 
-    #[Route('/admin/evenement/details/{id}', name: 'admin_evenement_details')]
+    #[Route('/admin/evenement/details/{id}', name: 'admin_evenement_details'), IsGranted("ROLE_ADMIN")]
     public function details($id,CategorieEvenementRepository $cateRipo, EvenementRepository $evRipo)
     {
         return $this->render('admin/admin_evenement/index.html.twig', [
@@ -62,7 +63,7 @@ class AdminEvenementController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/evenement/update/', name: 'admin_evenement_update')]
+    #[Route('/admin/evenement/update/', name: 'admin_evenement_update'), IsGranted("ROLE_ADMIN")]
     public function mo(Request $request, CategorieEvenementRepository $cateRipo, EntityManagerInterface $em, EvenementRepository $evRipo)
     {
         $data = $request -> request;

@@ -10,6 +10,7 @@ use App\Repository\OffreEmploisRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MembreEmploisController extends AbstractController
@@ -25,7 +26,7 @@ class MembreEmploisController extends AbstractController
         $this -> membreRipo = $memebreRipo;
     }
 
-    #[Route('/membre/emplois', name: 'app_membre_emplois')]
+    #[Route('/membre/emplois', name: 'app_membre_emplois'), IsGranted("ROLE_MEMBRE")]
     public function index(): Response
     {
         return $this->render('membre_emplois/index.html.twig', [
@@ -36,7 +37,7 @@ class MembreEmploisController extends AbstractController
     }
 
 
-    #[Route('/membre/emplois/add', name: 'membre_emplois_add')]
+    #[Route('/membre/emplois/add', name: 'membre_emplois_add', methods:('POST')), IsGranted("ROLE_MEMBRE")]
     public function ajout(Request $request)
     {
         
@@ -62,7 +63,7 @@ class MembreEmploisController extends AbstractController
         return str_replace(" ","-",strtolower($slug));
     }
 
-    #[Route('/membre/emplois/details/{slug}', name: 'membre_emplois_details')]
+    #[Route('/membre/emplois/details/{slug}', name: 'membre_emplois_details'), IsGranted("ROLE_MEMBRE")]
     public function details($slug, Request $request){
         $selected = $this->offreRipo->findOneBy(['membre'=>$this->membreRipo->find($this->getUser()->getId()), 'slug'=>$slug]);
         if ($selected == null) {
@@ -76,7 +77,7 @@ class MembreEmploisController extends AbstractController
         ]);
     }
 
-    #[Route('/membre/emplois/update', name: 'membre_emplois_update')]
+    #[Route('/membre/emplois/update', name: 'membre_emplois_update', methods:('POST')) ,IsGranted("ROLE_MEMBRE")]
     public function update(Request $request){
         $offre = $this->offreRipo->find(intval($request->request->get('id')));
         $offre -> setTitre($request->request->get('titre'));

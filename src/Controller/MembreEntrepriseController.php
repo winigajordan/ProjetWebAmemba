@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class MembreEntrepriseController extends AbstractController
@@ -26,7 +27,7 @@ class MembreEntrepriseController extends AbstractController
         
     }
 
-    #[Route('/membre/entreprise', name: 'app_membre_entreprise')]
+    #[Route('/membre/entreprise', name: 'app_membre_entreprise'), IsGranted("ROLE_MEMBRE")]
     public function index(): Response
     {
         if($this->getUser()){
@@ -46,9 +47,8 @@ class MembreEntrepriseController extends AbstractController
         
     }
 
-    /* #[Route('/membre/entreprise/add', name: 'app_membre_entreprise_add', methods: [ 'POST'])] */
 
-    #[Route('/membre/entreprise/add', name: 'app_membre_entreprise_add')]
+    #[Route('/membre/entreprise/add', name: 'app_membre_entreprise_add', methods:('POST')), IsGranted("ROLE_MEMBRE")]
     public function add(Request $request): Response
     {
         $files = $request->files;
@@ -72,7 +72,7 @@ class MembreEntrepriseController extends AbstractController
         return $this->redirectToRoute('app_membre_entreprise');
     }
 
-    #[Route('/membre/entreprise/update', name: 'app_membre_entreprise_update', )]
+    #[Route('/membre/entreprise/update', name: 'app_membre_entreprise_update', methods:('POST')), IsGranted("ROLE_MEMBRE")]
     public function update(Request $request): Response
     {
         $files = $request->files;

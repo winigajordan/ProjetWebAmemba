@@ -20,8 +20,11 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- IntelTel Input CSS-->
+    <link rel="stylesheet" href="{{asset('front/css/intlTelInput.css')}}" crossorigin="anonymous">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{asset('front/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('front/css/style.css')}}" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{asset('front/css/responsive.css')}}" crossorigin="anonymous">
 </head>
 <body>
     <!-- NAVBAR START -->
@@ -88,7 +91,11 @@
             {% if "ROLE_MEMBRE" in app.user.roles %}
             <div class="membre">
                 <a href="#">
-                    <img src="{{asset('front/images/avatars/exemple.jpg')}}" alt="avatar" id="show">
+                    {% if app.user.profile %} 
+                        <img src="/pp/{{app.user.profile}}" alt="avatar" id="show">
+                    {% else %}
+                        <img src="{{asset('front/images/avatars/exemple.jpg')}}" alt="avatar" id="show">
+                    {% endif %}
                 </a>
             </div>
             {% endif %}
@@ -130,7 +137,7 @@
             
 
             <li class="list-group-item">
-                <a href="#" class="btn">
+                <a href="{{path('app_membre_profile')}}" class="btn">
                     <i class="fa-solid fa-user"></i> Compte
                 </a>
             </li>
@@ -155,17 +162,17 @@
                 </a>
             </li>
             <li class="list-group-item">
-                <a href="#" class="btn">
+                <a href="{{path('app_annuaire')}}" class="btn">
                     <i class="fa-solid fa-book"></i> Annuaire
                 </a>
             </li>
             <li class="list-group-item">
-                <a href="#" class="btn">
-                    <i class="fa-solid fa-w"></i> Programme WEN
+                <a href="{{path('app_membre_entreprise')}}" class="btn">
+                    <i class="fa-solid fa-w"></i> Mon entreprise
                 </a>
             </li>
             <li class="list-group-item">
-                <a href="#" class="btn">
+                <a href="{{path('app_membre_emplois')}}" class="btn">
                     <i class="fa-solid fa-briefcase"></i> Offres d'emplois
                 </a>
             </li>
@@ -182,6 +189,11 @@
             <li class="list-group-item">
                 <a href="#" class="btn">
                     <i class="fa-solid fa-money-bill"></i> Cotisations
+                </a>
+            </li>
+            <li class="list-group-item">
+                <a href="{{path('app_logout')}}" class="btn">
+                    <span class="badge rounded-pill alert-danger">Deconnexion</span>
                 </a>
             </li>
 
@@ -258,9 +270,10 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-
+{% block js %}{% endblock js %}
 <!-- JavaScript Bootstrap with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="{{asset('front/js/script.js')}}" defer></script>
+
 </body>
 </html>

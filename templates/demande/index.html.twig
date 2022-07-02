@@ -23,45 +23,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 col-lg-4 col-md-6">
-                <div class="card">
-                    <div class="card-body px-3 py-4-5">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="stats-icon purple">
-                                    <i class="iconly-boldShow"></i>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <h6 class="text-muted font-semibold">Demandes de partenariat</h6>
-                                <h6 class="font-extrabold mb-0">XXX</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6 col-lg-4 col-md-6">
-                <div class="card">
-                    <div class="card-body py-4 px-5">
-                        <div class="d-flex align-items-center">
-                            <div class="avatar avatar-xl">
-                                <img src="{{asset('admin/assets/images/faces/1.jpg')}}" alt="Face 1">
-                            </div>
-                            <div class="ms-3 name">
-                                <h5 class="font-bold">Nom </h5>
-                                <h6 class="text-muted mb-0">mail </h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
         
         
     </div>
     
 </section>
+
 <div class="page-content">
     <section class="section">
         <div class="row" id="basic-table">
@@ -127,6 +95,9 @@
                                         <strong>Nom : </strong> {{selected.nom}}  <br>  <strong>Prenom : </strong> {{selected.prenom}}
                                         <br>
                                         <strong>Mail : </strong> {{selected.mail}}<br>  
+                                        {% if selected.telephone is not null %}
+                                        <strong>Téléphone : </strong> {{selected.telephone}}<br>  
+                                        {% endif %}
                                         <strong>Promotion : </strong> {{selected.promotion}}
                                         <br>
                                         <br>

@@ -2,14 +2,15 @@
 
 namespace App\Controller;
 
-use App\Entity\OffreEmplois;
 use DateTime;
+use App\Entity\OffreEmplois;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\OffreEmploisRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 class AdminEmploisController extends AbstractController
 {
@@ -23,7 +24,7 @@ class AdminEmploisController extends AbstractController
         $this -> em = $em;
     }
 
-    #[Route('/admin/emplois', name: 'app_admin_emplois')]
+    #[Route('/admin/emplois', name: 'app_admin_emplois'), IsGranted("ROLE_ADMIN")]
     public function index(): Response
     {
         return $this->render('admin/admin_emplois/index.html.twig', [
@@ -33,7 +34,7 @@ class AdminEmploisController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/emplois/add', name: 'app_admin_emplois_add')]
+    #[Route('/admin/emplois/add', name: 'app_admin_emplois_add'), IsGranted("ROLE_ADMIN")]
     public function add(Request $request): Response
     {
         $offre = new OffreEmplois();
@@ -53,7 +54,7 @@ class AdminEmploisController extends AbstractController
         return str_replace(" ","-",strtolower($slug));
     }
 
-    #[Route('/admin/emplois/details/{slug}', name: 'admin_emplois_details')]
+    #[Route('/admin/emplois/details/{slug}', name: 'admin_emplois_details'), IsGranted("ROLE_ADMIN")]
     public function details($slug) : Response{
         return $this->render('admin/admin_emplois/index.html.twig', [
             'controller_name' => 'AdminEmploisController',
@@ -63,7 +64,7 @@ class AdminEmploisController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/emplois/update', name: 'app_admin_emplois_update')]
+    #[Route('/admin/emplois/update', name: 'app_admin_emplois_update'), IsGranted("ROLE_ADMIN")]
     public function update(Request $request) {
         $data = $request->request;
         $offre = $this->emploisRipo->find(intval($data->get('id')));

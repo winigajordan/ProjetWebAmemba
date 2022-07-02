@@ -12,12 +12,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProduitAdminController extends AbstractController
 {
 
-    #[Route('/admin/produit', name: 'app_produit_admin')]
+    #[Route('/admin/produit', name: 'app_produit_admin'), IsGranted("ROLE_ADMIN")]
     public function index(ProduitRepository $prodRepo): Response
     {
         $produits=$prodRepo->findAll();
@@ -27,7 +28,7 @@ class ProduitAdminController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/produit/add', name: 'app_produit_add')]
+    #[Route('/admin/produit/add', name: 'app_produit_add', methods:('POST')), IsGranted("ROLE_ADMIN")]
     public function addProduit(ProduitRepository $prodRepo,CategorieProduitRepository $catRepo,
      Request $request,EntityManagerInterface $em,ValidatorInterface $validator): Response
     {
@@ -73,12 +74,15 @@ class ProduitAdminController extends AbstractController
         ]);
     }
     
-    #[Route('/admin/produit/edit/{slug}', name:'app_produit_edit')]
+    #[Route('/admin/produit/edit/{slug}', name:'app_produit_edit'), IsGranted("ROLE_ADMIN")]
     public function editProduit($slug,ProduitRepository $prodRepo,
     CategorieProduitRepository $catRepo,Request $request,ValidatorInterface $validator,
     EntityManagerInterface $em):Response{
         $categories=$catRepo->findAll();
         $produit=$prodRepo->findOneBy(['slug' => $slug]);
+        if($produit==null){
+            return $this->redirectToRoute("app_produit_admin");
+        }
         if (!empty($_POST)){
             //dd($request);
             $produit->setLibelle($request->request->get("libelle"));
@@ -115,7 +119,7 @@ class ProduitAdminController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/produit/archive/{slug}', name:'app_produit_archive')]
+    #[Route('/admin/produit/archive/{slug}', name:'app_produit_archive'), IsGranted("ROLE_ADMIN")]
     public function archiveProduit($slug,ProduitRepository $prodRepo,
     EntityManagerInterface $em):Response{
         $produit=$prodRepo->findOneBy(['slug'=> $slug]);

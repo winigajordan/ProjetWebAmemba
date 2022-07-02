@@ -124,7 +124,6 @@ nav .membre img {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('../images/hero-carroussel/background.jfif');
 }
 
 .slider-section .slider .sl-content .sl-content-content {
@@ -375,7 +374,6 @@ nav .membre img {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('../images/interview/interview_1.png');
 }
 
 .wen .wen-cards .card3 {
@@ -558,7 +556,6 @@ nav .membre img {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('../images/hero-carroussel/background.jfif');
 }
 
 .old .container {
@@ -723,6 +720,10 @@ nav .membre img {
 .login-register .login-right form textarea {
     background-color: #dfe6e9;
     height: 50px;
+}
+
+.login-register .login-right form #phone {
+    width: 119%;
 }
 
 .login-register .login-right form .logo-enterprise {
@@ -1368,7 +1369,7 @@ dl[class=row] dt {
 
 /* FORUM STYLING START */
 
-.second .container .forum-post {
+.second .forum-post {
     background-color: #f3f3f3;
     padding: 20px;
     border-radius: 15px;
@@ -1405,3 +1406,27 @@ dl[class=row] dt {
 
 
 /* PROFILE STYLING END  */
+
+
+/* PHONE BOOK STYLING START  */
+
+.second .phone-book .phone-book-card-cont {
+    height: 380px;
+    border-radius: 7px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.second .phone-book .phone-book-card span {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+
+/* PHONE BOOK STYLING END */

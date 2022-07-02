@@ -37,6 +37,9 @@ class Demande
     #[ORM\Column(type: 'string', length: 255)]
     private $etat;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $telephone;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -134,6 +137,18 @@ class Demande
     public function setEtat(string $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): self
+    {
+        $this->telephone = $telephone;
 
         return $this;
     }

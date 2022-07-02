@@ -40,6 +40,9 @@ class Partenariat
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $dateReponse;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $telephone;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -149,6 +152,18 @@ class Partenariat
     public function setDateReponse(?\DateTimeInterface $dateReponse): self
     {
         $this->dateReponse = $dateReponse;
+
+        return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(string $telephone): self
+    {
+        $this->telephone = $telephone;
 
         return $this;
     }

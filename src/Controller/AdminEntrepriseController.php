@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\EntrepriseRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,7 +21,7 @@ class AdminEntrepriseController extends AbstractController
         $this-> em = $em;
     }
 
-    #[Route('/admin/entreprise', name: 'app_admin_entreprise')]
+    #[Route('/admin/entreprise', name: 'app_admin_entreprise'), IsGranted("ROLE_ADMIN")]
     public function index(): Response
     {
         return $this->render('admin/admin_entreprise/index.html.twig', [
@@ -29,7 +30,7 @@ class AdminEntrepriseController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/entreprise/details/{slug}', name: 'admin_entreprise_details')]
+    #[Route('/admin/entreprise/details/{slug}', name: 'admin_entreprise_details'), IsGranted("ROLE_ADMIN")]
     public function details($slug)
     {
         $selected = $this->entRipo->findOneBy(['slug'=>$slug]);
@@ -43,7 +44,7 @@ class AdminEntrepriseController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/entreprise/update/{slug}/{etat}', name: 'admin_entreprise_update')]
+    #[Route('/admin/entreprise/update/{slug}/{etat}', name: 'admin_entreprise_update'), IsGranted("ROLE_ADMIN")]
     public function update($slug,$etat)
     {
         $entreprise =  $this->entRipo->findOneBy(['slug'=>$slug]);

@@ -38,6 +38,7 @@ class DemandePartenariatController extends AbstractController
         $partenariat->setNom($data->get('nom'));
         $partenariat->setPrenom($data->get('prenom'));
         $partenariat->setMail($data->get('email'));
+        $partenariat->setTelephone($data->get('full_number'));
         $partenariat->setEntreprise($data->get('entreprise'));
         $partenariat->setRequete($data->get('req'));
         $partenariat->setDate(new \DateTime());
