@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
@@ -37,7 +38,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'client', targetEntity: Commande::class)]
     private $commandes;
+
+    #[ORM\OneToMany(mappedBy: 'auteur', targetEntity: Article::class)]
+    private $articles;
+
+    #[ORM\OneToMany(mappedBy: 'auteur', targetEntity: Sujet::class)]
+    private $sujets;
     
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+        $this->sujets = new ArrayCollection();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -156,6 +170,67 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($commande->getClient() === $this) {
                 $commande->setClient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getAuteur() === $this) {
+                $article->setAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Sujet>
+     */
+    public function getSujets(): Collection
+    {
+        return $this->sujets;
+    }
+
+    public function addSujet(Sujet $sujet): self
+    {
+        if (!$this->sujets->contains($sujet)) {
+            $this->sujets[] = $sujet;
+            $sujet->setAuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSujet(Sujet $sujet): self
+    {
+        if ($this->sujets->removeElement($sujet)) {
+            // set the owning side to null (unless already changed)
+            if ($sujet->getAuteur() === $this) {
+                $sujet->setAuteur(null);
             }
         }
 

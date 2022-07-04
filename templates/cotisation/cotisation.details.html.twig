@@ -1,0 +1,54 @@
+{% extends 'base.pages.html.twig' %}
+
+{% block title %}Details Cotisation{% endblock %}
+{% block page %}{% endblock %}
+
+{% block content %}
+    <!-- SECOND SECTION START -->
+    <section class="second py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    {% for message in app.flashes('warning') %}
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>{{message}}</strong> 
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                    <div class="card">
+                        
+                        <div class="content-body border-top">
+                            <p>{{cotisation.titre}}</p>
+                            <p class="text-muted">{{cotisation.description}}</p>
+                        </div>
+
+                    </div>
+
+                </div>
+                <aside class="col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <dl class="dlist-align">
+                                <dt>Montant :</dt>
+                                <dd class="text-end text-dark h5">{{cotisation.montant}}</dd>
+                            </dl>
+                            <div class="d-grid gap-2 my-3">
+                                {% if cotisation not in app.user.cotisations %}                                
+                                <a href="#" class="btn btn-success w-100">Cotiser</a>
+                                <a href="{{path('app_cotisation_make',{id:cotisation.id})}}" class="btn btn-success w-100">Cotiser avec wallet</a>
+                                <a href="{{path('app_cotisation')}}" class="btn btn-light w-100"> Retour à la liste </a>
+                                {% else %}
+                                <p>Vous avez déja cotisé !</p>
+                                {% endif %}
+                            </div>
+
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+    <!-- SECOND SECTION END -->
+
+
+{% endblock content %}

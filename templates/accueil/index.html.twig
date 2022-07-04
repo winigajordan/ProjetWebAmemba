@@ -10,7 +10,7 @@
 <section class="slider-section">
     <i class="fas fa-angle-left fa-3x arrow arrow-left" id="arrow-left"></i>
     <div class="sliders-container">
-        <div class="slider sl-1">
+        <div class="slider sl-1" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('front/images/hero-carroussel/background.jfif')}}');">
             <div class="sl-content">
                 <div class="sl-content-content">
                     <h2>{{page.carouselTitre1}}</h2>
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="slider sl-2">
+        <div class="slider sl-2" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('front/images/hero-carroussel/background.jfif')}}');">
             <div class="sl-content">
                 <div class="sl-content-content">
                     <h2>{{page.carouselTitre2}}</h2>
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="slider sl-3">
+        <div class="slider sl-3" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('front/images/hero-carroussel/background.jfif')}}');">
             <div class="sl-content">
                 <div class="sl-content-content">
                     <h2>{{page.carouselTitre3}}</h2>
@@ -168,11 +168,11 @@
         <div class="wen-cards-duo">
             <div class="card1 wen-card col position-relative">
                 <p>
-                    “{{page.temoignageText3}}“  
+                    “{{page.temoignageText3}}“
                 </p>
                 <h5 class="position-absolute">{{page.temoignageAuteur3}}</h5>
             </div>
-            <div class="card2 wen-card col d-flex align-items-end">
+            <div class="card2 wen-card col d-flex align-items-end" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('front/images/interview/interview_1.png')}}');">
                 <div class="wen-card-video">
                     <h5>{{page.temoignageAuteur1}}</h5>
                     <h3>{{page.temoignageTitre1}}</h3>
@@ -181,30 +181,31 @@
             </div>
         </div>
         <div class="wen-cards-duo ">
-            <div class="card3 wen-card col d-flex align-items-end">
+            <div class="card3 wen-card col d-flex align-items-end" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('front/images/interview/interview_1.png')}}');">
                 <div class="wen-card-video position-relative">
                     <h5>{{page.temoignageAuteur2}}</h5>
                     <h3>{{page.temoignageTitre2}}</h3>
                     <p>“{{page.temoignageText2}}“ </p>  
-            </div>
+                </div>
             </div>
             <div class="card4 wen-card col position-relative">
                 <p>
-                    “{{page.temoignageText4}}“
+                    “{{page.temoignageText4}}“ 
                 </p>
                 <h5 class="position-absolute">{{page.temoignageAuteur4}}</h5>
             </div>
         </div>
     </div>
+    <!--
     <div class="w-100 d-flex justify-content-center py-5">
         <a href="#" class="btn btn-primary">PROGRAMME WEN</a>
-    </div>
+    </div> -->
 </section>
 <!-- WEN SECTION END -->
 
 
 <!-- BLOG SECTION START -->
-<section class="blog container position-relative">
+<section class="blog container position-relative mt-3">
     <h2 class="text-center pt-5">Derniers articles du blog</h2>
     <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. 
@@ -351,7 +352,7 @@
 <!-- PARTNERS SECTION START -->
 <section class="partners container">
     <h2 class="text-center py-5">Nos partenaires</h2>
-    <div class="partners-carousel-container">
+    <div class="partners-carousel-container pb-5">
         <div class="d-flex justify-content-center align-items center">
             <img src="{{asset('front/images/partners/free.png')}}" alt="">    
         </div>

@@ -1,0 +1,47 @@
+{% extends 'base.pages.html.twig' %}
+{% block page %}{% endblock %}
+{% block content %}
+    <!-- Basic Tables start -->
+        <section class="section">
+            <div class="container mt-3">
+                
+            
+            <div class="card">
+                <div class="card-header">
+                    <h2>Articles</h2>
+                </div>
+                <div class="card-body">
+                    <table class="table" id="table1">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Date de creation</th>
+                                <th>Date de publication</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for article in articles %}
+                            <tr>
+                                <td>{{article.titre}}</td>
+                                <td>{{article.createdAt|date}}</td>
+                                <td>{% if article.publishedAt %}{{article.publishedAt|date}}{% else %}-{% endif %}</td>
+                                <td>
+                                    <span class="badge bg-success">{% if article.statut %}{% if article.lisibilite %}EN LIGNE{% else %}ARCHIVE{% endif %}{% else %} {% if article.refused %}REJETE{% else %}EN ATTENTE{% endif %}{% endif %}</span>
+                                </td>
+                                <td>
+                                    {% if not article.refused %}
+                                     <a class="btn-btn-outline-primary btn-sm" href="{{path('app_blog_article_details',{slug:article.slug})}}">Aperçu</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        </section>
+    <!-- Basic Tables end -->
+{% endblock content %}

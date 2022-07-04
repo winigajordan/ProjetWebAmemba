@@ -1,0 +1,149 @@
+{% extends 'base.admin.html.twig' %}
+{% block style %}
+<!-- IntelTel Input CSS-->
+<link rel="stylesheet" href="{{asset('front/css/intlTelInput.css')}}" crossorigin="anonymous">
+
+{% endblock style %}
+{% block page_title %} Details cotisation {% endblock page_title %}
+
+
+{% block content %}
+    <!-- SECOND SECTION START -->
+    <section class="second">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="card">
+                        
+                        <div class="card-body">
+                            <h3>{{cotisation.titre}}</h3>
+                            <p>{{cotisation.description}}</p>
+                        </div>
+                    </div>
+
+                </div>
+                
+            </div>
+
+
+            <div class="card ">
+                    <div class="accordion" id="accordionPanelsStayOpenExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                <strong> Ajouter un contributeur </strong> 
+                            </button>
+                          </h2>
+                          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                                <div class="card-body">
+                                    {% for message in app.flashes('error') %}
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>{{message}}</strong> 
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    {% endfor %}
+                                    <form class="form form-horizontal" method='POST' action="{{path('app_cotisation_add_cont')}}" >
+                                        <div class="form-body">
+
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label for="last-name">Nom</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input type="text" id="last-name" class="form-control" name="nom" required>
+                                                </div>
+                                            </div>                                            
+
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label for="first-name">Prenom</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input type="text" id="first-name" class="form-control" name="prenom" required>
+                                                    <input type="text" value="{{cotisation.id}}" name="id" hidden>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label for='phonr' class="form-label col-12">Téléphone</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input class="form-control" id='phone' type="tel" required>
+                                                </div>
+                                            </div>
+
+                                            
+
+                                                <div class="col-sm-12 d-flex justify-content-end">
+                                                    
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Ajouter</button>
+                                                   
+                                                </div>
+                                        </div> 
+                                    </form>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+
+            <h2>Listes des contributions</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for i in cotisation.contributeurs %}
+                    <tr>
+                        <td scope="row">{{i.nom}}</td>
+                        <td>{{i.prenom}}</td>
+                        <td>{{i.email}}</td>
+                    </tr>
+                {% endfor %}
+                    
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!-- SECOND SECTION END -->
+
+
+{% endblock content %}
+{% block js %}
+
+<!-- IntelTel Input -->
+<script type="text/javascript" src="{{asset('front/js/intlTelInput.js')}}"></script>
+<script>
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+        // allowDropdown: false,
+        // autoHideDialCode: false,
+        // autoPlaceholder: "off",
+        // dropdownContainer: document.body,
+        // excludeCountries: ["us"],
+        // formatOnDisplay: false,
+        // geoIpLookup: function(callback) {
+        //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+        //     var countryCode = (resp && resp.country) ? resp.country : "";
+        //     callback(countryCode);
+        //   });
+        // },
+        hiddenInput: "full_number",
+        // initialCountry: "auto",
+        // localizedCountries: { 'de': 'Deutschland' },
+        // nationalMode: false,
+        // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        placeholderNumberType: "MOBILE",
+        preferredCountries: ['sn'],
+        separateDialCode: true,
+        utilsScript: "{{asset('front/js/utils.js')}}",
+    });
+</script>
+{% endblock js %}

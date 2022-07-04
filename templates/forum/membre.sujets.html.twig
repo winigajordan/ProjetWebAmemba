@@ -1,0 +1,37 @@
+{% extends 'base.pages.html.twig' %}
+
+{% block content %}
+    <!-- Basic Tables start -->
+        <section class="section">
+            <div class="card">
+                <div class="card-header">
+                    Sujets
+                </div>
+                <div class="card-body">
+                    <table class="table" id="table1">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Date de creation</th>
+                                <th>Reponses</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for su in sujets %}
+                            <tr>
+                                <td>{{su.contenu}}</td>
+                                <td>{{su.createdAt|format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none')}}</td>
+                                <td>{{su.commentaires|length}} Réponses</td>
+                                <td>
+                                    <a class="btn-btn-outline-primary btn-sm" href="#">Aperçu</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    <!-- Basic Tables end -->
+{% endblock content %}

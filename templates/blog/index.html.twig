@@ -1,0 +1,55 @@
+{% extends 'base.pages.html.twig' %}
+
+{% block title %}Blog{% endblock %}
+{% block page %}{% endblock page %}
+{% block content %}
+<!-- SECOND SECTION START -->
+    <section class="second">
+        <div class="container">               
+                <div class="mb-4 mt-4">
+                    <form method="GET">
+                        <div class="input-group mb-2">
+                        <input type="search" name="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                        <button type="submit" class="btn btn-outline-primary">search</button>
+                        </div>
+                    </form>                            
+                </div>
+                              
+
+                <div class="row">
+                    {% if articles|length>0 %}
+                    {% for article in articles %}
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                    <a href="{{path('app_blog_article_details',{slug:article.slug})}}" style="text-decoration:none;">
+                        <figure class="card card-product-grid">
+                            <div class="img-wrap" style="background-image: url('/produits/{{article.images[0].path}}');"></div>
+                            <figcaption class="info-wrap border-top">
+                                <h3>{{article.titre}}</h3>
+                                <p class="title mb-2">Categorie : {{article.categorieArticle.libelle}}</p>
+                                <div class="article-infos">
+                                    <div class="article-date"><i class="fa-solid fa-calendar-days pb-2 pb-2"></i>{{article.createdAt|date}}</div>
+                                    <div class="article-auteur"><i class="fa-solid fa-user"></i>{{article.auteur.prenom}} {{article.auteur.nom}}</div>
+                                </div>
+                            </figcaption>
+                        </figure></a>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    {% if recherche is defined %}
+                    <p>Aucun article ne correspond à votre recherche</p>
+                    {% else %}
+                    <p>Aucun article publié dans le blog</p>
+                    {% endif %}
+                    {% endif %}
+                </div>
+                <hr>
+                <div class="d-flex justify-content-center">
+                    {% do articles.setPageRange(2) %}
+                    {{ knp_pagination_render(articles) }}
+                </div>
+            </main>
+        </div>
+    </section>
+    <!-- SECOND SECTION END -->
+
+{% endblock content %}

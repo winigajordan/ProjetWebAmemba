@@ -1,0 +1,56 @@
+{% extends 'base.pages.html.twig' %}
+
+{% block title %}Cotisations{% endblock %}
+{% block page %}{% endblock %}
+
+{% block content %}
+    <!-- SECOND SECTION START -->
+    <section class="second">
+        <div class="container p-5">
+            <h4>Nouvelles cotisations</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Date de création</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in myCotisations %}
+                        {% if c not in app.user.cotisations %}
+                        <tr>
+                            <th scope="row">{{c.titre}} {% if c.type == "OBLIGATOIRE" %}<span class="badge rounded-pill alert-success">Obligatoire</span>{% endif %}
+                            </th>
+                            <td>{{c.createdAt|date}}</td>
+                            <td><a href="{{path('app_cotisation_details',{id:c.id})}}" class="btn btn-primary btn-sm">Details</a></td>
+                        </tr> 
+                        {% endif %}
+
+                    {% endfor %}
+                </tbody>
+            </table><br>
+
+            <h4>Cotisations effectuées</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Titre</th>
+                        <th scope="col">Date de création</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for c in app.user.cotisations %}
+                        <tr>
+                            <th scope="row">{{c.titre}}</th>
+                            <td>{{c.createdAt|date}}</td>
+                            <td><a href="{{path('app_cotisation_details',{id:c.id})}}" class="btn btn-primary btn-sm">Details</a></td>
+                        </tr> 
+                    {% endfor %}
+                </tbody>
+            </table><br>
+        </div>
+    </section>
+    <!-- SECOND SECTION END -->
+{% endblock content %}

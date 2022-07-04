@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{asset('admin/assets/css/bootstrap.css')}}">
     
 <link rel="stylesheet" href="{{asset('admin/assets/vendors/iconly/bold.css')}}">
-
+    {% block style %}{% endblock style %}
     <link rel="stylesheet" href="{{asset('admin/assets/vendors/perfect-scrollbar/perfect-scrollbar.css')}}">
     <link rel="stylesheet" href="{{asset('admin/assets/vendors/bootstrap-icons/bootstrap-icons.css')}}">
     <link rel="stylesheet" href="{{asset('admin/assets/css/app.css')}}">
@@ -78,7 +78,7 @@
             <li
                 class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
-                    <i class="bi bi-calendar-event-fill"></i>
+                    <i class="bi bi-cart-check-fill"></i>
                     <span>Boutique</span>
                 </a>
                 <ul class="submenu ">
@@ -93,6 +93,7 @@
                     </li>
                 </ul>
             </li>
+            <!--
 
             <li
                 class="sidebar-item  ">
@@ -101,12 +102,12 @@
                     <span>Commandes</span>
                 </a>
             </li>
-            
+            -->
             <li
                 class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
-                    <i class="bi bi-calendar-event-fill"></i>
-                    <span>Programme WEN</span>
+                    <i class="bi bi-stickies-fill"></i>
+                    <span>Entreprises/emplois</span>
                 </a>
                 <ul class="submenu ">
                     <li class="submenu-item ">
@@ -118,6 +119,40 @@
                 </ul>
             </li>
             
+            <li
+                class="sidebar-item  has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i class="bi bi-journal-check"></i>
+                    <span>Blog/Forum</span>
+                </a>
+                <ul class="submenu ">
+                    <li class="submenu-item ">
+                        <a href="{{path('app_admin_article')}}">Gestion des articles</a>
+                    </li>
+                    <li class="submenu-item ">
+                        <a href="{{path('app_thematique')}}">Thématique de forum</a>
+                    </li>
+                    <li class="submenu-item ">
+                        <a href="{{path('app_admin_forum')}}">Gestion des questions</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="sidebar-item  ">
+                <a href="{{path('app_cotisation_admin')}}" class='sidebar-link'>
+                    <i class="bi bi-cash"></i>
+                    <span>Cotisations</span>
+                </a>
+            </li>
+            
+            <li
+                class="sidebar-item  ">
+                <a href="#" class='sidebar-link'>
+                    <i class="bi bi-puzzle"></i>
+                    <span>News letter -- Comming soon</span>
+                </a>
+            </li>
+
             <li
                 class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
@@ -135,21 +170,16 @@
             </li>
             
             
-            <li
-                class="sidebar-item  ">
-                <a href="#" class='sidebar-link'>
-                    <i class="bi bi-puzzle"></i>
-                    <span>Contribute</span>
+            
+
+            <li class="sidebar-item  ">
+                <a href="{{path('app_logout')}}" class='sidebar-link'>
+                    <i class="bi bi-box-arrow-left"></i>
+                    <span class="text-danger">Déconnexion</span>
                 </a>
             </li>
             
-            <li
-                class="sidebar-item  ">
-                <a href="#" class='sidebar-link'>
-                    <i class="bi bi-cash"></i>
-                    <span>Donate</span>
-                </a>
-            </li>
+           
             
         </ul>
     </div>
@@ -186,12 +216,13 @@
             </footer>
         </div>
     </div>
+    {% block js %}{% endblock js %}
+    <script src="{{asset('front/js/script.js')}}" defer></script>
     <script src="{{asset('admin/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js')}}"></script>
     <script src="{{asset('admin/assets/js/bootstrap.bundle.min.js')}}"></script>
     
-<script src="{{asset('admin/assets/vendors/apexcharts/apexcharts.js')}}"></script>
-<script src="{{asset('admin/assets/js/pages/dashboard.js')}}"></script>
-
+    <script src="{{asset('admin/assets/vendors/apexcharts/apexcharts.js')}}"></script>
+    <script src="{{asset('admin/assets/js/pages/dashboard.js')}}"></script>
     <script src="{{asset('admin/assets/js/mazer.js')}}"></script>
 </body>
 
