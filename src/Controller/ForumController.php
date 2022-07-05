@@ -33,9 +33,8 @@ class ForumController extends AbstractController
             $key = $_GET['search'];
             $found = [];
             foreach($options as $sujet){
-                if (strpos($sujet->getContenu(), $key)||strpos($sujet->getThematique()->getLibelle(), $key)) {
+                if (strpos($sujet->getContenu(), $key) or strpos($sujet->getThematique()->getLibelle(), $key)) {
                     $found[] = $sujet;
-                   
                 }
             }
             $thematiques = $thRepo->findAll();
@@ -82,11 +81,10 @@ class ForumController extends AbstractController
         ]);
     }
 
-    #[Route('/forum/add', name: 'app_forum_add')]
+    #[Route('/membre/forum/add', name: 'app_forum_add')]
     public function addSujet(Request $request,EntityManagerInterface $em,ThematiqueRepository $themRepo):Response{
-        dd($request);
-        if(!empty($_POST)){
-            
+        if(!empty($_POST))
+        {
             $sujet = new Sujet();
             $sujet->setAuteur($this->getUser());
             $sujet->setContenu($request->request->get("contenu"));

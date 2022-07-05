@@ -9,6 +9,9 @@
 <!-- SECOND SECTION START -->
     <section class="second">
         <div class="container py-4">
+            <a type="button" href="{{path('app_forum_auteur')}}" class="btn btn-primary position-relative my-3">
+                Liste de mes questions <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"><span class="visually-hidden">unread messages</span></span>
+            </a>
             <div class="mb-4">            
                 <form method="GET">
                     <div class="input-group mb-2">
@@ -23,9 +26,7 @@
                 <a href="{{path('app_forum_sujet_details',{slug:su.slug})}}">
                     <hr>
                     <h3>{{su.contenu}}</h3>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. Enim vel sed posuere ut massa ut. Non sit imperdiet enim at diam orci augue sit ultrices. Rhoncus et ipsum, quis egestas scelerisque viverra id sit...
-                    </p>
+                    
                 </a>
                 <div class="forums-post-infos d-flex justify-content-between">
                     <span class="badge text-bg-secondary">{{su.commentaires|length}} reponse(s)</span>
@@ -61,7 +62,7 @@
                 </div>
     		    <div class="form-group mt-3">
     		        <label for="article">Contenu de la question</label>
-    		        <textarea rows="3" minlength="2" class="form-control" name="contenu" ></textarea>
+    		        <textarea rows="3" minlength="2" class="form-control" name="contenu" required></textarea>
     		    </div>
     		    <div class="form-group">
     		        <p><span class="require">*</span> - Champs obligatoires</p>

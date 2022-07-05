@@ -25,8 +25,9 @@
                         <div class="container p-0">
                             <div class="row d-flex justify-content-center">
                                 <div class="col-md-12 col-lg-10 col-xl-8 w-100">
-                                    <div class="card mb-3">
                                     {% for com in comments %}
+                                    <div class="card mb-3">
+                                    
                                     <div class="card-body">
                                         {% if com.isVisible %}
                                         
@@ -44,13 +45,11 @@
                                             {{com.content}}
                                         </p>
                                         {% else %}
-                                        <b>Réponse supprimée par l'administrateur</b>
+                                            <b>Réponse supprimée par l'administrateur</b>
                                         {% endif %}
-
                                     </div>
-                                    {% endfor %}
                                 </div>
-                                
+                                {% endfor %}
                                 <div class="card"> 
                                     <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
                                         <h6>Votre reponse</h6>
