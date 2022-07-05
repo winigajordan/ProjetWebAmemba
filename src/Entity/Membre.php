@@ -75,12 +75,17 @@ class Membre extends User
     #[ORM\Column(type: 'text', nullable: true)]
     private $bio;
 
+    
+    #[ORM\ManyToMany(targetEntity: Cotisation::class, mappedBy: 'contributeurs')]
+    private $cotisations;
+
     public function __construct()
     {
         $this->setRoles(['ROLE_MEMBRE']);
         $this->commandes = new ArrayCollection();
         $this->entreprises = new ArrayCollection();
         $this->offreEmplois = new ArrayCollection();
+        $this->cotisations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -370,6 +375,33 @@ class Membre extends User
     public function setBio(?string $bio): self
     {
         $this->bio = $bio;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cotisation>
+     */
+    public function getCotisations(): Collection
+    {
+        return $this->cotisations;
+    }
+
+    public function addCotisation(Cotisation $cotisation): self
+    {
+        if (!$this->cotisations->contains($cotisation)) {
+            $this->cotisations[] = $cotisation;
+            $cotisation->addContributeur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCotisation(Cotisation $cotisation): self
+    {
+        if ($this->cotisations->removeElement($cotisation)) {
+            $cotisation->removeContributeur($this);
+        }
 
         return $this;
     }

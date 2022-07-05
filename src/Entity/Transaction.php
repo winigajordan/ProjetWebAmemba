@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TransactionRepository::class)]
 #[ORM\InheritanceType('JOINED')]
-#[ORM\DiscriminatorMap(['achat' => 'Achat', 'depot' => 'Depot'])]
+#[ORM\DiscriminatorMap(['achat' => 'Achat', 'depot' => 'Depot', 'cotisation'=>'CotisationTransaction'])]
 class Transaction
 {
     #[ORM\Id]

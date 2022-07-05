@@ -1,0 +1,62 @@
+{% extends 'base.pages.html.twig' %}
+
+{% block title %}Redaction Article{% endblock %}
+{% block page %}{% endblock %}
+
+{% block content %}
+<!-- SECOND SECTION START -->
+    <section class="second">
+        <div class="container py-5">
+
+            <a type="button" href="{{path('app_article_auteur')}}" class="btn btn-primary position-relative my-3">
+                Liste de mes articles <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"><span class="visually-hidden">unread messages</span></span>
+            </a>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="form-top d-flex">
+                    <div class="form-top-left form-top-side">
+                        <div class="form-group" class="py-2">
+                            <div class="text-center">
+                                <label for="exampleFormControlFile1">Ajouter une image a l'article (facultatif)</label>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <img src="{{asset('front/images/nopreview.jpeg')}}" alt="article illustration" id="addArticleImg" width="500px">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-top-right form-top-side">
+                        <div class="form-group">
+                            <label for="title">Titre <span class="require">*</span> <small>(Ce champ est utilisé dans le chemin de l'url.)</small></label>
+                            <input type="text" class="form-control mb-3" name="titre" />
+                        </div>
+                        <div class="form-group form-row">
+                            <label for="title">Categorie <span class="require">*</span></label>
+                            <select name="categorie" id="" class="form-control mb-3">
+                                {% for i in categories %}
+                                <option value="{{i.id}}">{{i.libelle}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlFile1">Ajouter une image a l'article (facultatif)</label>
+                            <input name="image" class="form-control mb-4" type="file" id="formFileImage" accept="image/png, image/jpeg">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="article">Contenu de l'article</label>
+                            <textarea rows="5" minlength="20" class="form-control" name="contenu" ></textarea>
+                        </div>
+                    </div>
+                </div>
+    		    
+    		    <div class="form-group">
+    		        <p><span class="require">*</span> - Champs obligatoires</p>
+    		    </div>
+    		    <div class="form-group">
+    		        <button type="submit" class="btn btn-primary">
+    		            Poster
+    		        </button>
+    		    </div>
+    		</form>
+        </div>
+    </section>
+    <!-- SECOND SECTION END -->
+{% endblock content %}

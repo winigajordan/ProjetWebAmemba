@@ -1,0 +1,44 @@
+{% extends 'base.admin.html.twig' %}
+{% block page_title %} Liste des articles {% endblock page_title %}
+{% block content %}
+<!-- Basic Tables start -->
+                <section class="section">
+                    <div class="card">
+                        <div class="card-header">
+                            Articles
+                        </div>
+                        <div class="card-body">
+                            <table class="table" id="table1">
+                                <thead>
+                                    <tr>
+                                        <th>Titre</th>
+                                        <th>Auteur</th>
+                                        <th>Date</th>
+                                        <th>Statut</th>
+                                        <th>Categorie</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for article in articles %}
+                                    <tr>
+                                        <td>{{article.titre}}</td>
+                                        <td>{{article.auteur.nom}} {{article.auteur.prenom}}</td>
+                                        <td>{{article.createdAt|date}}</td>
+                                        <td>
+                                            {% if article.statut %}{% if article.lisibilite %}<span class="badge bg-success">EN LIGNE</span>{% else %}<span class="badge bg-warning">ARCHIVE</span>{% endif %}{% else %}<span class="badge bg-success">En attente</span>{% endif %}
+                                        </td>
+                                        <td>{{article.categorieArticle.libelle}}</td>
+                                        <td>
+                                            <a class="btn-btn-outline-primary btn-sm" href="{{path('app_admin_article_details',{slug:article.slug})}}">Aperçu</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </section>
+                <!-- Basic Tables end -->
+{% endblock content %}

@@ -1,0 +1,83 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block title %}Forum{% endblock %}
+{% block page %}{% endblock %}
+{% block content %}
+    <!-- SECOND SECTION START -->
+    <section class="second">
+        <div class="container py-4">
+            <form method="POST" action="{{path('app_sujet_change_categorie')}}">
+                <h4>Changer la thematique de la question</h4>
+                <div class="row">
+                    <div class="col-6">
+                    <select class="form-select" aria-label="Default select example" name="cat">
+                        {% for cat in categories %}
+                            <option value="{{cat.id}}">{{cat.libelle}}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" name="slug" value="{{sujet.slug}}" hidden>
+                    </div>   
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-primary">Changer</button>
+                    </div>
+                </div>
+            </form>
+            <div class="forum-post mb-4">
+                <hr>
+                <h3>{{sujet.contenu}}</h3>
+                
+                <div class="forums-post-infos d-flex justify-content-between">
+                    <span class="badge text-bg-secondary">{{sujet.commentaires|length}} reponse(s)</span>
+                    <div class="right">Par
+                        <span class="name">{{sujet.auteur.prenom}} {{sujet.auteur.nom}}</span>, publie le
+                        <span class="name">{{sujet.createdAt|format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none')}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-5 ">
+                <h4>Réponses</h4>
+                <div class="row ">
+                    <div class="col-12 ">
+                        <div class="container p-0">
+                            <div class="row d-flex justify-content-center">
+                                <div class="col-md-12 col-lg-10 col-xl-8 w-100">
+                                     {% for com in comments %}
+                                    <div class="card mb-3">
+                                   
+                                    <div class="card-body">
+                                        <div class="d-flex flex-start align-items-center">
+                                            <img class="rounded-circle shadow-1-strong me-3" src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp" alt="avatar" width="60" height="60" />
+                                            <div>
+                                                <h6 class="fw-bold text-primary mb-1">{{com.user.prenom}} {{com.user.nom}}</h6>
+                                                <p class="text-muted small mb-0">
+                                                    {{com.date|format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none')}}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <p class="mt-3 mb-4 pb-2">
+                                            {{com.content}}
+                                        </p>
+
+                                        {% if com.isVisible %}
+                                        <a href="{{path('app_sujet_alter_comment',{id:com.id})}}"><button type="button" class="btn btn-danger"><i class="bi bi-trash"> Supprimer</i></button></a>
+                                        {% else %}
+                                        <a href="{{path('app_sujet_alter_comment',{id:com.id})}}"><button type="button" class="btn btn-primary"><i class="bi bi-pencil-square"> Afficher</i><button></a>
+                                        {% endif %}
+
+                                    </div>
+                                    
+                                </div>
+                                {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br><br>
+            </div>
+        </div>
+    </section>
+    <!-- SECOND SECTION END -->
+
+{% endblock content %}

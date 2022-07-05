@@ -1,0 +1,79 @@
+{% extends 'base.pages.html.twig' %}
+{% block page %}{% endblock page %}
+{% block page_content %}
+    <h2 class="first-title text-center mb-4">Forum</h2>
+{% endblock %}
+
+{% block title %}Forum{% endblock %}
+{% block content %}
+<!-- SECOND SECTION START -->
+    <section class="second">
+        <div class="container py-4">
+            <a type="button" href="{{path('app_forum_auteur')}}" class="btn btn-primary position-relative my-3">
+                Liste de mes questions <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"><span class="visually-hidden">unread messages</span></span>
+            </a>
+            <div class="mb-4">            
+                <form method="GET">
+                    <div class="input-group mb-2">
+                    <input type="search" name="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="submit" class="btn btn-outline-primary">search</button>
+                    </div>
+                </form>           
+            </div>
+
+            {% for su in sujets %}
+            <div class="forum-post mb-4">
+                <a href="{{path('app_forum_sujet_details',{slug:su.slug})}}">
+                    <hr>
+                    <h3>{{su.contenu}}</h3>
+                    
+                </a>
+                <div class="forums-post-infos d-flex justify-content-between">
+                    <span class="badge text-bg-secondary">{{su.commentaires|length}} reponse(s)</span>
+                    <div class="right">Par
+                        <span class="name">{{su.auteur.prenom}} {{su.auteur.nom}}</span>, publie le
+                        <span class="name">{{su.createdAt|format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none')}}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="d-flex mt-4 d-flex justify-content-end">
+                {% do sujets.setPageRange(2) %}
+                {{ knp_pagination_render(sujets) }}
+            </div>
+        </div>
+
+        <div class="container py-5">
+            <div>
+            <h2>Poster une question</h2>
+            </div>
+            <form method="POST" enctype="multipart/form-data" action="{{path('app_forum_add')}}">
+                <div class="form-top d-flex">
+                    <div class="form-top-right form-top-side">
+                        <div class="form-group form-row">
+                            <label for="title">Thematique<span class="require">*</span></label>
+                            <select name="thematique" id="" class="form-control mb-3">
+                                {% for i in thematiques %}
+                                <option value="{{i.id}}">{{i.libelle}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+    		    <div class="form-group mt-3">
+    		        <label for="article">Contenu de la question</label>
+    		        <textarea rows="3" minlength="2" class="form-control" name="contenu" required></textarea>
+    		    </div>
+    		    <div class="form-group">
+    		        <p><span class="require">*</span> - Champs obligatoires</p>
+    		    </div>
+    		    <div class="form-group">
+    		        <button type="submit" class="btn btn-primary">
+    		            Poster
+    		        </button>
+    		    </div>
+    		</form>
+        </div>
+    </section>
+    <!-- SECOND SECTION END -->
+{% endblock content %}

@@ -1,0 +1,101 @@
+{% extends 'base.pages.html.twig' %}
+
+{% block title %}Blog{% endblock %}
+{% block page %}{% endblock %}
+{% block content %}
+
+    <section class="second py-5">
+        <div class="container w-100">
+            <div class="single-article py-5">
+                <div class="img-article" style="background-image: url('/produits/{{article.images[0].path}}');"></div>
+                <h3>{{article.titre}}</h3>
+                <div class="d-flex">
+                    <div class="author mx-2">
+                        <i class="fa-solid fa-user"></i>
+                        <span>{{article.auteur.prenom}} {{article.auteur.nom}}</span>
+                    </div>
+                    <div class="day">
+                        <i class="fa-solid fa-calendar"></i>
+                        <span> {{article.createdAt|date}} </span>
+                    </div>
+                </div>
+                <hr>
+                {% for p in paragraphes %}
+                <p class="my-4">
+                    {{p}}
+                </p>
+                {% endfor %}    
+            </div>
+        </div>
+        <div class="container ">
+            <h3 class="">Commentaires</h3>
+
+            <div class="row ">
+                <div class="col-12 ">
+                    <div class="container p-0">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-md-12 col-lg-10 col-xl-8 w-100">
+                                {% for com in comments %}
+                                <div class="card mb-3">
+                                    
+                                    <div class="card-body">
+                                        {% if com.isVisible %}
+                                        
+                                        <div class="d-flex flex-start align-items-center">
+                                            {% if "ROLE_MEMBRE" in com.user.roles %}
+                                            <img class="rounded-circle shadow-1-strong me-3" src="{% if com.user.profile %} /pp/{{com.user.profile}} {% else %}{{asset('front/images/avatars/exemple.jpg')}} {% endif %}" alt="avatar" width="60" height="60" />
+                                            {% else %}
+                                            <img class="rounded-circle shadow-1-strong me-3" src="{{asset('front/images/avatars/exemple.jpg')}}" alt="avatar" width="60" height="60" />
+
+                                            {% endif %}
+                                            <div>
+                                                <h6 class="fw-bold text-primary mb-1">{{com.user.prenom}} {{com.user.nom}}</h6>
+                                                <p class="text-muted small mb-0">
+                                                    {{com.date|format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none')}}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <p class="mt-3  pb-2">
+                                            {{com.content}}
+                                        </p>
+                                        {% else %}
+                                        <b>Commentaire supprimé par l'administrateur</b>
+                                        {% endif %}
+                                    </div>
+                                    
+                                </div>
+                                {% endfor %}
+                                <div class="card">
+                                    
+                                    <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+                                        <h6>Votre commentaire</h6>
+                                        <form method="POST" action="{{path('app_article_comment')}}">
+                                        <div class="d-flex flex-start w-100">
+                                            {% if "ROLE_MEMBRE" in app.user.roles %}
+                                            <img class="rounded-circle shadow-1-strong me-3" src="{% if app.user.profile %} /pp/{{app.user.profile}} {% else %}{{asset('front/images/avatars/exemple.jpg')}} {% endif %}" alt="avatar" width="60" height="60" />
+                                            {% else %}
+                                            <img class="rounded-circle shadow-1-strong me-3" src="{{asset('front/images/avatars/exemple.jpg')}}" alt="avatar" width="60" height="60" />
+                                            {% endif %}
+                                            <div class="form-outline w-100">
+                                                <textarea name="content" class="form-control" id="textAreaExample" rows="4" style="background: #fff;"></textarea>
+                                            </div>
+                                            
+                                            <input type="text" name="slug" value="{{article.slug}}" hidden>
+                                        </div>
+                                        <div class="float-end mt-2 pt-1">
+                                            <button type="submit" class="btn btn-primary">Poster</button>
+                                        </div> 
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+        </div>
+    </section>
+    <!-- SECOND SECTION END -->
+{% endblock content %}

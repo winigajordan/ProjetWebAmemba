@@ -1,0 +1,39 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block content %}
+    <!-- Basic Tables start -->
+        <section class="section">
+            <div class="card">
+                <div class="card-header">
+                    Sujets
+                </div>
+                <div class="card-body">
+                    <table class="table" id="table1">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Date de creation</th>
+                                <th>Reponses</th>
+                                <th>Thematique</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for su in sujets %}
+                            <tr>
+                                <td>{{su.contenu}}</td>
+                                <td>{{su.createdAt|format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none')}}</td>
+                                <td>{{su.commentaires|length}} Réponses</td>
+                                <td>
+                                    {{su.thematique.libelle}}
+                                </td>
+                                <td><a name="" id="" class="btn btn-primary" href="{{path('app_forum_admin_sujet_details',{slug:su.slug})}}" role="button">Details</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    <!-- Basic Tables end -->
+{% endblock content %}

@@ -25,6 +25,20 @@ class Commentaire
     #[ORM\ManyToOne(targetEntity: Evenement::class, inversedBy: 'commentaires')]
     private $evenement;
 
+    #[ORM\ManyToOne(targetEntity: Article::class, inversedBy: 'commentaires')]
+    private $article;
+
+    #[ORM\ManyToOne(targetEntity: Sujet::class, inversedBy: 'commentaires')]
+    private $sujet;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isVisible;
+
+    public function __construct()
+    {
+        $this->isVisible = true;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +88,42 @@ class Commentaire
     public function setEvenement(?Evenement $evenement): self
     {
         $this->evenement = $evenement;
+
+        return $this;
+    }
+
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): self
+    {
+        $this->article = $article;
+
+        return $this;
+    }
+
+    public function getSujet(): ?Sujet
+    {
+        return $this->sujet;
+    }
+
+    public function setSujet(?Sujet $sujet): self
+    {
+        $this->sujet = $sujet;
+
+        return $this;
+    }
+
+    public function getIsVisible(): ?bool
+    {
+        return $this->isVisible;
+    }
+
+    public function setIsVisible(bool $isVisible): self
+    {
+        $this->isVisible = $isVisible;
 
         return $this;
     }
