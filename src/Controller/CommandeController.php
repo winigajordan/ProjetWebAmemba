@@ -149,7 +149,7 @@ class CommandeController extends AbstractController
             
 
             $em->flush();
-            $session->set("panier",[]);
+           
             return $this->redirectToRoute('app_commandes_client');   
         }
         return $this->redirectToRoute('add_client');
@@ -212,14 +212,15 @@ class CommandeController extends AbstractController
     }
 
     #[Route('/commande/success/{ref}', name: 'app_client_commande_success')]
-    public function commandeValide($ref, CommandeRepository $cmdRipo, EntityManagerInterface $em): Response
+    public function commandeValide($ref, SessionInterface $session,CommandeRepository $cmdRipo, EntityManagerInterface $em): Response
     {    
         $commande = $cmdRipo->findOneBy(["reference"=>$ref]);
         //dd($commande);
         $commande -> setEtat('EN COURS');
-        
-        return $this->render('commande/success.commande.html.twig', [
-        ]);
+        $em->persist($commande);
+        $em->flush();
+        $session->set("panier",[]);
+        return $this->redirectToRoute('app_commandes_client');
     }
 
 }

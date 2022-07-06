@@ -30,7 +30,6 @@ class DemandeController extends AbstractController
     ]
     public function index(DemandeRepository $dmd): Response
     {
-
         $demandes = $dmd -> findBy(["etat"=>"EN COURS"]);
         return $this->render('./demande/index.html.twig', [
             'controller_name' => 'DemandeController',

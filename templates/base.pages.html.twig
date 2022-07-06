@@ -40,8 +40,12 @@
                         <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Amemba Life</a>
                         <ul class="dropdown-menu">
                             <li><a href="{{path('app_agenda')}}" class="dropdown-item nav-link">Activite/Agenda</a></li>
-                            <li><a href="#" class="dropdown-item nav-link">Programme WEN</a></li>
-                            <li><a href="#" class="dropdown-item nav-link">Partenariat</a></li>
+                            <li><a href="{{path('app_demande_partenariat')}}" class="dropdown-item nav-link">Partenariat</a></li>
+                            {% if app.user is not null %}
+                                {% if "ROLE_MEMBRE" in app.user.roles %}
+                                    <li><a href="{{path('app_emplois')}}" class="dropdown-item nav-link">Offres d'emplois</a></li>
+                                {% endif %}
+                            {% endif %}
                         </ul>
                     </li>
 

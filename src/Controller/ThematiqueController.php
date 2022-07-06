@@ -8,21 +8,21 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ThematiqueController extends AbstractController
 {
-    #[Route('/thematique', name: 'app_thematique')]
+    #[Route('admin/thematique', name: 'app_thematique'), IsGranted("ROLE_ADMIN")]
     public function index(ThematiqueRepository $thRepo): Response
     {
         $thematiques = $thRepo->findAll();
         return $this->render('thematique/index.html.twig', [
-            
             'thematiques' => $thematiques
         ]);
     }
 
-    #[Route('/thematique/add', name: 'app_thematique_add')]
+    #[Route('/admin/thematique/add', name: 'app_thematique_add'), IsGranted("ROLE_ADMIN")]
     public function addThematique(Request $request,EntityManagerInterface $em): Response
     {
         if(!empty($_POST)){

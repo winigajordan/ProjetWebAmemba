@@ -35,7 +35,7 @@ class RegisterController extends AbstractController
 
     #[Route('/register/send', name: 'add_demande', methods: ['POST'])]
     public function aaddDemande(Request $request, EntityManagerInterface $em): Response {
-        dd($request);
+        //dd($request);
         $verif = new ApiMailVerification();
         $result = $verif -> test($request->request->get('email'));
         if($result['deliverability'] == 'DELIVERABLE'){

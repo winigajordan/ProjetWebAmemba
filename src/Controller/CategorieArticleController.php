@@ -8,11 +8,12 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Repository\CategorieArticleRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategorieArticleController extends AbstractController
 {
-    #[Route('admin/categorie/article', name: 'app_categorie_article')]
+    #[Route('admin/categorie/article', name: 'app_categorie_article'), IsGranted("ROLE_ADMIN")]
     public function index(CategorieArticleRepository $catRepo): Response
     {
         $categories = $catRepo->findAll();
@@ -22,7 +23,7 @@ class CategorieArticleController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/article/categorie/add', name: 'app_categorie_article_add')]
+    #[Route('/admin/article/categorie/add', name: 'app_categorie_article_add'), IsGranted("ROLE_ADMIN")]
     public function addCategorie(Request $request,EntityManagerInterface $em): Response
     {
         if(!empty($_POST)){
