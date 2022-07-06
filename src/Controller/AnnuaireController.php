@@ -27,7 +27,7 @@ class AnnuaireController extends AbstractController
         ]);
     }
 
-    #[Route('/annuaire/{prenom}-{nom}', name: 'app_annuaire_details', methods: ['GET']), IsGranted("ROLE_MEMBRE")]
+    #[Route('/annuaire/{prenom}_{nom}', name: 'app_annuaire_details', methods: ['GET']), IsGranted("ROLE_MEMBRE")]
     public function details($prenom, $nom): Response
     {
         $membre = $this->membreRepository->findOneBy([

@@ -31,7 +31,7 @@ class AdminPageAboutController extends AbstractController
         $this->hasher = $hasher;
     }
 
-    #[Route('/admin/page/about', name: 'app_admin_page_about'), IsGranted("ROLE_MEMBRE")]
+    #[Route('/admin/page/about', name: 'app_admin_page_about'), IsGranted("ROLE_ADMIN")]
     public function index(): Response
     {
         return $this->render('admin/admin_page_about/index.html.twig', [
@@ -40,7 +40,7 @@ class AdminPageAboutController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/page/about/section1/update', name: 'page_about_section1'), IsGranted("ROLE_MEMBRE")]
+    #[Route('/admin/page/about/section1/update', name: 'page_about_section1'), IsGranted("ROLE_ADMIN")]
     public function section1(Request $request){
         $data = $request->request;
         $page = $this->page;
@@ -51,7 +51,7 @@ class AdminPageAboutController extends AbstractController
         return $this->redirectToRoute('app_admin_page_about');
     }
 
-    #[Route('/admin/page/about/section2/update', name: 'page_about_section2'), IsGranted("ROLE_MEMBRE")]
+    #[Route('/admin/page/about/section2/update', name: 'page_about_section2'), IsGranted("ROLE_ADMIN")]
     public function section2(Request $request){
        
         $real = new Realisation();
@@ -69,7 +69,7 @@ class AdminPageAboutController extends AbstractController
     
     }
 
-    #[Route('/admin/page/about/section2/edit/{id}', name: 'page_about_section2_edit'), IsGranted("ROLE_MEMBRE")]
+    #[Route('/admin/page/about/section2/edit/{id}', name: 'page_about_section2_edit'), IsGranted("ROLE_ADMIN")]
     public function section2edit($id){
        
         $real = $this->realRipo->find(intval($id));
@@ -83,7 +83,7 @@ class AdminPageAboutController extends AbstractController
         }
     }
 
-    #[Route('/admin/page/about/section3/update', name: 'page_about_section3'), IsGranted("ROLE_MEMBRE")]
+    #[Route('/admin/page/about/section3/update', name: 'page_about_section3'), IsGranted("ROLE_ADMIN")]
     public function section3(Request $request){
         $page = $this->page;
         $page ->setMotTitre($request->request->get('motTitre'));

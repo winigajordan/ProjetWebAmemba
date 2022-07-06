@@ -15,11 +15,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ForumController extends AbstractController
 {
-    #[Route('/forum/{filter}', name: 'app_forum',defaults:["filter"=>"all"])]
+    #[Route('/forum/{filter}', name: 'app_forum',defaults:["filter"=>"all"]), IsGranted("ROLE_MEMBRE")]
     public function index($filter,
     SujetRepository $sujetRepo,
     ThematiqueRepository $thRepo,
@@ -69,7 +70,7 @@ class ForumController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/forum', name: 'app_admin_forum')] 
+    #[Route('/admin/forum', name: 'app_admin_forum'), IsGranted("ROLE_ADMIN")] 
     public function adminIndex(SujetRepository $subRepo):Response{
         $sujets = $subRepo->findAll();
         $sujetsProposes = $subRepo->findBy(['etat'=>false],['createdAt'=>'DESC']); 
@@ -81,7 +82,7 @@ class ForumController extends AbstractController
         ]);
     }
 
-    #[Route('/membre/forum/add', name: 'app_forum_add')]
+    #[Route('/membre/forum/add', name: 'app_forum_add'), IsGranted("ROLE_MEMBRE")]
     public function addSujet(Request $request,EntityManagerInterface $em,ThematiqueRepository $themRepo):Response{
         if(!empty($_POST))
         {
@@ -99,7 +100,7 @@ class ForumController extends AbstractController
         return $this->redirectToRoute('app_forum');
     }
 
-    #[Route('/forum/auteur/sujets', name: 'app_forum_auteur')]
+    #[Route('/forum/auteur/sujets', name: 'app_forum_auteur'), IsGranted("ROLE_MEMBRE")]
     public function mySubjects(SujetRepository $subRepo):Response{
         $sujets = $subRepo->findBy(['auteur'=>$this->getUser()],['createdAt'=>'DESC']);
         return $this->render('forum/membre.sujets.html.twig', [
@@ -119,7 +120,7 @@ class ForumController extends AbstractController
         ]); 
     }
 
-    #[Route('/admin/forum/sujet/{slug}', name: 'app_forum_admin_sujet_details')]  
+    #[Route('/admin/forum/sujet/{slug}', name: 'app_forum_admin_sujet_details'), IsGranted("ROLE_ADMIN")]  
     public function SujetDetailsAdmin(
         $slug,
         SujetRepository $subRepo,
@@ -155,7 +156,7 @@ class ForumController extends AbstractController
         }
     }
 
-    #[Route('change/comment/{id}', name: 'app_sujet_alter_comment')] 
+    #[Route('change/comment/{id}', name: 'app_sujet_alter_comment'), IsGranted("ROLE_ADMIN")] 
     public function changeCommentState(
         $id,
         CommentaireRepository $comRepo,
@@ -170,7 +171,7 @@ class ForumController extends AbstractController
             return $this->redirectToRoute('app_forum_admin_sujet_details', ['slug' => $sujet->getSlug()]);
     }
 
-    #[Route('alter/categorie/sujet', name: 'app_sujet_change_categorie')]
+    #[Route('alter/categorie/sujet', name: 'app_sujet_change_categorie'), IsGranted("ROLE_ADMIN")]
     public function changeThematiqueSujet(
     SujetRepository $suRepo,
     ThematiqueRepository $thRepo,

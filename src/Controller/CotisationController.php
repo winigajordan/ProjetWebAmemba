@@ -2,18 +2,19 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Cotisation;
-use App\Entity\CotisationTransaction;
 use App\Entity\Transaction;
-use App\Repository\CotisationRepository;
 use App\Repository\MembreRepository;
 use App\Repository\WalletRepository;
-use DateTime;
+use App\Entity\CotisationTransaction;
+use App\Repository\CotisationRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CotisationController extends AbstractController
 {
@@ -27,7 +28,7 @@ class CotisationController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/cotisation', name: 'app_cotisation_admin')]
+    #[Route('/admin/cotisation', name: 'app_cotisation_admin'), IsGranted("ROLE_ADMIN")]
     public function addCotisation(CotisationRepository $coRepo,Request $request,EntityManagerInterface $em): Response
     {
         if(!empty($_POST)){
@@ -52,7 +53,7 @@ class CotisationController extends AbstractController
         ]);
     }
 
-    #[Route('/cotisation/clore/{id}', name: 'app_cotisation_cloture')]
+    #[Route('/admin/cotisation/clore/{id}', name: 'app_cotisation_cloture'), IsGranted("ROLE_ADMIN")]
     public function cloreCotisation($id,CotisationRepository $coRepo,EntityManagerInterface $em): Response
     {
         $cotisation = $coRepo->find($id);
@@ -71,7 +72,7 @@ class CotisationController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/cotisation/{id}', name: 'app_cotisation_details_admin')]
+    #[Route('/admin/cotisation/{id}', name: 'app_cotisation_details_admin'), IsGranted("ROLE_ADMIN")]
     public function detailsCotisationAdmin($id,CotisationRepository $coRepo): Response {
         $cotisation = $coRepo->find($id);
         return $this->render('cotisation/admin.cotisation.details.html.twig', [
@@ -80,7 +81,7 @@ class CotisationController extends AbstractController
         ]);
     }
 
-    #[Route('/cotisation/make/{id}', name: 'app_cotisation_make')]
+    #[Route('/cotisation/make/{id}', name: 'app_cotisation_make'), IsGranted("ROLE_MEMBRE")]
     public function makeCotisation($id, WalletRepository $walletRipo,  CotisationRepository $coRepo,EntityManagerInterface $em):Response{
         $user = $this->getUser();
         $cotisation = $coRepo->find($id);
@@ -116,8 +117,8 @@ class CotisationController extends AbstractController
         return $this->redirectToRoute('app_cotisation');
     }
 
-    #[Route('/cotisation/add/cont', name: 'app_cotisation_add_cont')]
-    public function addCont(Request $request, MembreRepository $membreRipo, EntityManagerInterface $em){
+    #[Route('/cotisation/add/cont', name: 'app_cotisation_add_cont'), IsGranted("ROLE_ADMIN")]
+    public function addCont(Request $request,CotisationRepository $cotisationRipo, MembreRepository $membreRipo, EntityManagerInterface $em){
         $data = $request->request;
         
         $membre = $membreRipo->findOneBy(["telephone"=>$data->get('full_number')]);
@@ -125,8 +126,18 @@ class CotisationController extends AbstractController
        if($membre == null){
             $this->addFlash('warning', 'Veuillez vérifier le numéro de téléphone');
             return $this->redirectToRoute('app_cotisation_details_admin', ['id'=>$data->get('id')]);
+       } else {
+            $cotisation = $cotisationRipo->find($data->get('id'));
+            $membre->addCotisation($cotisation);
+            $cotisation->setSolde($cotisation->getSolde()+$cotisation->getMontant());
+            $em->persist($membre);
+            $em->persist($cotisation);
+            $em->flush();
+            $this->addFlash('okay', 'Contributeur ajouté avec succès');
+            return $this->redirectToRoute('app_cotisation_details_admin', ['id'=>$data->get('id')]);
+           // $membre->addCotisation();
        }
-      // dd('ts');
+      
         
     }
 }

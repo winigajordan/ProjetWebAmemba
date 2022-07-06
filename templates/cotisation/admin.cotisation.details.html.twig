@@ -37,8 +37,14 @@
                           <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                             <div class="accordion-body">
                                 <div class="card-body">
-                                    {% for message in app.flashes('error') %}
+                                    {% for message in app.flashes('warning') %}
                                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>{{message}}</strong> 
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    {% endfor %}
+                                    {% for message in app.flashes('okay') %}
+                                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
                                             <strong>{{message}}</strong> 
                                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                         </div>
