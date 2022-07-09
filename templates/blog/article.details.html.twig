@@ -72,10 +72,12 @@
                                         <h6>Votre commentaire</h6>
                                         <form method="POST" action="{{path('app_article_comment')}}">
                                         <div class="d-flex flex-start w-100">
+                                            {% if app.user %}
                                             {% if "ROLE_MEMBRE" in app.user.roles %}
                                             <img class="rounded-circle shadow-1-strong me-3" src="{% if app.user.profile %} /pp/{{app.user.profile}} {% else %}{{asset('front/images/avatars/exemple.jpg')}} {% endif %}" alt="avatar" width="60" height="60" />
                                             {% else %}
                                             <img class="rounded-circle shadow-1-strong me-3" src="{{asset('front/images/avatars/exemple.jpg')}}" alt="avatar" width="60" height="60" />
+                                            {% endif %}
                                             {% endif %}
                                             <div class="form-outline w-100">
                                                 <textarea name="content" class="form-control" id="textAreaExample" rows="4" style="background: #fff;"></textarea>

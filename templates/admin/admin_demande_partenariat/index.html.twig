@@ -34,7 +34,7 @@
                                             <form method="post" action={{path('admin_demande_partenariat_traitement')}}>
                                                 <div class="form-group mb-3">
                                                   <label for="reponse">Reponse</label>
-                                                  <textarea class="form-control" name="reponse" id="reponse" rows="3"> {% if selected.reponse is not null %}{{selected.reponse}}{% endif %} </textarea>
+                                                  <textarea class="form-control" name="reponse" required id="reponse" rows="3" > {% if selected.reponse is not null %}{{selected.reponse}}{% endif %} </textarea>
                                                   <input type="text" name="id" value="{{selected.id}}" hidden>
                                                 </div>
                                                 <div class="form-check form-switch mb-3">

@@ -9,6 +9,7 @@ use App\Repository\MembreRepository;
 use App\Repository\WalletRepository;
 use App\Entity\CotisationTransaction;
 use App\Repository\CotisationRepository;
+use App\Service\PayTech\Payement;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -81,7 +82,7 @@ class CotisationController extends AbstractController
         ]);
     }
 
-    #[Route('/cotisation/make/{id}', name: 'app_cotisation_make'), IsGranted("ROLE_MEMBRE")]
+    #[Route('/cotisation/make/wallet/{id}', name: 'app_cotisation_make'), IsGranted("ROLE_MEMBRE")]
     public function makeCotisation($id, WalletRepository $walletRipo,  CotisationRepository $coRepo,EntityManagerInterface $em):Response{
         $user = $this->getUser();
         $cotisation = $coRepo->find($id);
@@ -135,9 +136,28 @@ class CotisationController extends AbstractController
             $em->flush();
             $this->addFlash('okay', 'Contributeur ajouté avec succès');
             return $this->redirectToRoute('app_cotisation_details_admin', ['id'=>$data->get('id')]);
-           // $membre->addCotisation();
        }
-      
-        
     }
+
+    #[Route('/cotisation/make/{id}', name: 'app_cotisation_make_1'), IsGranted("ROLE_MEMBRE")]
+    public function make(CotisationRepository $cotisationRipo,Payement $pay, $id){
+        $cotisation =  $cotisationRipo->find($id);
+        $url = $pay->payCotisation($cotisation->getMontant(), $id);
+        return $this->redirect($url);
+    }
+
+    #[Route('/cotisation/sucess/memba/{id}', name: 'app_cotisation_make_1_success'), IsGranted("ROLE_MEMBRE")]
+    public function makeSucess(EntityManagerInterface $em ,MembreRepository $membreRipo, CotisationRepository $cotisationRipo,Payement $pay, $id){
+        $cotisation =  $cotisationRipo->find($id);
+        $user = $membreRipo->find($this->getUser()->getId());
+        $user->addCotisation($cotisation);
+        $cotisation->setSolde($cotisation->getSolde()+$cotisation->getMontant());
+        $em->persist($user);
+        $em->persist($cotisation);
+        $em->flush();
+        return $this->redirectToRoute('app_cotisation');
+    }
+
+
+
 }

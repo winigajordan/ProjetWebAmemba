@@ -1,0 +1,104 @@
+{% extends 'base.pages.html.twig' %}
+
+{% block page %}{% endblock page %}
+
+{% block content %}
+<!-- REGISTER SECTION START -->
+<section class="login-register">
+    <div class="container d-flex">
+        <div class="login-left login-card d-flex justify-content-center align-items-center">
+            <div>
+                <img src="{{asset('front/images/join_vector.svg')}}" alt="">
+                <h2 class="mt-5 mb-3">Récupération de mot de passe</h2>
+            </div>
+        </div>
+        <div class="login-right login-card">
+            <div class="container">
+                <form method = "post" action= "{{path('checkData')}}">
+                   
+                    <h2>Formulaire de récupération de mot de passe</h2>	
+                    {% for message in app.flashes('warning') %}
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <strong>{{message}}</strong> 
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+
+                    {% if titre == 'index' %}
+                    <div class="mb-3">
+                         <label class="form-label">Email</label>
+                         <input class="form-control" name="email" placeholder="Adresse email" type="email" required >
+                    </div> 
+                    
+                    <div class="mb-3">
+                        <label class="form-label col-12">Téléphone</label>
+                        <input class="form-control" id='phone' type="tel" required>
+                    </div>
+                    {% endif %} 
+                    
+                    {% if reset is defined %}
+                    
+                        <input class="form-control" name="mail" placeholder="Adresse email" type="email" required value="{{reset.mail}}" hidden>
+                  
+                    <div class="mb-3">
+                        <label class="form-label">Code</label>
+                        <input class="form-control" name="code" placeholder="Code de reinitialisation" type="text" required>
+                   </div>
+                    {% endif %}
+
+                    {% if code is defined %}
+                    <input class="form-control" name="mail" placeholder="Adresse email" type="email" required value="{{code.mail}}" hidden>
+                  
+                    <div class="mb-3">
+                        <label class="form-label">Mot de passe</label>
+                        <input class="form-control" name="pwd1" placeholder="Nouveau mot de passe" type="password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Confirmer votre mot de passe</label>
+                        <input class="form-control" name="pwd2" placeholder="Confirmez votre mot de passe" type="password" required>
+                   </div>
+                    {% endif %}
+
+                    
+                    <div class="my-4">
+                      <button type="submit" class="btn btn-primary w-100" {% if titre == "" %}disabled{% endif %}> Valider  </button>
+                    </div> 
+            
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- REGISTER SECTION END -->
+{% endblock content %}
+
+{% block js %}
+<!-- IntelTel Input -->
+<script type="text/javascript" src="{{asset('front/js/intlTelInput.js')}}"></script>
+<script>
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+        // allowDropdown: false,
+        // autoHideDialCode: false,
+        // autoPlaceholder: "off",
+        // dropdownContainer: document.body,
+        // excludeCountries: ["us"],
+        // formatOnDisplay: false,
+        // geoIpLookup: function(callback) {
+        //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+        //     var countryCode = (resp && resp.country) ? resp.country : "";
+        //     callback(countryCode);
+        //   });
+        // },
+        hiddenInput: "full_number",
+        // initialCountry: "auto",
+        // localizedCountries: { 'de': 'Deutschland' },
+        // nationalMode: false,
+        // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        placeholderNumberType: "MOBILE",
+        preferredCountries: ['sn'],
+        separateDialCode: true,
+        utilsScript: "{{asset('front/js/utils.js')}}",
+    });
+</script>
+{% endblock js %}

@@ -86,7 +86,7 @@ class CommandeController extends AbstractController
             $url =  $payement -> payAction($commande);
             
             $em->flush();
-            $session->set("panier",[]);
+            
             return $this->redirect($url);   
         }
         return $this->redirectToRoute('add_client');
@@ -146,7 +146,7 @@ class CommandeController extends AbstractController
             $achat -> setWallet($wallet);
             $achat -> setCommande($commande);
             $em -> persist($achat);
-            
+            $session->set("panier",[]);
 
             $em->flush();
            
