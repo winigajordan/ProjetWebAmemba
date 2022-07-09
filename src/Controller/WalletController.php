@@ -4,10 +4,13 @@ namespace App\Controller;
 
 use DateTime;
 use App\Entity\Depot;
+use App\Repository\DepotRepository;
 use App\Repository\MembreRepository;
 use App\Repository\WalletRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\TransactionRepository;
+use App\Service\PayTech\Payement;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,12 +32,14 @@ class WalletController extends AbstractController
         MembreRepository $membreRepository,
         EntityManagerInterface $em,
         TransactionRepository $transactionRipo,
+        DepotRepository $depotRipo
         )
     {
         $this-> walletRipo = $walletRipo;
         $this-> membreRepository = $membreRepository;
         $this-> em = $em;
         $this-> transactionRipo = $transactionRipo;
+        $this->depotRipo = $depotRipo;
     }
 
 
@@ -54,22 +59,39 @@ class WalletController extends AbstractController
     }
 
     #[Route('/wallet/recharge', name: 'app_wallet_recharge'), IsGranted("ROLE_MEMBRE")]
-    public function recharge(Request $request){
+    public function recharge(Request $request, Payement $payement){
         $solde = $request -> request -> get('montant');
         $membre = $this->membreRepository->find($this->getUser()->getId());
         $wallet = $this -> walletRipo -> findOneBy(['membre'=>$membre]);
-        $wallet -> setSolde($wallet->getSolde()+intval($solde));
-        $this->em ->persist($wallet);
+        //$wallet -> setSolde($wallet->getSolde()+intval($solde));
+        //$this->em ->persist($wallet);
 
         $depot = new Depot();
         $depot -> setDate(new DateTime());
         $depot -> setWallet($wallet);
         $depot -> setMontant(floatval($solde));
+        $depot -> setReference(uniqid("DEPOT-"));
+        $depot -> setEtat("ANNULE");
         $depot -> setType('Depôt');
         $this->em ->persist($depot);
-        
         $this -> em -> flush();
-        return $this-> redirectToRoute('app_wallet');
+
+        $url =  $payement -> payWallet($depot->getMontant(), $depot->getReference());
+        return $this->redirect($url);
+
+        //return $this-> redirectToRoute('app_wallet');
         
+    }
+
+    #[Route('/recharge/{ref}', name: 'recharge_success'), IsGranted("ROLE_MEMBRE")]
+    public function success($ref){
+        $depot = $this->depotRipo->findOneBy(['reference'=>$ref]);
+        $wallet = $this->walletRipo->find($depot->getWallet()->getId());
+        $depot->setEtat('TERMINE');
+        $wallet -> setSolde($wallet->getSolde() + $depot->getMontant());
+        $this->em->persist($wallet);
+        $this->em->persist($depot);
+        $this->em->flush();
+        return $this->redirectToRoute('app_wallet');
     }
 }

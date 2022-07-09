@@ -30,7 +30,10 @@
                   <p class="card-text mb-3">  <strong>  Email : </strong> <a class="card-text" href="mailto:{{membre.email}}">{{membre.email}}</a></p>
                   <p class="card-text mb-3">  <strong>  Téléphone : </strong> {{membre.telephone}}</p>
                   {% if membre.statut %}
-                    <a href="/cv/{{membre.cv}}" target="_blank" class="btn btn-primary">Affichier le CV</a>
+                  {% if membre.cv %}
+                   <a href="/cv/{{membre.cv}}" target="_blank" class="btn btn-primary">Affichier le CV</a>
+                  {% endif %}
+                   
                 {% endif %}
                 </div>
                 

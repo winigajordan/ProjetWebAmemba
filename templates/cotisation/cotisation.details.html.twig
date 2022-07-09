@@ -9,7 +9,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-9">
-                    {% for message in app.flashes('warning') %}
+                    {% for message in app.flashes('error') %}
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
                             <strong>{{message}}</strong> 
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -34,7 +34,7 @@
                             </dl>
                             <div class="d-grid gap-2 my-3">
                                 {% if cotisation not in app.user.cotisations %}                                
-                                <a href="#" class="btn btn-success w-100">Cotiser</a>
+                                <a href="{{path('app_cotisation_make_1',{id:cotisation.id} )}}" class="btn btn-success w-100">Cotiser</a>
                                 <a href="{{path('app_cotisation_make',{id:cotisation.id})}}" class="btn btn-success w-100">Cotiser avec wallet</a>
                                 <a href="{{path('app_cotisation')}}" class="btn btn-light w-100"> Retour à la liste </a>
                                 {% else %}

@@ -12,7 +12,7 @@
             <div class="container">
                 <h2> Bienvenue sur dans Portefeuille </h2>
                 <div class="row mt-5">
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="accordion" id="accordionPanelsStayOpenExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="headingOne">
@@ -53,7 +53,7 @@
                         
                     </div>
     
-                    <div class="col-6">
+                    <div class="col-8">
                         <div class="accordion" id="accordionPanelsStayOpenExample">
                             <div class="accordion-item">
                               <h2 class="accordion-header" id="headingTwo">
@@ -68,7 +68,9 @@
                                           <tr>
                                             <th scope="col">Date</th>
                                             <th scope="col">Montant</th>
+                                           
                                             <th scope="col">Type de transaction</th>
+                                             <th scope="col">Etat</th>
                                           </tr>
                                         </thead>
                                         <tbody>
@@ -85,6 +87,9 @@
                                             </td>
                                             {% else %}
                                             <td> {{trans.type}}</td>
+                                            {% endif %}
+                                            {% if trans.type == "Depôt" %}
+                                            <td scope="row">{{trans.etat}}</td>
                                             {% endif %}
                                             
                                           </tr>
