@@ -1,0 +1,205 @@
+{% extends 'base.admin.html.twig' %}
+{% block style %}
+<!-- IntelTel Input CSS-->
+<link rel="stylesheet" href="{{asset('front/css/intlTelInput.css')}}" crossorigin="anonymous">
+
+{% endblock style %}
+{% block page_title %} Contenue de la page About {% endblock page_title %}
+{% block content %}
+<div class="page-content">
+    <section class="section">
+        <div class="row" id="basic-table">
+            <div class="col-12 ">
+                
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="accordion" id="accordionPanelsStayOpenExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="panelsStayOpen-heading4">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse4" aria-expanded="false" aria-controls="panelsStayOpen-collapse4">
+                                        <strong> Ajout d'un poste </strong> 
+                                    </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapse4" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading4">
+                                        <div class="accordion-body">
+                                            <form class="form form-horizontal" method="POST" action="{{path('app_add_poste')}}">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="motTitre">Libelle</label>
+                                                            <input type="text" class="form-control" name="libelle" id="motTitre" aria-describedby="helpId" placeholder="" >                                               
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <button type="submit" class="btn btn-primary">Ajouter un poste </button>      
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="accordion" id="accordionPanelsStayOpenExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="panelsStayOpen-heading3">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse3" aria-expanded="false" aria-controls="panelsStayOpen-collapse3">
+                                        <strong> Liste des postes </strong> 
+                                    </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapse3" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading3">
+                                        <div class="accordion-body">
+                                            <table class="table table-hover mb-0 table-lg">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Libelle</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for poste in postes %}
+                                                    <tr>
+                                                        <td class="text-bold-500">{{poste.libelle}}</td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <div class="card">
+                           <div class="container my-3">
+                            <form class="form form-horizontal" enctype="multipart/form-data" method="POST" action="{{path('app_add_membre')}}">
+                                <h5 class="my-2"> Ajouter une membre au bureau </h5>
+                                <div class="row mt-2">
+                                    <div class="col-md-4">
+                                        <label for='phonr' class="form-label col-12">Nom complet </label>
+                                    </div>
+                                    <div class="col-md-8 form-group">
+                                        <input type="text" class="form-control" name="nom" id="nom" aria-describedby="helpId" placeholder="" required>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for='phonr' class="form-label col-12">Téléphone</label>
+                                    </div>
+                                    <div class="col-md-8 form-group">
+                                        <input class="form-control" id='phone' type="number" required>
+                                    </div>
+                                </div>
+                                
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for='phonr' class="form-label col-12">Poste</label>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <select class="form-select form-select" aria-label=".form-select example" name="poste" required>
+                                            {% for poste in postes %}
+                                            <option selected value="{{poste.id}}">{{poste.libelle}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for='phonr' class="form-label col-12">Image</label>
+                                    </div>
+                                    <div class="col-md-8 form-group">
+                                        <input class="form-control" name="pp" type="file" required>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Ajouter au bureau </button>      
+                            </form>
+                            </div>   
+                            
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="accordion" id="accordionPanelsStayOpenExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="panelsStayOpen-heading2">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse2" aria-expanded="false" aria-controls="panelsStayOpen-collapse2">
+                                        <strong> Liste des membres du bureau </strong> 
+                                    </button>
+                                    </h2>
+                                    <div id="panelsStayOpen-collapse2" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading2">
+                                        <div class="accordion-body">
+                                            <table class="table table-hover mb-0 table-lg">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Nom</th>
+                                                        <th>Poste</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% for membre in membres %}
+                                                    <tr>
+                                                        <td class="text-bold-500">{{membre.nomComplet}}</td>
+                                                        <th>{{membre.fonction.libelle}}</th>
+                                                        <th>
+                                                            <a name="" id="" class="btn btn-outline-primary" href="{{path('app_update_membre',  {id: membre.id})}}" role="button">
+                                                                {% if membre.etat %} Archiver {% else %} Publier {% endif %}
+                                                            </a>
+                                                        </th>    
+                                                    </tr>
+                                                    {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </section>    
+</div>
+{% endblock content %}
+{% block js %}
+
+<!-- IntelTel Input -->
+<script type="text/javascript" src="{{asset('front/js/intlTelInput.js')}}"></script>
+<script>
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+        // allowDropdown: false,
+        // autoHideDialCode: false,
+        // autoPlaceholder: "off",
+        // dropdownContainer: document.body,
+        // excludeCountries: ["us"],
+        // formatOnDisplay: false,
+        // geoIpLookup: function(callback) {
+        //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+        //     var countryCode = (resp && resp.country) ? resp.country : "";
+        //     callback(countryCode);
+        //   });
+        // },
+        hiddenInput: "full_number",
+        // initialCountry: "auto",
+        // localizedCountries: { 'de': 'Deutschland' },
+        // nationalMode: false,
+        // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        placeholderNumberType: "MOBILE",
+        preferredCountries: ['sn'],
+        separateDialCode: true,
+        utilsScript: "{{asset('front/js/utils.js')}}",
+    });
+</script>
+{% endblock js %}

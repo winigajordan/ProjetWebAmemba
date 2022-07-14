@@ -41,10 +41,12 @@ class AdminEvenementController extends AbstractController
         $ev -> setStartAt(new DateTime($data->get('startAt')));
         $ev -> setEndAt(new DateTime($data->get('endAt')));
         $image=new Image(); 
+
         $img=$request->files->get("image"); 
         $imageName=uniqid().'.'.$img->guessExtension(); 
         $img->move($this->getParameter("evenement_directory"),$imageName);          
         $image->setPath($imageName);
+        
         $ev->addImage($image);
         $em -> persist($image);
         $em -> persist($ev);

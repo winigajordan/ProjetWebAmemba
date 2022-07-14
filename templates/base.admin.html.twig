@@ -122,7 +122,7 @@
             <li
                 class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
-                    <i class="bi bi-journal-check"></i>
+                    <i class="bi bi-file-earmark-font-fill"></i>
                     <span>Blog/Forum</span>
                 </a>
                 <ul class="submenu ">
@@ -143,16 +143,30 @@
 
             <li class="sidebar-item  ">
                 <a href="{{path('app_cotisation_admin')}}" class='sidebar-link'>
-                    <i class="bi bi-cash"></i>
+                    <i class="bi bi-wallet-fill"></i>
                     <span>Cotisations</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item  ">
+                <a href="{{path('app_admin_bureau')}}" class='sidebar-link'>
+                    <i class="bi bi-people-fill"></i>
+                    <span>Bureau</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item  ">
+                <a href="{{path('app_admin_partenaire')}}" class='sidebar-link'>
+                    <i class="bi bi-people-fill"></i>
+                    <span>Partenaires</span>
                 </a>
             </li>
             
             <li
                 class="sidebar-item  ">
-                <a href="#" class='sidebar-link'>
-                    <i class="bi bi-puzzle"></i>
-                    <span>News letter -- Comming soon</span>
+                <a href="{{path('app_newsletter')}}" class='sidebar-link'>
+                    <i class="bi bi-puzzle-fill"></i>
+                    <span>News letter</span>
                 </a>
             </li>
 
@@ -167,7 +181,7 @@
                         <a href="{{path('app_admin_page_accueil')}}">Page d'accueil</a>
                     </li>
                     <li class="submenu-item ">
-                        <a href="#">Page About</a>
+                        <a href="{{path('app_admin_page_about')}}">Page About</a>
                     </li>
                 </ul>
             </li>

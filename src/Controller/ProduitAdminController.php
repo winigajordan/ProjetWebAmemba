@@ -28,7 +28,7 @@ class ProduitAdminController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/produit/add', name: 'app_produit_add', methods:('POST')), IsGranted("ROLE_ADMIN")]
+    #[Route('/admin/produit/add', name: 'app_produit_add'), IsGranted("ROLE_ADMIN")]
     public function addProduit(ProduitRepository $prodRepo,CategorieProduitRepository $catRepo,
      Request $request,EntityManagerInterface $em,ValidatorInterface $validator): Response
     {

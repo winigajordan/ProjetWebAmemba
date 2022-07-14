@@ -58,7 +58,7 @@ class BlogController extends AbstractController
                 $output = $paginator->paginate(
                     $found,
                     $request->query->getInt('page',1),
-                    1
+                    12
                 );
                 return $this->render('blog/index.html.twig', [
                     'controller_name' => 'BlogController',
@@ -79,7 +79,7 @@ class BlogController extends AbstractController
         $output = $paginator->paginate(
             $articles,
             $request->query->getInt('page',1),
-            1
+            12
         );
         return $this->render('blog/index.html.twig', [
             'controller_name' => 'BlogController',

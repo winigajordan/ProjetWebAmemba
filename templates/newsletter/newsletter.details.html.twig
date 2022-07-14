@@ -1,0 +1,22 @@
+{% extends 'base.admin.html.twig' %}
+{% block page_title %} Details{% endblock page_title %}
+{% block content %}
+<section class="second py-5">
+        <div class="container w-100">
+            <div class="single-article py-5">
+                <div class="d-flex">
+                    <div class="day">
+                        <i class="fa-solid fa-calendar"></i>
+                        <span> {{letter.createdAt|format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none')}} </span>
+                    </div>
+                </div>
+                <hr>
+                {% for p in paragraphes %}
+                <p class="my-4">
+                    {{p}}
+                </p>
+                {% endfor %}    
+            </div>
+        </div>
+    </section>
+{% endblock content %}

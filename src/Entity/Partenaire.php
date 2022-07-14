@@ -22,6 +22,9 @@ class Partenaire
     #[ORM\Column(type: 'string', length: 255)]
     private $logo;
 
+    #[ORM\Column(type: 'boolean')]
+    private $etat;
+
     
     public function getId(): ?int
     {
@@ -60,6 +63,18 @@ class Partenaire
     public function setLogo(string $logo): self
     {
         $this->logo = $logo;
+
+        return $this;
+    }
+
+    public function getEtat(): ?bool
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(bool $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }

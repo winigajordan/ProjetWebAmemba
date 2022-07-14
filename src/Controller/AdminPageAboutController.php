@@ -36,7 +36,7 @@ class AdminPageAboutController extends AbstractController
     {
         return $this->render('admin/admin_page_about/index.html.twig', [
             'page'=>$this->page,
-            'reals'=>$this->realRipo->findBy(['etat'=>"VALIDE"])
+            'reals'=>$this->realRipo->findAll()
         ]);
     }
 
@@ -76,7 +76,12 @@ class AdminPageAboutController extends AbstractController
         if($real==null){
             return $this->redirectToRoute('app_admin_page_about');
         } else {
-        $real->setEtat('ARCHIVE');
+            
+        if ($real->getEtat()=="ARCHIVE") {
+            $real->setEtat('VALIDE');
+        } else {
+            $real->setEtat('ARCHIVE');
+        }
         $this->em->persist($real);
         $this->em->flush();
         return $this->redirectToRoute('app_admin_page_about');
@@ -90,14 +95,6 @@ class AdminPageAboutController extends AbstractController
         $page -> setMotContenu($request->request->get('motContenue'));
         $this->em->persist($page);
 
-        /* $admin = new Admin();
-        $admin -> setNom('Winiga');
-        $admin -> setRoles(['ROLE_ADMIN']);
-        $admin -> setEmail('admin@admin.com');
-        $admin -> setPrenom('Jordan');
-        $admin -> setPassword($this->hasher->hashPassword($admin, '1234'));
-        $this->em->persist($admin); */
-        
         $this->em->flush();
         return $this->redirectToRoute('app_admin_page_about');
 

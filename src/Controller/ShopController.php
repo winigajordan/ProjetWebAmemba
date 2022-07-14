@@ -2,16 +2,21 @@
 
 namespace App\Controller;
 
-use App\Repository\CategorieProduitRepository;
 use App\Repository\ProduitRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
+use App\Repository\CategorieProduitRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ShopController extends AbstractController
 {
     #[Route('/shop', name: 'app_shop')]
-    public function index(ProduitRepository $prodRepo,CategorieProduitRepository $catRepo): Response
+    public function index(ProduitRepository $prodRepo,
+    CategorieProduitRepository $catRepo,
+    Request $request,
+    PaginatorInterface $paginator): Response
     {
         if(!empty($_POST)){
             
@@ -21,9 +26,14 @@ class ShopController extends AbstractController
             ['etat'=>true],
             ['id'=>'DESC']
         );
+        $output = $paginator->paginate(
+            $produits,
+            $request->query->getInt('page',1),
+            15
+        );
         return $this->render('shop/index.html.twig', [
             'controller_name' => 'ShopController',
-            'produits' => $produits,
+            'produits' => $output,
             'count' => count($produits),
             'categories' => $categories            
         ]);
@@ -43,8 +53,12 @@ class ShopController extends AbstractController
     }
 
     #[Route('/shop/categorie/{id}', name: 'app_produit_by_category')]
-    public function byCategorie($id,CategorieProduitRepository $catRepo,
-    ProduitRepository $prodRepo): Response
+    public function byCategorie($id,
+    CategorieProduitRepository $catRepo,
+    ProduitRepository $prodRepo,
+    Request $request,
+    PaginatorInterface $paginator
+    ): Response
     {
         $categories = $catRepo->findAll();
         $categorie= $catRepo->find($id);
@@ -53,9 +67,14 @@ class ShopController extends AbstractController
             ['etat'=>true,'categorie'=>$categorie],
             ['id'=>'DESC']
         );
+        $output = $paginator->paginate(
+            $produits,
+            $request->query->getInt('page',1),
+            15
+        );
         return $this->render('shop/index.html.twig', [
             'controller_name' => 'ShopController',
-            'produits' => $produits,
+            'produits' => $output,
             'count' => count($produits),
             'categories' => $categories  
         ]);

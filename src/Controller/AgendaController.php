@@ -2,17 +2,22 @@
 
 namespace App\Controller;
 
-use App\Repository\CategorieEvenementRepository;
-use App\Repository\EvenementRepository;
 use DateTime;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\EvenementRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\CategorieEvenementRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AgendaController extends AbstractController
 {
     #[Route('/agenda', name: 'app_agenda')]
-    public function index(EvenementRepository $ripo, CategorieEvenementRepository $cateRipo): Response
+    public function index(
+        EvenementRepository $ripo, 
+        CategorieEvenementRepository $cateRipo,
+        PaginatorInterface $paginator
+        ): Response
     {
         $events = $this->events($ripo);
         $past = $events[0];

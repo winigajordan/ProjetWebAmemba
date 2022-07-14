@@ -13,12 +13,12 @@
         <div class="mb-2">
             <label for="exampleInputEmail1" class="form-label">Libelle</label>
             <input name="libelle" type="text"
-             value="{% if produitSelected is defined %}{{produitSelected.libelle}}{% else %} {% endif %}"
-             class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+             value="{% if produitSelected is defined %}{{produitSelected.libelle}}{% endif %}"
+             class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
         </div>
         <div class="form-group">
           <label for="">Categorie</label>
-          <select class="form-control" name="categorie" id="">
+          <select class="form-control" name="categorie" id="" required>
           {% for cat in categories %}
             <option value={{cat.id}}>{{cat.libelle}}</option>
           {% endfor %}
@@ -27,26 +27,26 @@
 
         <div class="mb-2">
             <label for="exampleInputEmail1" class="form-label">Description</label>
-            <textarea name="description" class="form-control">{% if produitSelected is defined %}{{produitSelected.description}}{% else %}{% endif %}</textarea>
+            <textarea name="description" class="form-control" required>{% if produitSelected is defined %}{{produitSelected.description}}{% endif %}</textarea>
         </div>
 
         <div class="mb-2">
             <label for="exampleInputEmail1" class="form-label">Prix</label>
-            <input name="prix" type="number"
-             value={% if produitSelected is defined %}{{produitSelected.prix}} {% else %} {% endif %}
-             class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input name="prix" type="number" 
+             value={% if produitSelected is defined %}{{produitSelected.prix}}{% endif %}
+             class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
         </div>
 
         <div class="mb-2">
             <label for="exampleInputEmail1" class="form-label">Quantite en stock</label>
-            <input name="qte_stock" type="number" class="form-control"
-             value={% if produitSelected is defined %}{{produitSelected.getQteStock()}} {% else %} {% endif %}
-             id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input name="qte_stock" type="number" class="form-control" 
+             value={% if produitSelected is defined %}{{produitSelected.getQteStock()}}{% endif %}
+             id="exampleInputEmail1" aria-describedby="emailHelp" required>
         </div>
 
         <div class="mb-4">
             <label for="formFileLg" class="form-label">Image</label>
-            <input name="image" class="form-control form-control-lg" id="formFileLg" type="file">
+            <input name="image" class="form-control form-control-lg" id="formFileLg" type="file" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" required>
         </div>
 
         <button type="submit" name="btnAdd" class="btn btn-primary">{% if produitSelected is defined %}Modifier{% else %}Ajouter{% endif %}</button>
