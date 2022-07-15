@@ -34,7 +34,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent"">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-2">
-                        <a href="{{path('app_accueil')}}" class="nav-link">Acceuil</a>
+                        <a href="{{path('app_accueil')}}" class="nav-link">Accueil</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Amemba Life</a>
@@ -226,49 +226,63 @@
 
 {% block content %} {% endblock content %}
 
+{% block part %}
+
+
+{% endblock part %}
 
 <!-- FOOTER START -->
 <footer>
-    <div class="container h-100 d-flex">
-        <div class="card-footer">
-            <div class="logos my-5">
-                <img src="{{asset('front/images/identity/logo_txt/white.png')}}" alt="">
-                <img src="{{asset('front/images/identity/logo_txt/txt_white.png')}}" alt="">
+    <div class="px-xxl-5">
+        <div class="row">
+            <div class="card-footer col-sm" >
+                <div class="logos my-5">
+                    <img src="{{asset('front/images/identity/logo_txt/white.png')}}" alt="">
+                </div>
             </div>
-            <ul class="coordonnees list-group">
-                <li><i class="fa-solid fa-location-dot"></i>   Adresse</li>
-                <li><i class="fa-solid fa-phone"></i>   Numéro de téléphone </li>
-                <li><i class="fa-solid fa-at"></i> Adresse email</li>
-            </ul>
-        </div>
-        <div class="card-footer">
-            <h4 class="my-5">MEMBA LIFE</h4>
-            <ul class="memba-life list-group">
-                <li><a href="#">Activités</a></li>
-                <li><a href="#">Calendrier</a> </li>
-                <li><a href="#">Programme WEN</a></li>
-                <li><a href="#">Partenariats</a></li>
-            </ul>
-        </div>
-        <div class="card-footer">
-            <h4 class="my-5"> Mentions légales</h4>
-            <ul class="mentions-legales list-group">
-                <li><a href="#">Politique de confidentialité</a></li>
-                <li><a href="#">Termes et Conditions</a></li>
-            </ul>
-        </div>
-        <div class="card-footer">
-            <h4 class="my-5"> Nos réseaux sociaux</h4>
-            <ul class="reseaux-sociaux list-group d-flex">
-                <li><a href="#"><i class="fa-brands fa-instagram fa-2x"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-facebook fa-2x"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-twitter fa-2x"></i></a></li>
-                <li><a href="#"><i class="fa-brands fa-youtube fa-2x"></i></a></li>
-            </ul>
+            
+            <div class="card-footer col-sm">
+                <h4 class="my-5"> Mentions légales</h4>
+                <ul class="mentions-legales list-group">
+                    <li><a href="#">Politique de confidentialité</a></li>
+                    <li><a href="#">Termes et Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="card-footer col-sm">
+                <h4 class="my-5">Liens utiles</h4>
+                <ul class="memba-life list-group">
+                    <li><a href="#">Ministère de la finance</a></li>
+                    <li><a href="#">Ministère de l'Enseignement supérieur</a></li>
+                    <li><a href="#">Ministère de l’Éducation nationale</a></li>
+                </ul>
+            </div>
+            <div class="card-footer col-sm">
+                <h4 class="my-5">Notre site</h4>
+                <ul class="memba-life list-group">
+                    <li><a href="#">A propos</a></li>
+                    <li><a href="#">Notre Agenda</a></li>
+                    <li><a href="#">Notre Boutique</a></li>
+                    <li><a href="#">Demande d'adhésion</a> </li>
+                    <li><a href="#">Demande de partenariat</a> </li>
+                </ul>
+            </div>
+
+            <div class="card-footer col-sm">
+                <h4 class="my-5"> Nos réseaux sociaux</h4>
+                <ul class="reseaux-sociaux list-group d-flex">
+                    <li class=""><a href="#"><i class="fa-solid fa-envelope fa-2x"></i> <span class="mx-3">Mail</span></a></li>
+                    <li class=""><a href="#"><i class="fa-brands fa-facebook fa-2x"></i> <span class="mx-3">Facebook</span></a></li>
+                    <li class=""><a href="#"><i class="fa-brands fa-youtube fa-2x"></i> <span class="mx-3">Youtube</span></a></li>
+                    <li class=""><a href="#"><i class="fa-brands fa-whatsapp fa-2x"></i> <span class="mx-3">WhatsApp</span></a></li>
+
+                </ul>
+            </div>
         </div>
     </div>
 </footer>
 <!-- FOOTER END -->
+
 
 <!-- Slick JS -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>

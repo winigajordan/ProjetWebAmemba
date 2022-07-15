@@ -761,11 +761,14 @@ nav .membre img {
 
 footer {
     background-color: var(--secondary-blue);
+    padding-right: 30px;
+    padding-left: 30px;
+    padding-bottom: 20px;
 }
 
 footer * {
     color: #fff;
-    text-align: center;
+    text-align: left;
 }
 
 footer h6 {
@@ -778,7 +781,8 @@ footer ul {
 }
 
 footer ul li {
-    margin: 10px auto;
+    margin-top: 10px ;
+    align-items: left;
 }
 
 footer ul li a {
@@ -786,7 +790,7 @@ footer ul li a {
     font-weight: 500;
     font-size: 17px;
     display: flex;
-    align-items: center;
+    align-items: left;
 }
 
 footer .card-footer {
@@ -794,7 +798,8 @@ footer .card-footer {
 }
 
 footer .card-footer .logos img {
-    width: 50px;
+    margin-top: 20px;
+    width: 200px;
 }
 
 

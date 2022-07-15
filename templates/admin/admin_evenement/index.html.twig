@@ -17,28 +17,14 @@
                             </div>
                             <div class="col-md-8">
                                 <h6 class="text-muted font-semibold">Nombre d'évènements</h6>
-                                <h6 class="font-extrabold mb-0">hihi 123</h6>
+                                <h6 class="font-extrabold mb-0">{{evenements|length}}</h6>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <div class="col-6 col-lg-6 col-md-6">
-                <div class="card">
-                    <div class="card-body py-4 px-5">
-                        <div class="d-flex align-items-center">
-                            <div class="avatar avatar-xl">
-                                <img src="{{asset('admin/assets/images/faces/1.jpg')}}" alt="Face 1">
-                            </div>
-                            <div class="ms-3 name">
-                                <h5 class="font-bold">Nom </h5>
-                                <h6 class="text-muted mb-0">mail </h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
 
         </div>
         
@@ -73,10 +59,6 @@
                                                     <input type="text" id="first-name" class="form-control" name="title" {% if selected is defined %} value="{{selected.title}}" {% endif %} required>
                                                 </div>
                                             </div>
-
-                                            
-                                            
-
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="desc">Description </label>
@@ -89,7 +71,7 @@
                                                     <label>{% if selected is defined %} Nouvelle catégorie {% else %} Categorie {% endif %}</label>
                                                 </div>
                                                 <div class="col-md-8 form-group">
-                                                    <select class="form-control" name="categorie">
+                                                    <select class="form-control" name="categorie" required>
                                                         {% for cat in categories %}
                                                             <option value = "{{cat.id}}">{{cat.name}}</option>
                                                         {% endfor %}

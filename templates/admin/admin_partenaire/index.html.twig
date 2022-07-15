@@ -1,0 +1,88 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block page_title %} Gestion des partenaires {% endblock page_title %}
+{% block content %}
+<div class="page-content">
+    <section class="section">
+        <div class="row" id="basic-table">
+            <div class="col-12 ">
+                <div class="card">
+                    <div class="container my-3">
+                    <form class="form form-horizontal" enctype="multipart/form-data" method="POST" action="{{path('app_admin_partenaire_add')}}">
+                       
+                        <div class="row mt-2">
+                            <div class="col-md-4">
+                                <label for='phonr' class="form-label col-12">Nom du partenaire </label>
+                            </div>
+                            <div class="col-md-8 form-group">
+                                <input type="text" class="form-control" name="nom" id="nom" aria-describedby="helpId"  required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for='phonr' class="form-label col-12">Description</label>
+                            </div>
+                            <div class="col-md-8 form-group">
+                                <textarea class="form-control" name="description" rows="3" required></textarea>
+                            </div>
+                        </div>
+                        
+
+                        
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for='phonr' class="form-label col-12">Logo du partenaire </label>
+                            </div>
+                            <div class="col-md-8 form-group">
+                                <input class="form-control" name="logo" type="file" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ajouter le partenaire </button> 
+                    </form>
+                    </div>   
+                </div>
+            </div>
+        </div>
+    </section>    
+</div>
+
+
+<div class="card">
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-heading3">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapse3" aria-expanded="false" aria-controls="panelsStayOpen-collapse3">
+                <strong> Liste des partenaires </strong> 
+            </button>
+            </h2>
+            <div id="panelsStayOpen-collapse3" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-heading3">
+                <div class="accordion-body">
+                    <table class="table table-hover mb-0 table-lg">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Etat</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for part in partenaires %}
+                            <tr>
+                                <td class="text-bold-500">{{part.nom}}</td>
+                                <td class="text-bold-500">{% if part.etat %} PUBLIE {% else %} ARCHIVE {% endif %}</td>
+                                <td class="text-bold-500"> 
+                                    <a type="button" class="btn btn-outline-primary" href="{{path('app_admin_partenaire_update',{id:part.id})}}">{% if part.etat %} ARCHIVER {% else %} PUBLIER {% endif %}</a> 
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock content %}

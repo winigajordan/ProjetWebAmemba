@@ -91,6 +91,22 @@ $(document).ready(function() {
         slidesToScroll: 3,
         dots: false,
         arrows: false,
+        responsive: [{
+            breakpoint: 760,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            },
+
+        }
+    ]
     });
     // Historique 
     $('.historiques-caroussel-container').slick({
@@ -101,6 +117,22 @@ $(document).ready(function() {
         slidesToScroll: 3,
         dots: false,
         arrows: false,
+        responsive: [{
+            breakpoint: 760,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 480,
+            settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+            },
+
+        }
+    ]
     });
     // Stats Animation
     $('.count').each(function() {

@@ -42,7 +42,7 @@ class ForumController extends AbstractController
             $output = $paginator->paginate(
                 $found,
                 $request->query->getInt('page',1),
-                1
+                9
             );
             return $this->render('forum/index.html.twig', [
                 'controller_name' => 'ForumController',
@@ -62,7 +62,7 @@ class ForumController extends AbstractController
         $output = $paginator->paginate(
             $sujets,
             $request->query->getInt('page',1),
-            1
+            9
         );
         return $this->render('forum/index.html.twig', [
             'thematiques' => $thematiques,

@@ -24,44 +24,13 @@
                         </div>
                     </div>
                 </article> 
-                <article class="filter-group">
-                    <header class="card-header">
-                    <a href="#" class="title" data-bs-toggle="collapse" data-bs-target="#collapse_aside2">
-                        <i class="icon-control fa fa-chevron-down"></i>  Prix 
-                    </a>
-                    </header>
-                    <div class="collapse show" id="collapse_aside2">
-                        <div class="card-body">
-                            <div class="row mb-3">
-                            <form method="POST" >
-                                <div class="col-6">
-                                    <label for="min" class="form-label">Min</label>
-                                    <input name="min" class="form-control" id="min" placeholder="0 F CFA" type="number">
-                                </div>
-                                <div class="col-6">
-                                    <label for="max" class="form-label">Max</label>
-                                    <input name="max" class="form-control" id="max" placeholder="999999 F CFA" type="number">
-                                </div>
-                            </div>
-                            <button class="btn btn-primary w-100" type="submit">Filtrer</button>
-                            </form>
-                        </div>
-                    </div>
-                </article>
                 </div>
             </aside>
             <main class="col-lg-9">
                 
             <header class="d-sm-flex align-items-center border-bottom mb-4 pb-3">
                 <strong class="d-block py-2">{{count}} produits trouvés </strong>
-                <div class="ms-auto">
-                  <select class="form-select d-inline-block w-auto">
-                      <option value="0">Correspondance</option>
-                      <option value="1">Recommandé</option>
-                      <option value="2">Hautement noté</option>
-                      <option value="3">Au hasard</option>
-                  </select>
-                </div>
+                
             </header>
             {% if produits|length > 0 %}
             <div class="row">
@@ -105,3 +74,5 @@
 <!-- SECOND SECTION END -->
 {% endblock content %}
 
+
+{% block part %}{% endblock part %}
