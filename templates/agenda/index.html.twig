@@ -66,7 +66,7 @@
               {% for ev in past %}
               <div class="col-lg-4 col-md-6 col-sm-6">
                     <figure class="card card-product-grid">
-                        <div class="img-wrap" style="background-image: url({{asset('front/images/blog/blog1.png')}});"> </div>
+                        <div class="img-wrap" style="background-image: url('evenements/{{ev.images[0].path}}');"> </div>
                         <figcaption class="info-wrap border-top">
                             <h3>{{ev.title}}</h3>
                             <div class="article-infos">
@@ -81,24 +81,26 @@
 
 
             </div>
-            <hr>
-            <div class="d-flex mt-4 d-flex justify-content-end">
-                <div aria-label="Page navigation nav-pagination" class="p-2">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Précédent</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Suivant</a></li>
-                    </ul>
-                </div>
-            </div>
+           
         </main>
     </div>
 </section>
 <!-- SECOND SECTION END -->
+
+<!-- PARTNERS SECTION START -->
+<section class="partners container">
+    <h2 class="text-center py-5">Nos partenaires</h2>
+    <div class="partners-carousel-container pb-5">
+        
+        {% for part in partenaires %}
+        <div class="d-flex justify-content-center align-items center">
+            
+            <img src="/partenaires/{{part.logo}}" alt="">    
+        </div>
+        {% endfor %}
+    </div>
+</section>
+<!-- PARTNERS SECTION END -->
 
 
 {% endblock %}

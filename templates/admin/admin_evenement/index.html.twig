@@ -59,10 +59,6 @@
                                                     <input type="text" id="first-name" class="form-control" name="title" {% if selected is defined %} value="{{selected.title}}" {% endif %} required>
                                                 </div>
                                             </div>
-
-                                            
-                                            
-
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="desc">Description </label>
@@ -75,7 +71,7 @@
                                                     <label>{% if selected is defined %} Nouvelle catégorie {% else %} Categorie {% endif %}</label>
                                                 </div>
                                                 <div class="col-md-8 form-group">
-                                                    <select class="form-control" name="categorie">
+                                                    <select class="form-control" name="categorie" required>
                                                         {% for cat in categories %}
                                                             <option value = "{{cat.id}}">{{cat.name}}</option>
                                                         {% endfor %}

@@ -36,7 +36,7 @@ class AdminPartenaireController extends AbstractController
         $part -> setDescription($request->request->get('description'));
         $img=$request->files->get("logo"); 
         $imageName=uniqid().'.'.$img->guessExtension(); 
-        $img->move($this->getParameter("evenement_directory"),$imageName);          
+        $img->move($this->getParameter("partenaires"),$imageName);          
         $part->setLogo($imageName);
         $this->em->persist($part);
         $this->em->flush();

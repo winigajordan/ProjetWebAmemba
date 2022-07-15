@@ -307,36 +307,12 @@
 <section class="partners container">
     <h2 class="text-center py-5">Nos partenaires</h2>
     <div class="partners-carousel-container pb-5">
+        
+        {% for part in partenaires %}
         <div class="d-flex justify-content-center align-items center">
-            <img src="{{asset('front/images/partners/free.png')}}" alt="">    
+            <img src="/partenaires/{{part.logo}}" alt="">    
         </div>
-        <div class="d-flex justify-content-center align-items center">
-            <img src="{{asset('front/images/partners/sonatel.png')}}" alt="">    
-        </div>
-        <div class="d-flex justify-content-center align-items center">
-            <img src="{{asset('front/images/partners/ism.png')}}" alt="">    
-        </div>
-        <div class="d-flex justify-content-center align-items center">
-            <img src="{{asset('front/images/partners/iam.png')}}" alt="">    
-        </div>
-        <div class="d-flex justify-content-center align-items center">
-            <img src="{{asset('front/images/partners/zadada.png')}}" alt="">    
-        </div>
-        <div class="d-flex justify-content-center align-items center">
-            <img src="{{asset('front/images/partners/free.png')}}" alt="">    
-        </div>
-        <div class="d-flex justify-content-center align-items center">
-            <img src="{{asset('front/images/partners/sonatel.png')}}" alt="">    
-        </div>
-        <div class="d-flex justify-content-center align-items center">
-            <img src="{{asset('front/images/partners/ism.png')}}" alt="">    
-        </div>
-        <div class="d-flex justify-content-center align-items center">
-            <img src="{{asset('front/images/partners/iam.png')}}" alt="">    
-        </div>
-        <div class="d-flex justify-content-center align-items center">
-            <img src="{{asset('front/images/partners/zadada.png')}}" alt="">    
-        </div>
+        {% endfor %}
     </div>
 </section>
 <!-- PARTNERS SECTION END -->
@@ -385,3 +361,6 @@
     <!-- NEWSLETTER SECTION END -->
 
 {% endblock %}
+
+
+{% block part %}{% endblock part %}

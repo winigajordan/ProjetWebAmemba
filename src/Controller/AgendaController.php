@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use DateTime;
 use App\Repository\EvenementRepository;
+use App\Repository\PartenaireRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +17,8 @@ class AgendaController extends AbstractController
     public function index(
         EvenementRepository $ripo, 
         CategorieEvenementRepository $cateRipo,
-        PaginatorInterface $paginator
+        PaginatorInterface $paginator,
+        PartenaireRepository $partRipo
         ): Response
     {
         $events = $this->events($ripo);
@@ -28,12 +30,13 @@ class AgendaController extends AbstractController
             'future' => $future,
             'past'=> $past,
             'numberPast' => count($past),
-            'categories' => $cateRipo -> findAll()
+            'categories' => $cateRipo -> findAll(),
+            'partenaires' =>  $partRipo -> findBy(['etat'=>True])
         ]);
     }
 
     #[Route('/agenda/{id}', name: 'app_agenda_categorie')]
-    public function filterByCategorie($id, CategorieEvenementRepository $cateRipo, EvenementRepository $ripo){
+    public function filterByCategorie($id, CategorieEvenementRepository $cateRipo, EvenementRepository $ripo,   PartenaireRepository $partRipo){
        $catEvents = $this->categorieEvenement($id, $cateRipo);
        $events = $this->events($ripo);
        $future = $events[1];
@@ -44,6 +47,7 @@ class AgendaController extends AbstractController
            'past'=> $catEvents,
            'numberPast' => count($catEvents),
            'categories' => $cateRipo -> findAll(),
+           'partenaires' =>  $partRipo -> findBy(['etat'=>True])
            
        ]);
     }

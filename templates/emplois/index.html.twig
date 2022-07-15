@@ -6,8 +6,8 @@
 
 {% block content %}
     <!-- SECOND SECTION START -->
-    <section class="second">
-        <div class="container py-4">
+    <section class="second mt-3">
+        <div class="container py-4 mt-3">
 
             
            
@@ -15,7 +15,7 @@
                 <input type="text" class="form-control" id="search" aria-describedby="search" placeholder="Rechercher des mots clés..." name="key" {% if key is defined %}value="{{key}}"{% endif %}>
                 <button type="submit" class="btn btn-primary d-flex mx-3"> Rechercher </button>
             </form>
-            
+            {% if emplois|length > 0 %}
             <h6 class="mb-4">{{emplois|length}} emplois</h6>
             {% for emp in emplois %}
             <div class="forum-post mb-4">
@@ -33,25 +33,16 @@
                 </div>
             </div>
             {% endfor %}
-            
-            {% if emplois|length > 0 %}
-            <!-- Pagination -->
-            <div class="d-flex mt-4 d-flex justify-content-end">
-                <div aria-label="Page navigation nav-pagination" class="p-2">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Précédent</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Suivant</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!-- pagination end -->
+
+            {% else %}
+            <div style="height:170px">
             {% endif %}
+            
+            
         </div>
     </section>
     <!-- SECOND SECTION END -->
 {% endblock %}
+
+
+{% block part %}{% endblock part %}
