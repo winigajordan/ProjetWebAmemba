@@ -16,7 +16,6 @@
                     <div class="form-top-left form-top-side">
                         <div class="form-group" class="py-2">
                             <div class="text-center">
-                                <label for="exampleFormControlFile1">Ajouter une image a l'article (facultatif)</label>
                             </div>
                             <div class="d-flex justify-content-center">
                                 <img src="{{asset('front/images/nopreview.jpeg')}}" alt="article illustration" id="addArticleImg" width="500px">
@@ -26,23 +25,23 @@
                     <div class="form-top-right form-top-side">
                         <div class="form-group">
                             <label for="title">Titre <span class="require">*</span> <small>(Ce champ est utilisé dans le chemin de l'url.)</small></label>
-                            <input type="text" class="form-control mb-3" name="titre" />
+                            <input type="text" class="form-control mb-3" name="titre" required />
                         </div>
                         <div class="form-group form-row">
                             <label for="title">Categorie <span class="require">*</span></label>
-                            <select name="categorie" id="" class="form-control mb-3">
+                            <select name="categorie" id="" class="form-control mb-3" required>
                                 {% for i in categories %}
                                 <option value="{{i.id}}">{{i.libelle}}</option>
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFormControlFile1">Ajouter une image a l'article (facultatif)</label>
-                            <input name="image" class="form-control mb-4" type="file" id="formFileImage" accept="image/png, image/jpeg">
+                            <label for="exampleFormControlFile1">Ajouter une image a l'article </label>
+                            <input name="image" class="form-control mb-4" type="file" id="formFileImage" accept="image/png, image/jpeg" required>
                         </div>
                         <div class="form-group mt-3">
                             <label for="article">Contenu de l'article</label>
-                            <textarea rows="5" minlength="20" class="form-control" name="contenu" ></textarea>
+                            <textarea rows="5" minlength="20" class="form-control" name="contenu" required></textarea>
                         </div>
                     </div>
                 </div>

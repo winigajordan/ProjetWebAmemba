@@ -12,6 +12,7 @@ parameters:
     pp_directory : '%kernel.project_dir%/public/pp'
     bureau_directory : '%kernel.project_dir%/public/bureau'
     partenaires : '%kernel.project_dir%/public/partenaires'
+    blog : '%kernel.project_dir%/public/blog'
     
 services:
     # default configuration for services in *this* file
