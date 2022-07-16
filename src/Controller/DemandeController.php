@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Abonne;
 use DateTime;
 use App\Entity\Membre;
 use App\Entity\Wallet;
@@ -82,6 +83,14 @@ class DemandeController extends AbstractController
         $selected -> setEtat('VALIDE');
         $manager -> persist($membre);
         $manager -> persist($selected);
+
+        //ajout à la newsletter
+        $abonne = new Abonne();
+        $abonne -> setNom($membre->getNom());
+        $abonne -> setPrenom($membre->getPrenom());
+        $abonne -> setMail($membre->getEmail());
+        $abonne -> setStatus(true);
+        $manager -> persist($abonne);
         
         //creation de wallet
         $wallet = new Wallet();

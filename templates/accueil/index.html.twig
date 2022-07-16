@@ -10,7 +10,7 @@
 <section class="slider-section">
     <i class="fas fa-angle-left fa-3x arrow arrow-left" id="arrow-left"></i>
     <div class="sliders-container">
-        <div class="slider sl-1" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('front/images/hero-carroussel/background.jfif')}}');">
+        <div class="slider sl-1" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('/pages/')}}{{page.carouselImage1}}');">
             <div class="sl-content">
                 <div class="sl-content-content">
                     <h2>{{page.carouselTitre1}}</h2>
@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-        <div class="slider sl-2" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('front/images/hero-carroussel/background.jfif')}}');">
+        <div class="slider sl-2" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('/pages/')}}{{page.carouselImage2}}');">
             <div class="sl-content">
                 <div class="sl-content-content">
                     <h2>{{page.carouselTitre2}}</h2>
@@ -30,7 +30,7 @@
                 </div>
             </div>
         </div>
-        <div class="slider sl-3" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('front/images/hero-carroussel/background.jfif')}}');">
+        <div class="slider sl-3" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('/pages/')}}{{page.carouselImage3}}');">
             <div class="sl-content">
                 <div class="sl-content-content">
                     <h2>{{page.carouselTitre3}}</h2>
@@ -167,84 +167,18 @@
         Enim vel sed posuere ut massa ut.
     </p>
     <div class="blog-carousel-container pb-5">
+        {% for art in articles %}
         <div class="blog-card">
             <div class="blog-card-top">
-                <img src="{{asset('front/images/blog/blog1.png')}}" alt="">
+                <img src="{{asset('/blog/')}}{{art.images[0].path}}" alt="">
             </div>
             <div class="blog-card-bottom">
-                <h4>Titre de l’article</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod.Lorem ipsum dolor sit amet, consec tetur adipiscing elit, 
-                    sed do eiusmod.
-                </p>
+                <h4>{{art.titre}}</h4>
                 <a href="" class="btn btn-outline-primary">Lire plus</a>
             </div>
         </div>
-        <div class="blog-card">
-            <div class="blog-card-top">
-                <img src="{{asset('front/images/blog/blog2.png')}}" alt="">
-            </div>
-            <div class="blog-card-bottom">
-                <h4>Titre de l’article</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod.Lorem ipsum dolor sit amet, consec tetur adipiscing elit, 
-                    sed do eiusmod.
-                </p>
-                <a href="" class="btn btn-outline-primary">Lire plus</a>
-            </div>
-        </div>
-        <div class="blog-card">
-            <div class="blog-card-top">
-                <img src="{{asset('front/images/blog/blog3.png')}}" alt="">
-            </div>
-            <div class="blog-card-bottom">
-                <h4>Titre de l’article</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod.Lorem ipsum dolor sit amet, consec tetur adipiscing elit, 
-                    sed do eiusmod.
-                </p>
-                <a href="" class="btn btn-outline-primary">Lire plus</a>
-            </div>
-        </div>
-        <div class="blog-card">
-            <div class="blog-card-top">
-                <img src="{{asset('front/images/blog/blog2.png')}}" alt="">
-            </div>
-            <div class="blog-card-bottom">
-                <h4>Titre de l’article</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod.Lorem ipsum dolor sit amet, consec tetur adipiscing elit, 
-                    sed do eiusmod.
-                </p>
-                <a href="" class="btn btn-outline-primary">Lire plus</a>
-            </div>
-        </div>
-        <div class="blog-card">
-            <div class="blog-card-top">
-                <img src="{{asset('front/images/blog/blog1.png')}}" alt="">
-            </div>
-            <div class="blog-card-bottom">
-                <h4>Titre de l’article</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod.Lorem ipsum dolor sit amet, consec tetur adipiscing elit, 
-                    sed do eiusmod.
-                </p>
-                <a href="" class="btn btn-outline-primary">Lire plus</a>
-            </div>
-        </div>
-        <div class="blog-card">
-            <div class="blog-card-top">
-                <img src="{{asset('front/images/blog/blog2.png')}}" alt="">
-            </div>
-            <div class="blog-card-bottom">
-                <h4>Titre de l’article</h4>
-                <p>
-                    Lorem ipsum dolor sit amet, consec tetur adipiscing elit, sed do eiusmod.Lorem ipsum dolor sit amet, consec tetur adipiscing elit, 
-                    sed do eiusmod.
-                </p>
-                <a href="" class="btn btn-outline-primary">Lire plus</a>
-            </div>
-        </div>
+        {% endfor %}
+        
     </div>
     <div class="blog-btn position-absolute">
         <div class="btn-group" role="group" aria-label="Basic example">
@@ -307,7 +241,7 @@
 <section class="partners container">
     <h2 class="text-center py-5">Nos partenaires</h2>
     <div class="partners-carousel-container pb-5">
-        
+
         {% for part in partenaires %}
         <div class="d-flex justify-content-center align-items center">
             <img src="/partenaires/{{part.logo}}" alt="">    

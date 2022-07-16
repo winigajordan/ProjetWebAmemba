@@ -9,7 +9,7 @@
     <h2 class="text-center pt-5">Evènements à venir</h2>
     <div class="events-carousel-container my-5 position-relative">
       {% for ev in future %}
-        <div class="event-card event-card1 position-relative" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('evenements/{{ev.images[0].path}}');">
+        <div class="event-card event-card1 position-relative" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('evenements/')}}{{ev.images[0].path}}');">
             <div class="event-card-badge position-absolute">
                 <span class="text-center">{{ev.date |format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none') }}</span>
             </div>
@@ -66,7 +66,8 @@
               {% for ev in past %}
               <div class="col-lg-4 col-md-6 col-sm-6">
                     <figure class="card card-product-grid">
-                        <div class="img-wrap" style="background-image: url('evenements/{{ev.images[0].path}}');"> </div>
+                        
+                        <div class="img-wrap" style="background-image: url('{{asset('evenements/')}}{{ev.images[0].path}}');"> </div>
                         <figcaption class="info-wrap border-top">
                             <h3>{{ev.title}}</h3>
                             <div class="article-infos">

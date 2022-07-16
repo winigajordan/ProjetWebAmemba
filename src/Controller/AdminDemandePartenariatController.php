@@ -53,7 +53,7 @@ class AdminDemandePartenariatController extends AbstractController
         $partenariat->setReponse($data->get('reponse'));
         $partenariat->setDateReponse(new \DateTime());
         $mail = new ApiMailJet();
-        $mail->send($partenariat->getMail(), $partenariat->getPrenom()." " .$partenariat->getNom(), "Demande de partenariat" ,$data->get('reponse'));
+        $mail->part($partenariat->getMail(), $partenariat->getPrenom()." " .$partenariat->getNom(),$data->get('reponse'));
         //dd($partenariat);
         $this->em->persist($partenariat);
         $this->em->flush();

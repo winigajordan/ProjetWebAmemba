@@ -4,18 +4,32 @@
 <!-- SECOND SECTION START -->
     <section class="second">
         <div class="container py-5">
-            <form method="POST" enctype="multipart/form-data" action="{{path('app_newletter_add')}}">
-                <div class="form-group mt-3">
-                    <label for="article">Contenu de la letter</label>
-                    <textarea rows="10" minlength="20" class="form-control" name="contenu" ></textarea>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Rediger une newsletter</h3>
                 </div>
+                <div class="card-body">
+                    <form method="POST" enctype="multipart/form-data" action="{{path('app_newletter_add')}}">
+                        
+                        <div class="form-group">
+                          <label for="titre">Titre</label>
+                          <input type="text" class="form-control" name="titre" id="titre" aria-describedby="helpId">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="article">Contenu de la letter</label>
+                            <textarea rows="5" minlength="20" class="form-control" name="contenu" id="article"></textarea>
+                        </div>
 
-    		    <div class="form-group">
-    		        <button type="submit" class="btn btn-primary">
-    		            Poster
-    		        </button>
-    		    </div>
-    		</form>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">
+                                Poster
+                            </button>
+                        </div>
+                    </form>
+                   
+                </div>
+            </div>
+            
         </div>
 
             <div class="card">
@@ -26,6 +40,7 @@
                 <table class="table" id="table1">
                     <thead>
                         <tr>
+                            <th>Titre</th>
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
@@ -33,6 +48,7 @@
                     <tbody>
                     {% for letter in letters %}
                         <tr>
+                            <td>{{letter.titre}}</td>
                             <td>{{letter.createdAt|format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none')}}</td>
                             <td>
                                 <a class="btn-btn-outline-primary btn-sm" href="{{path('app_newsletter_details',{id:letter.id})}}">Aperçu</a>

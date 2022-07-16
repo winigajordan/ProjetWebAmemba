@@ -107,7 +107,7 @@ class BlogController extends AbstractController
             $image=new Image(); 
             $img=$request->files->get("image"); 
             $imageName=uniqid().'.'.$img->guessExtension(); 
-            $img->move($this->getParameter("images_directory"),$imageName);          
+            $img->move($this->getParameter("blog"),$imageName);          
             $image->setPath($imageName);
             $article->addImage($image);
             $em->persist($image);
@@ -187,12 +187,8 @@ class BlogController extends AbstractController
                 $art->setPublishedAt(new DateTimeImmutable());
                 $this->em->persist($art);
                 $this->em->flush();
-                return $this->render('blog/admin.article.details.html.twig', [
-                    'controller_name' => 'BlogController',
-                    'categories' => $categoriesArticle,
-                    'article' => $art,
-                    'paragraphes' => $paragraphes
-                ]); 
+                
+                return $this->redirectToRoute('app_admin_article');
             }
             if($request->request->get('refuser')){
                 $art=$article[0];

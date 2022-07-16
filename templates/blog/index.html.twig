@@ -22,7 +22,7 @@
                     <div class="col-lg-4 col-md-6 col-sm-6">
                     <a href="{{path('app_blog_article_details',{slug:article.slug})}}" style="text-decoration:none;">
                         <figure class="card card-product-grid">
-                            <div class="img-wrap" style="background-image: url('/produits/{{article.images[0].path}}');"></div>
+                            <div class="img-wrap" style="background-image: url('/blog/{{article.images[0].path}}');"></div>
                             <figcaption class="info-wrap border-top">
                                 <h3>{{article.titre}}</h3>
                                 <p class="title mb-2">Categorie : {{article.categorieArticle.libelle}}</p>

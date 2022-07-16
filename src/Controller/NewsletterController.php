@@ -31,12 +31,13 @@ class NewsletterController extends AbstractController
         EntityManagerInterface $em){
         $letter = new Letter();
         $letter->setContent($request->request->get('contenu'));
+        $letter->setTitre($request->request->get('titre'));
         $em->persist($letter);
         $em->flush();
         $abonnes = $aboRepo->findBy(['status'=>1]);
         foreach ($abonnes as $abo) {
             $mail = new ApiMailJet();
-            $mail -> send($abo->getMail(), "", "Newsletter", $request->request->get('contenu'));
+            $mail -> news($abo->getMail(), $abo->getPrenom()." " .$abo->getNom(), $request->request->get('titre'), $request->request->get('contenu'));
         }
         return $this->redirectToRoute('app_newsletter');
     }

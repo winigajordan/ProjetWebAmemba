@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ArticleRepository;
 use DateTime;
 use App\Repository\EvenementRepository;
 use App\Repository\PageAccueilRepository;
@@ -17,22 +18,24 @@ class AccueilController extends AbstractController
     public function __construct(
         EvenementRepository $eventRipo,
         PageAccueilRepository $accueilRepository,
-        PartenaireRepository $partRipo
+        PartenaireRepository $partRipo,
+        ArticleRepository $articleRepo
         )
     {
         $this-> eventRipo = $eventRipo;
         $this-> accueilRepository = $accueilRepository;
         $this->partRipo = $partRipo;
+        $this->articleRipo = $articleRepo;
     }
 
     #[Route('/', name: 'app_accueil')]
     public function index(): Response
     {
-
         return $this->render('accueil/index.html.twig', [
             'events' => $this->events(),
             'page' =>  $this-> accueilRepository->find(1),
-            'partenaires' => $this->partRipo->findBy(['etat'=>True])
+            'partenaires' => $this->partRipo->findBy(['etat'=>True]),
+            'articles'=>$this->art()
         ]);
     }
 
@@ -46,5 +49,14 @@ class AccueilController extends AbstractController
             }
         }
         return $future;
+    }
+
+    public function art(){
+        $articles = $this->articleRipo->findBy(['lisibilite'=>true],['publishedAt'=>'DESC']);
+        if(sizeof($articles)<5){
+            return $articles;
+        } else {
+           return array_slice($articles, 0, 5);
+        }
     }
 }

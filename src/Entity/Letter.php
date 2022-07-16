@@ -20,6 +20,9 @@ class Letter
     #[ORM\Column(type: 'datetime_immutable')]
     private $createdAt;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $titre;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
@@ -50,6 +53,18 @@ class Letter
     public function setCreatedAt(\DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): self
+    {
+        $this->titre = $titre;
 
         return $this;
     }

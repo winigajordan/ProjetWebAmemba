@@ -94,6 +94,7 @@ nav .membre img {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     right: 0;
     z-index: 5;
+    overflow-y: scroll;
 }
 
 .menu-membre ul li a {
