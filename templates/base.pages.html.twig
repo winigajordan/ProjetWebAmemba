@@ -68,7 +68,6 @@
                                 {% if app.user %}
                                 <li><a href="{{path('app_commandes_client')}}" class="dropdown-item nav-link">Commandes</a></li>
                                 {% endif %}
-                            
                             </ul>
                         </li>
                         {% else %}
@@ -86,7 +85,6 @@
                 </ul>
             </div>
             {% if not app.user %}
-            
                 <div class="navbar-buttons">
                     <a href="{{path('app_register')}}" class="btn btn-outline-primary mx-2">Adhésion</a>
                     <a href="{{path('app_login')}}" class="btn btn-primary">Connexion <i class="fa-solid fa-angle-right"></i></a>
@@ -102,6 +100,12 @@
                     {% endif %}
                 </a>
             </div>
+            {% endif %}
+            {% if "ROLE_ADMIN" in app.user.roles %}
+            <div class="navbar-buttons">
+                <a href="{{path('demande')}}" class="btn btn-outline-primary mx-2">Dashboard</a>
+            </div>
+            
             {% endif %}
             {% endif %}
             
@@ -123,9 +127,6 @@
 
     {% if app.user is not null %}
     {% if "ROLE_MEMBRE" in app.user.roles %}
-
-
-
     <!-- MENU MEMBER START -->
     <div class="menu-membre pt-3" style="height : 500px">
         <ul class="list-group list-group-flush ">
