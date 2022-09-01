@@ -34,7 +34,23 @@ class BlogController extends AbstractController
         $this->em=$em;
     }
 
-    #[Route('/blog/{filter}', name: 'app_blog',defaults:["filter"=>"all"])]
+    #[Route('/actualite', name:'blog')]
+    public function blog( CategorieArticleRepository $catRepo, ArticleRepository $articleRepo, PaginatorInterface $paginator, Request $request,){
+        $articles = $articleRepo->findBy(['lisibilite'=>true],['publishedAt'=>'DESC']); 
+        $output = $paginator->paginate(
+            $articles,
+            $request->query->getInt('page',1),
+            12
+        );
+        return $this->render('blog/index.html.twig', [
+            'controller_name' => 'BlogController',
+            'articles' => $output,
+            'recherche' => 'recherche',
+            'categories' => $catRepo->findAll()
+        ]);   
+    }
+
+    #[Route('/blog/categorie/{filter}', name: 'app_blog',defaults:['filter'=>'all'])]
     public function index($filter, 
     ArticleRepository $articleRepo,
     CategorieArticleRepository $catRepo,
@@ -42,8 +58,6 @@ class BlogController extends AbstractController
     PaginatorInterface $paginator): Response
     {
         if(!empty($_GET)){
-            //dd($request);
-            //dd("ey");
             if(isset($_GET['search'])){
                 $options = $articleRepo->findBy(['lisibilite'=>true],['publishedAt'=>'DESC']); 
                 $key = $_GET['search'];
@@ -165,7 +179,7 @@ class BlogController extends AbstractController
         ]);
     }
 
-    #[Route('/blog/admin/article/{slug}', name: 'app_admin_article_details')]
+    #[Route('/admin/blog/article/{slug}', name: 'app_admin_article_details')]
     public function AdminArticleDetails(
         $slug,
         ArticleRepository $articleRepo,

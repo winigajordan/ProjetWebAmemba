@@ -13,6 +13,11 @@ class Admin extends User
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    public function __construct()
+    {
+        $this->setRoles(['ROLE_ADMIN']);
+    }
+
     public function getId(): ?int
     {
         return parent::getId();

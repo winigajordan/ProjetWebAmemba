@@ -53,7 +53,7 @@
 
 
                     <li class="nav-item mx-2">
-                        <a href="{{path('app_blog')}}" class="nav-link">Blog</a>
+                        <a href="{{path('blog')}}" class="nav-link">Blog</a>
                     </li>
                     <li class="nav-item mx-2">
                         <a href="{{path('app_about')}}" class="nav-link">A propos</a>
@@ -90,23 +90,26 @@
                     <a href="{{path('app_login')}}" class="btn btn-primary">Connexion <i class="fa-solid fa-angle-right"></i></a>
                 </div>
             {% else %}
-            {% if "ROLE_MEMBRE" in app.user.roles %}
-            <div class="membre">
-                <a href="#">
-                    {% if app.user.profile %} 
-                        <img src="/pp/{{app.user.profile}}" alt="avatar" id="show">
-                    {% else %}
-                        <img src="{{asset('front/images/avatars/exemple.jpg')}}" alt="avatar" id="show">
-                    {% endif %}
-                </a>
-            </div>
-            {% endif %}
-            {% if "ROLE_ADMIN" in app.user.roles %}
-            <div class="navbar-buttons">
-                <a href="{{path('demande')}}" class="btn btn-outline-primary mx-2">Dashboard</a>
-            </div>
-            
-            {% endif %}
+                {% if "ROLE_MEMBRE" in app.user.roles %}
+                <div class="membre">
+                    <a href="#">
+                        {% if app.user.profile %} 
+                            <img src="/pp/{{app.user.profile}}" alt="avatar" id="show">
+                        {% else %}
+                            <img src="{{asset('front/images/avatars/exemple.jpg')}}" alt="avatar" id="show">
+                        {% endif %}
+                    </a>
+                </div>
+                {% endif %}
+                {% if "ROLE_ADMIN" in app.user.roles %}
+                <div class="navbar-buttons">
+                    <a href="{{path('demande')}}" class="btn btn-outline-primary mx-2">Dashboard</a>
+                </div>
+                
+                {% endif %}
+                <div class="navbar-buttons">
+                    <a href="{{path('app_logout')}}" class="btn btn-outline-danger mx-2">Déconnexion</a>
+                </div>
             {% endif %}
             
 
