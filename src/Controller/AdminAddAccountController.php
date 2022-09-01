@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Admin;
 use App\Repository\AdminRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,7 @@ class AdminAddAccountController extends AbstractController
         $this->hasher = $hasher;
     }
 
-    #[Route('/account', name: 'app_admin_account')]
+    #[Route('/account', name: 'app_admin_account'), IsGranted("ROLE_ADMIN")]
     public function index(AdminRepository $adminRipo): Response
     {
         return $this->render('admin/admin_add_account/index.html.twig', [
@@ -28,7 +29,7 @@ class AdminAddAccountController extends AbstractController
         ]);
     }
 
-    #[Route('/account/add', name: 'app_admin_account_add')]
+    #[Route('/account/add', name: 'app_admin_account_add'), IsGranted("ROLE_ADMIN")]
     public function add(Request $request, EntityManagerInterface $em): Response
     {
         $data=$request->request;
@@ -42,7 +43,7 @@ class AdminAddAccountController extends AbstractController
        return  $this->redirectToRoute('app_admin_account');
     }
 
-    #[Route('/account/delete/{id}', name: 'app_admin_account_delete')]
+    #[Route('/account/delete/{id}', name: 'app_admin_account_delete'), IsGranted("ROLE_ADMIN")]
     public function update($id, EntityManagerInterface $em, AdminRepository $adminRipo): Response
     {
         $admin = $adminRipo->find($id);
