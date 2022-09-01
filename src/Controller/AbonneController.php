@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AbonneController extends AbstractController
 {
+    
     #[Route('/abonne', name: 'app_abonne')]
     public function index(
         EntityManagerInterface $em,

@@ -1,0 +1,117 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block page_title %} Ajout d'admin {% endblock page_title %}
+
+{% block content %}
+
+    <div class="page-content">
+        <section class="section">
+            <div class="row" id="basic-table">
+                <div class="col-12 ">
+                    <div class="card ">
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                        <strong> Ajouter un evenement </strong>
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                    <div class="accordion-body">
+                                        <div class="card-body">
+                                            <form class="form form-horizontal" enctype="multipart/form-data" method='POST' action="{{path('app_admin_account_add')}}">
+                                                <div class="form-body">
+
+
+
+                                                    <div class="row">
+                                                        <div class = "col-6">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="email-id-vertical">Nom</label>
+                                                                    <input type="text" id="email-id-vertical" class="form-control" name="nom"  required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class = "col-6">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="email-id-vertical">Prenom</label>
+                                                                    <input type="text" id="email-id-vertical" class="form-control" name="prenom" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--
+                                                    <div class="dropdown-divider"></div>
+                                                    -->
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label>Email</label>
+                                                        </div>
+                                                        <div class="col-md-8 form-group">
+                                                            <input type="email" id="first-name" class="form-control" name="email" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label>Mot de passe </label>
+                                                        </div>
+                                                        <div class="col-md-8 form-group">
+                                                            <input type="password" id="first-name" class="form-control" name="pwd" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Ajouter</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Liste des catégories</h4>
+                    </div>
+                    <div class="card-content">
+                        <!-- Table with no outer spacing -->
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0 table-lg">
+                                <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Prenom</th>
+                                    <th>Mail</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody >
+                                {% for ad in admins %}
+                                    <tr>
+                                        <td>{{ad.nom}} </td>
+                                        <td class="text-bold-500">{{ad.prenom}}</td>
+                                        <td>{{ad.email}}</td>
+
+                                        <td>
+                                            <a href="{{path('app_admin_account_delete', {'id' : ad.id })}}" class="btn btn-outline-danger">Supprimer l'admin</a></td>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+{% endblock content %}
