@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Admin;
 use App\Repository\PageAboutRepository;
 use App\Repository\PartenaireRepository;
 use App\Repository\PageAccueilRepository;

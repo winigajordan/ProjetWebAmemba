@@ -64,7 +64,7 @@ class RegisterController extends AbstractController
                 $content = "Une demande d'adhésion vien d'être effectué par $nom \n Date et heure : $date \n Veuillez vous connecter pour traiter la demande";
                 $mail = new ApiMailJet();
                 $mail -> send("contact@mariamaba-alumni.com", "", "Demande d'adhésion", $content);
-                $this->addFlash('info', 'Votre demande a été envoyé');
+                $this->addFlash('info', 'Votre demande a été envoyée');
                 return $this->redirectToRoute('app_register');
             }
             else {

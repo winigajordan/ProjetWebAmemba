@@ -30,12 +30,20 @@
     <!-- NAVBAR START -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container h-100">
-            <a href="#"><img src="{{asset('front/images/identity/logo_draw.png')}}" alt=""></a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent"">
+            <a href="{{ path('app_accueil') }}" style="text-decoration: none" >
+                <img src="{{asset('front/images/identity/logo_draw.png')}}" alt="">
+                <p class= "logo-title">AMEMBA</p>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-2">
                         <a href="{{path('app_accueil')}}" class="nav-link">Accueil</a>
                     </li>
+
+                    <li class="nav-item mx-2">
+                        <a href="{{path('app_about')}}" class="nav-link">A propos</a>
+                    </li>
+
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown">Amemba Life</a>
                         <ul class="dropdown-menu">
@@ -47,16 +55,6 @@
                                 {% endif %}
                             {% endif %}
                         </ul>
-                    </li>
-
-                    
-
-
-                    <li class="nav-item mx-2">
-                        <a href="{{path('blog')}}" class="nav-link">Blog</a>
-                    </li>
-                    <li class="nav-item mx-2">
-                        <a href="{{path('app_about')}}" class="nav-link">A propos</a>
                     </li>
                     {% if app.user is not null %}
                         {% if "ROLE_MEMBRE" not in app.user.roles %}
@@ -75,12 +73,15 @@
                             <a href="{{path('app_shop')}}" class="nav-link">Boutique</a>
                         </li>
                         {% endif %}
-                    {% else %} 
+                    {% else %}
                     <li class="nav-item mx-2">
                         <a href="{{path('app_shop')}}" class="nav-link">Boutique</a>
                     </li>
                     {% endif %}
-                    
+
+                    <li class="nav-item mx-2">
+                        <a href="{{path('blog')}}" class="nav-link">Blog</a>
+                    </li>
                    
                 </ul>
             </div>
@@ -257,7 +258,6 @@
             <div class="card-footer col-sm">
                 <h4 class="my-5">Liens utiles</h4>
                 <ul class="memba-life list-group">
-                    <li><a href="http://www.finances.gouv.sn/" target="_blank" >Ministère de la finance</a></li>
                     <li><a href="https://mesr.gouv.sn/" target="_blank">Ministère de l'Enseignement supérieur</a></li>
                     <li><a href="https://www.education.sn/" target="_blank">Ministère de l’Éducation nationale</a></li>
                 </ul>
@@ -278,7 +278,11 @@
                 <ul class="reseaux-sociaux list-group d-flex">
                     <li class=""><a href="mailto:contact@mariamaba-alumni.com"><i class="fa-solid fa-envelope fa-2x"></i> <span class="mx-3">Mail</span></a></li>
                     <li class=""><a href="https://www.facebook.com/groups/342225004108" target="_blank"><i class="fa-brands fa-facebook fa-2x"></i> <span class="mx-3">Facebook</span></a></li>
+                    <li class=""><a href="https://www.facebook.com/groups/342225004108" target="_blank"><i class="fa-brands fa-instagram fa-2x"></i> <span class="mx-3">amemba_officiel</span></a></li>
+                    <li class=""><a href="https://www.facebook.com/groups/342225004108" target="_blank"><i class="fa-brands fa-twitter fa-2x"></i> <span class="mx-3">AMEMBAofficiel</span></a></li>
+                    <!--
                     <li class=""><a href="https://www.youtube.com/channel/UCDPsjydTxiMkAjlqnur3Btw" target="_blank"><i class="fa-brands fa-youtube fa-2x"></i> <span class="mx-3">Youtube</span></a></li>
+                    -->
                     <li class=""><a href="https://wa.me/33624162138" target="_blank"><i class="fa-brands fa-whatsapp fa-2x"></i> <span class="mx-3">WhatsApp</span></a></li>
 
                 </ul>
