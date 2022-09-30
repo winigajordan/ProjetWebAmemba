@@ -67,6 +67,17 @@
 
 /* SECTION HEADER STYLING START */
 
+.logo-title {
+    font-family: 'Merriweather', serif;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+a:has(.logo-title){
+    display: flex;
+    align-items: center;
+}
+
 nav {
     min-height: 70px;
     padding-top: 7px;

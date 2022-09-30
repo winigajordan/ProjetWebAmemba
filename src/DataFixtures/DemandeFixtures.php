@@ -16,6 +16,7 @@ class DemandeFixtures extends AppFixtures
 
         //$mails = ['winigajordan@gmail.com', 'akolatse1@gmail.com'];
 
+        /*
         $demande = new Demande();
         $demande -> setNom("Rema");
         $demande -> setPrenom("Jordan");
@@ -40,5 +41,6 @@ class DemandeFixtures extends AppFixtures
         $manager-> persist($demande1);
 
         $manager->flush();
+        */
     }
 }

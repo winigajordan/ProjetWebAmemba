@@ -95,6 +95,9 @@
         .first h2 {
             font-size: 22px;
         }
+        .logo-title{
+            display: none;
+        }
         .slider-section .slider .sl-content .sl-content-content p,
         .first .container p {
             font-size: 15px;

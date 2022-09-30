@@ -14,14 +14,36 @@ class ShopController extends AbstractController
 {
     #[Route('/shop', name: 'app_shop')]
     public function index(ProduitRepository $prodRepo,
-    CategorieProduitRepository $catRepo,
-    Request $request,
-    PaginatorInterface $paginator): Response
+                          CategorieProduitRepository $catRepo,
+                          Request $request,
+                          PaginatorInterface $paginator): Response
     {
-        if(!empty($_POST)){
-            
-        }
         $categories = $catRepo->findAll();
+        if(!empty($_GET)& isset($_GET['search'])){
+
+            $options = $prodRepo->findBy(
+                ['etat'=>true],
+                ['id'=>'DESC']
+            );
+            $key = $_GET['search'];
+            $found = [];
+            foreach($options as $pro){
+                if (strpos($pro->getLibelle(), $key)) {
+                    $found[] = $pro;
+                }
+            }
+            $output = $paginator->paginate(
+                $found,
+                $request->query->getInt('page',1),
+                15
+            );
+            return $this->render('shop/index.html.twig', [
+                'controller_name' => 'ShopController',
+                'produits' => $output,
+                'count' => count($found),
+                'categories' => $categories
+            ]);
+        }
         $produits=$prodRepo->findBy(
             ['etat'=>true],
             ['id'=>'DESC']
@@ -35,7 +57,7 @@ class ShopController extends AbstractController
             'controller_name' => 'ShopController',
             'produits' => $output,
             'count' => count($produits),
-            'categories' => $categories            
+            'categories' => $categories
         ]);
     }
 
@@ -54,10 +76,10 @@ class ShopController extends AbstractController
 
     #[Route('/shop/categorie/{id}', name: 'app_produit_by_category')]
     public function byCategorie($id,
-    CategorieProduitRepository $catRepo,
-    ProduitRepository $prodRepo,
-    Request $request,
-    PaginatorInterface $paginator
+                                CategorieProduitRepository $catRepo,
+                                ProduitRepository $prodRepo,
+                                Request $request,
+                                PaginatorInterface $paginator
     ): Response
     {
         $categories = $catRepo->findAll();
@@ -76,7 +98,7 @@ class ShopController extends AbstractController
             'controller_name' => 'ShopController',
             'produits' => $output,
             'count' => count($produits),
-            'categories' => $categories  
+            'categories' => $categories
         ]);
     }
 }
