@@ -61,7 +61,7 @@ class RegisterController extends AbstractController
                 $em -> flush();
                 $nom = $demande -> getNom()." ".$demande -> getPrenom();
                 $date = date_format($demande -> getDate(),'Y/m/d-H:i:s');
-                $content = "Une demande d'adhésion vien d'être effectué par $nom \n Date et heure : $date \n Veuillez vous connecter pour traiter la demande";
+                $content = "Une demande d'adhésion vien d'être effectuée par $nom \n Date et heure : $date \n Veuillez vous connecter pour traiter la demande";
                 $mail = new ApiMailJet();
                 $mail -> send("contact@mariamaba-alumni.com", "", "Demande d'adhésion", $content);
                 $this->addFlash('info', 'Votre demande a été envoyée');

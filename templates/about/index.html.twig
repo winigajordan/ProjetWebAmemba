@@ -8,7 +8,7 @@
     <div class="mission-right w-50 h-50">
         <h3>{{page.missionTitre}}</h3>
         <p>
-            {{page.missionText}}    
+            {{page.missionText|raw}}    
         </p>
     </div>
 </section>
@@ -61,7 +61,7 @@
                 <div class="image" style="background-image: url(/pages/{{real.image}});"></div>
                 <h5 class="py-2">{{real.titre}}</h5>
                 <p>
-                    {{real.description}}
+                    {{real.description|raw}}
                 </p>
             </div>
             {% endfor %}
@@ -92,12 +92,12 @@
 
 <!-- TESTIMONY SECTION START  -->
 <section class="testimony-section container-fluid">
-    <h2 class="text-center mb-5 pt-5">Quelques mots de la présidente</h2>
+    <h2 class="text-center mb-5 pt-5">{{page.motTitre}}</h2>
     <div class="testimony-container container d-flex justify-content-between">
         <div class="testimony-left testimony-card" style="background-image: url({{asset('front/images/blog/blog2.png')}});"></div>
         <div class="testimony-right testimony-card">
             <p>
-                ''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. Enim vel sed posuere ut massa ut. Non sit imperdiet enim at diam orci augue sit ultrices. Rhoncus et ipsum, quis egestas''
+                    {{page.motContenu|raw}}
             </p>
             <h6 class="my-3">La présidente</h6>
         </div>
@@ -112,7 +112,7 @@
           
           {% for part in partenaires %}
           <div class="d-flex justify-content-center align-items center">
-              <img src="/partenaires/{{part.logo}}" alt="">    
+              <img src="/partenaires/{{part.logo}}" alt="" style="width: 200px; object-fit: cover">    
           </div>
           {% endfor %}
       </div>

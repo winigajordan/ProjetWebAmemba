@@ -56,6 +56,7 @@ class AdminPageAboutController extends AbstractController
        
         $real = new Realisation();
         $real->setTitre($request->request->get('titre'));
+        //$real->setDescription('aa');
         $real->setDescription($request->request->get('description'));
         $real->setEtat("VALIDE");
         $img=$request->files->get("img"); 

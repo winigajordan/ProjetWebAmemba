@@ -101,7 +101,7 @@ class DemandeController extends AbstractController
         //envoie de mail
         $content = "Votre login est $userMail et votre mot de passe est $userPassword";
         $mail = new ApiMailJet();
-        $mail -> send($selected-> getMail(), "", "Demande accepté", $content);
+        $mail -> send($selected-> getMail(), "", "Demande acceptée", $content);
 
         $manager -> flush();
         return $this->redirectToRoute('demande');
@@ -115,7 +115,7 @@ class DemandeController extends AbstractController
         $selected -> setEtat('REFUSE');
         $content = "Suite à des vérifications, nous ne sommes pas en mesure de valider la création de votre compte";
         $mail = new ApiMailJet();
-        $mail -> send($selected-> getMail(), "", "Demande refusé", $content);
+        $mail -> send($selected-> getMail(), "", "Demande refusée", $content);
         $manager -> persist($selected);
         $manager -> flush();
         return $this->redirectToRoute('demande');
