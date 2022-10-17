@@ -59,9 +59,9 @@
         <div class="">
             <h3>{{page.missionTitre}}</h3>
             <p>
-                {{page.missionText}}
+                {{page.missionText | raw}}
             </p>
-            <a href="#" class="btn btn-primary">Lire plus <i class="fa-solid fa-angle-right"></i></a>
+            <a href="{{path('app_about')}}" class="btn btn-primary">Lire plus <i class="fa-solid fa-angle-right"></i></a>
         </div>
     </div>
 </section>
@@ -258,8 +258,8 @@
             <div class="login-left login-card d-flex justify-content-center align-items-center">
                 <div>
                     <img src="{{asset('front/images/mail_vector.svg')}}" alt="">
-                    <h2 class="mt-5 mb-3">Inscrivez a notre mailing-list</h2>
-                    <p>Inscrivez-vous a notre newsletter pour être informé(e) des dernières nouveautés en temps réel. Pas plus d'un mail par semaine.</p>
+                    <h2 class="mt-5 mb-3">Inscrivez-vous à notre mailing-list</h2>
+                    <p>Inscrivez-vous à notre newsletter pour être informé(e) des dernières nouvelles de l’AMEMBA en temps réel. Pas plus d'un mail par semaine.</p>
                 </div>
             </div>
             <div class="login-right login-card">

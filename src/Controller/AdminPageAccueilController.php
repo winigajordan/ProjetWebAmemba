@@ -79,7 +79,8 @@ class AdminPageAccueilController extends AbstractController
         $data = $request->request;
         $page= $this->page;
         $page->setMissionTitre($data->get('missionTitre'));
-        $page->setMissionText($data->get('missionText'));
+        //dd($data->get('my_editor'));
+        $page->setMissionText($data->get('my_editor'));
         $this->em->persist($page);
         $this->em->flush();
         return $this->redirectToRoute('app_admin_page_accueil');
