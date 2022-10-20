@@ -61,7 +61,8 @@
                 <div class="image" style="background-image: url(/pages/{{real.image}});"></div>
                 <h5 class="py-2">{{real.titre}}</h5>
                 <p>
-                    {{real.description|raw}}
+                    {{real.miniDescription}}
+                    <a href="{{path('app_realisation_details',{id:real.id})}}">Voir plus</a>
                 </p>
             </div>
             {% endfor %}

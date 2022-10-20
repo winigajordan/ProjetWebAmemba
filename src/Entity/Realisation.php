@@ -25,6 +25,9 @@ class Realisation
     #[ORM\Column(type: 'string', length: 255)]
     private $etat;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $miniDescription;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Realisation
     public function setEtat(string $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getMiniDescription(): ?string
+    {
+        return $this->miniDescription;
+    }
+
+    public function setMiniDescription(string $miniDescription): self
+    {
+        $this->miniDescription = $miniDescription;
 
         return $this;
     }

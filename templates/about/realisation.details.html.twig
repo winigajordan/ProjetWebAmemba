@@ -1,0 +1,24 @@
+{% extends 'base.pages.html.twig' %}
+
+{% block title %}Realisation{% endblock %}
+{% block page %}{% endblock %}
+{% block content %}
+
+    <section class="second py-5">
+        <div class="container w-100">
+            <div class="single-article py-5">
+                <div class="img-article" style="background-image: url(/pages/{{real.image}});"></div>
+                <h3>{{real.titre}}</h3>
+                <hr>
+                <p class="my-4">
+                    {{real.description|raw}}
+                </p>  
+            </div>
+        </div>
+    </section>
+    <!-- SECOND SECTION END -->
+{% endblock content %}
+
+
+
+{% block part %}{% endblock part %}

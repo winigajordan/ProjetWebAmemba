@@ -58,16 +58,24 @@ class AdminPageAboutController extends AbstractController
         $real->setTitre($request->request->get('titre'));
         //$real->setDescription('aa');
         $real->setDescription($request->request->get('description'));
+        $real->setMiniDescription($request->request->get('min-description'));
         $real->setEtat("VALIDE");
         $img=$request->files->get("img"); 
         $imageName=uniqid().'.'.$img->guessExtension(); 
         $img->move($this->getParameter("pages_directory"),$imageName);
         $real->setImage($imageName);
-
         $this->em->persist($real);
         $this->em->flush();
         return $this->redirectToRoute('app_admin_page_about');
     
+    }
+
+    #[Route('/admin/realisation/{id}', name: 'app_realisation_details')]  
+    public function realisationDetails($id):Response{
+        $real = $this->realRipo->find($id);
+        return $this->render('about/realisation.details.html.twig', [
+            "real"=>$real
+        ]); 
     }
 
     #[Route('/admin/page/about/section2/edit/{id}', name: 'page_about_section2_edit'), IsGranted("ROLE_ADMIN")]
