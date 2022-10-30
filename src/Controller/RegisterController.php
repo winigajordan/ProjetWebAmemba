@@ -71,7 +71,7 @@ class RegisterController extends AbstractController
                 return $this->render('register/index.html.twig', [
                     'txtRegister' => 'Veuillez verifier votre adresse mail et remplissez à nouveau le formulaire',
                 ]);
-            }
+                } 
         }
        
     }

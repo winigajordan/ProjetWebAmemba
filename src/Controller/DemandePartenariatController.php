@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Partenariat;
-use App\Repository\PartenariatRepository;
+use App\Repository\PartenaireRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\PartenariatRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,11 +16,13 @@ class DemandePartenariatController extends AbstractController
 
     public function __construct(
         PartenariatRepository $partenariatRepository,
-        EntityManagerInterface $em
+        EntityManagerInterface $em,
+        PartenaireRepository $partRipo,
     )
     {
         $this->partenariatRepository = $partenariatRepository;
         $this->em = $em;
+        $this->partRipo = $partRipo;
     }
 
     #[Route('/demande/partenariat', name: 'app_demande_partenariat')]
@@ -27,6 +30,7 @@ class DemandePartenariatController extends AbstractController
     {
         return $this->render('demande_partenariat/index.html.twig', [
            'text'=>'Remplissez le formulaire pour effectuer une demande de partenariat',
+           'partenaires' => $this->partRipo->findBy(['etat'=>True]),
         ]);
     }
 
@@ -49,6 +53,7 @@ class DemandePartenariatController extends AbstractController
         return $this->render('demande_partenariat/index.html.twig', [
             'text'=>'Votre demande a été envoyée avec succès',
             'etat'=>'disabled',
+            'partenaires' => $this->partRipo->findBy(['etat'=>True]),
         ]);
     }
 

@@ -47,7 +47,7 @@ class AdminBureauController extends AbstractController
     {
         $membre = new MembreBureau();
         $membre -> setNomComplet($request->request->get('nom'));
-        $membre -> setTelephone($request->request->get('full_number'));
+        $membre -> setTelephone($request->request->get('promotion'));
         $membre -> setFonction($this->posteRipo->find($request->request->get('poste')));
         $membre -> setEtat(True);
 
