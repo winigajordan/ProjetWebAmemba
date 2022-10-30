@@ -100,11 +100,11 @@
                     <div class="row gx-2">
                         <div class="col-6 mb-3">
                             <label class="form-label" for="pays">Pays de résidence</label>
-                            <input type="text" class="form-control" id="pays" name="pays" required value="{{membre.pays}}">
+                            <input type="text" class="form-control" id="pays" name="pays" required value="{{membre.pays}}" onChange="javascript:this.value=this.value.toUpperCase();">
                         </div>
                         <div class="col-6 mb-3">
                             <label class="form-label" for="ville">Ville de résidence</label>
-                            <input type="text" id="nom" class="form-control" name="ville" required value="{{membre.ville}}">
+                            <input type="text" id="nom" class="form-control" name="ville" required value="{{membre.ville}}" onChange="javascript:this.value=this.value.toUpperCase();">
                         </div>
                     </div>
 
@@ -146,7 +146,7 @@
                     {% endif %}
                     <div class="mb-4">
                         <p>
-                            *mettre à jour le profil avant de mofifier les informations de votre entreprise
+                            *mettre à jour le profil avant de modifier les informations de votre entreprise
                         </p>
                         <a class="btn btn-primary mb-3" href="{{path('app_membre_entreprise')}}" >Mettre à jour les information de mon entreprise</a>
                         <button type="submit" class="btn btn-primary w-100"> Enregistrer les modifications  </button>

@@ -48,21 +48,31 @@
                           <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                             <div class="accordion-body">
                                 <div class="card-body">
-                                    <form class="form form-horizontal" enctype="multipart/form-data" method='POST' action="{% if selected is defined %} {{path('admin_evenement_update')}}{% else %} {{path('admin_evenement_add')}} {% endif %}">
+                                    <form class="form form-horizontal" enctype="multipart/form-data" method='post'  action="{% if selected is defined %} {{path('admin_evenement_update')}}{% else %} {{path('admin_evenement_add')}} {% endif %}">
+                                        
+                                        <div class="col-sm-12 d-flex justify-content-end">
+                                            {% if selected is defined %} 
+                                            <button type="submit" class="btn btn-warning me-1 mb-1">Modifier</button>
+                                            {% else %}
+                                            <button type="submit" class="btn btn-primary me-1 mb-1">Ajouter</button>
+                                            {% endif %}
+                                        </div>
+                                        {% for message in app.flashes('error') %}
+                                            <div class="alert alert-danger">
+                                                {{ message }}
+                                            </div>
+                                        {% endfor %}
                                         <div class="form-body">
-
+                                            <div class="mb-3">
+                                                <label for="formFileMultiple" class="form-label">Importer l'image</label>
+                                                <input name="image" class="form-control" id="formFileLg" type="file" {% if selected is not defined %} required {% endif %}>
+                                            </div>
                                             <div class="row">
                                                 <div class="col-md-4">
                                                     <label>Titre</label>
                                                 </div>
                                                 <div class="col-md-8 form-group">
                                                     <input type="text" id="first-name" class="form-control" name="title" {% if selected is defined %} value="{{selected.title}}" {% endif %} required>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <div class="form-group">
-                                                    <label for="desc">Description </label>
-                                                    <textarea class="form-control" id="desc" rows="2" name="description"  required>{% if selected is defined %} {{selected.content}} {% endif %}</textarea>
                                                 </div>
                                             </div>
 
@@ -76,6 +86,7 @@
                                                             <option value = "{{cat.id}}">{{cat.name}}</option>
                                                         {% endfor %}
                                                     </select>
+                                                
                                             </div>
 
                                             <div class="dropdown-divider"></div>
@@ -87,7 +98,7 @@
                                                 </div>
                                             </div>
 
-                                            
+                                            <div class="row">
                                                 <div class = "col-6">
                                                     <div class="col-12">
                                                         <div class="form-group">
@@ -104,24 +115,18 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="dropdown-divider"></div>
 
-                                                <div class="dropdown-divider"></div>
-
-                                                <input class="form-control" type="text" id="formFileMultiple" {% if selected is defined %} value="{{selected.id}}" {% endif %}  name="id" hidden>
-                                               
-                                                
-                                                <div class="mb-3">
-                                                    <label for="formFileMultiple" class="form-label">Importer l'image</label>
-                                                    <input name="image" class="form-control" id="formFileLg" type="file" {% if selected is not defined %} required {% endif %}>
+                                            <input class="form-control" type="text" id="formFileMultiple" {% if selected is defined %} value="{{selected.id}}" {% endif %}  name="id" hidden>
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <label for="my_editor">Description </label>
+                                                    <textarea class="form-control" id="my_editor" rows="5" name="description">{% if selected is defined %} {{selected.content}} {% endif %}</textarea>
                                                 </div>
+                                            </div>
                                             
-                                                <div class="col-sm-12 d-flex justify-content-end">
-                                                    {% if selected is defined %} 
-                                                    <button type="submit" class="btn btn-warning me-1 mb-1">Modifier</button>
-                                                    {% else %}
-                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Ajouter</button>
-                                                    {% endif %}
-                                                </div>
+                                            
                                         </div>
                                     </form>
                                 </div>
@@ -172,5 +177,8 @@
 
     </section>
 </div>
-
+<script src="{{asset('admin/assets/js/form-edit/ckeditor.js')}}"></script>
+<script>
+    ClassicEditor.create(document.getElementById('my_editor'));
+</script>
 {% endblock content %}

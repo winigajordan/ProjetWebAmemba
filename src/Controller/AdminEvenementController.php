@@ -31,7 +31,12 @@ class AdminEvenementController extends AbstractController
     #[Route('/admin/evenement/add', name: 'admin_evenement_add'), IsGranted("ROLE_ADMIN")]
     public function add(Request $request, EntityManagerInterface $em, CategorieEvenementRepository $cateRipo)
     {
+        
         $data = $request -> request;
+        if (strlen($data->get('description'))==0){
+            $this->addFlash('error', 'Veuillez saisir une valeur dans le champ description');
+            return $this->redirectToRoute('app_admin_evenement');
+        }
         $date = ($data -> get('date'));
         $ev = new Evenement();
         $ev -> setCategorie( $cateRipo -> find(intval($data -> get('categorie'))));
