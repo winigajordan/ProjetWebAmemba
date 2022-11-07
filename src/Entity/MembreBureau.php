@@ -16,8 +16,6 @@ class MembreBureau
     #[ORM\Column(type: 'string', length: 255)]
     private $nomComplet;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $telephone;
 
     #[ORM\ManyToOne(targetEntity: PostesBureau::class, inversedBy: 'membresBureau')]
     #[ORM\JoinColumn(nullable: false)]
@@ -26,8 +24,10 @@ class MembreBureau
     #[ORM\Column(type: 'boolean')]
     private $etat;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $img;
+
+    #[ORM\OneToOne(targetEntity: Membre::class, cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private $membre;
 
     public function getId(): ?int
     {
@@ -42,21 +42,9 @@ class MembreBureau
     public function setNomComplet(string $nomComplet): self
     {
         $this->nomComplet = $nomComplet;
-
         return $this;
     }
 
-    public function getTelephone(): ?string
-    {
-        return $this->telephone;
-    }
-
-    public function setTelephone(string $telephone): self
-    {
-        $this->telephone = $telephone;
-
-        return $this;
-    }
 
     public function getFonction(): ?PostesBureau
     {
@@ -82,14 +70,14 @@ class MembreBureau
         return $this;
     }
 
-    public function getImg(): ?string
+    public function getMembre(): ?membre
     {
-        return $this->img;
+        return $this->membre;
     }
 
-    public function setImg(string $img): self
+    public function setMembre(membre $membre): self
     {
-        $this->img = $img;
+        $this->membre = $membre;
 
         return $this;
     }
