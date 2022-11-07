@@ -78,11 +78,11 @@
     <h2 class="text-center my-5">Bureau actuel</h2>
     <div class="container">
         <div class="historiques-caroussel-container">
-            {% for membre in membres %}
+            {% for mb in membres %}
             <div class="historique-card">
-                <div class="image" style="background-image: url(/bureau/{{membre.img}});"></div>
-                <h6 class="mt-3"> <strong> {{membre.nomComplet}}</strong> - Promotion de {{membre.telephone}} </h6>
-                <h5 class="mt-3">{{membre.fonction.libelle}}</h5>
+                <div class="image" style="background-image: url(/pp/{{mb.membre.profile}});"></div>
+                <h6 class="mt-3"> <strong> {{mb.nomComplet}}</strong> - Promotion de {{mb.membre.promotion}} </h6>
+                <h5 class="mt-3">{{mb.fonction.libelle}}</h5>
             </div>
             {% endfor %}
         </div>

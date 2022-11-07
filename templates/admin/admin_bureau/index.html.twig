@@ -75,56 +75,7 @@
                 </div>
 
                 <div class="row mt-3">
-                    <div class="col-6">
-                        <div class="card">
-                           <div class="container my-3">
-                            <form class="form form-horizontal" enctype="multipart/form-data" method="POST" action="{{path('app_add_membre')}}">
-                                <h5 class="my-2"> Ajouter une membre au bureau </h5>
-                                <div class="row mt-2">
-                                    <div class="col-md-4">
-                                        <label for='phonr' class="form-label col-12">Nom complet </label>
-                                    </div>
-                                    <div class="col-md-8 form-group">
-                                        <input type="text" class="form-control" name="nom" id="nom" aria-describedby="helpId" placeholder="" required>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label for='tel' class="form-label col-12">Promotion</label>
-                                    </div>
-                                    <div class="col-md-8 form-group">
-                                        <input class="form-control" id='tel' type="number" required name="promotion" min="1983" max="2022">
-                                    </div>
-                                </div>
-                                
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label for='phonr' class="form-label col-12">Poste</label>
-                                    </div>
-                                    <div class="col-md-6 form-group">
-                                        <select class="form-select form-select" aria-label=".form-select example" name="poste" required>
-                                            {% for poste in postes %}
-                                            <option selected value="{{poste.id}}">{{poste.libelle}}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label for='phonr' class="form-label col-12">Image</label>
-                                    </div>
-                                    <div class="col-md-8 form-group">
-                                        <input class="form-control" name="pp" type="file" required>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Ajouter au bureau </button>      
-                            </form>
-                            </div>   
-                            
-                        </div>
-                    </div>
+                   
                     <div class="col">
                         <div class="card">
                             <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -165,6 +116,69 @@
                         </div>
                     </div>
                 </div>
+                
+                {% for message in app.flashes('error') %}
+                    <div class="alert alert-warning alert-dismissible show fade">
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+              
+                
+                <div class="row">
+                     <div class="col-12">
+                        <div class="card">
+                           <div class="container my-3">
+                                <h5 class="my-2"> Ajouter une membre au bureau </h5>
+                            {% if membreFound is not defined %}
+                            <h6 class="my-2 mb-3"> Rechercher une membre e mettre à jour son rôle dans l'amicale </h6>
+                            <form class="form form-horizontal" method="POST" action="{{path('app_search')}}">
+                                <div class="row mt-2">
+                                    <div class="col-md-2">
+                                        <label for='phone' class="form-label col-12">E-mail</label>
+                                    </div>
+                                    <div class="col-md-6 form-group">
+                                        <input type="email" class="form-control" name="email" id="nom" aria-describedby="helpId" placeholder="" required>
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <button type="submit" class="btn btn-primary">Rechercher </button>      
+                                    </div>
+                                </div>
+                            </form>
+                            {% else %}
+                            
+                            <form class="form form-horizontal mt-3" method="POST" action="{{path('app_add_membre')}}">
+                                <div class="row mt-2">
+                                    <div class="col-md-2">
+                                        <label for='phone' class="form-label col-12">Nom complet | Poste</label>
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <input type="text" disabled class="form-control" id="nom" aria-describedby="helpId" placeholder="{{membreFound.prenom}} {{membreFound.nom}}" required>
+                                        <input type="text" name="id" value="{{membreFound.id}}" hidden>
+                                    </div>
+                                    
+                                    <div class="col-md-3 form-group">
+                                        <select class="form-select" aria-label="Default select example" id="role" name="poste">
+                                            {% for role in postes %}
+                                            <option value="{{role.id}}">{{role.libelle}}</option>
+                                            {% endfor %}
+                                          </select>
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <button type="submit" class="btn btn-primary">Ajouter au bureau </button>      
+                                    </div>
+                                </div>
+                            </form>
+                            {% endif %}
+                            
+                            </div>   
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+                
 
                 
             </div>
