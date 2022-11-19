@@ -113,7 +113,6 @@ class ResetPasswordController extends AbstractController
                     
                 ] );
             }
-            
 
         }
        
