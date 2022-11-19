@@ -59,9 +59,9 @@ class ResetPasswordController extends AbstractController
 
                 //envoie de mail
                 $mail = new ApiMailJet();
-                //$mail->send($reset->getMail(),"", "Reinitialisation de mot de passe", "Votre code de reinitialisation de mot de passe est $reset");
-                //$this->em->flush();
-                $this->addFlash('warning', 'Un code de vérification vous a été envoyé à travers le moyen de récupération choisis.  ');
+                $mail->send($reset->getMail(),"", "Reinitialisation de mot de passe", "Votre code de reinitialisation de mot de passe est $reset");
+                $this->em->flush();
+                $this->addFlash('warning', 'Un code de vérification vous a été envoyé à '.$data->get('email').'.');
                 return $this->render('reset_password/index.html.twig', 
                     [
                         'titre'=>'code',
@@ -113,7 +113,6 @@ class ResetPasswordController extends AbstractController
                     
                 ] );
             }
-            
 
         }
        
