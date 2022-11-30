@@ -15,7 +15,7 @@
         <div class="login-right login-card">
             <div class="container">
                 <form method="POST" action = " {% if entreprise is defined %} {{path('app_membre_entreprise_update')}} {% else %} {{path('app_membre_entreprise_add')}} {% endif %} " enctype="multipart/form-data">
-                    <h2> {% if entreprise is defined %}  Modifier votre entreprise {% else %} Inscrire votre entrepise {% endif %} </h2>
+                    <h2> {% if entreprise is defined %}  Modifier les informations de mon entreprise {% else %} Je suis entrepreneure, j'inscris mon entreprise {% endif %} </h2>
                     <div class="mb-3">
                         <label class="form-label">Nom</label>
                         <input type="text" class="form-control" name="id" value="{% if entreprise is defined %}{{entreprise.id}}{% endif %}" hidden>
@@ -26,13 +26,38 @@
                         <input class="form-control" name="domaine" placeholder="Domaine" type="text" required {% if entreprise is defined %}value="{{entreprise.domaine}}"{% endif %}>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Description</label>
-                        <textarea class="form-control" name="description" placeholder="Description de votre entreprise" rows="3" required>{% if entreprise is defined %}{{entreprise.description}}{% endif %}</textarea>
+                        <label class="form-label">Parlez nous de votre entreprise en quelques mots</label>
+                        <textarea class="form-control" name="description" placeholder="Description de votre entreprise" rows="4" required>{% if entreprise is defined %}{{entreprise.description}}{% endif %}</textarea>
                     </div>
-                    
+                    <div class="mb-3">
+                        <label class="form-label">Date de création ou de debut d'activité</label>
+                        <input class="form-control" name="date" placeholder="Ou se situe votre entreprise?" type="date" required {% if entreprise is defined %}value="{{entreprise.createdAt|date("m/d/Y")}}"{% endif %}>
+                    </div>
                     <div class="mb-3">
                         <label class="form-label">Adresse</label>
                         <input class="form-control" name="adresse" placeholder="Ou se situe votre entreprise?" type="text" required {% if entreprise is defined %}value="{{entreprise.adresses}}"{% endif %}>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Type d'entreprise</label>
+                        <select class="form-select" aria-label="Default select example" name="type">
+                            <option value="Entreprise individuelle" selected>Entreprise individuelle</option>
+                            <option value="SA">SA</option>
+                            <option value="SARL">SARL</option>
+                            <option value="SUARL">SUARL</option>
+                            <option value="GIE">GIE</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input class="form-control" name="email" placeholder="Ou se situe votre entreprise?" type="email" required {% if entreprise is defined %}value="{{entreprise.email}}"{% endif %}>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Lien vers la page du réseau social le plus actif</label>
+                        <input class="form-control" name="instagram" placeholder="Ou se situe votre entreprise?" type="url" {% if entreprise is defined %}value="{{entreprise.instagram}}"{% endif %}>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Site web</label>
+                        <input class="form-control" name="site" placeholder="Ou se situe votre entreprise?" type="url" {% if entreprise is defined %}value="{{entreprise.site}}"{% endif %}>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Logo de l'entreprise (facultatif)</label>

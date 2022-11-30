@@ -40,6 +40,21 @@ class Entreprise
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $logo;
 
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $createdAt;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $type;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $email;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $instagram;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $site;
+
 
     public function __construct()
     {
@@ -145,6 +160,67 @@ class Entreprise
     public function setLogo(?string $logo): self
     {
         $this->logo = $logo;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(?string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getInstagram(): ?string
+    {
+        return $this->instagram;
+    }
+
+    public function setInstagram(?string $instagram): self
+    {
+        $this->instagram = $instagram;
+
+        return $this;
+    }
+
+
+    public function getSite(): ?string
+    {
+        return $this->site;
+    }
+
+    public function setSite(?string $site): self
+    {
+        $this->site = $site;
 
         return $this;
     }
