@@ -63,11 +63,13 @@ class AdminMembreController extends AbstractController
             ->setMembre($membre);
             $em->persist($mb);
          }
-
-         $img=$request->files->get("photo"); 
-         $imageName=uniqid().'.'.$img->guessExtension(); 
-         $img->move($this->getParameter("pp_directory"),$imageName);          
-         $membre->setProfile($imageName);
+         if($request->files->get('photo')){
+            $img=$request->files->get("photo"); 
+            $imageName=uniqid().'.'.$img->guessExtension(); 
+            $img->move($this->getParameter("pp_directory"),$imageName);          
+            $membre->setProfile($imageName);
+         }
+         
          
          $userPassword = date_format(new DateTime(),'Y-m-d-H-i-s');
          $pwd = $this->hasher->hashPassword($membre, $userPassword);

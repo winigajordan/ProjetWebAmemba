@@ -90,13 +90,14 @@ class AdminPageAccueilController extends AbstractController
     public function section3(Request $request): Response
     {
         $data = $request->request;
+        //dd($data);
         $page= $this->page;
         $page->setChiffreAlumni($data->get('chiffreAlumni'));
         $page->setChiffreAlumniText($data->get('chiffreAlumniText'));
         $page->setChiffreProjet($data->get('chiffreProjet'));
         $page->setChiffreProjetText($data->get('chiffreProjetText'));
         $page->setChiffreFonds($data->get('chiffreFonds'));
-        $page->setChiffreProjetText($data->get('chiffreFondsText'));
+        $page->setChiffreFondsText($data->get('chiffreFondsText'));
         $this->em->flush();
         return $this->redirectToRoute('app_admin_page_accueil');
     }
