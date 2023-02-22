@@ -174,7 +174,7 @@
             </div>
             <div class="blog-card-bottom">
                 <h4>{{art.titre}}</h4>
-                <a href="" class="btn btn-outline-primary">Lire plus</a>
+                <a href="{{path('app_blog_article_details',{slug:art.slug})}}" class="btn btn-outline-primary">Lire plus</a>
             </div>
         </div>
         {% endfor %}
@@ -185,7 +185,7 @@
             <button type="button" id="blog-arrow-left" class="btn btn-secondary"><i class="fa-solid fa-angle-left"></i></button>
             <button type="button" id="blog-arrow-right" class="btn btn-secondary"><i class="fa-solid fa-angle-right"></i></button>
         </div>
-        <a class="btn btn-primary" href="#">Voir tout <i class="fa-solid fa-angle-right"></i></a>
+        <a class="btn btn-primary" href="{{path('blog')}}">Voir tout <i class="fa-solid fa-angle-right"></i></a>
     </div>
 </section>
 <!-- BLOG SECTION END -->

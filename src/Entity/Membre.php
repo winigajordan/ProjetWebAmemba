@@ -60,13 +60,13 @@ class Membre extends User
     #[ORM\Column(type: 'string', length: 25, nullable: true)]
     private $bac;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $univ;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $diplome;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $experience;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]

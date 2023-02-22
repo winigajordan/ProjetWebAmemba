@@ -3,27 +3,37 @@
 namespace App\Controller;
 
 use App\Repository\MembreRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 class AnnuaireController extends AbstractController
 {
+    private $paginator;
+    private $membreRepository;
     public function __construct(
-        MembreRepository $membreRepository
+        MembreRepository $membreRepository,
+        PaginatorInterface $paginator
     )
     {
         $this->membreRepository = $membreRepository;
+        $this->paginator = $paginator;
     }
 
     #[Route('/annuaire', name: 'app_annuaire'), IsGranted("ROLE_MEMBRE")]
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $membres = $this->membreRepository->findAll();
+        $output = $this->paginator->paginate(
+            $membres,
+            $request->query->getInt('page',1),
+            16
+        );
         return $this->render('annuaire/index.html.twig', [
-            'membres' => $this->membreRepository->findAll(),
-            
+            'membres' => $output,
         ]);
     }
 

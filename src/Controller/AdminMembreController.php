@@ -50,6 +50,38 @@ class AdminMembreController extends AbstractController
          $membre -> setEmail($data->get('mail'));
          $membre -> setRoles(["ROLE_MEMBRE"]);
 
+         if ($data->get('bac')){
+             $membre->setBac($data->get('bac'));
+         }
+
+         if ($data->get('secteur')){
+             $membre->setSecteur($data->get('secteur'));
+         }
+
+         if ($data->get('entreprise')) {
+             $membre->setEntreprise($data->get('entreprise'));
+         }
+
+         if ($data->get('etudes')) {
+             $membre->setUniv($data->get('etudes'));
+         }
+
+        if ($data->get('diplomes')) {
+            $membre->setDiplome($data->get('diplomes'));
+        }
+
+         if ($data->get('exp')){
+             $membre->setExperience($data->get('exp'));
+         }
+
+         if ($data->get('profil')){
+             $membre->setLink($data->get('profil'));
+         }
+
+         if ($data->get('bio')){
+             $membre->setBio($data->get('bio'));
+         }
+
          if ($data->get("role")==0) {
             $membre->setRoleAmicale("MEMBRE");
          } else {
@@ -71,7 +103,7 @@ class AdminMembreController extends AbstractController
          }
          
          
-         $userPassword = date_format(new DateTime(),'Y-m-d-H-i-s');
+         $userPassword = date_format(new DateTime(),'Y-m-d-H-i');
          $pwd = $this->hasher->hashPassword($membre, $userPassword);
          $membre -> setPassword($pwd);
          $em -> persist($membre);

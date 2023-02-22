@@ -6,6 +6,7 @@ use Mail;
 use DateTime;
 use App\Entity\Client;
 use App\Entity\Demande;
+use App\Repository\DemandeRepository;
 use App\Repository\MembreRepository;
 use App\Repository\UserRepository;
 use App\Service\Mail\ApiMailJet;
@@ -36,10 +37,12 @@ class RegisterController extends AbstractController
     }
 
     #[Route('/register/send', name: 'add_demande', methods: ['POST'])]
-    public function aaddDemande(Request $request, MembreRepository $membreRipo, EntityManagerInterface $em): Response {
+    public function aaddDemande(Request $request, MembreRepository $membreRipo, EntityManagerInterface $em,DemandeRepository $demandeRepo): Response {
         $user = $membreRipo->findOneBy(['email'=>$request->request->get('email')]);
         $user2 = $membreRipo->findOneBy(['telephone'=>$request->request->get('full_number')]);
-        if ($user or $user2) {
+        $demande3 = $demandeRepo->findOneBy(['mail'=>$request->request->get('email')]);
+        $demande4 = $demandeRepo->findOneBy(['telephone'=>$request->request->get('full_number')]);
+        if ($user or $user2 or $demande3 or $demande4) {
             $this->addFlash('info', 'Le mail et ou le numéro de téléphone que vous avez saisie figurent déjà dans la base de donnée');
             return $this->redirectToRoute('app_register');;
         } else {

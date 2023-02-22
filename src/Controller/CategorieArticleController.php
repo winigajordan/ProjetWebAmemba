@@ -34,4 +34,36 @@ class CategorieArticleController extends AbstractController
         }
         return $this->redirectToRoute('app_categorie_article');
     }
+
+    #[Route('admin/categorie/article/{id}', name: 'app_categorie_article_update'), IsGranted("ROLE_ADMIN")]
+    public function updateCategorie(CategorieArticleRepository $catRepo,$id,EntityManagerInterface $em,Request $request): Response
+    {
+        $cat = $catRepo->find($id);
+        if(!empty($_POST)){
+            $cat->setLibelle($request->request->get('libelle'));
+            $em->persist($cat);
+            $em->flush();
+            return $this->redirectToRoute('app_categorie_article');
+        }else{
+            
+            $categories = $catRepo->findAll();
+            return $this->render('categorie_article/index.html.twig', [
+                'controller_name' => 'CategorieArticleController',
+                'categories' => $categories,
+                'categorie' => $cat,
+            ]); 
+        }
+        
+    }
+
+    #[Route('admin/categorie/article/delete/{id}', name: 'app_categorie_article_remove'), IsGranted("ROLE_ADMIN")]
+    public function removeCategorie(CategorieArticleRepository $catRepo,$id):  Response
+    {
+        $cat = $catRepo->find($id);
+        
+        return $this->redirectToRoute('app_categorie_article');
+    }
+
+
+
 }
