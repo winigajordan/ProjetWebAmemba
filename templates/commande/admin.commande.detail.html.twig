@@ -16,8 +16,8 @@
                         </div>
                         <div class="col-lg-6 col-md-6 ms-auto text-md-end">
                             <select class="form-select d-inline-block" name="etat" style="max-width: 200px">
-                                {% if commande.etat=='EN COURS' %}<option value="EN COURS DE LIVRAISON">EN COURS DE LIVRAISON</option>{% endif %}
-                                {% if commande.etat=='EN COURS DE LIVRAISON' %}<option value="LIVRE">LIVRE</option>{% endif %}
+                                {% if commande.etat=='EN ATTENTE DE CONFIRMATION' %}<option value="EN COURS">EN COURS</option><option value="ANNULE">ANNULE</option>{% endif %}
+                                {% if commande.etat=='EN COURS' %}<option value="TERMINE">TERMINE</option>{% endif %}   
                             </select>
                             <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </div>
@@ -94,6 +94,8 @@
 
                     </div>
                 </div>
+                <!-- button// -->
+                <a href="{{path('app_commandes')}}" class="btn btn-warning">Retour</a>
                 <!-- card-body end// -->
             </div>
         </div>

@@ -11,20 +11,58 @@
     <!-- SECOND SECTION START -->
     <section class="second">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-9">
-                    <div class="card">
-                        
-                        <div class="card-body">
-                            <h3>{{cotisation.titre}}</h3>
-                            <p>{{cotisation.description}}</p>
+
+
+            <!-- Update cotisation -->
+
+            <div class="card ">
+                <div class="accordion" id="accordionPanelsStayOpenExample">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                <strong> Editer la cotisation </strong>
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                            <div class="accordion-body">
+                                <div class="card-body">
+
+                                    <form class="form form-horizontal" method='POST' action="{{path('app_admin_cotisation_update_content')}}" >
+                                        <div class="form-body">
+
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label for="last-name">Titre</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+                                                    <input type="text" id="last-name" value="{{cotisation.titre}}" class="form-control" name="titre" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <label for="first-name">Description</label>
+                                                </div>
+                                                <div class="col-md-8 form-group">
+
+                                                    <textarea class="form-control" id="desc" rows="2" name="description" required>{{cotisation.description}}</textarea>
+                                                    <input type="text" value="{{cotisation.id}}" name="id" hidden>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12 d-flex justify-content-end">
+
+                                                <button type="submit" class="btn btn-primary me-1 mb-1">Editer</button>
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
                 </div>
-                
             </div>
-
 
             <div class="card ">
                     <div class="accordion" id="accordionPanelsStayOpenExample">

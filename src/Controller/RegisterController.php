@@ -43,8 +43,8 @@ class RegisterController extends AbstractController
         $demande3 = $demandeRepo->findOneBy(['mail'=>$request->request->get('email')]);
         $demande4 = $demandeRepo->findOneBy(['telephone'=>$request->request->get('full_number')]);
         if ($user or $user2 or $demande3 or $demande4) {
-            $this->addFlash('info', 'Le mail et ou le numéro de téléphone que vous avez saisie figurent déjà dans la base de donnée');
-            return $this->redirectToRoute('app_register');;
+            $this->addFlash('info', 'Votre profil est déjà enregistré. Veuillez aller dans la partie "Connexion" et réinitialiser votre mot de passe.');
+            return $this->redirectToRoute('app_register');
         } else {
             $verif = new ApiMailVerification();
             $result = $verif -> test($request->request->get('email'));

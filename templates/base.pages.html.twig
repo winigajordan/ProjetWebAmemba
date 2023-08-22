@@ -149,16 +149,22 @@
                 </a>
             </li>
 
+            <li class="list-group-item">
+                <a href="{{path('app_cotisation')}}" class="btn">
+                    <i class="fa-solid fa-money-bill-transfer"></i> Cotisations
+                </a>
+            </li>
 
             <li class="list-group-item">
                 <a href="{{path('app_panier')}}" class="btn">
-                    <i class="fa-solid fa-cart-shopping"></i> Panier
+                    <i class="fa-solid fa-cart-arrow-down"></i>
+                   Panier
                 </a>
             </li class="list-group-item">
 
             <li class="list-group-item">
                 <a href="{{path('app_commandes_client')}}" class="btn">
-                    <i class="fa-solid fa-cart-shopping"></i> Commandes
+                    <i class="fa-solid fa-cart-shopping"></i>   Commandes
                 </a>
             </li class="list-group-item">
 
@@ -193,11 +199,7 @@
                     <i class="fa-solid fa-pen"></i> Ecrire un article
                 </a>
             </li>
-            <li class="list-group-item">
-                <a href="{{path('app_cotisation')}}" class="btn">
-                    <i class="fa-solid fa-money-bill"></i> Cotisations
-                </a>
-            </li>
+
             <li class="list-group-item">
                 <a href="{{path('app_logout')}}" class="btn">
                     <span class="badge rounded-pill alert-danger">Deconnexion</span>
@@ -223,8 +225,6 @@
     </section>
     <!-- FIRST SECTION END -->
     {% endblock page %}
-
-   
 
 
 {% block content %} {% endblock content %}
@@ -273,7 +273,7 @@
 
             <div class="card-footer col-sm">
                 <h4 class="my-5"> Nos réseaux sociaux</h4>
-                <ul class="reseaux-sociaux list-group d-flex">
+                {# <ul class="reseaux-sociaux list-group d-flex">
                     <li class=""><a href="mailto:contact@mariamaba-alumni.com"><i class="fa-solid fa-envelope fa-2x"></i> <span class="mx-3">Mail</span></a></li>
                     <li class=""><a href="https://www.facebook.com/groups/342225004108" target="_blank"><i class="fa-brands fa-facebook fa-2x"></i> <span class="mx-3">Facebook</span></a></li>
                     <li class=""><a href="https://www.instagram.com/amemba_officiel/" target="_blank"><i class="fa-brands fa-instagram fa-2x"></i> <span class="mx-3">amemba_officiel</span></a></li>
@@ -283,7 +283,10 @@
                     -->
                     <li class=""><a href="https://wa.me/33650128142" target="_blank"><i class="fa-brands fa-whatsapp fa-2x"></i> <span class="mx-3">WhatsApp</span></a></li>
 
-                </ul>
+                </ul> #}
+                {{ render(controller(
+                    'App\\Controller\\SocialsController::indexFooter'
+                )) }}
             </div>
         </div>
     </div>

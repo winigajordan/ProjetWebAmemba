@@ -76,6 +76,7 @@ class DemandeController extends AbstractController
         $membre -> setTelephone($selected->getTelephone());
         $membre -> setStatut(false);
         $membre -> setEmail($selected -> getMail());
+        $membre->setEtat(true);
         $membre -> setRoleAmicale("MEMBRE");
         $membre -> setRoleAmicale('MEMBRE');
         $membre -> setRoles(["ROLE_MEMBRE"]);

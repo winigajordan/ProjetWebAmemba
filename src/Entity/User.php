@@ -36,19 +36,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 255)]
     private $prenom;
 
-    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Commande::class)]
-    private $commandes;
-
     #[ORM\OneToMany(mappedBy: 'auteur', targetEntity: Article::class)]
     private $articles;
 
     #[ORM\OneToMany(mappedBy: 'auteur', targetEntity: Sujet::class)]
     private $sujets;
+
+    #[ORM\OneToMany(mappedBy: 'client', targetEntity: Commande::class)]
+    private $commandes;
     
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->sujets = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
     }
 
 
@@ -146,35 +147,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Commande>
-     */
-    public function getCommandes(): Collection
-    {
-        return $this->commandes;
-    }
-
-    public function addCommande(Commande $commande): self
-    {
-        if (!$this->commandes->contains($commande)) {
-            $this->commandes[] = $commande;
-            $commande->setClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommande(Commande $commande): self
-    {
-        if ($this->commandes->removeElement($commande)) {
-            // set the owning side to null (unless already changed)
-            if ($commande->getClient() === $this) {
-                $commande->setClient(null);
-            }
-        }
-
-        return $this;
-    }
 
     
     /**
@@ -231,6 +203,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($sujet->getAuteur() === $this) {
                 $sujet->setAuteur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->commandes->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getClient() === $this) {
+                $commande->setClient(null);
             }
         }
 

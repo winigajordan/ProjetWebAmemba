@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PageAccueilRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PageAccueilRepository::class)]
@@ -105,6 +106,25 @@ class PageAccueil
 
     #[ORM\Column(type: 'text')]
     private $membreText;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $missionImg;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $ancienneImg1;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $ancienneImg2;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $ancienneImg3;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $blogTitre = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $blogText = null;
+
 
    
 
@@ -487,5 +507,81 @@ class PageAccueil
 
         return $this;
     }
+
+    public function getMissionImg(): ?string
+    {
+        return $this->missionImg;
+    }
+
+    public function setMissionImg(?string $missionImg): self
+    {
+        $this->missionImg = $missionImg;
+
+        return $this;
+    }
+
+    public function getAncienneImg1(): ?string
+    {
+        return $this->ancienneImg1;
+    }
+
+    public function setAncienneImg1(?string $ancienneImg1): self
+    {
+        $this->ancienneImg1 = $ancienneImg1;
+
+        return $this;
+    }
+
+    public function getAncienneImg2(): ?string
+    {
+        return $this->ancienneImg2;
+    }
+
+    public function setAncienneImg2(?string $ancienneImg2): self
+    {
+        $this->ancienneImg2 = $ancienneImg2;
+
+        return $this;
+    }
+
+    public function getAncienneImg3(): ?string
+    {
+        return $this->ancienneImg3;
+    }
+
+    public function setAncienneImg3(?string $ancienneImg3): self
+    {
+        $this->ancienneImg3 = $ancienneImg3;
+
+        return $this;
+    }
+
+    public function getBlogTitre(): ?string
+    {
+        return $this->blogTitre;
+    }
+
+    public function setBlogTitre(?string $blogTitre): self
+    {
+        $this->blogTitre = $blogTitre;
+
+        return $this;
+    }
+
+    public function getBlogText(): ?string
+    {
+        return $this->blogText;
+    }
+
+    public function setBlogText(?string $blogText): self
+    {
+        $this->blogText = $blogText;
+
+        return $this;
+    }
+
+   
+
+
 
 }

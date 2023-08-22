@@ -42,11 +42,13 @@
                 </thead>
                 <tbody>
                     {% for c in app.user.cotisations %}
+                        {% if c.etat == 1 %}
                         <tr>
                             <th scope="row">{{c.titre}}</th>
                             <td>{{c.createdAt|date}}</td>
                             <td><a href="{{path('app_cotisation_details',{id:c.id})}}" class="btn btn-primary btn-sm">Details</a></td>
-                        </tr> 
+                        </tr>
+                        {% endif %}
                     {% endfor %}
                 </tbody>
             </table><br>

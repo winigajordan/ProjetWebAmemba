@@ -129,7 +129,7 @@ class BlogController extends AbstractController
             $em->flush();
             return $this->redirectToRoute('app_article_auteur');
         }
-        $categories = $catRepo->findAll();
+        $categories = $catRepo->findBy(['status'=>true]);
         return $this->render('blog/membre.article.add.html.twig', [
             'controller_name' => 'BlogController',
             'categories' => $categories

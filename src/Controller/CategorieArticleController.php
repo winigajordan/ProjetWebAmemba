@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\CategorieArticle;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\CategorieArticleRepository;
@@ -10,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Validator\Constraints\Length;
 
 class CategorieArticleController extends AbstractController
 {
@@ -56,11 +58,20 @@ class CategorieArticleController extends AbstractController
         
     }
 
-    #[Route('admin/categorie/article/delete/{id}', name: 'app_categorie_article_remove'), IsGranted("ROLE_ADMIN")]
-    public function removeCategorie(CategorieArticleRepository $catRepo,$id):  Response
+    #[Route('admin/categorie/article/archive/{id}', name: 'app_categorie_article_archive'), IsGranted("ROLE_ADMIN")]
+    public function removeCategorie(CategorieArticleRepository $catRepo,ArticleRepository $artRepo,EntityManagerInterface $em,$id):  Response
     {
         $cat = $catRepo->find($id);
-        
+        /* $articles = $artRepo->findBy(['categorieArticle'=>$cat]);
+        if(sizeof($articles)>0){
+            foreach ($articles as $article) {
+                $article->setLisibilite(false);
+                $em->persist($article);
+            }
+        }*/
+        $cat->setStatus(!$cat->getStatus()); 
+        $em->persist($cat);
+        $em->flush();
         return $this->redirectToRoute('app_categorie_article');
     }
 

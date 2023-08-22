@@ -102,7 +102,7 @@
                                                         <th>{{membre.fonction.libelle}}</th>
                                                         <th>
                                                             <a name="" id="" class="btn btn-outline-primary" href="{{path('app_update_membre',  {id: membre.id})}}" role="button">
-                                                                {% if membre.etat %} Archiver {% else %} Publier {% endif %}
+                                                                {% if membre.etat %}Retirer{% endif %}
                                                             </a>
                                                         </th>    
                                                     </tr>

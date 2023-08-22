@@ -26,7 +26,7 @@ class AnnuaireController extends AbstractController
     #[Route('/annuaire', name: 'app_annuaire'), IsGranted("ROLE_MEMBRE")]
     public function index(Request $request): Response
     {
-        $membres = $this->membreRepository->findAll();
+        $membres = $this->membreRepository->findBy(['etat'=>true]);
         $output = $this->paginator->paginate(
             $membres,
             $request->query->getInt('page',1),
@@ -57,14 +57,20 @@ class AnnuaireController extends AbstractController
     #[Route('/annuaire/recherche', name: 'app_annuaire_details_recherche', methods: ['POST']), IsGranted("ROLE_MEMBRE")]
     public function recherche(Request $request): Response
     {
-        
+        $membres = $this->membreRepository->findBy(['etat'=>true]);
+        $output = $this->paginator->paginate(
+            $this->find($request->request->get('search')),
+            $request->query->getInt('page',1),
+            16
+        );
         return $this->render('annuaire/index.html.twig', [
-            'membres' => $this->find($request->request->get('search'))
+            'membres' => $output,
         ]);
+
     }
 
     public function find($key){
-        $membres = $this->membreRepository->findAll();
+        $membres = $this->membreRepository->findBy(['etat'=>true]);
         $result = [];
         $key = strtolower($key);
         foreach ($membres as $membre) {

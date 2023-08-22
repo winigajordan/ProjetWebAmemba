@@ -21,9 +21,13 @@ class Thematique
     #[ORM\OneToMany(mappedBy: 'thematique', targetEntity: Sujet::class)]
     private $sujets;
 
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $status;
+
     public function __construct()
     {
         $this->sujets = new ArrayCollection();
+        $this->status = true;
     }
 
     public function getId(): ?int
@@ -42,6 +46,7 @@ class Thematique
 
         return $this;
     }
+
 
     /**
      * @return Collection<int, Sujet>
@@ -69,6 +74,18 @@ class Thematique
                 $sujet->setThematique(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus(): ?bool
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?bool $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

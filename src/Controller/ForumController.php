@@ -58,7 +58,7 @@ class ForumController extends AbstractController
             //dd($thematique);
             $sujets = $sujetRepo->findBy(['lisibilite'=>true,'thematique'=>$thematique],['publishedAt'=>'DESC']);   
         }   
-        $thematiques = $thRepo->findAll();
+        $thematiques = $thRepo->findBy(['status'=>true]);
         $output = $paginator->paginate(
             $sujets,
             $request->query->getInt('page',1),

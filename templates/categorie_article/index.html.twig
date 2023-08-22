@@ -12,6 +12,7 @@
                     <thead>
                         <tr>
                         <th scope="col">Libelle</th>
+                        <th scope="col">Etat</th>
                         <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -19,7 +20,12 @@
                         {% for i in categories %}
                         <tr>
                         <th>{{i.libelle}}</th>
-                        <td><a href="{{path('app_categorie_article_update',{id:i.id})}}"><i class="bi bi-pencil-square"></i></a><a href="#"><i class="bi bi-trash"></i></a></td>
+                        <td>
+                            {% if i.status %}Active{% else %}Archivé{% endif %}
+                        </td>
+                        <td><a href="{{path('app_categorie_article_update',{id:i.id})}}"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{{path('app_categorie_article_archive',{id:i.id})}}">{% if i.status %}<i class="bi bi-trash" data-bs-toggle="modal" data-bs-target="#staticBackdrop" ></i>{% else %}<i class="bi bi-check2-circle"></i>{% endif %}</a>                
+                        </td>
                         </tr>
                         {% endfor %}
                     </tbody>

@@ -21,9 +21,13 @@ class CategorieArticle
     #[ORM\OneToMany(mappedBy: 'categorieArticle', targetEntity: Article::class)]
     private $articles;
 
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $status;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
+        $this->status = true;
     }
 
     public function getId(): ?int
@@ -69,6 +73,18 @@ class CategorieArticle
                 $article->setCategorieArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    public function setStatus($status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

@@ -1,5 +1,5 @@
 {% extends 'base.admin.html.twig' %}
-{% block page_title %} Contenue de la page About {% endblock page_title %}
+{% block page_title %} Contenu de la page About {% endblock page_title %}
 {% block content %}
 <div class="page-content">
     <section class="section">
@@ -106,27 +106,9 @@
                                                     <tr>
                                                     <th scope="row">{{r.titre}}</th>
                                                     <td> <a href="{{path('page_about_section2_edit', {'id' : r.id })}}" class="btn btn-warning mb-2"> {% if r.etat =='ARCHIVE' %} Afficher{% else %} Archiver{% endif %} </a> </td>
-                                                    <td><a href="{{path('app_realisation_update',{id:r.id})}}"><i class="bi bi-pencil-square"></i></a><a href="#">
-                                                    <i class="bi bi-trash" data-bs-toggle="modal" data-bs-target="#staticBackdrop" ></i></a>
-                        
-                                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="staticBackdropLabel">Suppression de réalisation</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Veuillez confirmer la suppression de la réalisation
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
-                                                            <a class="btn btn-primary" href="{{path('app_delete_realisation',{id:r.id})}}" role="button">Oui</a>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                    </div>
-
+                                                    <td><a href="{{path('app_realisation_update',{id:r.id})}}"><i class="bi bi-pencil-square"></i></a>
+                                                    <a href="{{path('app_delete_realisation',{id:r.id})}}"><i class="bi bi-trash" data-bs-toggle="modal" data-bs-target="#staticBackdrop" ></i></a>
+                                                    
                                                     </td>
                                                     </tr>
                                                     {% endfor %}

@@ -53,4 +53,14 @@ class ThematiqueController extends AbstractController
         }
         
     }
+
+    #[Route('admin/thematique/archive/{id}', name: 'app_thematique_archive'), IsGranted("ROLE_ADMIN")]
+    public function removeThematique(ThematiqueRepository $thRepo,EntityManagerInterface $em,$id):  Response
+    {
+        $th = $thRepo->find($id);
+        $th->setStatus(!($th->getStatus()));
+        $em->persist($th);
+        $em->flush();
+        return $this->redirectToRoute('app_thematique');
+    }
 }
