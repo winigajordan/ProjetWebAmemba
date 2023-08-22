@@ -17,7 +17,11 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AdminPageAboutController extends AbstractController
 {
-
+    private PageAboutRepository $aboutRipo;
+    private RealisationRepository $realRipo;
+    private EntityManagerInterface $em;
+    private UserPasswordHasherInterface $hasher;
+    private PageAbout $page;
     public function __construct(
         PageAboutRepository $aboutRipo,
         RealisationRepository $realRipo,
@@ -42,10 +46,17 @@ class AdminPageAboutController extends AbstractController
 
     #[Route('/admin/page/about/section1/update', name: 'page_about_section1'), IsGranted("ROLE_ADMIN")]
     public function section1(Request $request){
+        $files = $request->files;
         $data = $request->request;
         $page = $this->page;
         $page->setMissionTitre($data->get('missionTitre'));
         $page->setMissionText($data->get('missionTexte'));
+        if(!empty($files->get("img1"))){
+            $img=$files->get("img1"); 
+            $imageName=uniqid().'.'.$img->guessExtension(); 
+            $img->move($this->getParameter("pages_directory"),$imageName);
+            $page->setMissionPath($imageName);
+        } 
         $this->em->persist($page);
         $this->em->flush();
         return $this->redirectToRoute('app_admin_page_about');
@@ -78,6 +89,42 @@ class AdminPageAboutController extends AbstractController
         ]); 
     }
 
+    #[Route('/admin/realisation/delete/{id}', name: 'app_delete_realisation')]  
+    public function deleteRealisation($id):Response{
+        $real = $this->realRipo->find($id);
+        $this->em->remove($real);
+        $this->em->flush();
+        return $this->redirectToRoute('app_admin_page_about');
+    }
+
+    #[Route('/admin/realisation/update/{id}', name: 'app_realisation_update')]  
+    public function updateRealisation($id,Request $request):Response{
+        $real = $this->realRipo->find($id);
+        if(!empty($_POST)){
+            $real->setTitre($request->request->get('titre'));
+            //$real->setDescription('aa');
+            $real->setDescription($request->request->get('description'));
+            $real->setMiniDescription($request->request->get('min-description'));
+            $real->setEtat("VALIDE");
+            if($request->files->get("img")){
+                $img=$request->files->get("img"); 
+                $imageName=uniqid().'.'.$img->guessExtension(); 
+                $img->move($this->getParameter("pages_directory"),$imageName);
+                $real->setImage($imageName);
+            }
+            $this->em->persist($real);
+            $this->em->flush();
+            return $this->redirectToRoute('app_admin_page_about');
+        }else{
+            return $this->render('admin/admin_page_about/index.html.twig', [
+                'page'=>$this->page,
+                'reals'=>$this->realRipo->findAll(),
+                'real' => $real
+            ]); 
+        }
+        
+    }
+
     #[Route('/admin/page/about/section2/edit/{id}', name: 'page_about_section2_edit'), IsGranted("ROLE_ADMIN")]
     public function section2edit($id){
        
@@ -99,9 +146,16 @@ class AdminPageAboutController extends AbstractController
 
     #[Route('/admin/page/about/section3/update', name: 'page_about_section3'), IsGranted("ROLE_ADMIN")]
     public function section3(Request $request){
+        $files = $request->files;
         $page = $this->page;
         $page ->setMotTitre($request->request->get('motTitre'));
         $page -> setMotContenu($request->request->get('motContenue'));
+        if(!empty($files->get("img2"))){
+            $img=$files->get("img2"); 
+            $imageName=uniqid().'.'.$img->guessExtension(); 
+            $img->move($this->getParameter("pages_directory"),$imageName);
+            $page->setMotPath($imageName);
+        } 
         $this->em->persist($page);
 
         $this->em->flush();

@@ -76,11 +76,18 @@ class AdminPageAccueilController extends AbstractController
     #[Route('/admin/page/accueil/section2/update', name: 'page_accueil_section2',  methods:('POST')), IsGranted("ROLE_ADMIN")]
     public function section2(Request $request): Response
     {
+        $files = $request->files;
         $data = $request->request;
         $page= $this->page;
         $page->setMissionTitre($data->get('missionTitre'));
         //dd($data->get('my_editor'));
         $page->setMissionText($data->get('my_editor'));
+        if(!empty($files->get("missionImg"))){
+            $img=$files->get("missionImg"); 
+            $imageName=uniqid().'.'.$img->guessExtension(); 
+            $img->move($this->getParameter("pages_directory"),$imageName);
+            $page->setMissionImg($imageName);
+        } 
         $this->em->persist($page);
         $this->em->flush();
         return $this->redirectToRoute('app_admin_page_accueil');
@@ -90,13 +97,14 @@ class AdminPageAccueilController extends AbstractController
     public function section3(Request $request): Response
     {
         $data = $request->request;
+        //dd($data);
         $page= $this->page;
         $page->setChiffreAlumni($data->get('chiffreAlumni'));
         $page->setChiffreAlumniText($data->get('chiffreAlumniText'));
         $page->setChiffreProjet($data->get('chiffreProjet'));
         $page->setChiffreProjetText($data->get('chiffreProjetText'));
         $page->setChiffreFonds($data->get('chiffreFonds'));
-        $page->setChiffreProjetText($data->get('chiffreFondsText'));
+        $page->setChiffreFondsText($data->get('chiffreFondsText'));
         $this->em->flush();
         return $this->redirectToRoute('app_admin_page_accueil');
     }
@@ -116,7 +124,7 @@ class AdminPageAccueilController extends AbstractController
     #[Route('/admin/page/accueil/section5/update', name: 'page_accueil_section5',  methods:('POST')), IsGranted("ROLE_ADMIN")]
     public function section5(Request $request): Response
     {
-        
+        $files = $request->files;
         $data = $request->request;
        //dd($data);
         $page= $this->page;
@@ -130,19 +138,51 @@ class AdminPageAccueilController extends AbstractController
         $page->setTemoignageText2($request->request->get('temoignageText2'));
         $page->setTemoignageText3($request->request->get('temoignageText3'));
         $page->setTemoignageText4($request->request->get('temoignageText4'));
+        if(!empty($files->get("ancienneImg1"))){
+            $img=$files->get("ancienneImg1"); 
+            $imageName=uniqid().'.'.$img->guessExtension(); 
+            $img->move($this->getParameter("pages_directory"),$imageName);
+            $page->setAncienneImg1($imageName);
+        } 
+        if(!empty($files->get("ancienneImg2"))){
+            $img=$files->get("ancienneImg2"); 
+            $imageName=uniqid().'.'.$img->guessExtension(); 
+            $img->move($this->getParameter("pages_directory"),$imageName);
+            $page->setAncienneImg2($imageName);
+        } 
         $this->em->persist($page);
         $this->em->flush();
         return $this->redirectToRoute('app_admin_page_accueil');
     }
-    
+
     #[Route('/admin/page/accueil/section6/update', name: 'page_accueil_section6',  methods:('POST')), IsGranted("ROLE_ADMIN")]
     public function section6(Request $request): Response
     {
         $data = $request->request;
         //dd($data);
         $page= $this->page;
+        $page->setBlogTitre($data->get('blogTitre'));
+        $page->setBlogText($data->get('blogText'));
+        $this->em->persist($page);
+        $this->em->flush();
+        return $this->redirectToRoute('app_admin_page_accueil');
+    }
+    
+    #[Route('/admin/page/accueil/section7/update', name: 'page_accueil_section7',  methods:('POST')), IsGranted("ROLE_ADMIN")]
+    public function section7(Request $request): Response
+    {
+        $files = $request->files;
+        $data = $request->request;
+        //dd($data);
+        $page= $this->page;
         $page->setMembreTitre($data->get('membreTitre'));
         $page->setMembreText($data->get('membreText'));
+        if(!empty($files->get("ancienneImg3"))){
+            $img=$files->get("ancienneImg3"); 
+            $imageName=uniqid().'.'.$img->guessExtension(); 
+            $img->move($this->getParameter("pages_directory"),$imageName);
+            $page->setAncienneImg3($imageName);
+        } 
         $this->em->persist($page);
         $this->em->flush();
         return $this->redirectToRoute('app_admin_page_accueil');

@@ -1,0 +1,259 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block page_title %} Modification de membre {% endblock page_title %}
+{% block style %}
+<!-- IntelTel Input CSS-->
+<link rel="stylesheet" href="{{asset('front/css/intlTelInput.css')}}" crossorigin="anonymous">
+{% endblock style %}
+{% block content %}
+
+    {% if membreFound is defined %}
+    <div class="page-content">
+        <section class="section">
+            <div class="row" id="basic-table">
+                <div class="col-12 ">
+                    <div class="card">
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                        <strong>Mettre à jour une membre </strong>
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                                    <div class="accordion-body">
+                                        <div class="card-body">
+                                            <form class="form form-horizontal" enctype="multipart/form-data" method='POST' action="{{path('admin_membre_modif')}}">
+                                                <div class="form-body">
+                                                    {# <div class="row">
+                                                        <div class = "col-2">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="role">Rôle</label>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class = "col-6">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <select class="form-select" aria-label="Default select example" id="role" name="role">
+                                                                        <option selected value="0">Membre</option>
+                                                                        
+                                                                        {% for role in roles %}
+                                                                        <option value="{{role.id}}">{{role.libelle}}</option>
+                                                                        {% endfor %}
+                                                                       
+                                                                       
+                                                                      </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> #}
+                                                    <input type="text" name="modif" value="fun" hidden>
+
+                                                    <div class="form-check mb-3">
+                                                        <input class="form-check-input" type="checkbox" checked name="etat" id="flexCheckDefault">
+                                                        <label class="form-check-label" for="flexCheckDefault">
+                                                            Afficher dans l'annuaire
+                                                        </label>
+                                                    </div>
+                                                    <input type="number" name="id" value="{{membreFound.id}}" hidden>
+                                                    <div class="row">
+                                                        <div class = "col-6">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="email-id-vertical">Nom</label>
+                                                                    <input type="text" id="email-id-vertical" class="form-control" name="nom" value="{{membreFound.nom}}" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class = "col-6">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="email-id-vertical">Prenom</label>
+                                                                    <input type="text" id="email-id-vertical" class="form-control" name="prenom" value="{{membreFound.prenom}}" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class = "col-4">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="email-id-vertical">Email</label>
+                                                                    <input type="email" id="email-id-vertical" class="form-control" name="mail" value="{{membreFound.email}}" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class = "col-4">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-label col-12">Téléphone</label>
+                                                                    <input class="form-control" id='phone' name="telTest" type="tel" value="{{membreFound.telephone}}" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class = "col-4">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-label col-12">Promotion</label>
+                                                                    <input class="form-control" id='' name="promotion" type="number" min="1983" max="2022" value="{{membreFound.promotion}}" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                    <div class="row">
+                                                        <div class = "col-4">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="email-id-vertical">Pays de résidence</label>
+                                                                    <input type="text" id="email-id-vertical" class="form-control" name="pays" value="{{membreFound.pays}}" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class = "col-4">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-label col-12">Ville de résidence </label>
+                                                                    <input class="form-control" id='' name="ville" type="text" value="{{membreFound.ville}}" required>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class = "col-4">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-label col-12">Photo</label>
+                                                                    <input class="form-control" id='' name="photo" type="file">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class = "col-4">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-label col-12">Série de BAC</label>
+                                                                    <input class="form-control" id='' name="bac" type="text"value="{{membreFound.bac}}" >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class = "col-4">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="email-id-vertical">Secteur d'activité</label>
+                                                                    <input type="text" class="form-control" name="secteur" value="{{membreFound.secteur}}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class = "col-4">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-label col-12">Entreprise</label>
+                                                                    <input class="form-control" name="entreprise" type="text" value="{{membreFound.entreprise}}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="my_editor">Etablissement(s) d'Etudes Supérieures fréquenté(s)</label>
+                                                        <textarea class="form-control" name="etudes" id="my_editor" rows="4">{{membreFound.univ}}</textarea>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="my_editor">Diplôme(s) Obtenu(s)</label>
+                                                        <textarea class="form-control" name="diplomes" id="my_editor2" rows="4">{{membreFound.diplome}}</textarea>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="my_editor">Experiences Professionnelles</label>
+                                                        <textarea class="form-control" name="exp" id="my_editor1" rows="4">{{membreFound.experience}}</textarea>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="my_editor">Profil Linkedin</label>
+                                                        <input class="form-control" name="profil" type="text" value="{{membreFound.link}}">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="my_editor"> Bio / Entrepreneurship</label>
+                                                        <textarea class="form-control" name="bio" id="" rows="2">{{membreFound.bio}}</textarea>
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-primary me-1 mb-1">Mettre à jour</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </section>
+    </div>
+    {% else %}
+        <h6 class="my-2 mb-3"> Rechercher une membre pour mettre à jour ses informations </h6>
+        <form class="form form-horizontal" method="POST" action="{{path('admin_membre_modif')}}">
+            <div class="row mt-2">
+                <div class="col-md-2">
+                    <label for='phone' class="form-label col-12">E-mail</label>
+                </div>
+                <div class="col-md-6 form-group">
+                    <input type="email" class="form-control" name="email" id="nom" aria-describedby="helpId" placeholder="" required>
+                </div>
+                <input type="text" name="recherche" value="fun" hidden>
+                <div class="col-md-3 form-group">
+                    <button type="submit" class="btn btn-primary">Rechercher </button>      
+                </div>
+            </div>
+        </form>
+
+    {% endif %}
+
+{% endblock content %}
+
+
+{% block js %}
+<!-- IntelTel Input -->
+<script type="text/javascript" src="{{asset('front/js/intlTelInput.js')}}"></script>
+<script src="{{asset('admin/assets/js/form-edit/ckeditor.js')}}"></script>
+<script>
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+        // allowDropdown: false,
+        // autoHideDialCode: false,
+        // autoPlaceholder: "off",
+        // dropdownContainer: document.body,
+        // excludeCountries: ["us"],
+        // formatOnDisplay: false,
+        // geoIpLookup: function(callback) {
+        //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+        //     var countryCode = (resp && resp.country) ? resp.country : "";
+        //     callback(countryCode);
+        //   });
+        // },
+        hiddenInput: "full_number",
+        // initialCountry: "auto",
+        // localizedCountries: { 'de': 'Deutschland' },
+        // nationalMode: false,
+        // onlyCountries: ['us', 'gb', 'ch', 'ca', 'do'],
+        placeholderNumberType: "MOBILE",
+        preferredCountries: ['sn'],
+        separateDialCode: true,
+        utilsScript: "{{asset('front/js/utils.js')}}",
+    });
+</script>
+    <script>
+        ClassicEditor.create(document.getElementById('my_editor'));
+        ClassicEditor.create(document.getElementById('my_editor1'));
+        ClassicEditor.create(document.getElementById('my_editor2'));
+    </script>
+{% endblock js %}

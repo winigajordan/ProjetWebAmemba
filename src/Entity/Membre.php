@@ -60,13 +60,13 @@ class Membre extends User
     #[ORM\Column(type: 'string', length: 25, nullable: true)]
     private $bac;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $univ;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $diplome;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $experience;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -79,10 +79,12 @@ class Membre extends User
     #[ORM\ManyToMany(targetEntity: Cotisation::class, mappedBy: 'contributeurs')]
     private $cotisations;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $etat = null;
+
     public function __construct()
     {
         $this->setRoles(['ROLE_MEMBRE']);
-        $this->commandes = new ArrayCollection();
         $this->entreprises = new ArrayCollection();
         $this->offreEmplois = new ArrayCollection();
         $this->cotisations = new ArrayCollection();
@@ -405,4 +407,17 @@ class Membre extends User
 
         return $this;
     }
+
+    public function isEtat(): ?bool
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?bool $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
 }

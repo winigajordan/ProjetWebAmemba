@@ -19,6 +19,12 @@ class Depot extends Transaction
     #[ORM\Column(type: 'string', length: 255)]
     private $etat;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $numero;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $moyen;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +50,30 @@ class Depot extends Transaction
     public function setEtat(string $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getNumero(): ?string
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(string $numero): self
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
+    public function getMoyen(): ?string
+    {
+        return $this->moyen;
+    }
+
+    public function setMoyen(string $moyen): self
+    {
+        $this->moyen = $moyen;
 
         return $this;
     }

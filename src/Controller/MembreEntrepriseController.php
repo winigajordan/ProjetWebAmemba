@@ -60,6 +60,13 @@ class MembreEntrepriseController extends AbstractController
         $entreprise -> setAdresses($data->get('adresse'));
         $entreprise -> setSlug($this->slg($data->get('nom')));
         $entreprise -> setProprietaire($this->membreRepository->find($this->getUser()->getId()));
+        $entreprise -> setEmail($data->get('email'));
+        $entreprise -> setInstagram($data->get('instagram'));
+        $entreprise -> setType($data->get('type'));
+        $entreprise -> setCreatedAt(new \DateTime($data->get('date')));
+        if (!empty($data->get('site'))){
+            $entreprise -> setSite($data->get('site'));
+        }
         $entreprise -> setEtat('DEMANDE');
         if(!empty($files->get("logo"))){
             $img=$files->get("logo"); 
@@ -67,6 +74,7 @@ class MembreEntrepriseController extends AbstractController
             $img->move($this->getParameter("entreprises_directory"),$imageName);
             $entreprise->setLogo($imageName);
         }
+        //dd($entreprise);
         $this->em->persist($entreprise);
         $this->em->flush();
         return $this->redirectToRoute('app_membre_entreprise');

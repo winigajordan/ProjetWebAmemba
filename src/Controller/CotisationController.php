@@ -22,9 +22,8 @@ class CotisationController extends AbstractController
     #[Route('/cotisation', name: 'app_cotisation')]
     public function index(CotisationRepository $coRepo): Response
     {
-        $mycotisations = $coRepo->findAll();
+        $mycotisations = $coRepo->findBy(['etat'=>true]);
         return $this->render('cotisation/membre.cotisation.html.twig', [
-            'controller_name' => 'CotisationController',
             'myCotisations' => $mycotisations
         ]);
     }
@@ -82,6 +81,57 @@ class CotisationController extends AbstractController
         ]);
     }
 
+    #[Route('/admin/cotisation/update/content', name: 'app_admin_cotisation_update_content'), IsGranted("ROLE_ADMIN")]
+    public function updateContent(CotisationRepository $coRepo, Request $request, EntityManagerInterface $manager) : Response{
+        $data = $request->request;
+        $cotisation = $coRepo->find($data->get('id'));
+        $cotisation->setTitre($data->get('titre'));
+        $cotisation->setDescription($data->get('description'));
+        $manager->persist($cotisation);
+        $manager->flush();
+        return $this->redirectToRoute('app_cotisation_details_admin', array('id'=>$cotisation->getId()) );
+
+    }
+
+    #[Route('/cotisation/with/wallet', name: 'app_cotisation_make'), IsGranted("ROLE_MEMBRE")]
+    public function makeCotisationWithWallet(Request $request, WalletRepository $walletRipo,  CotisationRepository $coRepo,EntityManagerInterface $manager) : Response {
+        $data = $request->request;
+        $user = $this->getUser();
+        $cotisation = $coRepo->find($data->get('id'));
+        $wallet = $walletRipo->find($user->getWallet()->getId());
+        //verification du solde du portefeuille
+        if($data->get('montant')>$wallet->getSolde()){
+            $this->addFlash('error', 'Le montant disponible dans votre portefeuille est insuffisant pour effectuer cette transaction');
+            return $this->redirectToRoute('app_cotisation_details', ['id'=>$cotisation->getId()]);
+        }
+
+        //modification du solde sur le portefeuille
+        $wallet->setSolde(intval($wallet->getSolde()) - intval($data->get('montant')));
+        $manager->persist($wallet);
+
+        //création de la transaction
+        $tr = new CotisationTransaction();
+        $tr ->setDate(new DateTime());
+        $tr -> setMontant($data->get('montant'));
+        $tr -> setType('Cotisation');
+        $tr -> setWallet($wallet);
+        $manager->persist($tr);
+
+        //mise à jour de la cotisation du membre
+        $user->addCotisation($cotisation);
+        $manager->persist($user);
+
+        //mise à jour du solde de la cotisation
+        $cotisation->setSolde($cotisation->getSolde()+$data->get('montant'));
+        $manager->persist($cotisation);
+
+        $manager->flush();
+        return $this->redirectToRoute('app_cotisation');
+
+    }
+
+    /*
+
     #[Route('/cotisation/make/wallet/{id}', name: 'app_cotisation_make'), IsGranted("ROLE_MEMBRE")]
     public function makeCotisation($id, WalletRepository $walletRipo,  CotisationRepository $coRepo,EntityManagerInterface $em):Response{
         $user = $this->getUser();
@@ -94,7 +144,6 @@ class CotisationController extends AbstractController
         }
 
         //modification du solde sur le portefeuille
-        
         $wallet->setSolde(intval($wallet->getSolde()) - intval($cotisation->getMontant()));
         $em->persist($wallet);
 
@@ -118,6 +167,7 @@ class CotisationController extends AbstractController
         return $this->redirectToRoute('app_cotisation');
     }
 
+     */
     #[Route('/cotisation/add/cont', name: 'app_cotisation_add_cont'), IsGranted("ROLE_ADMIN")]
     public function addCont(Request $request,CotisationRepository $cotisationRipo, MembreRepository $membreRipo, EntityManagerInterface $em){
         $data = $request->request;

@@ -12,6 +12,7 @@
                     <thead>
                         <tr>
                         <th scope="col">Libelle</th>
+                        <th scope="col">Etat</th>
                         <th scope="col">Actions</th>
                         </tr>
                     </thead>
@@ -19,7 +20,10 @@
                         {% for i in thematiques %}
                         <tr>
                         <th>{{i.libelle}}</th>
-                        <td><a href="#"><i class="bi bi-pencil-square"></i></a><a href="#"><i class="bi bi-trash"></i></a></td>
+                        <td>{% if i.status %}Actif{% else %}Archivé{% endif %}</td>
+                        <td><a href="{{path('app_thematique_update',{id:i.id})}}"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{{path('app_thematique_archive',{id:i.id})}}">{% if i.status %}<i class="bi bi-trash" data-bs-toggle="modal" data-bs-target="#staticBackdrop" ></i>{% else %}<i class="bi bi-check2-circle"></i>{% endif %}</a>                            
+                        </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -29,14 +33,14 @@
                 <div class="card mb-4">
                     <div class="card-body">
                         <h5 class="mb-3">Nouvelle Thematique</h5>
-                        <form method="POST" action="{{path('app_thematique_add')}}">
+                        <form method="POST" action="{% if thematique is defined %}{{path('app_thematique_update',{id:thematique.id})}}{% else %}{{path('app_thematique_add')}}{% endif %}">
                             <div class="mb-4">
                                 <label for="categorie_libelle" class="form-label">Libelle</label>
                                 <input type="text" placeholder="Type here" class="form-control" id="order_created_date"
-                                name="libelle">
+                                name="libelle" value="{% if thematique is defined %}{{thematique.libelle}}{% else %}{% endif %}">
                             </div>
                             <div class="mb-4">
-                                <button type="submit" class="btn btn-primary">Ajouter</button>
+                                <button type="submit" class="btn btn-primary">{% if thematique is defined %}Modifier{% else %}Ajouter{% endif %}</button>
                             </div>
                         </form>
                     </div>

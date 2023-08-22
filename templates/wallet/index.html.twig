@@ -11,6 +11,9 @@
         <section class="second">
             <div class="container">
                 <h2> Bienvenue dans  votre Portefeuille AMEMBA </h2>
+                <p class="mt-3">
+                    Recharger votre portefeuille AMEMBA et utiliser le pour payer votre cotisation, participer aux collectes, acheter vos goodies préférés dans la boutique.
+                </p>
                 <div class="row mt-5">
                     <div class="col-4">
                         <div class="accordion" id="accordionPanelsStayOpenExample">
@@ -38,7 +41,36 @@
                                                 <div class="row mb-3">
                                                     <div class = "card ">
                                                         <div class="my-3">
-                                                            <input type="number" class="form-control"  placeholder="Montant" name="montant">
+                                                            <input type="number" min="100" class="form-control"  placeholder="Montant" name="montant" required>
+                                                            <br>
+                                                            <input type="text" min="100" class="form-control"  placeholder="numero" name="numero" required>
+                                                            <br>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="moyen" id="flexRadioDefault1" value="Orange Money" required>
+                                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                                    Orange Money
+                                                                    <br>
+                                                                    <br>
+                                                                    <div id="bloc1" style="display:none">
+                                                                    <p>Code marchand : 473191 <br>
+                                                                    Code à taper sur votre téléphone :
+                                                                        #144#5*378604*Montant*CodeSecret#
+                                                                        Paiement sans frais
+                                                                    </p>
+                                                                    </div>
+                                                                </label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="moyen" id="flexRadioDefault2" value="Wave" required>
+                                                                <label class="form-check-label" for="flexRadioDefault2">
+                                                                    Wave
+                                                                    <br>
+                                                                    <br>
+                                                                    <div id="bloc2" style="display:none">
+                                                                    <img src="{{asset('front/images/wave.png')}}" height="250px" width="250px">
+                                                                    </div>
+                                                                </label>
+                                                            </div>
                                                             <button type="submit" class="btn btn-outline-success mt-2">Recharger</button>
                                                         </div>
                                                     </div>
@@ -76,7 +108,7 @@
                                         <tbody>
                                           {% for trans in transactions %}
                                           <tr>
-                                            <th> {{trans.date |format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none') }} </th>
+                                            <th> {{trans.date |date("d/m/Y")}} </th>
                                             <td scope="row">{{trans.montant}}</td>
                                             {% if trans.type == "Achat" %}
                                             <td>
@@ -110,3 +142,27 @@
 
 
 {% block part %}{% endblock part %}
+
+{% block js %}
+<script>
+    var radio1 = document.getElementById('flexRadioDefault1');
+    var radio2 = document.getElementById('flexRadioDefault2');
+    var bloc1 = document.getElementById('bloc1');
+    var bloc2 = document.getElementById('bloc2');
+    radio1.addEventListener('click', function(){
+        //display block1 to the opposite of its current state
+        if(bloc1.style.display == 'none')
+            bloc1.style.display = 'block';
+        else
+            bloc1.style.display = 'none';
+        bloc2.style.display = 'none';
+    });
+    radio2.addEventListener('click', function(){
+        bloc1.style.display = 'none';
+        if(bloc2.style.display == 'none')
+            bloc2.style.display = 'block';
+        else
+            bloc2.style.display = 'none';
+    });
+</script>
+{% endblock js %}

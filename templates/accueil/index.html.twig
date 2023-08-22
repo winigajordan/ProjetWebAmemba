@@ -52,7 +52,7 @@
 <section class="mission-section row row-cols-1 row-cols-md-2 container my-5 mx-auto">
     <div class="mission-left col">
         <div class="blue-bg d-flex align-items-center">
-            <img src="{{asset('front/images/goal.png')}}">
+            <img src="{{asset('/pages/')}}{{page.missionImg}}">
         </div>
     </div>
     <div class="mission-right col">
@@ -70,8 +70,8 @@
 
 <!-- STATS SECTION START -->
 <section class="stats container d-flex flex-column justify-content-between mt-5">
-    <h2 class="text-center my-5">L'Amicale en chiffres</h2>
-    <div class="stats-cards w-100 h-50 d-flex justify-content-around mb-5">
+    <h2 class="text-center my-5" style="margin-bottom: 50px">L'Amicale en chiffres</h2>
+    <div class="stats-cards w-100 h-50 d-flex justify-content-around my-5">
         <div class="stats-card">
             <div class="stats-ico d-flex justify-content-center align-items-center grad">
                 <i class="fa-solid fa-graduation-cap fa-2x"></i>
@@ -95,9 +95,9 @@
                 <i class="fa-solid fa-money-bill fa-2x"></i>
             </div>
             <h4 class="text-center">
-                <span class="count"> {{page.chiffreFonds}} </span> Fonds Immobilises
+                <span class="count"> {{page.chiffreFonds}} </span> Millions
             </h4>
-            <p class="text-center"> {{page.chiffreFondsText}}</p>
+            <p class="text-center"> {{ page.chiffreFondsText}} </p>
         </div>
     </div>
 </section>
@@ -131,7 +131,7 @@
                 </p>
                 <h5 class="position-absolute">{{page.temoignageAuteur3}}</h5>
             </div>
-            <div class="card2 wen-card col d-flex align-items-end" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('front/images/interview/interview_1.png')}}');">
+            <div class="card2 wen-card col d-flex align-items-end" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('/pages/')}}{{page.ancienneImg1}}');">
                 <div class="wen-card-video">
                     <h5>{{page.temoignageAuteur1}}</h5>
                     <h3>{{page.temoignageTitre1}}</h3>
@@ -140,7 +140,7 @@
             </div>
         </div>
         <div class="wen-cards-duo ">
-            <div class="card3 wen-card col d-flex align-items-end" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('front/images/interview/interview_1.png')}}');">
+            <div class="card3 wen-card col d-flex align-items-end" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('/pages/')}}{{page.ancienneImg2}}');">
                 <div class="wen-card-video position-relative">
                     <h5>{{page.temoignageAuteur2}}</h5>
                     <h3>{{page.temoignageTitre2}}</h3>
@@ -161,10 +161,9 @@
 
 <!-- BLOG SECTION START -->
 <section class="blog container position-relative mt-3">
-    <h2 class="text-center pt-5">Derniers articles du blog</h2>
+    <h2 class="text-center pt-5">{{ page.blogTitre }}</h2>
     <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Magna donec nulla eu purus sed pharetra. 
-        Enim vel sed posuere ut massa ut.
+        {{ page.blogText }}
     </p>
     <div class="blog-carousel-container pb-5">
         {% for art in articles %}
@@ -174,7 +173,7 @@
             </div>
             <div class="blog-card-bottom">
                 <h4>{{art.titre}}</h4>
-                <a href="" class="btn btn-outline-primary">Lire plus</a>
+                <a href="{{path('app_blog_article_details',{slug:art.slug})}}" class="btn btn-outline-primary">Lire plus</a>
             </div>
         </div>
         {% endfor %}
@@ -185,7 +184,7 @@
             <button type="button" id="blog-arrow-left" class="btn btn-secondary"><i class="fa-solid fa-angle-left"></i></button>
             <button type="button" id="blog-arrow-right" class="btn btn-secondary"><i class="fa-solid fa-angle-right"></i></button>
         </div>
-        <a class="btn btn-primary" href="#">Voir tout <i class="fa-solid fa-angle-right"></i></a>
+        <a class="btn btn-primary" href="{{path('blog')}}">Voir tout <i class="fa-solid fa-angle-right"></i></a>
     </div>
 </section>
 <!-- BLOG SECTION END -->
@@ -224,7 +223,7 @@
 {% endif %}
 
 <!-- OLD SECTION START -->
-<section class="old" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('front/images/hero-carroussel/background.jfif')}}');">
+<section class="old" style="background-image: linear-gradient(rgba(0, 24, 69, 0.7), rgba(0, 24, 69, 0.7)), url('{{asset('/pages/')}}{{page.ancienneImg3}}');">
     <div class="container d-flex flex-column justify-content-around h-100 py-5">
         <h2 class="text-center">{{page.membreTitre}}</h2>
         <p class="text-center">

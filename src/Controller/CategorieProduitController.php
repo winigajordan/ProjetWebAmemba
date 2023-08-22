@@ -34,4 +34,25 @@ class CategorieProduitController extends AbstractController
         }
         return $this->redirectToRoute('app_categorie_produit');
     }
+
+    #[Route('admin/categorie/produit/{id}', name: 'app_produit_categorie_update'), IsGranted("ROLE_ADMIN")]
+    public function updateCategorie(CategorieProduitRepository $catRepo,$id,EntityManagerInterface $em,Request $request): Response
+    {
+        $cat = $catRepo->find($id);
+        if(!empty($_POST)){ 
+            $cat->setLibelle($request->request->get('libelle'));
+            $em->persist($cat);
+            $em->flush();
+            return $this->redirectToRoute('app_categorie_produit');
+        }else{
+            
+            $categories=$catRepo->findAll();
+            return $this->render('categorie_produit/index.html.twig', [
+                'controller_name' => 'CategorieProduitController',
+                'categories' => $categories,
+                'categorie' => $cat
+            ]);
+        }
+        
+    }
 }

@@ -115,12 +115,62 @@
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label class="form-label col-12">Photo</label>
-                                                                    <input class="form-control" id='' name="photo" type="file" required>
+                                                                    <input class="form-control" id='' name="photo" type="file">
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div> 
-                                                   
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class = "col-4">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-label col-12">Série de BAC</label>
+                                                                    <input class="form-control" id='' name="bac" type="text" >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class = "col-4">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="email-id-vertical">Secteur d'activité</label>
+                                                                    <input type="text" class="form-control" name="secteur">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class = "col-4">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label class="form-label col-12">Entreprise</label>
+                                                                    <input class="form-control" name="entreprise" type="text" >
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="my_editor">Etablissement(s) d'Etudes Supérieures fréquenté(s)</label>
+                                                        <textarea class="form-control" name="etudes" id="my_editor" rows="4"></textarea>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="my_editor">Diplôme(s) Obtenu(s)</label>
+                                                        <textarea class="form-control" name="diplomes" id="my_editor2" rows="4"></textarea>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="my_editor">Experiences Professionnelles</label>
+                                                        <textarea class="form-control" name="exp" id="my_editor1" rows="4"></textarea>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="my_editor">Profil Linkedin</label>
+                                                        <input class="form-control" name="profil" type="text" >
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="my_editor"> Bio / Entrepreneurship</label>
+                                                        <textarea class="form-control" name="bio" id="" rows="2"></textarea>
+                                                    </div>
 
                                                     <button type="submit" class="btn btn-primary me-1 mb-1">Ajouter</button>
                                                 </div>
@@ -234,6 +284,7 @@
 {% block js %}
 <!-- IntelTel Input -->
 <script type="text/javascript" src="{{asset('front/js/intlTelInput.js')}}"></script>
+<script src="{{asset('admin/assets/js/form-edit/ckeditor.js')}}"></script>
 <script>
     var input = document.querySelector("#phone");
     window.intlTelInput(input, {
@@ -260,4 +311,9 @@
         utilsScript: "{{asset('front/js/utils.js')}}",
     });
 </script>
+    <script>
+        ClassicEditor.create(document.getElementById('my_editor'));
+        ClassicEditor.create(document.getElementById('my_editor1'));
+        ClassicEditor.create(document.getElementById('my_editor2'));
+    </script>
 {% endblock js %}

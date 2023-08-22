@@ -1,0 +1,62 @@
+{% extends 'base.admin.html.twig' %}
+
+{% block content %}
+        <!-- SECOND SECTION START -->
+    <section class="content-main container">
+
+        <h2 class="content-title my-2">Depots Wallet</h2>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-4">
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Numero</th>
+                                        <th> Nom - Promotion </th>
+                                        <th>Montant</th>
+                                        <th>Statut</th>
+                                        <th>Date</th>
+                                        <th>Moyen</th>
+                                        <th> Action </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for dep in depots %}
+                                    <tr>
+                                        <td>{{dep.numero}}</td>
+                                        <td>{{dep.wallet.membre.prenom}} {{dep.wallet.membre.nom}} - {{dep.wallet.membre.promotion}}</td>
+                                        <td>{{dep.montant}}</td>
+                                        <td><span class="badge rounded-pill alert-success">{{dep.etat}}</span></td>
+                                        <td>{{dep.getDate()|date("d/m/Y")}}</td>
+                                        <td>{{dep.moyen}}</td>
+                                        <td>
+                                            {% if dep.etat != "REJETE" and dep.etat != "VALIDE" %}
+                                            <a class="btn btn-primary" href="{{path('app_depot_accept',{ref:dep.reference})}}" role="button">Valider</i></a>
+                                            <a class="btn btn-primary" href="{{path('app_depot_reject',{ref:dep.reference})}}" role="button">Rejeter</a>{% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-center">
+                                {% do depots.setPageRange(2) %}
+                                {{ knp_pagination_render(depots) }}
+                            </div>
+                        </div>
+                        <!-- table-responsive //end -->
+                    </div>
+                    <!-- card-body end// -->
+                </div>
+                <!-- card end// -->
+            </div>
+        </div>
+        <!-- .row end// -->
+
+
+    </section>
+    <!-- SECOND SECTION END -->
+{% endblock content %}

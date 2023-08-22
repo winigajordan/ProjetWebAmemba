@@ -25,6 +25,12 @@ class PageAbout
     #[ORM\Column(type: 'text')]
     private $motContenu;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $missionPath;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $motPath;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +80,30 @@ class PageAbout
     public function setMotContenu(string $motContenu): self
     {
         $this->motContenu = $motContenu;
+
+        return $this;
+    }
+
+    public function getMissionPath(): ?string
+    {
+        return $this->missionPath;
+    }
+
+    public function setMissionPath(?string $missionPath): self
+    {
+        $this->missionPath = $missionPath;
+
+        return $this;
+    }
+
+    public function getMotPath(): ?string
+    {
+        return $this->motPath;
+    }
+
+    public function setMotPath(?string $motPath): self
+    {
+        $this->motPath = $motPath;
 
         return $this;
     }

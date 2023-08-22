@@ -25,7 +25,7 @@ class WalletController extends AbstractController
     private MembreRepository $membreRepository;
     private EntityManagerInterface $em;
     private TransactionRepository $transactionRipo;
-    
+    private DepotRepository $depotRipo;
 
     public function __construct(
         WalletRepository $walletRipo, 
@@ -58,6 +58,7 @@ class WalletController extends AbstractController
         ]);
     }
 
+
     #[Route('/wallet/recharge', name: 'app_wallet_recharge'), IsGranted("ROLE_MEMBRE")]
     public function recharge(Request $request, Payement $payement){
         $solde = $request -> request -> get('montant');
@@ -71,13 +72,13 @@ class WalletController extends AbstractController
         $depot -> setWallet($wallet);
         $depot -> setMontant(floatval($solde));
         $depot -> setReference(uniqid("DEPOT-"));
-        $depot -> setEtat("ANNULE");
+        $depot -> setEtat("EN ATTENTE DE CONFIRMATION");
         $depot -> setType('Depôt');
+        $depot -> setNumero($request->request->get('numero'));
+        $depot -> setMoyen($request->request->get('moyen'));
         $this->em ->persist($depot);
         $this -> em -> flush();
-
-        $url =  $payement -> payWallet($depot->getMontant(), $depot->getReference());
-        return $this->redirect($url);
+        return $this->redirectToRoute('app_wallet');
 
         //return $this-> redirectToRoute('app_wallet');
         

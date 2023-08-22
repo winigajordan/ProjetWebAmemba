@@ -33,4 +33,34 @@ class ThematiqueController extends AbstractController
         }
         return $this->redirectToRoute('app_thematique');
     }
+
+    #[Route('admin/thematique/update/{id}', name: 'app_thematique_update'), IsGranted("ROLE_ADMIN")]
+    public function updateThematique(ThematiqueRepository $thRepo,$id,EntityManagerInterface $em,Request $request): Response
+    {
+        $cat = $thRepo->find($id);
+        if(!empty($_POST)){
+            $cat->setLibelle($request->request->get('libelle'));
+            $em->persist($cat);
+            $em->flush();
+            return $this->redirectToRoute('app_thematique');
+        }else{
+            
+            $thematiques = $thRepo->findAll();
+            return $this->render('thematique/index.html.twig', [
+                'thematiques' => $thematiques,
+                'thematique' => $cat
+            ]);
+        }
+        
+    }
+
+    #[Route('admin/thematique/archive/{id}', name: 'app_thematique_archive'), IsGranted("ROLE_ADMIN")]
+    public function removeThematique(ThematiqueRepository $thRepo,EntityManagerInterface $em,$id):  Response
+    {
+        $th = $thRepo->find($id);
+        $th->setStatus(!($th->getStatus()));
+        $em->persist($th);
+        $em->flush();
+        return $this->redirectToRoute('app_thematique');
+    }
 }

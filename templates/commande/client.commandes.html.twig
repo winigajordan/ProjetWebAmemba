@@ -28,7 +28,7 @@
                                         <td><span class="badge rounded-pill alert-success">{{com.etat}}</span></td>
                                         <td>{{com.date |format_datetime(locale='fr', dateFormat = 'medium' ,  timeFormat = 'none') }} </td>
                                         <td class="text-end d-flex">
-                                            <a href="{{path('app_client_commande_details',{id:com.id})}}" class="btn btn-light">Detail</a>
+                                            <a href="{{path('app_client_commande_details',{id:com.id})}}" class="btn btn-light">Details</a>
                                             
                                             <!-- dropdown //end -->
                                         </td>
@@ -52,8 +52,8 @@
                                 <label class="form-label">Statut de la commande</label>
                                 <select class="form-select" name="etat">
                                     <option value="EN COURS">EN COURS</option>
-                                    <option value="EN COURS DE LIVRAISON">EN COURS DE LIVRAISON</option>
-                                    <option value="LIVRE">LIVRE</option>
+                                    <option value="EN ATTENTE DE CONFIRMATION">EN ATTENTE DE CONFIRMATION</option>
+                                    <option value="TERMINE">TERMINE</option>
                                 </select>
                             </div>
                             {# <div class="mb-4">
@@ -70,7 +70,10 @@
             </div>
         </div>
         <!-- .row end// -->
-
+        <div class="d-flex justify-content-center">
+            {% do commandes.setPageRange(3) %}
+            {{ knp_pagination_render(commandes) }}
+        </div>
 
     </section>
     <!-- SECOND SECTION END -->

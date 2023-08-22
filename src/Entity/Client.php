@@ -16,14 +16,11 @@ class Client extends User
     private $id;
 
     
-
-   
-    
     public function __construct()
     {
         $this->setRoles(['ROLE_CLIENT']);
-        $this->commandes = new ArrayCollection();
     }
+   
 
     
 }

@@ -1,23 +1,116 @@
 {% extends 'base.pages.html.twig' %}
 
-{% block title %}Hello CommandeController!{% endblock %}
+{% block title %}PAYEMENT{% endblock %}
+{% block page %}{% endblock page %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block content %}
+    <!-- SECOND SECTION START -->
+    <section class="second py-5">
+        <div class="container">
+        <h1>Finalisation de la commande</h1>
+            <div class="row">
+                <div class="col-lg-7">
+                    <div class="card">
+                        <div class="content-body">
+                            <table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col">Libelle</th>
+                                <th scope="col">Prix</th>
+                                <th scope="col">Quantite</th>
+                                <th scope="col">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in items %}
+                                <tr>
+                                <td>{{i['produit'].libelle}}</td>
+                                <td>{{i['produit'].prix}}</td>
+                                <td>{{i['quantite']}}</td>
+                                <td>{{i['produit'].prix*i['quantite']}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <br>
+                    Total : {{total}} FCFA
+                </div>
+                <aside class="col-lg-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="POST" action="{{path('app_commande_add')}}">
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Numero de transaction</label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1" name="numero" required>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="moyen" id="flexRadioDefault1" value="Orange Money" required>
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            Orange Money
+                                            <br>
+                                            <br>
+                                            <div id="bloc1" style="display:none">
+                                            <p>Code marchant : 473191 <br>
+                                            Code à taper sur votre téléphone :
+                                                #144#5*378604*Montant*CodeSecret#
+                                                Paiement sans frais
+                                            </p>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="moyen" id="flexRadioDefault2" value="Wave" required>
+                                        <label class="form-check-label" for="flexRadioDefault2">
+                                            Wave
+                                            <br>
+                                            <br>
+                                            <div id="bloc2" style="display:none">
+                                            <img src="{{asset('front/images/wave.png')}}" height="250px" width="250px">
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Commander</button>
+                            </form>
+                        </div>
+                    </div>
+                </aside>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            </div>
+        </div>
+    </section>
+    <!-- SECOND SECTION END -->
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/AMEMBA/v2/ProjetWebAmemba/src/Controller/CommandeController.php'|file_link(0) }}">src/Controller/CommandeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/AMEMBA/v2/ProjetWebAmemba/templates/commande/index.html.twig'|file_link(0) }}">templates/commande/index.html.twig</a></code></li>
-    </ul>
-</div>
+
+    
 {% endblock %}
 
 
 {% block part %}{% endblock part %}
+
+{% block js %}
+<script>
+    var radio1 = document.getElementById('flexRadioDefault1');
+    var radio2 = document.getElementById('flexRadioDefault2');
+    var bloc1 = document.getElementById('bloc1');
+    var bloc2 = document.getElementById('bloc2');
+    radio1.addEventListener('click', function(){
+        //display block1 to the opposite of its current state
+        if(bloc1.style.display == 'none')
+            bloc1.style.display = 'block';
+        else
+            bloc1.style.display = 'none';
+        bloc2.style.display = 'none';
+    });
+    radio2.addEventListener('click', function(){
+        bloc1.style.display = 'none';
+        if(bloc2.style.display == 'none')
+            bloc2.style.display = 'block';
+        else
+            bloc2.style.display = 'none';
+    });
+</script>
+{% endblock js %}

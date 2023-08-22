@@ -28,7 +28,7 @@ class AdminBureauController extends AbstractController
     {
         return $this->render('admin/admin_bureau/index.html.twig', [
             'postes'=>$this->posteRipo->findAll(),
-            'membres'=>$this->membreRipo->findAll()
+            'membres'=>$this->membreRipo->findBy(['etat'=>true])
         ]);
         
     }

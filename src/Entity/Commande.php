@@ -30,12 +30,17 @@ class Commande
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: DetailCommande::class)]
     private $detailCommandes;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $adresse;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'commandes')]
     #[ORM\JoinColumn(nullable: false)]
     private $client;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $moyen;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $numero;
+
 
     public function __construct()
     {
@@ -125,18 +130,6 @@ class Commande
         return $this;
     }
 
-    public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(string $adresse): self
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }
-
     public function getClient(): ?User
     {
         return $this->client;
@@ -148,4 +141,29 @@ class Commande
 
         return $this;
     }
+
+    public function getMoyen(): ?string
+    {
+        return $this->moyen;
+    }
+
+    public function setMoyen(string $moyen): self
+    {
+        $this->moyen = $moyen;
+
+        return $this;
+    }
+
+    public function getNumero(): ?string
+    {
+        return $this->numero;
+    }
+
+    public function setNumero(?string $numero): self
+    {
+        $this->numero = $numero;
+
+        return $this;
+    }
+
 }

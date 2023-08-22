@@ -28,14 +28,25 @@
                 <aside class="col-lg-3">
                     <div class="card">
                         <div class="card-body">
+
                             <dl class="dlist-align">
                                 <dt>Montant :</dt>
                                 <dd class="text-end text-dark h5">{{cotisation.montant}}</dd>
                             </dl>
+                            <form method="POST" action="{{ path('app_cotisation_make') }}">
+                                <div class="form-group">
+                                    <label for="staticEmail" class="col-form-label">Montant</label>
+                                    <div class="row">
+                                        <div class="col-8"> <input type="number" name="montant" class="form-control" value="{{cotisation.montant}}"></div>
+                                        <div class="col-4 mt-1"> FCFA</div>
+                                        <input type="text" name="id" hidden value="{{cotisation.id}}">
+                                    </div>
+                                    <input type="submit" class="form-control mt-3 btn btn-primary" value="Cotiser">
+                                </div>
+
+                            </form>
                             <div class="d-grid gap-2 my-3">
-                                {% if cotisation not in app.user.cotisations %}                                
-                                <a href="{{path('app_cotisation_make_1',{id:cotisation.id} )}}" class="btn btn-success w-100">Cotiser</a>
-                                <a href="{{path('app_cotisation_make',{id:cotisation.id})}}" class="btn btn-success w-100">Cotiser avec wallet</a>
+                                {% if cotisation not in app.user.cotisations %}
                                 <a href="{{path('app_cotisation')}}" class="btn btn-light w-100"> Retour à la liste </a>
                                 {% else %}
                                 <p>Vous avez déja cotisé !</p>

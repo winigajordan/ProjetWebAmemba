@@ -35,18 +35,9 @@
                 
             </div>
             <hr>
-            <div class="d-flex mt-4 d-flex justify-content-end">
-                <div aria-label="Page navigation nav-pagination" class="p-2">
-                    <ul class="pagination">
-                        <li class="page-item"><a class="page-link" href="#">Précédent</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" href="#">Suivant</a></li>
-                    </ul>
-                </div>
+            <div class="d-flex justify-content-center">
+                    {% do membres.setPageRange(2) %}
+                    {{ knp_pagination_render(membres) }}
             </div>
         </div>
     </section>
